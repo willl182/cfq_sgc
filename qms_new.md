@@ -1,0 +1,131 @@
+Esta propuesta reestructura tu Sistema de Gestión de Calidad (SGC) actual para alinearlo directamente con los requisitos de la **propuesta de resolución (pv0)**, transformando el enfoque de "archivo documental" a un **sistema de gestión por procesos**.
+
+El objetivo es que tu estructura de carpetas coincida con la lista de verificación del **Anexo I-B (Acta de Visita)** 1, facilitando la inspección del ICA y garantizando el cumplimiento de los nuevos puntos críticos como la trazabilidad, el control de residuos y la supervisión del laboratorio.
+
+### Nueva Estructura Propuesta del SGC (Alineada a pv0)
+
+Esta estructura reemplaza la organización numérica anterior por una lógica de flujo de proceso (Ciclo PHVA).
+
+SGC\_CALFERQUIM\_NUEVA\_RESOLUCION/
+
+├── 00\_Inbox\_Pendientes/
+
+├── 01\_Direccion\_Tecnica\_Legal/
+
+│   ├── 01\_Registro\_Empresa\_ICA/       \# Resoluciones, Modificaciones, SimplifICA \[2, 3\]
+
+│   ├── 02\_Asesor\_Tecnico/             \# Contrato y soportes de acompañamiento permanente \[4, 5\]
+
+│   └── 03\_Representacion\_Legal/       \# Cámara de comercio, RUT
+
+├── 02\_Gestion\_Proveedores\_Insumos/    \# (Antes parte de 04 y 07\)
+
+│   ├── 01\_Seleccion\_Evaluacion/       \# Procedimiento Control de Proveedores \[6\]
+
+│   ├── 02\_Hojas\_Seguridad\_MP/         \# De materias primas (antigua carpeta 07\) \[7\]
+
+│   ├── 03\_Recepcion\_Almacenamiento/   \# Proc. recepción y ubicación \[8\]
+
+│   └── 04\_Fichas\_Tecnicas\_MP/         \# Requisito para registro de productos \[7\]
+
+├── 03\_Produccion\_Manufactura/         \# (Fusiona 03 Operacion y 06 Procesos)
+
+│   ├── 01\_Ordenes\_Produccion/
+
+│   ├── 02\_Procedimientos\_POE/         \# Molienda, Mezcla, Homogenización, Reacciones \[6, 8\]
+
+│   ├── 03\_Balance\_Masas/              \# Balance de materias primas (Nuevo requisito crítico) \[6, 9\]
+
+│   ├── 04\_Envasado\_Etiquetado/        \# Proc. envasado y control de etiquetas \[6\]
+
+│   └── 05\_Mantenimiento\_Equipos/      \# Listado de equipos y mantenimiento \[6\]
+
+├── 04\_Laboratorio\_Control\_Calidad/    \# (Fusiona 05, 11 y 12 \- Enfoque Unificado)
+
+│   ├── 01\_Registro\_Laboratorio/       \# Resolución del laboratorio propio o contrato externo registrado \[10, 11\]
+
+│   ├── 02\_Plan\_Muestreo/              \# Proc. toma de muestras \[6, 9\]
+
+│   ├── 03\_Resultados\_Analisis/        \# Certificados de análisis (anuales obligatorios) \[11, 12\]
+
+│   ├── 04\_Contramuestras/             \# Proc. almacenamiento y gestión de contramuestras \[13, 14\]
+
+│   └── 05\_Verificacion\_Equipos/       \# Calibración de equipos de laboratorio (si aplica)
+
+├── 05\_Trazabilidad\_Liberacion/        \# (Nuevo Módulo Crítico)
+
+│   ├── 01\_Codificacion\_Lotes/         \# Procedimiento de loteado \[8, 9\]
+
+│   ├── 02\_Liberacion\_Lotes/           \# Formatos de liberación al comercio (Cuarentena \-\> Aprobado) \[8, 15\]
+
+│   └── 03\_Trazabilidad\_Ventas/        \# Rastreabilidad hasta el consumidor
+
+├── 06\_Gestion\_Residuos\_Ambiental/     \# (Antes 02 \- Reforzado)
+
+│   ├── 01\_Disposicion\_Barreduras/     \# Proc. manejo y prohibición de reutilización \[16, 17\]
+
+│   ├── 02\_Residuos\_Liquidos/          \# Disposición final \[18\]
+
+│   └── 03\_Plan\_Gestion\_Ambiental/
+
+├── 07\_Postventa\_Servicio\_Cliente/     \# (Antes parte de 04\)
+
+│   ├── 01\_PQRS/                       \# Proc. atención quejas y reclamos con tiempos definidos \[9, 19\]
+
+│   └── 02\_Retiro\_Producto/            \# Procedimiento de recall (retirada del mercado) \[20\]
+
+└── 08\_Dossier\_Productos\_Registrados/  \# (Antes 08 y 09\)
+
+    ├── \[Nombre\_Comercial\_Producto\]/
+
+    │   ├── 01\_Registro\_Venta/         \# Resolución y modificaciones
+
+    │   ├── 02\_Ficha\_Tecnica/          \# Actualizada según Anexo II-E \[21\]
+
+    │   ├── 03\_Etiqueta\_Aprobada/      \# PDF legible aprobado \[7, 22\]
+
+    │   ├── 04\_Hoja\_Seguridad/         \# Ficha de datos de seguridad \[7\]
+
+    │   └── 05\_Soportes\_Ensayo/        \# Informes de eficacia (si aplica) \[23\]
+
+### Justificación de los Cambios Clave
+
+A continuación, explico por qué se sugieren estos cambios basándome en los hallazgos de las fuentes:
+
+#### 1\. Centralización de Laboratorio (04\_Laboratorio\_Control\_Calidad)
+
+* **Problema actual:** Tenías separado "Laboratorio" (interno) y "Laboratorios Externos".  
+* **Requisito pv0:** La nueva norma exige que *todos* los análisis de control de calidad (incluso los internos anuales) provengan de un laboratorio **registrado ante el ICA** 10, 11\. Ya no basta con verificadores internos en Excel si el laboratorio no está registrado.  
+* **Acción:** Se unifica la gestión para demostrar que, sea propio o contratado, el laboratorio cumple con el registro y provee los certificados de análisis anuales obligatorios 11\. Se añade explícitamente la carpeta de **Contramuestras**, un requisito procedimental nuevo y explícito en el Anexo I-B 14\.
+
+#### 2\. Creación del Módulo de Trazabilidad (05\_Trazabilidad\_Liberacion)
+
+* **Problema actual:** La liberación de lotes estaba oculta dentro de "Calidad".  
+* **Requisito pv0:** El Anexo I-B exige procedimientos documentados específicos para la **Codificación de Lotes** 6 y la **Liberación de Lotes al comercio** 8, 15\.  
+* **Acción:** Se eleva la visibilidad de estos procesos. Ante una visita técnica, el inspector verificará cómo un lote específico pasa de producción a estar "liberado" para la venta. Esta carpeta debe contener los registros que vinculan la Orden de Producción con el Certificado de Análisis y la autorización de venta.
+
+#### 3\. Gestión Estricta de Residuos (06\_Gestion\_Residuos\_Ambiental)
+
+* **Problema actual:** "Gestión Ambiental" parecía ser un repositorio general.  
+* **Requisito pv0:** Existe una prohibición explícita y grave: **"Prohibido distribuir o destinar las barreduras para la elaboración de fertilizantes"** 16, 17\. Además, se exige un procedimiento documentado para el manejo o disposición de residuos líquidos y barreduras 24\.  
+* **Acción:** Se debe separar claramente el material recuperable del residuo/barredura. Tener una carpeta específica para "Disposición de Barreduras" demuestra control sobre este riesgo de inocuidad y cumplimiento de la prohibición.
+
+#### 4\. Producción y Balance de Masas (03\_Produccion\_Manufactura)
+
+* **Problema actual:** Los procesos operativos estaban dispersos entre "Operación" y "SST".  
+* **Requisito pv0:** Se exige documentación del **"Balance de materias primas"** 6, 9\. Esto implica verificar que la cantidad de materia prima comprada coincide con la producida \+ inventario \+ residuos.  
+* **Acción:** Se integran los POE (Procedimientos Operativos Estandarizados) en una sola ubicación. Se añade "Balance de Masas" para auditar rendimientos y evitar desvíos, un punto clave en la nueva inspección técnica.
+
+#### 5\. Gestión de Proveedores (02\_Gestion\_Proveedores\_Insumos)
+
+* **Problema actual:** Estaba implícito en "Calidad".  
+* **Requisito pv0:** El Anexo I-A exige explícitamente procedimientos y registros de **"control de proveedores"** 6\.  
+* **Acción:** Se crea un directorio dedicado para demostrar que solo se compran materias primas a proveedores aprobados y que se cuenta con sus Hojas de Seguridad y Fichas Técnicas actualizadas antes de usarlas en fabricación.
+
+### Recomendación de Implementación Inmediata
+
+Para la transición descrita en el Artículo 40 (Periodo Transitorio) 25:
+
+1. Utilice la carpeta 01\_Registro\_Empresa\_ICA para compilar los PDFs de resoluciones vigentes que deberá cargar a **SimplifICA** en el plazo de 6 meses.  
+2. Asegúrese de que la carpeta 04\_Laboratorio.../03\_Resultados\_Analisis contenga un análisis completo del último año por cada producto registrado, ya que es una obligación de permanencia 11\.
+
