@@ -1,40 +1,59 @@
-# Acta N/A 3.04 - Tratamiento Termico (Pirolisis)
+# ACTA DE NO APLICABILIDAD: TRATAMIENTO TÉRMICO (PIROLISIS)
 
-- Codigo: ACTA-NA-3.04
-- Version: V1
-- Fecha: 2026-02-17
-- Responsable: Direccion Tecnica
+| CÓDIGO | VERSIÓN | VIGENCIA | PRÓXIMA REVISIÓN |
+|
+|
+|
+|
+|
+| **CGC-ACTA-NA-3.04** | **01** | **2026-02-17** | **12 meses o ante cambio de proceso** |
 
-## 1. Objetivo
+---
 
-Dejar constancia formal de no aplicabilidad del requisito ICA 3.4 (tratamiento termico por pirolisis) para la operacion actual de CALFERQUIM.
+## 1. OBJETIVO
 
-## 2. Alcance
+Dejar constancia formal y documentada de la **No Aplicabilidad** del requisito "Tratamiento Térmico por Pirolisis" (numeral 3.04 del Anexo I-B de pv0) para la operación actual de manufactura de **CALFERQUIM S.A.S.**
 
-Aplica al modulo `3.04_NA_Pirolisis` del sistema documental y al listado de procedimientos del Anexo I-B.
+## 2. ALCANCE
 
-## 3. Justificacion tecnica de no aplicabilidad
+Este documento aplica al módulo de Producción del Sistema de Gestión de Calidad y exonera a la empresa de crear el POE 3.04 mientras no se implemente el proceso de pirolisis.
 
-- En el proceso productivo actual no se ejecuta etapa de pirolisis.
-- No se cuenta con horno/reactor de pirolisis ni linea dedicada para ese tratamiento.
-- Las formulaciones activas no exigen transformacion termica por pirolisis para cumplimiento de especificaciones.
+## 3. FUNDAMENTO NORMATIVO
 
-## 4. Evidencia de soporte
+*   **Resolución ICA pv0 (Propuesta):** Anexo I-B, Numeral 3.04 "Tratamiento Térmico (Pirolisis)".
+*   **Resolución ICA 150 de 2003:** Literal aplicable.
 
-- Flujo de proceso vigente sin etapa de pirolisis.
-- Inventario de equipos de planta sin equipo de pirolisis.
-- Procedimientos operativos actuales de produccion y control de calidad.
+## 4. JUSTIFICACIÓN TÉCNICA DE NO APLICABILIDAD
 
-## 5. Criterio de reactivacion
+La empresa **CALFERQUIM S.A.S.** opera actualmente bajo un modelo de **mezcla física** de fertilizantes y acondicionadores de suelo. Los procesos que se ejecutan son:
 
-Si la empresa incorpora proceso de pirolisis, esta acta pierde vigencia operativa y se debe crear POE 3.04 con sus formatos y registros antes de operar.
+*   Molienda (mecánica)
+*   Mezcla / Blending
+*   Granulación simple
+*   Envasado
 
-## 6. Aprobacion
+**NO SE EJECUTA** ninguna etapa de transformación térmica por pirolisis, ni se cuenta con el equipo correspondiente (horno de pirolisis, reactor térmico de alta temperatura).
 
-- Elaboro: Direccion Tecnica
-- Reviso: Jefe de Produccion
-- Apruebo: Gerencia General
+Las formulaciones activas de los productos registrados no exigen este tratamiento para alcanzar las especificaciones de calidad declaradas en el Registro ICA.
 
-## 7. Control de cambios
+## 5. EVIDENCIAS DE SOPORTE
 
-- V1: Creacion inicial del acta N/A.
+*   **Diagrama de Flujo de Proceso:** No incluye etapa de pirolisis.
+*   **Inventario de Equipos:** No registra equipo de pirolisis.
+*   **Lista Maestra de Equipos:** Verificación física de planta confirma ausencia.
+
+## 6. CRITERIO DE REACTIVACIÓN
+
+**SI** en el futuro la empresa incorpora el proceso de pirolisis como parte de su operación:
+1.  Esta Acta pierde vigencia automáticamente.
+2.  Se **debe** crear el `POE_3.04_Pirolisis_V1.md` con sus formatos y registros correspondientes.
+3.  **No se permitirá** operar el equipo hasta que el POE esté aprobado y vigente.
+
+## 7. CONTROL DE CAMBIOS
+
+| Versión | Fecha | Descripción |
+|
+|
+|:---|
+| 01 | 2026-02-17 | Creación inicial del acta de no aplicabilidad. |
+

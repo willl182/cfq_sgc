@@ -1,57 +1,97 @@
-# POE 3.09 - Molienda Secundaria
+# PROCEDIMIENTO OPERATIVO ESTANDARIZADO: MOLIENDA SECUNDARIA Y MICRONIZACIÓN
 
-- Codigo: POE-3.09
-- Version: V1
-- Vigencia: 2026-02-17
-- Responsable: Jefe de Produccion
+| CÓDIGO | VERSIÓN | VIGENCIA | PRÓXIMA REVISIÓN |
+|
+|
+|
+|
+|
+| **CGC-POE-3.09** | **01** | **2026-02-17** | **12 meses o ante cambio regulatorio** |
 
-## 1. Objetivo
+---
 
-Controlar la molienda secundaria para ajuste fino de tamano de particula, garantizando cumplimiento de especificacion del producto final.
+## 1. OBJETIVO
 
-## 2. Alcance
+Estandarizar la operación de molienda fina o micronización (etapa secundaria) para garantizar que los productos en polvo alcancen la granulometría específica requerida para su solubilidad, suspensión o aplicación foliar.
 
-Aplica a lotes que requieren segunda etapa de molienda posterior a mezcla o pretratamiento.
+## 2. ALCANCE
 
-## 3. Definiciones
+Este procedimiento aplica exclusivamente a los productos que, tras una molienda primaria o mezcla, requieren una reducción adicional de tamaño de partícula para cumplir con especificaciones de malla fina (ej: Malla 200, 325) en la planta de **CALFERQUIM S.A.S.**
 
-- Molienda secundaria: ajuste fino posterior a una etapa inicial de reduccion de tamano.
-- Ajuste fino: correccion de fraccion gruesa para alcanzar especificacion final.
-- Reproceso: reingreso controlado del material a la etapa de molienda secundaria.
+## 3. DEFINICIONES
 
-## 4. Responsabilidades
+*   **Molienda Secundaria (Micronización):** Reducción de partículas a tamaños muy finos (micras) mediante molinos de alta velocidad o impacto.
+*   **Ajuste Fino:** Corrección granulométrica final previa al envasado.
+*   **Reproceso Recurrente:** Necesidad de pasar el mismo material más de una vez por el equipo para lograr el tamaño deseado.
 
-- Operario: ejecutar molienda secundaria y registrar variables.
-- Supervisor: validar parametros y autorizar reprocesos controlados.
-- Calidad: verificar cumplimiento de tamano objetivo y liberar lote.
+## 4. DOCUMENTOS DE REFERENCIA
 
-## 5. Procedimiento
+*   **Resolución ICA pv0 (Propuesta):** Anexo I-B.
+*   **Especificación Técnica de Producto Terminado (Polvo Soluble/Suspensiones).**
 
-1. Confirmar lote a procesar y requisito de tamano final.
-2. Revisar estado del equipo, mallas y limpieza previa.
-3. Registrar inicio de operacion, equipo y operador.
-4. Alimentar material segun capacidad nominal del equipo.
-5. Controlar tiempo de proceso y condiciones operativas.
-6. Tomar muestra y verificar tamano de particula final.
-7. Si no cumple, ejecutar reproceso controlado y repetir verificacion.
-8. Registrar cierre del lote y liberar hacia etapa siguiente.
+## 4.1. CONSIDERACIONES GMP (BUENAS PRÁCTICAS DE MANUFACTURA)
 
-## 6. Criterios de control y aceptacion
+Dado que se generan polvos muy finos, el riesgo de contaminación cruzada por vía aérea es crítico. **Es obligatorio** mantener cerrados los sistemas de recolección de polvo y verificar la integridad de los filtros de mangas antes de cada lote. **Se prohíbe** abrir las compuertas del molino antes de que este se haya detenido completamente y el polvo se haya asentado (Seguridad Industrial).
 
-- Frecuencia: minimo un control por lote y uno adicional si hay ajuste.
-- Aceptacion: cumplimiento del rango de tamano final definido por producto.
-- Reproceso recurrente en el mismo lote: escalar a Direccion Tecnica.
+## 5. RESPONSABILIDADES Y POLÍTICAS (Estilo Opus)
 
-## 7. Registros asociados
+### 5.1. Jefe de Producción
+*   **Debe** asegurar que el sistema de aspiración y control de polvos funcione correctamente para evitar pérdidas de producto (mermas invisibles).
+*   **Es responsable** de definir la velocidad de alimentación óptima para evitar el calentamiento excesivo del producto, que podría degradarlo.
 
-- `Formato_Control_Molienda_Secundaria_V1.csv`
-- `Registro_Molienda_Secundaria_V1.csv`
+### 5.2. Supervisor de Producción
+*   **Debe** autorizar cualquier reproceso de material que no haya cumplido la granulometría en el primer pase.
+*   **Tiene la autoridad** para detener el proceso si la temperatura de salida del producto supera el límite crítico establecido (ej: 40°C para higroscópicos).
 
-## 8. Anexos
+### 5.3. Operario de Molienda Fina
+*   **Debe** limpiar los imanes o trampas magnéticas a la entrada del molino para evitar daños por metales o chispas.
 
-- Anexo 1. Rango de tamano final por linea de producto.
-- Anexo 2. Causas frecuentes de desvio y acciones de ajuste.
+## 6. PROCEDIMIENTO (Estilo GLM-4.7)
 
-## 9. Control de cambios
+### 6.1. Preparación y Seguridad
 
-- V1: Creacion inicial del procedimiento.
+1.  **OPERARIO:** **Verificar** limpieza meticulosa del equipo, incluyendo ductos y ciclones.
+2.  **OPERARIO:** **Revisar** estado de las mallas finas o clasificadores de aire.
+3.  **OPERARIO:** **Encender** el sistema de recolección de polvos antes de arrancar el molino.
+
+### 6.2. Proceso de Micronización
+
+4.  **OPERARIO:** **Alimentar** el molino con el pre-mezclado o material grueso.
+    *   *Control:* Mantener amperaje constante cerca del nominal para máxima eficiencia.
+5.  **OPERARIO:** **Monitorear** la temperatura de la carcasa del molino y del producto de salida.
+    *   *Alerta:* Si sube demasiado, reducir alimentación o detener para enfriar.
+6.  **CALIDAD:** **Tomar muestra** cada hora para verificación de Malla (ej: % Pasante Malla 325).
+
+### 6.3. Manejo de Producto Fuera de Especificación (Gruesos)
+
+7.  **SI EL TAMAÑO ES MUY GRUESO:**
+    *   **Detener** alimentación.
+    *   **Revisar** si hay rotura de malla o desgaste en martillos/pines.
+    *   **Ajustar** velocidad del clasificador (si aplica).
+8.  **SI SE REQUIERE REPROCESO:**
+    *   **Retornar** el material a la tolva de alimentación.
+    *   **Registrar** el reproceso en la bitácora.
+    *   *Regla Crítica:* Si se requieren más de **2 pases** (reproceso recurrente), **DETENER** y escalar a Dirección Técnica para revisión de formulación o equipo.
+
+## 7. CRITERIOS DE CONTROL Y ACEPTACIÓN
+
+| VARIABLE | MÉTODO | CRITERIO | ACCIÓN |
+|:---|:---|:---|:---|
+| **Granulometría Fina** | Tamizado Húmedo/Seco | % Pasante Malla específica (ej: >95% Malla 200). | Ajustar molino. Reprocesar. |
+| **Temperatura Salida** | Termómetro IR | < T° crítica del producto. | Reducir carga. Enfriar. |
+| **Contaminación Metálica** | Trampa Magnética | Ausencia de partículas metálicas. | Limpiar imanes cada hora. |
+
+## 8. REGISTROS ASOCIADOS
+
+*   `Formato_Control_Molienda_Secundaria_V1.csv`: Bitácora de operación y reprocesos.
+*   `Registro_Molienda_Secundaria_V1.csv`: Histórico de lotes micronizados.
+
+## 9. ANEXOS
+
+*   **Anexo 1:** Tabla de Especificaciones de Molienda Fina por Producto.
+
+## 10. CONTROL DE CAMBIOS
+
+| VERSIÓN | FECHA | DESCRIPCIÓN DEL CAMBIO |
+|
+

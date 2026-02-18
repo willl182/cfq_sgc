@@ -1,0 +1,3 @@
+fecha_liberacion,hora_liberacion,numero_lote,producto_terminado,cantidad_liberada_kg,numero_bultos,resultado_analisis_nro,decision_final,observaciones_condiciones,responsable_liberacion,firma_digital_o_fisica
+2026-01-01,08:00,L-260101,FERTILIZANTE_A,1000,20,LAB-2026-001,APROBADO,Ninguna,Director Tecnico,Firma_Digital_DT
+2026-01-02,14:30,L-260102,FERTILIZANTE_B,500,10,LAB-2026-002,RECHAZADO,Contaminacion cruzada,Director Tecnico,Firma_Digital_DT

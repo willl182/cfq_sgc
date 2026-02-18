@@ -1,57 +1,110 @@
-# POE 3.10 - Envase
+# PROCEDIMIENTO OPERATIVO ESTANDARIZADO: ENVASE Y ROTULADO
 
-- Codigo: POE-3.10
-- Version: V1
-- Vigencia: 2026-02-17
-- Responsable: Produccion / Calidad
+| CÓDIGO | VERSIÓN | VIGENCIA | PRÓXIMA REVISIÓN |
+|
+|
+|
+|
+|
+| **CGC-POE-3.10** | **01** | **2026-02-17** | **12 meses o ante cambio regulatorio** |
 
-## 1. Objetivo
+---
 
-Estandarizar el proceso de envase para asegurar identificacion de lote, peso/volumen conforme y cierre adecuado del producto terminado.
+## 1. OBJETIVO
 
-## 2. Alcance
+Estandarizar las operaciones de envasado, pesado, sellado y etiquetado para garantizar que cada unidad comercial cumpla con el contenido neto declarado y posea la información legal obligatoria (Registro ICA, Lote, Fecha Vencimiento) para su trazabilidad y venta.
 
-Aplica a todas las operaciones de envase, sellado, etiquetado y verificaciones de control en producto terminado.
+## 2. ALCANCE
 
-## 3. Definiciones
+Este procedimiento aplica a todas las presentaciones comerciales (Sacos, Bolsas, Frascos, Garrafas) de fertilizantes y acondicionadores fabricados o re-envasados en la planta de **CALFERQUIM S.A.S.**
 
-- Envase: transferencia de producto terminado a su presentacion comercial.
-- Control de peso/volumen: verificacion de cumplimiento frente al contenido declarado.
-- Cierre conforme: sellado y empaque final sin fugas ni daño visible.
+## 3. DEFINICIONES
 
-## 4. Responsabilidades
+*   **Envase Primario:** Recipiente que está en contacto directo con el producto.
+*   **Contenido Neto:** Cantidad de producto contenido en el envase, excluyendo la tara.
+*   **Lote:** Código único de identificación que permite trazar la historia de fabricación.
+*   **Etiqueta Aprobada:** Arte gráfico autorizado por el ICA en la Resolución de Registro del producto.
 
-- Operario de envase: ejecutar llenado, cierre y rotulado por lote.
-- Supervisor de linea: verificar parametros y ritmo de produccion.
-- Calidad: realizar controles de peso/volumen y conformidad de rotulado.
+## 4. DOCUMENTOS DE REFERENCIA
 
-## 5. Procedimiento
+*   **Resolución ICA pv0 (Propuesta):** Anexo II-F "Requisitos de Etiquetado".
+*   **NTC 1000:** Sistema Internacional de Unidades.
+*   **Resolución 16379 de 2003:** Control metrológico del contenido neto.
 
-1. Verificar orden de produccion, lote y presentacion a envasar.
-2. Confirmar limpieza de linea y disponibilidad de materiales de empaque.
-3. Registrar inicio de envase (hora, lote, presentacion, operador).
-4. Ejecutar llenado y cierre segun parametro de la presentacion.
-5. Rotular cada unidad o empaque con identificacion de lote.
-6. Realizar controles de peso/volumen segun frecuencia definida.
-7. Segregar unidades no conformes y registrar novedad.
-8. Cerrar lote de envase y transferir a almacenamiento de producto terminado.
+## 4.1. CONSIDERACIONES GMP (BUENAS PRÁCTICAS DE MANUFACTURA)
 
-## 6. Criterios de control y aceptacion
+Antes de iniciar el envasado, **se debe** realizar un despeje de línea riguroso para retirar cualquier etiqueta, envase o producto del lote anterior. **Se prohíbe** tener etiquetas de diferentes productos en la misma mesa de trabajo. Las balanzas utilizadas para el control de peso **deben** verificarse con pesas patrón al inicio de cada turno y registrarse.
 
-- Frecuencia de control: al inicio, durante el proceso y al cierre del lote.
-- Aceptacion: peso/volumen dentro de tolerancia interna y rotulo legible completo.
-- Unidad no conforme: separar, identificar y gestionar segun procedimiento de no conformes.
+## 5. RESPONSABILIDADES Y POLÍTICAS (Estilo Opus)
 
-## 7. Registros asociados
+### 5.1. Jefe de Producción
+*   **Debe** asegurar la disponibilidad de los materiales de empaque correctos según la Orden de Producción.
+*   **Es responsable** de configurar las dosificadoras o balanzas para cumplir con el peso objetivo + sobrellenado de seguridad (si aplica).
 
-- `Formato_Control_Envase_V1.csv`
-- `Registro_Envase_V1.csv`
+### 5.2. Supervisor de Línea
+*   **Debe** verificar que el codificador (inkjet/sello) tenga la fecha y lote correctos antes de imprimir la primera unidad.
+*   **Tiene la autoridad** para detener la línea si detecta fallas en el sellado o peso fuera de tolerancia.
 
-## 8. Anexos
+### 5.3. Operario de Envase
+*   **Debe** inspeccionar visualmente cada envase vacío para asegurar que esté limpio y sin defectos.
+*   **Se prohíbe** liberar unidades con peso inferior a la tolerancia mínima legal.
 
-- Anexo 1. Frecuencia de muestreo de control por presentacion.
-- Anexo 2. Criterios de rechazo de empaque y sellado.
+### 5.4. Control de Calidad
+*   **Debe** cotejar la etiqueta física contra el "Arte Aprobado ICA" vigente para el producto.
+*   **Debe** realizar muestreo destructivo de sellado y peso estadístico durante el lote.
 
-## 9. Control de cambios
+## 6. PROCEDIMIENTO (Estilo GLM-4.7)
 
-- V1: Creacion inicial del procedimiento.
+### 6.1. Alistamiento de Línea
+
+1.  **SUPERVISOR:** **Verificar** orden de producción y solicitar materiales de empaque al almacén.
+2.  **CALIDAD:** **Liberar** la línea tras verificar limpieza (Despeje de Línea) y ausencia de materiales ajenos.
+3.  **CALIDAD:** **Entregar** al Supervisor el "Patrón de Etiqueta" aprobado para ese lote.
+    *   *Punto Crítico:* Verificar Textos Legales, Registro ICA, Composición Garantizada.
+
+### 6.2. Configuración de Codificación
+
+4.  **OPERARIO:** **Ajustar** el codificador con:
+    *   Lote: [Según Orden]
+    *   Fecha Fab: [Hoy]
+    *   Fecha Venc: [Según vida útil, ej: 2 años]
+5.  **SUPERVISOR:** **Imprimir** una prueba y verificar legibilidad. **Firmar** el visto bueno en el registro.
+
+### 6.3. Operación de Llenado y Pesado
+
+6.  **OPERARIO:** **Iniciar** el llenado de envases.
+7.  **OPERARIO:** **Verificar** el peso del 100% de las unidades (si es manual) o por muestreo frecuente (si es automático).
+    *   *Tolerancia:* El peso promedio debe ser ≥ Contenido Neto Declarado. Ninguna unidad puede estar por debajo de la Tolerancia Mínima (T2).
+8.  **OPERARIO:** **Cerrar/Sellar** el envase inmediatamente para evitar contaminación o derrames.
+
+### 6.4. Etiquetado y Embalaje Final
+
+9.  **OPERARIO:** **Adherir** la etiqueta o verificar la impresión en el saco.
+    *   *Control:* La etiqueta no debe estar torcida, arrugada o ilegible.
+10. **OPERARIO:** **Paletizar** el producto terminado e identificar la estiba con la tarjeta de "CUARENTENA" (Color Amarillo).
+11. **PRODUCCIÓN:** **Notificar** fin de lote a Calidad para inicio del proceso de Liberación (POE 3.12).
+
+## 7. CRITERIOS DE CONTROL Y ACEPTACIÓN
+
+| VARIABLE | CRITERIO | ACCIÓN SI FALLA |
+|:---|:---|:---|
+| **Peso Individual** | ± 1% del Contenido Neto. | Ajustar dosificadora. Re-pesar lote al 100%. |
+| **Legibilidad Lote/Venc** | 100% legible y adherido. | Borrar y re-imprimir. Rechazar envase. |
+| **Hermeticidad Sello** | Sin fugas al invertir el envase. | Re-sellar. Cambiar envase. |
+| **Texto Etiqueta** | Coincide 100% con Arte Aprobado ICA. | **DETENER LÍNEA.** Segregar todo el lote. Incidente Crítico. |
+
+## 8. REGISTROS ASOCIADOS
+
+*   `Formato_Control_Envase_V1.csv`: Registro de pesos y verificación de etiquetas.
+*   `Registro_Envase_V1.csv`: Consolidado de unidades producidas por turno.
+
+## 9. ANEXOS
+
+*   **Anexo 1:** Tabla de Tolerancias de Peso por Presentación (Sacos 50kg, 25kg, 1kg, etc.).
+*   **Anexo 2:** Catálogo de Defectos Críticos de Envase.
+
+## 10. CONTROL DE CAMBIOS
+
+| VERSIÓN | FECHA | DESCRIPCIÓN DEL CAMBIO |
+|
+

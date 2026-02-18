@@ -1,61 +1,101 @@
-# POE 3.18 - Disposicion de Barreduras y Residuos de Proceso
+# PROCEDIMIENTO OPERATIVO ESTANDARIZADO: DISPOSICIÓN DE BARREDURAS Y RESIDUOS
 
-- Codigo: POE-3.18
-- Version: V1
-- Vigencia: 2026-02-17
-- Responsable: Produccion / Gestion Ambiental
+| CÓDIGO | VERSIÓN | VIGENCIA | PRÓXIMA REVISIÓN |
+|
+|
+|
+|
+|
+| **CGC-POE-3.18** | **01** | **2026-02-17** | **12 meses o ante cambio regulatorio** |
 
-## 1. Objetivo
+---
 
-Estandarizar la recoleccion, segregacion, almacenamiento temporal y disposicion final de barreduras y residuos, evitando su reutilizacion no permitida en productos fertilizantes.
+## 1. OBJETIVO
 
-## 2. Alcance
+Establecer la metodología para la recolección, segregación, almacenamiento temporal y disposición final de barreduras y residuos sólidos/líquidos generados en las áreas de producción, envase y almacenamiento, garantizando su correcta clasificación y evitando la contaminación cruzada o reutilización indebida.
 
-Aplica a todas las areas operativas de produccion, envasado, almacenamiento y despacho.
+## 2. ALCANCE
 
-## 3. Definiciones
+Aplica a todas las áreas operativas de la planta: Producción, Envase, Almacén de MP, Almacén de PT y Zona de Despachos.
 
-- Barredura: material recolectado por limpieza de pisos, equipos o superficies.
-- Residuo no conforme: material fuera de especificacion o contaminado que no puede liberarse.
-- Disposicion final: entrega del residuo a gestor autorizado o mecanismo legalmente permitido.
+## 3. DEFINICIONES
 
-## 4. Regla critica de cumplimiento
+*   **Barredura:** Material particulado (polvo, finos, residuos de limpieza) recolectado del piso, equipos o superficies.
+*   **Residuo Sólido No Peligroso:** Material de desecho sin características de peligrosidad.
+*   **Residuo Líquido:** Aguas de lavado de equipos, condensados, derrames menores contenidos.
+*   **Gestor Autorizado:** Empresa terceros con licencia ambiental para transporte y disposición final.
 
-Queda prohibido reincorporar barreduras o residuos no conformes al proceso productivo destinado a comercializacion.
+## 4. DOCUMENTOS DE REFERENCIA
 
-## 5. Responsabilidades
+*   **Resolución ICA pv0 (Propuesta):** Anexo I-B, Pilar 10 "Manejo de Residuos/Barreduras".
+*   **Decreto 1076 de 2015:** Gestión de residuos sólidos.
 
-- Operarios: identificar, segregar y registrar barreduras/residuos al momento de generacion.
-- Supervisor de planta: verificar cumplimiento diario de segregacion y rotulado.
-- Responsable ambiental: definir destino final, coordinar retiro y conservar evidencia.
-- Calidad: verificar que no exista reincorporacion al producto comercial.
+## 4.1. CONSIDERACIONES GMP
 
-## 6. Procedimiento
+**SE PROHÍBE EXPRESAMENTE** la reincorporación de barreduras o residuos al proceso productivo de Fertilizantes o Acondicionadores destinados a comercialización. Esta es una regla crítica de cumplimiento. El incumplimiento constituye una No Conformidad Crítica y puede generar sanciones legales severas por fraude al consumidor.
 
-1. Identificar barredura o residuo al momento de limpieza o desviacion.
-2. Segregar en contenedores rotulados por tipo de residuo.
-3. Registrar cantidad aproximada, area y fecha.
-4. Trasladar a zona de almacenamiento temporal de residuos.
-5. Coordinar disposicion final con gestor autorizado o mecanismo definido por la empresa.
-6. Archivar evidencia de salida/disposicion final.
+## 5. RESPONSABILIDADES Y POLÍTICAS (Estilo Opus)
 
-## 7. Criterios de control y aceptacion
+### 5.1. Jefe de Producción
+*   **Debe** asegurar que los contenedores de residuos estén identificados y disponibles en cada área.
+*   **Es responsable** de la cuantificación exacta (peso real, no "aproximado") de las barreduras generadas.
 
-- Frecuencia de registro: diaria por area con generacion de residuo.
-- Evidencia minima de salida: acta, remision, factura o certificado de disposicion.
-- Hallazgo critico: cualquier reincorporacion de barredura a producto comercial.
-- Hallazgo critico: ausencia de evidencia de disposicion final.
+### 5.2. Operarios de Limpieza
+*   **Deben** segregar los residuos en los contenedores correctos según la clasificación del Anexo 1.
+*   **Se prohíbe** mezclar residuos de diferente origen en el mismo contenedor.
 
-## 8. Registros asociados
+### 5.3. Responsable Ambiental
+*   **Debe** coordinar la disposición final con el gestor autorizado y archivar los certificados de disposición.
 
-- Registro de barreduras por area y fecha.
-- Evidencia de disposicion final (acta, factura o certificado).
+### 5.4. Control de Calidad
+*   **Debe** auditar mensualmente que no exista reincorporación de residuos al producto comercial.
 
-## 9. Anexos
+## 6. PROCEDIMIENTO (Estilo GLM-4.7)
 
-- Anexo 1. Clasificacion interna de residuos por origen.
-- Anexo 2. Lista de gestores autorizados y contactos.
+### 6.1. Generación y Segregación
 
-## 10. Control de cambios
+1.  **OPERARIO:** **Recolectar** barreduras y residuos durante la limpieza rutinaria al final de cada turno.
+2.  **OPERARIO:** **Segregar** en contenedores rotulados:
+    *   Contenedor A: Barreduras de Área de Producción (polvo de materia prima).
+    *   Contenedor B: Residuos de Envase (sacos rotos, etiquetas defectuosas).
+    *   Contenedor C: Residuos de Limpieza (trapos, material absorbente).
+3.  **OPERARIO:** **Pesar** el contenido de cada contenedor y **registrar** en `Registro_Disposicion_Residuos_V1.csv` (Fecha, Área, Tipo, Peso kg).
 
-- V1: Creacion inicial del procedimiento.
+### 6.2. Almacenamiento Temporal
+
+4.  **OPERARIO:** **Trasladar** los contenedores sellados al área de almacenamiento temporal de residuos (Zona Techada).
+5.  **PRODUCCIÓN:** **No almacenar** más de **48 horas**. Acumulo prolongado genera riesgo sanitario y de contaminación.
+
+### 6.3. Residuos Líquidos (Lavados)
+
+6.  **OPERARIO:** **Recolectar** las aguas de lavado en trampa de sólidos antes de verter al sistema de drenaje (si aplica).
+7.  **OPERARIO:** **No verter** residuos químicos al drenaje sin tratamiento previo.
+
+### 6.4. Disposición Final
+
+8.  **GESTIÓN AMBIENTAL:** **Coordinar** el retiro de residuos al gestor autorizado cada semana o cuando los contenedores alcancen el 80% de capacidad.
+9.  **GESTIÓN AMBIENTAL:** **Exigir** y archivar el Certificado de Disposición Final (Remisión, Factura o Certificado).
+
+## 7. CRITERIOS DE CONTROL
+
+| Hallazgo | Severidad | Acción |
+|:---|:---|:---|
+| Reincorporación de barredura a producto comercial | **CRÍTICA** | Investigar, aislar producto, reportar a ICA. |
+| Ausencia de evidencia de disposición | **ALTA** | Abrir NC, gestionar evidencia faltante. |
+| Mezcla de residuos incompatibles | **MEDIA** | Re-clasificar y capacitar personal. |
+
+## 8. REGISTROS ASOCIADOS
+
+*   `Formato_Control_Disposicion_Residuos_V1.csv`
+*   `Registro_Disposicion_Residuos_V1.csv`
+
+## 9. ANEXOS
+
+*   **Anexo 1:** Clasificación de Residuos por Origen.
+*   **Anexo 2:** Lista de Gestores Autorizados.
+
+## 10. CONTROL DE CAMBIOS
+
+| Versión | Fecha | Descripción |
+|
+

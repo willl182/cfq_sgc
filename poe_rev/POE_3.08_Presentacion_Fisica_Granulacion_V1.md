@@ -1,57 +1,104 @@
-# POE 3.08 - Presentacion Fisica (Granulacion y Ajuste de Tamano)
+# PROCEDIMIENTO OPERATIVO ESTANDARIZADO: PRESENTACIÓN FÍSICA Y GRANULACIÓN
 
-- Codigo: POE-3.08
-- Version: V1
-- Vigencia: 2026-02-17
-- Responsable: Produccion
+| CÓDIGO | VERSIÓN | VIGENCIA | PRÓXIMA REVISIÓN |
+|
+|
+|
+|
+|
+| **CGC-POE-3.08** | **01** | **2026-02-17** | **12 meses o ante cambio regulatorio** |
 
-## 1. Objetivo
+---
 
-Estandarizar la etapa de presentacion fisica del producto para asegurar tamano de particula, apariencia y fluidez conforme a especificaciones.
+## 1. OBJETIVO
 
-## 2. Alcance
+Estandarizar las operaciones de granulación, compactación y clasificación por tamaño (tamizado) para asegurar que el producto terminado cumpla con las especificaciones de granulometría, apariencia física, fluidez y resistencia mecánica requeridas para su aplicación en campo.
 
-Aplica a operaciones de granulacion, tamizado y ajuste de tamano en productos que requieren presentacion fisica controlada.
+## 2. ALCANCE
 
-## 3. Definiciones
+Aplica a todos los fertilizantes granulados, compactados o mezclas físicas que requieran un ajuste de tamaño de partícula específico antes de su envasado en la planta de **CALFERQUIM S.A.S.**
 
-- Granulacion: proceso de formacion de granulos a partir de mezcla base.
-- Tamizado: separacion por tamano para obtener fraccion objetivo.
-- Fraccion fuera de especificacion: material retenido/pasante que no cumple rango definido.
+## 3. DEFINICIONES
 
-## 4. Responsabilidades
+*   **Granulación:** Proceso de aglomeración de partículas finas para formar gránulos de mayor tamaño.
+*   **Tamizado (Clasificación):** Separación mecánica de partículas según su tamaño mediante mallas.
+*   **Finos (Polvo):** Fracción de material por debajo del tamaño mínimo especificado (Pasa Malla inferior).
+*   **Gruesos (Sobretamaño):** Fracción de material por encima del tamaño máximo especificado (Retiene Malla superior).
+*   **Producto Conforme (On-Size):** Fracción de material dentro del rango de tamaño deseado.
 
-- Operario de linea: operar equipo de presentacion fisica y registrar parametros.
-- Supervisor: verificar cumplimiento del rango de tamano y aprobar ajustes.
-- Calidad: confirmar conformidad del producto antes de envase.
+## 4. DOCUMENTOS DE REFERENCIA
 
-## 5. Procedimiento
+*   **Resolución ICA pv0 (Propuesta):** Anexo I-B, Pilar 17.
+*   **Ficha Técnica del Producto:** Especificación de Rango Granulométrico (ej: 2-4 mm).
 
-1. Validar orden de produccion y especificacion de presentacion fisica.
-2. Verificar limpieza y estado de granulador/tamiz.
-3. Registrar hora de inicio, lote, equipo y operador.
-4. Ejecutar granulacion o ajuste fisico segun parametro del producto.
-5. Tamizar y separar material fuera de rango.
-6. Tomar muestra representativa y verificar distribucion de tamano.
-7. Si no cumple, ajustar parametros operativos y repetir verificacion.
-8. Registrar resultado y liberar el lote para envase.
+## 4.1. CONSIDERACIONES GMP (BUENAS PRÁCTICAS DE MANUFACTURA)
 
-## 6. Criterios de control y aceptacion
+Las mallas de los tamices **deben** revisarse diariamente para detectar roturas que permitan el paso de material fuera de especificación. **Se prohíbe** el uso de cepillos metálicos o herramientas punzantes para limpiar las mallas, ya que dañan el tejido. El material rechazado (finos y gruesos) **debe** recolectarse en contenedores limpios e identificados para su reproceso inmediato, evitando su contaminación con basura o residuos de piso.
 
-- Frecuencia: 100% de lotes con etapa de presentacion fisica.
-- Aceptacion: distribucion de tamano dentro del rango definido para el producto.
-- Material fuera de especificacion: gestionar como reproceso controlado o no conforme.
+## 5. RESPONSABILIDADES Y POLÍTICAS (Estilo Opus)
 
-## 7. Registros asociados
+### 5.1. Jefe de Producción
+*   **Debe** establecer los parámetros de operación del granulador (humedad, velocidad, presión) para cada producto.
+*   **Es responsable** de garantizar que el reproceso de finos y gruesos se realice de manera controlada y sin afectar la composición química del lote.
 
-- `Formato_Control_Presentacion_Fisica_V1.csv`
-- `Registro_Presentacion_Fisica_V1.csv`
+### 5.2. Supervisor de Producción
+*   **Debe** verificar la integridad de las mallas al inicio y final de cada turno.
+*   **Tiene la autoridad** para detener la línea si detecta un exceso de polvo en el producto final.
 
-## 8. Anexos
+### 5.3. Operario de Granulación/Tamizado
+*   **Debe** monitorear constantemente el flujo de material hacia las zarandas o tamices.
+*   **Se prohíbe** sobrecargar las mallas, ya que esto reduce la eficiencia de clasificación y "ciega" el tamiz.
 
-- Anexo 1. Rangos de tamano por producto.
-- Anexo 2. Parametros de operacion por equipo.
+### 5.4. Control de Calidad
+*   **Debe** realizar análisis granulométrico periódico (Ro-Tap o similar) para validar la eficacia del tamizado en línea.
 
-## 9. Control de cambios
+## 6. PROCEDIMIENTO (Estilo GLM-4.7)
 
-- V1: Creacion inicial del procedimiento.
+### 6.1. Configuración del Equipo
+
+1.  **OPERARIO:** **Verificar** que las mallas instaladas en la clasificadora correspondan a la especificación del producto (Ver Anexo 1).
+2.  **SUPERVISOR:** **Inspeccionar** estado de las mallas (sin huecos ni remiendos) y tensión correcta.
+
+### 6.2. Operación de Granulación y Clasificación
+
+3.  **OPERARIO:** **Alimentar** el sistema de granulación manteniendo flujo constante.
+4.  **OPERARIO:** **Regular** la adición de aglomerante (agua/solución) si aplica, evitando exceso de humedad que genere "barro".
+5.  **OPERARIO:** **Monitorear** las salidas de la clasificadora:
+    *   **Salida 1 (Gruesos):** Dirigir a molino de retorno.
+    *   **Salida 2 (Producto):** Dirigir a tolva de producto terminado/envase.
+    *   **Salida 3 (Finos):** Dirigir a reciclaje/aglomeración.
+6.  **OPERARIO:** **Tomar muestra** de la corriente de Producto (Salida 2) cada hora.
+    *   *Verificación:* Aspecto visual, dureza del gránulo y ausencia de polvo excesivo.
+
+### 6.3. Manejo de Material Fuera de Especificación
+
+7.  **SI HAY EXCESO DE FINOS:** **Revisar** si las mallas están tupidas/ciegas. **Ajustar** humedad o velocidad de alimentación.
+8.  **SI HAY EXCESO DE GRUESOS:** **Verificar** funcionamiento del molino de retorno.
+9.  **SI SE DETECTA ROTURA DE MALLA:**
+    *   **PARAR** inmediatamente la línea.
+    *   **CAMBIAR** la malla dañada.
+    *   **SEGREGAR** (poner en cuarentena) todo el material procesado desde el último control conforme.
+    *   **RE-PROCESAR** el material sospechoso pasándolo nuevamente por el tamiz íntegro.
+
+## 7. CRITERIOS DE CONTROL Y ACEPTACIÓN
+
+| VARIABLE | MÉTODO | CRITERIO | ACCIÓN |
+|:---|:---|:---|:---|
+| **Integridad de Mallas** | Visual | Sin roturas ni deformaciones. | Cambiar malla inmediatamente. |
+| **Granulometría** | Tamizado (Lab) | % Retenido en rango (ej: >90% entre 2-4mm). | Ajustar proceso. Bloquear lote. |
+| **Dureza de Gránulo** | Durómetro | > 2 kgf (o según especificación). | Ajustar aglomerante/secado. |
+
+## 8. REGISTROS ASOCIADOS
+
+*   `Formato_Control_Presentacion_Fisica_V1.csv`: Registro de mallas y controles horarios.
+*   `Registro_Presentacion_Fisica_V1.csv`: Histórico de producción granulada.
+
+## 9. ANEXOS
+
+*   **Anexo 1:** Tabla de Mallas y Rangos Granulométricos por Producto.
+
+## 10. CONTROL DE CAMBIOS
+
+| VERSIÓN | FECHA | DESCRIPCIÓN DEL CAMBIO |
+|
+
