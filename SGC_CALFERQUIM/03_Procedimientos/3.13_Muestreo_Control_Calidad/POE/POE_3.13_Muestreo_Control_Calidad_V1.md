@@ -22,6 +22,7 @@ Aplica a control de calidad de MP, proceso y producto terminado en todas las lin
 
 - DC-SI12 Asignacion de Lotes, Muestreo y Control de Calidad.
 - DC-SI34 Ensayos Fisicoquimicos en Laboratorio.
+- POE-3.13A Toma de Muestra de Mezclas Fisicas.
 
 ## 5. RESPONSABILIDADES Y POLITICAS
 
@@ -34,6 +35,7 @@ Aplica a control de calidad de MP, proceso y producto terminado en todas las lin
 
 1. Calidad define plan de muestreo por tipo de producto (anexo 1).
 2. Analista toma muestra con utensilios limpios y rotula inmediatamente.
+   - Para mezclas fisicas en sacos o a granel se debe aplicar `POE_3.13A_Toma_Muestra_Mezclas_Fisicas_V1`.
 3. Analista registra toma en `Formato_Control_Muestreo_V1.csv`.
 4. Laboratorio ejecuta ensayos fisicoquimicos segun metodo aplicable.
 5. Calidad compara resultados con criterios del anexo 2 y especificaciones tecnicas vigentes del producto/MP.
@@ -65,3 +67,4 @@ Aplica a control de calidad de MP, proceso y producto terminado en todas las lin
 | VERSION | FECHA | DESCRIPCION |
 |---|---|---|
 | 01 | 2026-02-18 | Emision inicial homologada desde DC-SI12/DC-SI34. |
+| 01 | 2026-02-18 | Se agrega referencia explicita a POE-3.13A para muestreo de mezclas fisicas (sacos/granel). |
