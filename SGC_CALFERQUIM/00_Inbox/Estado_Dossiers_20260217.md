@@ -1,0 +1,32 @@
+# Estado Dossiers Priorizados - 2026-02-17
+
+- Total priorizados: 30
+- Base completa: 12
+- Parcial: 18
+
+## Estado por prioridad
+
+- P1_S: base_completa=5, parcial=16, pendiente=0
+- P2_N: base_completa=6, parcial=2, pendiente=0
+- P3_SIN_DATO: base_completa=1, parcial=0, pendiente=0
+
+## Productos en estado parcial
+
+- AFOS-K 0-40-50 -> 11_AFOSK
+- BIOPLANTAS -> 00_EXTRA_BIOPLANTAS
+- CALFERBORO -> 15_BORO GRANULADO
+- CALFERCOBRE -> 16_CALFERCOBRE
+- CALFERMAGNESIO -> 21_CALFER MAGNESIO
+- CALFERQUIM 15-15-15 -> 07_15-15-15
+- CALFERQUIM 17-6-18-2 -> 08_17-6-18-2
+- CALFERQUIM 18-18-18 -> 09_18-18-18
+- CALFERQUIM SILIMAGRAN 30 -> 49_SILIMAGRAM
+- CALFERZINC-P GRADO 0-3-0 -> 23_CALFERZINC-P
+- FERTILIZANTE 25-4-24 -> 10_25-4-24
+- FOSFORITA NEIVA -> 27_FOSFORITA NEIVA
+- K2K -> 29_K2K
+- MAGNE 3 -> 32_MAGNE 3
+- PRODUCCION 17 -> 45_PRODUCCION 17
+- ZUELO-CA -> 59_ZUELOCa
+- FOLLAJE -> 26_FOLLAJE
+- ORGANIC M -> 00_EXTRA_ORGANIC_M

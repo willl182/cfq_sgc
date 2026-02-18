@@ -1,0 +1,22 @@
+producto_fuente,dossier,copias_registro_o_etiqueta,copias_ficha_tecnica,copias_hoja_seguridad,copias_soportes,pendientes
+AFOS-K 0-40-50,11_AFOSK,0,3,1,0,Registro venta; Etiqueta; Soportes ensayo
+BIOPLANTAS,00_EXTRA_BIOPLANTAS,0,3,1,0,Registro venta; Etiqueta; Soportes ensayo
+CALFER LLENADO,20_CALFER LLENADO,11,3,4,4,ninguno
+CALFERBORO,15_BORO GRANULADO,0,4,3,0,Registro venta; Etiqueta; Soportes ensayo
+CALFERCOBRE,16_CALFERCOBRE,0,2,1,0,Registro venta; Etiqueta; Soportes ensayo
+CALFERMAGNESIO,21_CALFER MAGNESIO,0,2,1,0,Registro venta; Etiqueta; Soportes ensayo
+CALFERQUIM 15-15-15,07_15-15-15,0,2,1,0,Registro venta; Etiqueta; Soportes ensayo
+CALFERQUIM 17-6-18-2,08_17-6-18-2,0,2,1,0,Registro venta; Etiqueta; Soportes ensayo
+CALFERQUIM 18-18-18,09_18-18-18,0,2,1,0,Registro venta; Etiqueta; Soportes ensayo
+CALFERQUIM SILIMAGRAN 30,49_SILIMAGRAM,0,3,1,0,Registro venta; Etiqueta; Soportes ensayo
+CALFERZINC-P GRADO 0-3-0,23_CALFERZINC-P,1,2,2,0,Etiqueta; Soportes ensayo
+FERTILIZANTE 25-4-24,10_25-4-24,0,2,1,0,Registro venta; Etiqueta; Soportes ensayo
+FERTIMENORES NP 4-10-0,24_FERTIMENORES,0,3,2,0,Registro venta; Etiqueta; Soportes ensayo
+FOSFORITA NEIVA,27_FOSFORITA NEIVA,0,2,1,0,Registro venta; Etiqueta; Soportes ensayo
+K2K,29_K2K,2,3,2,0,Soportes ensayo
+MAGNE 3,32_MAGNE 3,0,3,3,0,Registro venta; Etiqueta; Soportes ensayo
+PRODUCCION 17,45_PRODUCCION 17,2,3,0,0,Hoja seguridad; Soportes ensayo
+RAIFOS,46_RAIFOS 20,10,8,4,3,ninguno
+SOLURAIFOS,50_SOLURaiFOS,8,4,1,3,ninguno
+SULFA K 50,52_SULFA K 50,9,3,1,3,ninguno
+ZUELO-CA,59_ZUELOCa,2,2,3,0,Soportes ensayo

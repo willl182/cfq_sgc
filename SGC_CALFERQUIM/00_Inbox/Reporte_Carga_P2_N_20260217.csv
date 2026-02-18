@@ -1,0 +1,9 @@
+producto_fuente,dossier,copias_registro_o_etiqueta,copias_ficha_tecnica,copias_hoja_seguridad,copias_soportes,pendientes
+1-CRECIMIENTO,01_1-CRECIMIENTO,7,3,3,4,ninguno
+2-AVANCE,02_2-AVANCE,9,3,3,4,ninguno
+3-PRODUCTOR,03_3-PRODUCTOR,12,3,4,4,ninguno
+CALFER DESARROLLO,18_CAL DESARROLLO,2,1,2,1,ninguno
+CALFER FLORACIÓN,19_CALFER FLORACION,8,1,2,2,ninguno
+CALFER MENORES,22_CALFER MENORES,8,6,6,4,ninguno
+FOLLAJE,26_FOLLAJE,0,0,1,0,Registro venta; Ficha tecnica; Etiqueta; Soportes ensayo
+ORGANIC M,00_EXTRA_ORGANIC_M,0,0,0,0,Registro venta; Ficha tecnica; Etiqueta; Hoja seguridad; Soportes ensayo

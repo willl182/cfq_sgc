@@ -1,0 +1,31 @@
+producto_fuente,dossier,estado,faltantes
+AFOS-K 0-40-50,11_AFOSK,parcial,registro_venta|etiqueta|soportes_ensayo
+BIOPLANTAS,00_EXTRA_BIOPLANTAS,parcial,registro_venta|etiqueta|soportes_ensayo
+CALFER LLENADO,20_CALFER LLENADO,base_completa,ninguno
+CALFERBORO,15_BORO GRANULADO,parcial,registro_venta|etiqueta|soportes_ensayo
+CALFERCOBRE,16_CALFERCOBRE,parcial,registro_venta|etiqueta|soportes_ensayo
+CALFERMAGNESIO,21_CALFER MAGNESIO,parcial,registro_venta|etiqueta|soportes_ensayo
+CALFERQUIM 15-15-15,07_15-15-15,parcial,etiqueta|soportes_ensayo
+CALFERQUIM 17-6-18-2,08_17-6-18-2,parcial,registro_venta|etiqueta
+CALFERQUIM 18-18-18,09_18-18-18,parcial,etiqueta|soportes_ensayo
+CALFERQUIM SILIMAGRAN 30,49_SILIMAGRAM,parcial,registro_venta|etiqueta|soportes_ensayo
+CALFERZINC-P GRADO 0-3-0,23_CALFERZINC-P,parcial,etiqueta|soportes_ensayo
+FERTILIZANTE 25-4-24,10_25-4-24,parcial,etiqueta|soportes_ensayo
+FERTIMENORES NP 4-10-0,24_FERTIMENORES,base_completa,ninguno
+FOSFORITA NEIVA,27_FOSFORITA NEIVA,parcial,registro_venta|etiqueta
+K2K,29_K2K,parcial,soportes_ensayo
+MAGNE 3,32_MAGNE 3,parcial,etiqueta|soportes_ensayo
+PRODUCCION 17,45_PRODUCCION 17,parcial,hoja_seguridad|soportes_ensayo
+RAIFOS,46_RAIFOS 20,base_completa,ninguno
+SOLURAIFOS,50_SOLURaiFOS,base_completa,ninguno
+SULFA K 50,52_SULFA K 50,base_completa,ninguno
+ZUELO-CA,59_ZUELOCa,parcial,soportes_ensayo
+1-CRECIMIENTO,01_1-CRECIMIENTO,base_completa,ninguno
+2-AVANCE,02_2-AVANCE,base_completa,ninguno
+3-PRODUCTOR,03_3-PRODUCTOR,base_completa,ninguno
+CALFER DESARROLLO,18_CAL DESARROLLO,base_completa,ninguno
+CALFER FLORACIÓN,19_CALFER FLORACION,base_completa,ninguno
+CALFER MENORES,22_CALFER MENORES,base_completa,ninguno
+FOLLAJE,26_FOLLAJE,parcial,registro_venta|ficha_tecnica|etiqueta|soportes_ensayo
+ORGANIC M,00_EXTRA_ORGANIC_M,parcial,registro_venta|ficha_tecnica|etiqueta|hoja_seguridad|soportes_ensayo
+CALFERCORRECTIVO,17_CALFERCORRECTIVO,base_completa,ninguno
