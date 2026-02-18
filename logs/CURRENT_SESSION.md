@@ -1,6 +1,6 @@
 # Session State: SGC CALFERQUIM
 
-**Last Updated**: 2026-02-17 20:12
+**Last Updated**: 2026-02-17 20:25
 
 ## Session Objective
 
@@ -40,6 +40,8 @@ Ejecutar migracion digital acelerada (sin archivo fisico), priorizando dossiers 
 - [x] Copiadas actas N/A a `poe_rev/` para revision.
 - [x] Copiados formatos/registros faltantes (3.05, 3.14, 3.18, 3.19, 3.20) a `poe_rev/formatos_registros/`.
 - [x] Organizados formatos/registros de revision por subcarpetas por proceso en `poe_rev/formatos_registros/`.
+- [x] Creado plan fase 2 de implementacion ICA:
+  - `logs/plans/260217_2025_plan_implementacion_ica_fase2.md`
 - [x] Generado `dossier_pdts.md` con pendientes por dossier omitiendo `soportes_ensayo` por decision del usuario.
 - [ ] Pendiente cierre de parciales en 18 dossiers priorizados (12 base completa / 18 parcial).
 - [ ] Pendiente consolidar trazabilidad de soportes de ensayo por producto (clasificacion fina).
@@ -90,7 +92,8 @@ Ejecutar migracion digital acelerada (sin archivo fisico), priorizando dossiers 
 
 ## Next Steps
 
-1. Revisar con usuario la version final de POE 3.05, 3.12, 3.14, 3.18, 3.19 y 3.20 para aprobacion operativa.
-2. Pilotear formatos/registros nuevos 3.03/3.06/3.08/3.09/3.10 con evidencia de 1-2 lotes.
-3. Completar registros/etiquetas/FT/HS faltantes de `P1_S` y `P2_N` segun `dossier_pdts.md`.
-4. Consolidar checklist digital final por punto ICA (OK / Parcial / Pendiente / N/A).
+1. Ejecutar Fase 1 del plan `260217_2025_plan_implementacion_ica_fase2.md`: piloto en campo y firmas internas.
+2. Ejecutar Fase 2: homologacion legacy parcial (3.1, 3.11, 3.13, 3.15, 3.16, 3.17).
+3. Ejecutar Fase 3: recall 7.02, trazabilidad ventas, recepcion/almacenamiento MP, evidencia laboratorio ICA.
+4. Completar registros/etiquetas/FT/HS faltantes de `P1_S` y `P2_N` segun `dossier_pdts.md`.
+5. Consolidar checklist digital final por punto ICA (OK / Parcial / Pendiente / N/A).
