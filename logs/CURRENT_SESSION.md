@@ -44,6 +44,14 @@ Planificar, migrar e implementar la homologacion completa del modulo `03_Procedi
   - Documento nuevo: `SGC_CALFERQUIM/03_Procedimientos/3.13_Muestreo_Control_Calidad/POE/POE_3.13A_Toma_Muestra_Mezclas_Fisicas_V1.md` y `.docx`.
   - Alcance: consolidacion de muestreo en sacos y granel sin uso de imagenes.
   - Integracion: `POE_3.13_Muestreo_Control_Calidad_V1.md` actualizado para referenciar `POE-3.13A`.
+- [x] **Inventario MP con dossier y HS preliminar creado (2026-02-23)**:
+  - Archivo maestro: `SGC_CALFERQUIM/08_Base_Datos_Tecnica/Inventario_Materias_Primas_Dossier_V1.csv`.
+  - Resultado: `37` MP inventariadas, con `19` HS preliminares ubicadas y `18` pendientes por validar/buscar.
+  - Estructura definida para cada MP: `01_Ficha_Tecnica/` + `02_Hoja_Seguridad/` dentro de `01_Dossier_Materias_Primas`.
+- [x] **Traslado ejecutado a dossiers MP (2026-02-23)**:
+  - Dossiers creados: `SGC_CALFERQUIM/08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/` con `37` carpetas `MP-###`.
+  - Carga documental verificada: `FT presentes = 37`, `HS presentes = 19`, `HS sin asignacion = 18`.
+  - Reporte de verificacion: `SGC_CALFERQUIM/00_Inbox/Reporte_Traslado_Dossier_MP_20260223.csv`.
 
 ## Critical Technical Context
 

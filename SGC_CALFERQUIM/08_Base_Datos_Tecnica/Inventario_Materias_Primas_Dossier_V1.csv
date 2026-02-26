@@ -1,0 +1,38 @@
+dossier_id,materia_prima,dossier_slug,ft_referencia_base,hs_estado,hs_referencia_preliminar,ruta_dossier_asignada
+MP-001,ACIDO BORICO,MP-001_ACIDO_BORICO,0_FT.MP_ACIDO BORICO.pdf,preliminar_encontrada,HDS ACIDO BORICO PQP .pdf,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-001_ACIDO_BORICO/
+MP-002,ALGAS MARINAS,MP-002_ALGAS_MARINAS,0_FT.MP_ALGAS MARINA.pdf,pendiente_busqueda,,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-002_ALGAS_MARINAS/
+MP-003,CAL DOLOMITA,MP-003_CAL_DOLOMITA,0_FT.MP_CAL DOLOMITA.pdf,preliminar_encontrada,Ficha tecnica Dolomita +CAL DOLOMITA.pdf,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-003_CAL_DOLOMITA/
+MP-004,CAOLIN,MP-004_CAOLIN,0_FT.MP_CAOLIN.pdf,preliminar_encontrada,ft_caolin_antec_c_98.pdf,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-004_CAOLIN/
+MP-005,CLORURO DE POTASIO,MP-005_CLORURO_DE_POTASIO,0_FT.MP_CLORURO POTASIO G.pdf,preliminar_encontrada,Cloruro de Potasio-FDS-CO (1).pdf,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-005_CLORURO_DE_POTASIO/
+MP-006,DAP (FOSFATO DIAMONICO),MP-006_DAP_FOSFATO_DIAMONICO,0_FT.MP_FOSFATO DIAMONICO G.pdf,pendiente_busqueda,,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-006_DAP_FOSFATO_DIAMONICO/
+MP-007,DEXTROSA MONOHIDRATADA,MP-007_DEXTROSA_MONOHIDRATADA,0_FT.MP_DEXTROSA MONOHIDRATADA.pdf,pendiente_busqueda,,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-007_DEXTROSA_MONOHIDRATADA/
+MP-008,DIOXIDO DE SILICIO,MP-008_DIOXIDO_DE_SILICIO,0_FT.MP_DIOXIDO SILICIO (Pirosil PS-300).pdf,pendiente_busqueda,,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-008_DIOXIDO_DE_SILICIO/
+MP-009,DKP (FOSFATO DIPOTASICO),MP-009_DKP_FOSFATO_DIPOTASICO,0_FT.MP_FOSFATO DIPOTASICO_DKP.pdf,pendiente_busqueda,,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-009_DKP_FOSFATO_DIPOTASICO/
+MP-010,EDTA,MP-010_EDTA,0_FT.MP_EDTA.pdf,pendiente_busqueda,,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-010_EDTA/
+MP-011,FOSFOGRAN,MP-011_FOSFOGRAN,0_FT.MP_FOSFOGRAN.pdf,pendiente_busqueda,,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-011_FOSFOGRAN/
+MP-012,KIESERITA,MP-012_KIESERITA,0_FT.MP_KIESERITA G.pdf,preliminar_encontrada,"29. Ficha de datos de seguridad de Kieserita - Sulfato de magnesio monohidratado, kieserite.pdf",08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-012_KIESERITA/
+MP-013,KIESERITA KCL,MP-013_KIESERITA_KCL,0_FT.MP_KIESERITA KCL.pdf,preliminar_encontrada,Cloruro de Potasio-FDS-CO (1).pdf,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-013_KIESERITA_KCL/
+MP-014,MAP (FOSFATO MONOAMONICO),MP-014_MAP_FOSFATO_MONOAMONICO,0_FT.MP_FOSFATO DE AMONIO (MAP).pdf,preliminar_encontrada,MSDS - Fosfato Monoamonico.pdf,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-014_MAP_FOSFATO_MONOAMONICO/
+MP-015,MKP (FOSFATO MONOPOTASICO),MP-015_MKP_FOSFATO_MONOPOTASICO,0_FT.MP_FOSFATO MONOPOTASICO.pdf,pendiente_busqueda,,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-015_MKP_FOSFATO_MONOPOTASICO/
+MP-016,MOLIBDATO DE SODIO,MP-016_MOLIBDATO_DE_SODIO,0_FT.MP_MOLIBDATO DE SODIO Qcos ALFA.pdf,pendiente_busqueda,,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-016_MOLIBDATO_DE_SODIO/
+MP-017,NITRATO DE POTASIO,MP-017_NITRATO_DE_POTASIO,0_FT.MP_NITRATO DE POTASIO.pdf,preliminar_encontrada,MSDS Nitrato de potasio soluble nov 2016 v03 (1).pdf,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-017_NITRATO_DE_POTASIO/
+MP-018,NITRATO DE POTASIO (HAIFA),MP-018_NITRATO_DE_POTASIO_HAIFA,0_FT.MP_NITRATO POTASIO Haifa.pdf,preliminar_encontrada,MSDS Nitrato de potasio soluble nov 2016 v03 (1).pdf,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-018_NITRATO_DE_POTASIO_HAIFA/
+MP-019,OXIDO DE MAGNESIO,MP-019_OXIDO_DE_MAGNESIO,0_FT.MP_OXIDO MAGNESIO.pdf,pendiente_busqueda,,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-019_OXIDO_DE_MAGNESIO/
+MP-020,QUITINA ORGANICA HYT-C,MP-020_QUITINA_ORGANICA_HYT_C,0_FT.MP_QUITINA ORGANICA HYT-C.pdf,pendiente_busqueda,,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-020_QUITINA_ORGANICA_HYT_C/
+MP-021,ROBUSTO PH,MP-021_ROBUSTO_PH,0_FT.MP_ROBUSTO PH.pdf,pendiente_busqueda,,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-021_ROBUSTO_PH/
+MP-022,SILICATO DE MAGNESIO,MP-022_SILICATO_DE_MAGNESIO,0_FT.MP_SILICATO MAGNESIO.pdf,preliminar_encontrada,HOJA DE SEGURIDAD -SILICATO DE MAGNESIO.docx,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-022_SILICATO_DE_MAGNESIO/
+MP-023,SULFATO DE AMONIO,MP-023_SULFATO_DE_AMONIO,0_FT.MP_SULFATO AMONIO G.pdf,preliminar_encontrada,Hoja de Seguridad APDR 233_SULFATO DE AMONIO (1).PDF,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-023_SULFATO_DE_AMONIO/
+MP-024,SULFATO DE CALCIO,MP-024_SULFATO_DE_CALCIO,0_FT.MP_SULFATO CALCIO Registro ICA.pdf,pendiente_busqueda,,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-024_SULFATO_DE_CALCIO/
+MP-025,SULFATO DE COBALTO,MP-025_SULFATO_DE_COBALTO,0_FT.MP_SULFATO DE COBALTO.pdf,pendiente_busqueda,,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-025_SULFATO_DE_COBALTO/
+MP-026,SULFATO DE COBRE,MP-026_SULFATO_DE_COBRE,0_FT.MP_SULFATO COBRE.pdf,preliminar_encontrada,11) HS Sulfato de Cobre Pentahidratado 25_ CONAGRAN.pdf,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-026_SULFATO_DE_COBRE/
+MP-027,SULFATO DE HIERRO,MP-027_SULFATO_DE_HIERRO,0_FT.MP_SULFATO HIERRO Precisagro.pdf,pendiente_busqueda,,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-027_SULFATO_DE_HIERRO/
+MP-028,SULFATO DE MAGNESIO,MP-028_SULFATO_DE_MAGNESIO,0_FT.MP_SULFATO MAGNESIO.pdf,preliminar_encontrada,"29. Ficha de datos de seguridad de Kieserita - Sulfato de magnesio monohidratado, kieserite.pdf",08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-028_SULFATO_DE_MAGNESIO/
+MP-029,SULFATO DE MAGNESIO ANHIDRO,MP-029_SULFATO_DE_MAGNESIO_ANHIDRO,0_FT.MP_SULFATO MAGNESIO Anhidro.pdf,preliminar_encontrada,"29. Ficha de datos de seguridad de Kieserita - Sulfato de magnesio monohidratado, kieserite.pdf",08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-029_SULFATO_DE_MAGNESIO_ANHIDRO/
+MP-030,SULFATO DE MANGANESO,MP-030_SULFATO_DE_MANGANESO,0_FT.MP_SULFATO MANGANESO.pdf,preliminar_encontrada,29. Ficha de datos de seguridad de Sulfato de Manganeso Monohidratado Fino - 17S+31Mn 20231025 22.pdf,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-030_SULFATO_DE_MANGANESO/
+MP-031,SULFATO DE POTASIO,MP-031_SULFATO_DE_POTASIO,0_FT.MP_SULFATO POTASIO.pdf,preliminar_encontrada,HOJA DE SEGURIDAD SULFATO DE POTASIO.docx,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-031_SULFATO_DE_POTASIO/
+MP-032,SULFATO DE ZINC,MP-032_SULFATO_DE_ZINC,0_FT.MP_SULFATO ZINC.pdf,preliminar_encontrada,HOJA DE SEGURIDAD -  SULFATO DE ZINC AL 35_.docx,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-032_SULFATO_DE_ZINC/
+MP-033,SULFATO FERROSO,MP-033_SULFATO_FERROSO,0_FT.MP_SULFATO FERROSO.pdf,pendiente_busqueda,,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-033_SULFATO_FERROSO/
+MP-034,ULEXITA,MP-034_ULEXITA,0_FT.MP_ULEXITA.pdf,preliminar_encontrada,13) Ulexita calcinada Calcined ulexite 45 - TDS (Español) TIERRA SA.pdf,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-034_ULEXITA/
+MP-035,UREA,MP-035_UREA,0_FT.MP_UREA G.pdf,preliminar_encontrada,21) HS Urea CIAMSA.pdf,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-035_UREA/
+MP-036,UREA FOSFATO,MP-036_UREA_FOSFATO,0_FT.MP_UREA FOSFATO 17.5-44-0.pdf,pendiente_busqueda,,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-036_UREA_FOSFATO/
+MP-037,VINAZA,MP-037_VINAZA,0_FT.MP_VINAZA (BIORGANIK).pdf,pendiente_busqueda,,08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-037_VINAZA/

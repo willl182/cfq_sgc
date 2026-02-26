@@ -1,0 +1,38 @@
+dossier_id,materia_prima,dossier_path,ft_status,ft_file,hs_status,hs_file
+MP-001,ACIDO BORICO,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-001_ACIDO_BORICO\,ft_present,0_FT.MP_ACIDO BORICO.pdf,hs_present,HDS ACIDO BORICO PQP .pdf
+MP-002,ALGAS MARINAS,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-002_ALGAS_MARINAS\,ft_present,0_FT.MP_ALGAS MARINA.pdf,hs_not_assigned,
+MP-003,CAL DOLOMITA,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-003_CAL_DOLOMITA\,ft_present,0_FT.MP_CAL DOLOMITA.pdf,hs_present,Ficha tecnica Dolomita +CAL DOLOMITA.pdf
+MP-004,CAOLIN,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-004_CAOLIN\,ft_present,0_FT.MP_CAOLIN.pdf,hs_present,ft_caolin_antec_c_98.pdf
+MP-005,CLORURO DE POTASIO,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-005_CLORURO_DE_POTASIO\,ft_present,0_FT.MP_CLORURO POTASIO G.pdf,hs_present,Cloruro de Potasio-FDS-CO (1).pdf
+MP-006,DAP (FOSFATO DIAMONICO),Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-006_DAP_FOSFATO_DIAMONICO\,ft_present,0_FT.MP_FOSFATO DIAMONICO G.pdf,hs_not_assigned,
+MP-007,DEXTROSA MONOHIDRATADA,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-007_DEXTROSA_MONOHIDRATADA\,ft_present,0_FT.MP_DEXTROSA MONOHIDRATADA.pdf,hs_not_assigned,
+MP-008,DIOXIDO DE SILICIO,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-008_DIOXIDO_DE_SILICIO\,ft_present,0_FT.MP_DIOXIDO SILICIO (Pirosil PS-300).pdf,hs_not_assigned,
+MP-009,DKP (FOSFATO DIPOTASICO),Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-009_DKP_FOSFATO_DIPOTASICO\,ft_present,0_FT.MP_FOSFATO DIPOTASICO_DKP.pdf,hs_not_assigned,
+MP-010,EDTA,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-010_EDTA\,ft_present,0_FT.MP_EDTA.pdf,hs_not_assigned,
+MP-011,FOSFOGRAN,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-011_FOSFOGRAN\,ft_present,0_FT.MP_FOSFOGRAN.pdf,hs_not_assigned,
+MP-012,KIESERITA,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-012_KIESERITA\,ft_present,0_FT.MP_KIESERITA G.pdf,hs_present,"29. Ficha de datos de seguridad de Kieserita - Sulfato de magnesio monohidratado, kieserite.pdf"
+MP-013,KIESERITA KCL,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-013_KIESERITA_KCL\,ft_present,0_FT.MP_KIESERITA KCL.pdf,hs_present,Cloruro de Potasio-FDS-CO (1).pdf
+MP-014,MAP (FOSFATO MONOAMONICO),Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-014_MAP_FOSFATO_MONOAMONICO\,ft_present,0_FT.MP_FOSFATO DE AMONIO (MAP).pdf,hs_present,MSDS - Fosfato Monoamonico.pdf
+MP-015,MKP (FOSFATO MONOPOTASICO),Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-015_MKP_FOSFATO_MONOPOTASICO\,ft_present,0_FT.MP_FOSFATO MONOPOTASICO.pdf,hs_not_assigned,
+MP-016,MOLIBDATO DE SODIO,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-016_MOLIBDATO_DE_SODIO\,ft_present,0_FT.MP_MOLIBDATO DE SODIO Qcos ALFA.pdf,hs_not_assigned,
+MP-017,NITRATO DE POTASIO,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-017_NITRATO_DE_POTASIO\,ft_present,0_FT.MP_NITRATO DE POTASIO.pdf,hs_present,MSDS Nitrato de potasio soluble nov 2016 v03 (1).pdf
+MP-018,NITRATO DE POTASIO (HAIFA),Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-018_NITRATO_DE_POTASIO_HAIFA\,ft_present,0_FT.MP_NITRATO POTASIO Haifa.pdf,hs_present,MSDS Nitrato de potasio soluble nov 2016 v03 (1).pdf
+MP-019,OXIDO DE MAGNESIO,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-019_OXIDO_DE_MAGNESIO\,ft_present,0_FT.MP_OXIDO MAGNESIO.pdf,hs_not_assigned,
+MP-020,QUITINA ORGANICA HYT-C,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-020_QUITINA_ORGANICA_HYT_C\,ft_present,0_FT.MP_QUITINA ORGANICA HYT-C.pdf,hs_not_assigned,
+MP-021,ROBUSTO PH,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-021_ROBUSTO_PH\,ft_present,0_FT.MP_ROBUSTO PH.pdf,hs_not_assigned,
+MP-022,SILICATO DE MAGNESIO,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-022_SILICATO_DE_MAGNESIO\,ft_present,0_FT.MP_SILICATO MAGNESIO.pdf,hs_present,HOJA DE SEGURIDAD -SILICATO DE MAGNESIO.docx
+MP-023,SULFATO DE AMONIO,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-023_SULFATO_DE_AMONIO\,ft_present,0_FT.MP_SULFATO AMONIO G.pdf,hs_present,Hoja de Seguridad APDR 233_SULFATO DE AMONIO (1).PDF
+MP-024,SULFATO DE CALCIO,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-024_SULFATO_DE_CALCIO\,ft_present,0_FT.MP_SULFATO CALCIO Registro ICA.pdf,hs_not_assigned,
+MP-025,SULFATO DE COBALTO,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-025_SULFATO_DE_COBALTO\,ft_present,0_FT.MP_SULFATO DE COBALTO.pdf,hs_not_assigned,
+MP-026,SULFATO DE COBRE,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-026_SULFATO_DE_COBRE\,ft_present,0_FT.MP_SULFATO COBRE.pdf,hs_present,11) HS Sulfato de Cobre Pentahidratado 25_ CONAGRAN.pdf
+MP-027,SULFATO DE HIERRO,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-027_SULFATO_DE_HIERRO\,ft_present,0_FT.MP_SULFATO HIERRO Precisagro.pdf,hs_not_assigned,
+MP-028,SULFATO DE MAGNESIO,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-028_SULFATO_DE_MAGNESIO\,ft_present,0_FT.MP_SULFATO MAGNESIO.pdf,hs_present,"29. Ficha de datos de seguridad de Kieserita - Sulfato de magnesio monohidratado, kieserite.pdf"
+MP-029,SULFATO DE MAGNESIO ANHIDRO,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-029_SULFATO_DE_MAGNESIO_ANHIDRO\,ft_present,0_FT.MP_SULFATO MAGNESIO Anhidro.pdf,hs_present,"29. Ficha de datos de seguridad de Kieserita - Sulfato de magnesio monohidratado, kieserite.pdf"
+MP-030,SULFATO DE MANGANESO,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-030_SULFATO_DE_MANGANESO\,ft_present,0_FT.MP_SULFATO MANGANESO.pdf,hs_present,29. Ficha de datos de seguridad de Sulfato de Manganeso Monohidratado Fino - 17S+31Mn 20231025 22.pdf
+MP-031,SULFATO DE POTASIO,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-031_SULFATO_DE_POTASIO\,ft_present,0_FT.MP_SULFATO POTASIO.pdf,hs_present,HOJA DE SEGURIDAD SULFATO DE POTASIO.docx
+MP-032,SULFATO DE ZINC,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-032_SULFATO_DE_ZINC\,ft_present,0_FT.MP_SULFATO ZINC.pdf,hs_present,HOJA DE SEGURIDAD -  SULFATO DE ZINC AL 35_.docx
+MP-033,SULFATO FERROSO,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-033_SULFATO_FERROSO\,ft_present,0_FT.MP_SULFATO FERROSO.pdf,hs_not_assigned,
+MP-034,ULEXITA,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-034_ULEXITA\,ft_present,0_FT.MP_ULEXITA.pdf,hs_present,13) Ulexita calcinada Calcined ulexite 45 - TDS (Español) TIERRA SA.pdf
+MP-035,UREA,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-035_UREA\,ft_present,0_FT.MP_UREA G.pdf,hs_present,21) HS Urea CIAMSA.pdf
+MP-036,UREA FOSFATO,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-036_UREA_FOSFATO\,ft_present,0_FT.MP_UREA FOSFATO 17.5-44-0.pdf,hs_not_assigned,
+MP-037,VINAZA,Z:\cfq_sgc\SGC_CALFERQUIM\08_Base_Datos_Tecnica\01_Dossier_Materias_Primas\MP-037_VINAZA\,ft_present,0_FT.MP_VINAZA (BIORGANIK).pdf,hs_not_assigned,
