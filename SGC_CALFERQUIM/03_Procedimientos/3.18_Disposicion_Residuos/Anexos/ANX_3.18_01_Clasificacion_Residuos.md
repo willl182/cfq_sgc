@@ -1,47 +1,38 @@
-# ANEXO 1 - POE 3.18: CLASIFICACIÓN DE RESIDUOS POR ORIGEN
+# ANEXO 1 - POE 3.18: CLASIFICACION DE RESIDUOS POR ORIGEN
 
-| CÓDIGO | POE ASOCIADO | VERSIÓN |
-|:---:|:---:|:---:|
-| **CGC-POE-3.18-ANX-01** | **CGC-POE-3.18** | **01** |
-
----
+| CODIGO | POE ASOCIADO | VERSION |
+|---|---|---|
+| CGC-POE-3.18-ANX-01 | POE-3.18 | 02 |
 
 ## Instrucciones
 
-Esta clasificación **debe** usarse para segregar correctamente los residuos generados en planta. Cada tipo de residuo tiene un contenedor asignado con código de color. **Se prohíbe** mezclar categorías.
+Esta tabla es de uso obligatorio para segregacion, rotulado y disposicion. No se permite mezclar categorias ni reclasificar residuos sin autorizacion de Calidad.
 
-## Clasificación
+## Clasificacion
 
-| CÓDIGO | TIPO DE RESIDUO | ORIGEN TÍPICO | CONTENEDOR | DESTINO |
-|:---:|:---|:---|:---:|:---|
-| **R-01** | Barredura de piso (producto seco) | Molienda, Mezcla, Envase | Azul | Evaluación para reproceso o disposición |
-| **R-02** | Material fuera de especificación | Control de calidad, Granulación | Azul | Reproceso controlado o destrucción |
-| **R-03** | Empaques contaminados (sacos, bolsas) | Envase, Almacén | Gris | Gestor autorizado (reciclaje industrial) |
-| **R-04** | Polvo de filtros y ciclones | Molienda, Micronización | Azul | Evaluación composición. Posible reproceso. |
-| **R-05** | Contramuestras vencidas | Muestroteca (POE 3.14) | Azul | Disposición como R-01 |
-| **R-06** | Residuos líquidos (lavado de equipos) | Limpieza de mezcladora, tanques | Rojo | Gestor autorizado (tratamiento líquidos) |
-| **R-07** | Residuos ordinarios (no peligrosos) | Oficinas, comedor, baños | Verde | Recolección municipal |
-| **R-08** | Residuos peligrosos (solventes, aceites) | Mantenimiento, Laboratorio | Rojo | Gestor autorizado RESPEL |
-| **R-09** | Material de empaque limpio (reciclable) | Almacén, Recepción MP | Blanco | Reciclaje |
+| CODIGO | TIPO DE RESIDUO | ORIGEN TIPICO | CONTENEDOR | DESTINO FINAL AUTORIZADO |
+|---|---|---|---|---|
+| R-01 | Barredura de piso y polvo de limpieza | Molienda, mezcla, envase | Azul | Disposicion externa autorizada (sin reutilizacion) |
+| R-02 | Producto no conforme no recuperable | Proceso y calidad | Azul | Disposicion externa autorizada |
+| R-03 | Empaques contaminados | Envase, bodega | Gris | Gestor autorizado |
+| R-04 | Polvo de filtros/ciclones contaminado | Captacion de polvo | Azul | Disposicion externa autorizada |
+| R-05 | Contramuestras vencidas | Muestroteca | Azul | Disposicion externa autorizada |
+| R-06 | Residuos liquidos de lavado | Limpieza equipos | Rojo | Tratamiento con gestor autorizado |
+| R-07 | Ordinarios no peligrosos | Oficinas y servicios | Verde | Recoleccion municipal |
+| R-08 | Peligrosos (RESPEL) | Mantenimiento/lab | Rojo | Gestor RESPEL autorizado |
+| R-09 | Reciclable limpio | Recepcion/bodega | Blanco | Reciclaje autorizado |
 
-## Reglas de Segregación
+## Reglas de segregacion
 
-| REGLA | DESCRIPCIÓN |
-|:---|:---|
-| **Prohibición absoluta** | Las barreduras (R-01) **no pueden** reincorporarse como producto terminado |
-| **Evaluación obligatoria** | R-01, R-02 y R-04 requieren análisis antes de definir destino |
-| **Cuantificación** | Todo residuo azul **debe** pesarse al momento de la recolección |
-| **Registro** | Todo movimiento se documenta en el Formato de Disposición de Residuos |
-| **Frecuencia** | Recolección mínima al final de cada turno o cambio de producto |
+| REGLA | DESCRIPCION |
+|---|---|
+| Prohibicion absoluta | R-01, R-02, R-04 y R-05 no se reincorporan a proceso de venta |
+| Pesaje obligatorio | Todo residuo de proceso se pesa y registra por evento |
+| Rotulado minimo | Fecha, area, responsable, tipo y peso |
+| Trazabilidad | Toda salida requiere manifiesto y certificado de disposicion |
+| Frecuencia minima | Recoleccion al cierre de cada turno y en cada cambio de producto |
 
-## Contenedores
+## Limites de acumulacion
 
-| COLOR | USO | IDENTIFICACIÓN |
-|:---:|:---|:---|
-| **Azul** | Residuos de proceso (evaluables) | Rótulo con código R-XX, producto, lote, fecha, peso |
-| **Rojo** | Residuos peligrosos y líquidos | Rótulo RESPEL con pictogramas |
-| **Gris** | Empaques contaminados | Rótulo "Material contaminado - No reciclar" |
-| **Verde** | Ordinarios no peligrosos | Sin rótulo especial |
-| **Blanco** | Reciclables limpios | Sin rótulo especial |
-
-> **Nota:** La cantidad máxima acumulable de residuos azules (R-01 a R-05) en planta es de **500 kg** o **30 días**, lo que ocurra primero. Superado cualquier límite, **debe** gestionarse la disposición inmediata.
+- Residuos de proceso (R-01 a R-05): maximo 500 kg o 30 dias, lo que ocurra primero.
+- Al superar un limite, Gestion Ambiental programa retiro inmediato.

@@ -24,7 +24,7 @@ Aplica a PQR de clientes, distribuidores y terceros relacionadas con producto, d
 - DC-SI11 Servicio al Cliente.
 - DC-SI13 Politica Servicio al Cliente.
 - DC-SI15 Politica de Quejas y Reclamos.
-- Procedimiento interno vigente de retiro/contencion de producto.
+- POE-3.16A Retiro de Producto (Recall).
 
 ## 5. RESPONSABILIDADES Y POLITICAS
 
@@ -39,7 +39,7 @@ Aplica a PQR de clientes, distribuidores y terceros relacionadas con producto, d
 2. Servicio al Cliente clasifica tipo (peticion, queja, reclamo) y criticidad.
 3. Calidad analiza soporte, lote y antecedentes cuando aplique.
 4. Si requiere investigacion tecnica, se abre RPC y se integra resultado.
-5. Si la PQR implica riesgo sanitario, incumplimiento de especificacion o posible afectacion de multiples lotes, se activa de inmediato el protocolo interno de retiro/contencion con Direccion Tecnica y Calidad.
+5. Si la PQR implica riesgo sanitario, incumplimiento de especificacion o posible afectacion de multiples lotes, se activa de inmediato `POE_3.16A_Retiro_Producto_Recall_V1.md`.
 6. Responsable redacta respuesta y define acciones correctivas/preventivas.
 7. Direccion Tecnica aprueba respuesta para casos de alto impacto.
 8. Servicio al Cliente comunica respuesta al cliente y registra fecha.

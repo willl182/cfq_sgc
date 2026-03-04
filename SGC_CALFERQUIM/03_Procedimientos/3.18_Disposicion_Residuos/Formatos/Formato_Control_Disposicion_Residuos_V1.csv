@@ -1,1 +1,1 @@
-fecha,area,tipo_residuo,cantidad,unidad,contenedor,destino_previsto,responsable,observaciones
+fecha,turno,area,codigo_residuo,tipo_residuo,peso_kg,contenedor,origen_lote,destino_final_autorizado,responsable,revisor_calidad,observaciones
