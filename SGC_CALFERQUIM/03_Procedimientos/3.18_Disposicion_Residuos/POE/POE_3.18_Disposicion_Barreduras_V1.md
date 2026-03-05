@@ -55,7 +55,7 @@ Se prohibe de forma expresa e indelegable reincorporar barreduras, polvo de piso
 ### 7.3 Disposicion final
 
 8. Gestion Ambiental programa retiro al 80% de capacidad o antes del limite de tiempo.
-9. Solo se entrega a gestores incluidos en `ANX_3.18_02_Lista_Gestores_Autorizados.md` o suplente aprobado por Direccion Tecnica.
+9. Solo se entrega a gestores con licencia ambiental vigente aprobados por Direccion Tecnica.
 10. Cada salida exige manifiesto y certificado/acta de disposicion final.
 11. Gestion Ambiental registra cierre en `Registro_Disposicion_Residuos_V1.csv`.
 
@@ -93,7 +93,6 @@ Se prohibe de forma expresa e indelegable reincorporar barreduras, polvo de piso
 ## 10. ANEXOS
 
 - `ANX_3.18_01_Clasificacion_Residuos.md`
-- `ANX_3.18_02_Lista_Gestores_Autorizados.md`
 
 ## 11. CONTROL DE CAMBIOS
 

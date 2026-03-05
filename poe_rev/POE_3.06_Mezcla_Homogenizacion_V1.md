@@ -37,7 +37,7 @@ El orden de adición de materias primas **debe** respetarse estrictamente para e
 ## 5. RESPONSABILIDADES Y POLÍTICAS (Estilo Opus)
 
 ### 5.1. Jefe de Producción
-*   **Debe** definir los tiempos de mezcla óptimos para cada familia de productos (Anexo 1) basándose en validaciones previas.
+*   **Debe** asegurar el cumplimiento del tiempo de mezcla estándar de **4 minutos** y verificar su aplicación en producción.
 *   **Es responsable** de asegurar que los equipos de mezcla tengan el mantenimiento preventivo al día (revisión de aspas/cintas).
 
 ### 5.2. Supervisor de Producción
@@ -67,7 +67,7 @@ El orden de adición de materias primas **debe** respetarse estrictamente para e
     *   3°: Material fino o de menor densidad.
 5.  **OPERARIO:** **Adicionar** los componentes menores (Micros) en el centro geométrico del mezclador o mediante tolva de aditivos.
 6.  **OPERARIO:** **Cronometrar** el Tiempo de Mezcla Efectivo desde el cierre de la tapa/compuerta.
-    *   *Punto Crítico:* Respetar tiempo mínimo definido en Anexo 1 (ej: 5 - 15 minutos).
+    *   *Punto Crítico:* Respetar tiempo mínimo de **4 minutos** de mezcla efectiva.
 
 ### 6.3. Descarga y Control de Homogeneidad
 
@@ -91,11 +91,7 @@ El orden de adición de materias primas **debe** respetarse estrictamente para e
 *   `Formato_Control_Mezcla_Homogenizacion_V1.csv`: Registro de tiempos y orden de carga.
 *   `Registro_Mezcla_Homogenizacion_V1.csv`: Histórico de lotes mezclados.
 
-## 9. ANEXOS
-
-*   **Anexo 1:** Tabla de Tiempos de Mezcla y Secuencias de Carga por Producto.
-
-## 10. CONTROL DE CAMBIOS
+## 9. CONTROL DE CAMBIOS
 
 | VERSIÓN | FECHA | DESCRIPCIÓN DEL CAMBIO |
 |

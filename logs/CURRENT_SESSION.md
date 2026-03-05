@@ -1,69 +1,44 @@
-# Session State: SGC CALFERQUIM - Migracion y Homologacion POEs
+# Session State: SGC CALFERQUIM
 
-**Last Updated**: 2026-02-18 05:46
+**Last Updated**: 2026-03-05 05:51
 
 ## Session Objective
 
-Planificar, migrar e implementar la homologacion completa del modulo `03_Procedimientos` en `SGC_CALFERQUIM`, incluyendo cierre de brechas criticas (pilar 9: limpieza y desinfeccion) y revision regulatoria ICA/pv0.
+Ajuste de 8 POEs y creacion de descripcion narrativa del flujo de proceso (requisito 1.4) para reflejar la operacion real de la planta — eliminando supuestos BPM genericos que no se aplican.
 
 ## Current State
 
-- [x] **Track A Migracion** completado:
-  - POEs/Actas normalizados migrados de `poe_rev/` a `SGC_CALFERQUIM/03_Procedimientos/`.
-  - 18 anexos operativos distribuidos en subcarpetas `Anexos/`.
-  - 22 CSVs (Formato/Registro) verificados y ubicados por procedimiento.
-  - Archivos `PENDIENTE_*.md` eliminados en modulo 3.
-- [x] **Track B Homologacion** completado:
-  - 7 POEs nuevos creados: `3.01`, `3.02`, `3.11`, `3.13`, `3.15`, `3.16`, `3.17`.
-  - 7 formatos CSV + 7 registros CSV + 12 anexos tecnicos creados.
-- [x] **Revisiones de implementacion** ejecutadas:
-  - Verificacion estructural: `20/20` POEs del modulo 3 presentes.
-  - Reajustes regulatorios aplicados en criterios de COA, trazabilidad PQR-retiro, codificacion y muestreo MP/PT.
-- [x] **Fase siguiente simple implementada**:
-  - Plan registrado en `logs/plans/260218_0535_plan_fase_siguiente_auditoria_ica.md`.
-  - Indice maestro de auditoria creado en `SGC_CALFERQUIM/00_Inbox/Indice_Maestro_Auditoria_ICA_Modulo_3_V1.md` y `.docx`.
-  - Carpeta de evidencia piloto creada: `SGC_CALFERQUIM/03_Procedimientos/_Evidencia_Implementacion_ICA/`.
-  - Plantillas operativas creadas en `.md` y `.docx` (acta de piloto y checklist).
-- [x] **Preparacion para reunion de gerencia completada**:
-  - 7 carpetas de piloto creadas y precargadas (3.01, 3.02, 3.11, 3.13, 3.15, 3.16, 3.17).
-  - Resumen ejecutivo de avance generado en `SGC_CALFERQUIM/00_Inbox/Resumen_Avance_Reunion_Gerencia_20260218.md` y `.docx`.
-- [x] **Carga masiva FT/HS en dossiers ejecutada (2026-02-18)**:
-  - Fuentes usadas: `202_CALFERQUIM/09 Fichas Tecnicas/`, `202_CALFERQUIM/07 Hojas de Seguridad/` y caso puntual `202_CALFERQUIM/08 Registros ICA/todero/10_Ficha Técnica TODERO.docx`.
-  - Resultado: faltantes reducidos de `FT 29 -> 7` y `HS 30 -> 6` en `SGC_CALFERQUIM/05_Dossier_Productos/`.
-  - Evidencia: `SGC_CALFERQUIM/00_Inbox/Reporte_Carga_FT_HS_20260218.csv`, `SGC_CALFERQUIM/00_Inbox/Estado_Cobertura_FT_HS_20260218.csv`, `SGC_CALFERQUIM/00_Inbox/Resumen_Carga_FT_HS_20260218.md`.
-- [x] **Cierre residual con fuentes 08/99 ejecutado (2026-02-18)**:
-  - Alcance: busqueda y carga limitada a `202_CALFERQUIM/08 Registros ICA/` y `202_CALFERQUIM/99 Revision/`.
-  - Cargas adicionales: 2 FT (`30_KIESERITA P`, `53_SULFATO DE POTASIO`).
-  - Resultado actualizado: faltantes `FT 7 -> 5`, `HS 6 -> 6`.
-  - Evidencia: `SGC_CALFERQUIM/00_Inbox/Reporte_Cierre_Residual_08_99_20260218.csv`, `SGC_CALFERQUIM/00_Inbox/Pendientes_Residual_Despues_08_99_20260218.csv`, `SGC_CALFERQUIM/00_Inbox/Resumen_Cierre_Residual_08_99_20260218.md`.
-- [x] **Busqueda residual con fuentes 07/09 ejecutada (2026-02-18)**:
-  - Alcance: verificacion de fuentes en `202_CALFERQUIM/07 Hojas de Seguridad/` y `202_CALFERQUIM/09 Fichas Tecnicas/` para los 11 pendientes restantes.
-  - Resultado: sin nuevas cargas validas en esta ronda; cobertura se mantiene en `FT pendientes = 5`, `HS pendientes = 6`.
-  - Evidencia: `SGC_CALFERQUIM/00_Inbox/Estado_Cobertura_FT_HS_20260218_r2.csv`, `SGC_CALFERQUIM/00_Inbox/Resumen_Busqueda_07_09_20260218.md`.
-- [x] **POE unificado de muestreo de mezclas fisicas creado (2026-02-18)**:
-  - Documento nuevo: `SGC_CALFERQUIM/03_Procedimientos/3.13_Muestreo_Control_Calidad/POE/POE_3.13A_Toma_Muestra_Mezclas_Fisicas_V1.md` y `.docx`.
-  - Alcance: consolidacion de muestreo en sacos y granel sin uso de imagenes.
-  - Integracion: `POE_3.13_Muestreo_Control_Calidad_V1.md` actualizado para referenciar `POE-3.13A`.
-- [x] **Inventario MP con dossier y HS preliminar creado (2026-02-23)**:
-  - Archivo maestro: `SGC_CALFERQUIM/08_Base_Datos_Tecnica/Inventario_Materias_Primas_Dossier_V1.csv`.
-  - Resultado: `37` MP inventariadas, con `19` HS preliminares ubicadas y `18` pendientes por validar/buscar.
-  - Estructura definida para cada MP: `01_Ficha_Tecnica/` + `02_Hoja_Seguridad/` dentro de `01_Dossier_Materias_Primas`.
-- [x] **Traslado ejecutado a dossiers MP (2026-02-23)**:
-  - Dossiers creados: `SGC_CALFERQUIM/08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/` con `37` carpetas `MP-###`.
-  - Carga documental verificada: `FT presentes = 37`, `HS presentes = 19`, `HS sin asignacion = 18`.
-  - Reporte de verificacion: `SGC_CALFERQUIM/00_Inbox/Reporte_Traslado_Dossier_MP_20260223.csv`.
+- [x] POE 3.01 — Recepcion MP: cuarentena en vehiculo, ingreso solo con autorizacion Calidad, devolucion a cargo comercial/Gerencia, eliminados colores de etiqueta.
+- [x] POE 3.02 — Limpieza: barrido con escoba diferenciado por area (planta / bodega MP-PT / bodega empaques aislada). Eliminados desinfeccion, hisopado, ATP, verificacion Calidad. Autoriza Jefe Produccion.
+- [x] POE 3.05 — Verificacion de formulacion: formula (conc MP x cant MP) / 1000 = aporte nutriente. Objetivo: confirmar grado calculado vs grado ICA declarado. Eliminados entradas/salidas/barreduras/mermas/tolerancias zonales.
+- [x] POE 3.06 — Mezcla: Tipo A = mezcla fisica manual (vaciado intercalado + paleado → POE 3.10). Tipo B = tolva mecanica 4 min cronometrados → POE 3.08.
+- [x] POE 3.08 — Granulacion: Tolva → Olla (agua/miel) → Tubo secador → Sep. finos (recircula) → Sep. gruesos (muele y reprocesa) → Tubo enfriador → Recoleccion. Parametros en rangos definidos por Jefe Produccion.
+- [x] POE 3.10 — Envase: solo sacos y bigbag. Doble pesaje ±1% (produccion + alistamiento). Sin liquidos ni otros envases.
+- [x] POE 3.11 — Codificacion lotes: Bodega asigna codigo al generar OP y verifica no duplicidad. Bodega marca. Alistamiento confirma. Sin rol de Calidad.
+- [x] POE 3.12 — Liberacion lotes: traslado a bodega → En Revision. Verificaciones: DT (OP + etiquetas bultos), Calidad (certificado interno), Jefe Prod (datos proceso), Jefe Bodega (marcado lote). Dictamen: Aprobado / Rechazado / En Revision. Sin colores ni cuarentena fisica.
+- [x] DFP 1.4 — Descripcion narrativa del flujo de proceso creada: SGC_CALFERQUIM/01_Requisitos_Generales/1.4_Diagrama_Flujo_Proceso/DFP_1.4_Descripcion_Flujo_Proceso_V1.md
+
+## Patrones Operacionales Confirmados
+
+- Limpieza = barrido con escoba. Sin desinfeccion. Sin Calidad en verificacion de limpieza.
+- Mezcla fisica = vaciado intercalado + paleado manual. Sin mezclador mecanico.
+- Granulacion usa olla con aglomerante agua/miel. Sin compactadora, zarandas ni Ro-Tap.
+- Finos recirculan a olla. Gruesos se muelen y reprocean internamente.
+- Balance de MP = verificacion de formulacion vs grado ICA (no balance de masas entrada/salida).
+- Empaque: solo sacos y bigbag. Sin productos liquidos.
+- Codificacion de lotes: responsabilidad de Bodega, no de Calidad.
+- Liberacion: estados Aprobado / Rechazado / En Revision. Sin etiquetas de color fisico.
+- DT verifica OP y etiquetas de bultos como parte del proceso de liberacion.
 
 ## Critical Technical Context
 
-- Plan de trabajo formal en: `logs/plans/260218_0430_plan_migracion_homologacion_poes.md` (estado `completed`).
-- Se mantuvo la decision del usuario de conservar documentos legacy junto a nuevos POEs en las carpetas `POE/`.
-- Se incorporo nuevo procedimiento critico `POE_3.02_Limpieza_Desinfeccion_V1.md` para cerrar brecha ICA pilar 9.
-- Se agrego gobernanza de codigos de lote con lista maestra de abreviaturas en:
-  - `SGC_CALFERQUIM/03_Procedimientos/3.11_Codificacion_Lotes/Anexos/ANX_3.11_02_Lista_Maestra_Abreviaturas_Producto.md`
+- POE 3.05 renombrado conceptualmente: ya no es "Balance de Materias Primas" sino "Verificacion de Formulacion y Grado". El archivo mantiene el codigo CGC-POE-3.05.
+- El ANX_3.12_02_Etiquetas_Estatus.md sigue existiendo en disco pero ya no esta referenciado en POE 3.12 — candidato a archivar.
+- DFP 1.4 es descripcion narrativa; el diagrama grafico queda pendiente.
 
 ## Next Steps
 
-1. Definir fuente valida para 11 pendientes fuera del alcance 08/99 (`FT`: `26_FOLLAJE`, `28_GANADERO`, `35_N4`, `47_R-VITAL 17`, `61_ORGANIC_M`; `HS`: `40_NUCLEO MAGNE3`, `41_NUCLEO MAGNESIO-AZUFRE`, `42_NUCLEO MAGNESIO-SILICIO`, `43_NUCLEO MAGNESIO-S`, `45_PRODUCCION 17`, `61_ORGANIC_M`).
-2. Ejecutar y diligenciar 1 lote piloto por carpeta ya creada en `_Evidencia_Implementacion_ICA`.
-3. Adjuntar evidencia firmada (formato + registro + decision de Calidad) por cada piloto.
-4. Definir y formalizar el procedimiento de retiro de producto para enlazarlo con `POE_3.16_Servicio_Cliente_PQR_V1.md`.
+1. Elaborar diagrama grafico del flujo de proceso (pendiente — actualmente solo descripcion narrativa DFP-1.4).
+2. Definir si ANX_3.12_02_Etiquetas_Estatus.md se archiva o elimina.
+3. Sincronizar carpeta poe_rev/ con las versiones actualizadas si se requiere.
+4. Definir y documentar estructura oficial del codigo de lote (Anexo 1 de POE 3.11).

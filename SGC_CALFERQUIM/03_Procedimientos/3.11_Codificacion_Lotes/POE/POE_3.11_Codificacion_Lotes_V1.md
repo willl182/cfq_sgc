@@ -6,63 +6,67 @@
 
 ## 1. OBJETIVO
 
-Estandarizar la asignacion y control del codigo de lote para asegurar trazabilidad desde produccion hasta cliente final.
+Estandarizar la asignacion y marcado del codigo de lote para asegurar trazabilidad del producto terminado.
 
 ## 2. ALCANCE
 
-Aplica a lotes de producto terminado, lotes en reproceso autorizados y lotes fabricados para terceros.
+Aplica a todos los lotes de producto terminado fabricados en CALFERQUIM S.A.S.
 
 ## 3. DEFINICIONES
 
-- Codigo de lote: Identificador unico de fabricacion.
-- Reproceso: Reingreso controlado de producto bajo aprobacion de Calidad.
-- Serie diaria: Secuencia numerica del dia.
+- Codigo de lote: Identificador unico asignado a cada lote de fabricacion con la estructura ##-DDMMAA.
+- Marcado: Impresion o inscripcion del codigo de lote sobre el saco o bigbag.
+
+## 3.1. ESTRUCTURA DEL CODIGO DE LOTE
+
+```
+##-DDMMAA
+```
+
+Donde:
+- `##` — Numero consecutivo del lote (dos digitos, ej: 01, 65, 99).
+- `DDMMAA` — Fecha de fabricacion en formato dia-mes-año (dos digitos cada uno).
+
+**Ejemplo:** `65-030326` corresponde al lote numero 65 fabricado el 03 de marzo de 2026.
+
+El consecutivo es asignado por Bodega y se reinicia segun el periodo definido internamente. No puede repetirse dentro del mismo periodo.
 
 ## 4. DOCUMENTOS DE REFERENCIA
 
-- DC-SI12 Asignacion de Lotes, Muestreo y Control de Calidad.
 - POE 3.12 Liberacion de Lotes.
-- Anexo 2: Lista maestra de abreviaturas de producto.
 
 ## 5. RESPONSABILIDADES Y POLITICAS
 
-- Produccion debe solicitar codigo antes de iniciar lote.
-- Calidad debe validar estructura y no duplicidad del codigo.
-- Se prohibe imprimir etiquetas con lote no aprobado.
-- Todo cambio de lote debe quedar trazado y firmado.
+- Bodega asigna el codigo de lote al generar la orden de produccion y verifica que no sea duplicado.
+- Bodega ejecuta el marcado del codigo sobre el empaque (saco o bigbag).
+- Alistamiento confirma que el codigo marcado coincide con el de la orden de produccion.
+- Se prohibe despachar producto sin codigo de lote marcado y confirmado.
 
 ## 6. PROCEDIMIENTO
 
-1. Produccion solicita asignacion en `Formato_Asignacion_Lotes_V1.csv`.
-2. Calidad genera codigo segun estructura definida en anexo 1 y abreviatura aprobada en anexo 2.
-3. Calidad verifica que no exista lote repetido en el periodo vigente.
-4. Produccion registra codigo en orden de produccion y etiquetas.
-5. Calidad confirma consistencia entre orden, etiqueta y registro.
-6. Bodega usa el codigo para trazabilidad de almacenamiento y despacho.
-7. Calidad consolida historial en `Registro_Codificacion_Lotes_V1.csv`.
+1. BODEGA: Al generar la orden de produccion, asignar el codigo de lote segun la estructura ##-DDMMAA (seccion 3.1).
+2. BODEGA: Verificar que el codigo asignado no exista ya en el periodo vigente (no duplicidad).
+3. BODEGA: Registrar el codigo en la orden de produccion.
+4. BODEGA: Ejecutar el marcado del codigo de lote sobre cada saco o bigbag del lote.
+5. ALISTAMIENTO: Confirmar que el codigo marcado en el empaque coincide exactamente con el registrado en la orden de produccion.
+6. Si hay discrepancia: corregir el marcado antes de continuar. Reportar al Jefe de Produccion.
 
 ## 7. CRITERIOS DE CONTROL Y ACEPTACION
 
 | PARAMETRO | CRITERIO |
 |---|---|
-| Unicidad | Sin codigos duplicados |
-| Estructura | Cumple formato AAAAMMDD-PROD-SERIE |
-| Abreviatura | Debe existir y estar vigente en lista maestra controlada |
-| Consistencia documental | Mismo lote en OP, etiqueta y registro |
-| Trazabilidad | Lote vinculable a materia prima y cliente |
+| Unicidad | Sin codigos duplicados en el periodo vigente |
+| Estructura | Cumple formato ##-DDMMAA (ej: 65-030326) |
+| Consistencia | Codigo identico en orden de produccion y empaque |
+| Legibilidad | Codigo legible en todos los empaques del lote |
 
 ## 8. REGISTROS ASOCIADOS
 
-- `Formato_Asignacion_Lotes_V1.csv`
-- `Registro_Codificacion_Lotes_V1.csv`
+- Orden de produccion (campo codigo de lote).
 
-## 9. ANEXOS
-
-- Anexo 1: Estructura oficial del codigo de lote.
-- Anexo 2: Lista maestra de abreviaturas de producto.
-
-## 10. CONTROL DE CAMBIOS
+## 9. CONTROL DE CAMBIOS
 
 | VERSION | FECHA | DESCRIPCION |
 |---|---|---|
-| 01 | 2026-02-18 | Emision inicial separada de DC-SI12. |
+| 01 | 2026-02-18 | Emision inicial. |
+| 01 | 2026-03-05 | Ajuste operacional: Bodega asigna, verifica y marca. Alistamiento confirma. Sin rol de Calidad. Estructura del codigo definida en POE (##-DDMMAA, ej: 65-030326). Se elimina Anexo 1. |

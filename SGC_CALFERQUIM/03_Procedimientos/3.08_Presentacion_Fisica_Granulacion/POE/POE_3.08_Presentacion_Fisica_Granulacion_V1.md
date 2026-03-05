@@ -1,104 +1,106 @@
-# PROCEDIMIENTO OPERATIVO ESTANDARIZADO: PRESENTACIÓN FÍSICA Y GRANULACIÓN
+# PROCEDIMIENTO OPERATIVO ESTANDARIZADO: PRESENTACION FISICA Y GRANULACION
 
-| CÓDIGO | VERSIÓN | VIGENCIA | PRÓXIMA REVISIÓN |
-|
-|
-|
-|
-|
-| **CGC-POE-3.08** | **01** | **2026-02-17** | **12 meses o ante cambio regulatorio** |
+| CODIGO | VERSION | VIGENCIA | PROXIMA REVISION |
+|---|---|---|---|
+| CGC-POE-3.08 | 01 | 2026-02-17 | 12 meses o ante cambio regulatorio |
 
 ---
 
 ## 1. OBJETIVO
 
-Estandarizar las operaciones de granulación, compactación y clasificación por tamaño (tamizado) para asegurar que el producto terminado cumpla con las especificaciones de granulometría, apariencia física, fluidez y resistencia mecánica requeridas para su aplicación en campo.
+Estandarizar la operacion de granulacion por olla para obtener un producto con la presentacion fisica (tamano, apariencia y fluidez) adecuada para su envasado y aplicacion en campo, manteniendo los parametros de proceso dentro de los rangos definidos por el Jefe de Produccion para cada producto.
 
 ## 2. ALCANCE
 
-Aplica a todos los fertilizantes granulados, compactados o mezclas físicas que requieran un ajuste de tamaño de partícula específico antes de su envasado en la planta de **CALFERQUIM S.A.S.**
+Aplica a todos los fertilizantes y acondicionadores que pasan por el proceso de granulacion por olla en la planta de CALFERQUIM S.A.S.
 
 ## 3. DEFINICIONES
 
-*   **Granulación:** Proceso de aglomeración de partículas finas para formar gránulos de mayor tamaño.
-*   **Tamizado (Clasificación):** Separación mecánica de partículas según su tamaño mediante mallas.
-*   **Finos (Polvo):** Fracción de material por debajo del tamaño mínimo especificado (Pasa Malla inferior).
-*   **Gruesos (Sobretamaño):** Fracción de material por encima del tamaño máximo especificado (Retiene Malla superior).
-*   **Producto Conforme (On-Size):** Fracción de material dentro del rango de tamaño deseado.
+- Granulacion por olla: Proceso de aglomeracion de particulas mediante rotacion en olla inclinada con adicion de aglomerante (agua o miel).
+- Aglomerante: Liquido (agua o miel) que favorece la union de particulas para formar el granulo.
+- Tubo secador: Equipo de secado por calor que reduce la humedad del granulo antes de la clasificacion.
+- Separador de finos: Dispositivo que retiene el material por debajo del tamano minimo especificado y lo separa del flujo de producto conforme.
+- Separador de gruesos: Dispositivo que retiene el material por encima del tamano maximo especificado y lo separa del flujo de producto conforme. El material retenido se muele y se reincorpora al proceso (reproceso interno).
+- Tubo enfriador: Equipo que reduce la temperatura del granulo conforme antes de su recoleccion y envasado.
+- Rango operacional: Intervalo de valores definido por el Jefe de Produccion para cada parametro de proceso de cada producto. Las materias primas son heterogeneas, por lo que se trabaja con rangos y no con valores fijos.
 
 ## 4. DOCUMENTOS DE REFERENCIA
 
-*   **Resolución ICA pv0 (Propuesta):** Anexo I-B, Pilar 17.
-*   **Ficha Técnica del Producto:** Especificación de Rango Granulométrico (ej: 2-4 mm).
+- Resolucion ICA pv0 (Propuesta): Anexo I-B, Pilar 17.
+- POE 3.02 Limpieza de Areas y Equipos (cambio de produccion).
 
-## 4.1. CONSIDERACIONES GMP (BUENAS PRÁCTICAS DE MANUFACTURA)
+## 4.1. CONSIDERACIONES GMP (BUENAS PRACTICAS DE MANUFACTURA)
 
-Las mallas de los tamices **deben** revisarse diariamente para detectar roturas que permitan el paso de material fuera de especificación. **Se prohíbe** el uso de cepillos metálicos o herramientas punzantes para limpiar las mallas, ya que dañan el tejido. El material rechazado (finos y gruesos) **debe** recolectarse en contenedores limpios e identificados para su reproceso inmediato, evitando su contaminación con basura o residuos de piso.
+Los parametros de operacion de la olla y el tubo secador se ajustan unicamente bajo orden del Jefe de Produccion. Se prohibe al operario modificar parametros por iniciativa propia. La limpieza del equipo entre productos distintos es obligatoria (ver POE 3.02).
 
-## 5. RESPONSABILIDADES Y POLÍTICAS (Estilo Opus)
+## 5. RESPONSABILIDADES Y POLITICAS
 
-### 5.1. Jefe de Producción
-*   **Debe** establecer los parámetros de operación del granulador (humedad, velocidad, presión) para cada producto.
-*   **Es responsable** de garantizar que el reproceso de finos y gruesos se realice de manera controlada y sin afectar la composición química del lote.
+### 5.1. Jefe de Produccion
+- Define los rangos operacionales (velocidad de olla, temperatura del tubo secador, calor, separador, tubo enfriador) para cada producto antes de iniciar la produccion.
+- Es la unica persona autorizada para ordenar ajustes de parametros durante la operacion.
+- Es responsable de garantizar que el material fuera de rango (finos o gruesos) se maneje de forma controlada.
 
-### 5.2. Supervisor de Producción
-*   **Debe** verificar la integridad de las mallas al inicio y final de cada turno.
-*   **Tiene la autoridad** para detener la línea si detecta un exceso de polvo en el producto final.
+### 5.2. Operario de Granulacion
+- Opera el equipo segun los parametros definidos por el Jefe de Produccion para ese producto.
+- Reporta al Jefe de Produccion cualquier anomalia o condicion fuera del rango definido.
+- Se prohibe modificar parametros sin orden expresa del Jefe de Produccion.
 
-### 5.3. Operario de Granulación/Tamizado
-*   **Debe** monitorear constantemente el flujo de material hacia las zarandas o tamices.
-*   **Se prohíbe** sobrecargar las mallas, ya que esto reduce la eficiencia de clasificación y "ciega" el tamiz.
+## 6. PROCEDIMIENTO
 
-### 5.4. Control de Calidad
-*   **Debe** realizar análisis granulométrico periódico (Ro-Tap o similar) para validar la eficacia del tamizado en línea.
+### 6.1. Configuracion del Equipo
 
-## 6. PROCEDIMIENTO (Estilo GLM-4.7)
+1. JEFE DE PRODUCCION: Definir y comunicar los rangos operacionales para el producto a fabricar:
+   - Velocidad de la olla (rpm o frecuencia).
+   - Temperatura del tubo secador.
+   - Nivel de calor.
+   - Configuracion del separador de finos y gruesos.
+   - Configuracion del tubo enfriador.
+2. OPERARIO: Verificar limpieza del equipo (POE 3.02 si es cambio de produccion) y ajustar los parametros segun instruccion del Jefe de Produccion.
 
-### 6.1. Configuración del Equipo
+### 6.2. Flujo de Proceso
 
-1.  **OPERARIO:** **Verificar** que las mallas instaladas en la clasificadora correspondan a la especificación del producto (Ver Anexo 1).
-2.  **SUPERVISOR:** **Inspeccionar** estado de las mallas (sin huecos ni remiendos) y tensión correcta.
+El material sigue la siguiente secuencia continua:
 
-### 6.2. Operación de Granulación y Clasificación
+```
+Tolva de mezcla → Olla granuladora → Tubo secador → Separador de finos → Separador de gruesos → Tubo enfriador → Recoleccion
+```
 
-3.  **OPERARIO:** **Alimentar** el sistema de granulación manteniendo flujo constante.
-4.  **OPERARIO:** **Regular** la adición de aglomerante (agua/solución) si aplica, evitando exceso de humedad que genere "barro".
-5.  **OPERARIO:** **Monitorear** las salidas de la clasificadora:
-    *   **Salida 1 (Gruesos):** Dirigir a molino de retorno.
-    *   **Salida 2 (Producto):** Dirigir a tolva de producto terminado/envase.
-    *   **Salida 3 (Finos):** Dirigir a reciclaje/aglomeración.
-6.  **OPERARIO:** **Tomar muestra** de la corriente de Producto (Salida 2) cada hora.
-    *   *Verificación:* Aspecto visual, dureza del gránulo y ausencia de polvo excesivo.
+3. OPERARIO: Alimentar la olla desde la tolva con el material de mezcla (granel del POE 3.06).
+4. OPERARIO: Adicionar el aglomerante (agua o miel) en la cantidad y forma indicada por el Jefe de Produccion para favorecer la formacion del granulo.
+5. OPERARIO: El granulo formado en la olla pasa al tubo secador donde se reduce su humedad.
+6. OPERARIO: El material seco pasa al separador de finos: el material por debajo del rango (2-4 mm u otro segun producto) se separa y se recircula.
+7. OPERARIO: El material dentro del rango pasa al separador de gruesos: el material por encima del rango se separa, se muele y se reincorpora al proceso (reproceso interno).
+8. OPERARIO: El producto conforme (dentro del rango) pasa al tubo enfriador y se recolecta para envasado (POE 3.10).
+9. OPERARIO: Monitorear visualmente cada etapa del flujo y registrar los parametros de operacion en el formato correspondiente.
 
-### 6.3. Manejo de Material Fuera de Especificación
+### 6.3. Anomalias y Reporte
 
-7.  **SI HAY EXCESO DE FINOS:** **Revisar** si las mallas están tupidas/ciegas. **Ajustar** humedad o velocidad de alimentación.
-8.  **SI HAY EXCESO DE GRUESOS:** **Verificar** funcionamiento del molino de retorno.
-9.  **SI SE DETECTA ROTURA DE MALLA:**
-    *   **PARAR** inmediatamente la línea.
-    *   **CAMBIAR** la malla dañada.
-    *   **SEGREGAR** (poner en cuarentena) todo el material procesado desde el último control conforme.
-    *   **RE-PROCESAR** el material sospechoso pasándolo nuevamente por el tamiz íntegro.
+10. Si la proporcion de finos o gruesos supera lo normal para el producto: Reportar al Jefe de Produccion para ajuste de parametros.
+11. Si algun equipo del flujo presenta falla o bloqueo: Detener la alimentacion y reportar de inmediato al Jefe de Produccion.
 
-## 7. CRITERIOS DE CONTROL Y ACEPTACIÓN
+## 7. CRITERIOS DE CONTROL Y ACEPTACION
 
-| VARIABLE | MÉTODO | CRITERIO | ACCIÓN |
-|:---|:---|:---|:---|
-| **Integridad de Mallas** | Visual | Sin roturas ni deformaciones. | Cambiar malla inmediatamente. |
-| **Granulometría** | Tamizado (Lab) | % Retenido en rango (ej: >90% entre 2-4mm). | Ajustar proceso. Bloquear lote. |
-| **Dureza de Gránulo** | Durómetro | > 2 kgf (o según especificación). | Ajustar aglomerante/secado. |
+| PARAMETRO | CRITERIO | ACCION SI FALLA |
+|:---|:---|:---|
+| Velocidad de olla | Dentro del rango definido por Jefe de Produccion para el producto | Ajustar segun orden del Jefe de Produccion. |
+| Temperatura tubo secador | Dentro del rango definido por Jefe de Produccion para el producto | Ajustar segun orden del Jefe de Produccion. |
+| Aspecto visual del granulo | Homogeneo, sin exceso de polvo ni grumos irregulares | Reportar al Jefe de Produccion. Revisar aglomerante. |
+| Separador de finos | Material recirculado dentro de lo normal para el producto | Reportar al Jefe de Produccion para ajuste de parametros. |
+| Separador de gruesos | Material retenido se muele y reprocesa; proporcion dentro de lo normal para el producto | Reportar al Jefe de Produccion para ajuste de parametros. |
+| Tubo enfriador | Granulo conforme sale a temperatura adecuada para envasado | Reportar al Jefe de Produccion. |
 
 ## 8. REGISTROS ASOCIADOS
 
-*   `Formato_Control_Presentacion_Fisica_V1.csv`: Registro de mallas y controles horarios.
-*   `Registro_Presentacion_Fisica_V1.csv`: Histórico de producción granulada.
+- `Formato_Control_Presentacion_Fisica_V1.csv`: Registro de parametros de operacion por lote.
+- `Registro_Presentacion_Fisica_V1.csv`: Historico de produccion granulada.
 
 ## 9. ANEXOS
 
-*   **Anexo 1:** Tabla de Mallas y Rangos Granulométricos por Producto.
+- Anexo 1: Tabla de Rangos Operacionales por Producto.
 
 ## 10. CONTROL DE CAMBIOS
 
-| VERSIÓN | FECHA | DESCRIPCIÓN DEL CAMBIO |
-|
-
+| VERSION | FECHA | DESCRIPCION DEL CAMBIO |
+|---|---|---|
+| 01 | 2026-02-17 | Emision inicial. |
+| 01 | 2026-03-05 | Reescritura completa: se elimina proceso de compactacion, tamizado por zarandas, revision de mallas, criterios Ro-Tap y concepto On-Size. El proceso es granulacion por olla con aglomerante agua o miel. Parametros definidos por Jefe de Produccion en rangos; ajustes solo bajo su orden. |

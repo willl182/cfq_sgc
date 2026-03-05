@@ -1,102 +1,104 @@
-# PROCEDIMIENTO OPERATIVO ESTANDARIZADO: MEZCLA Y HOMOGENIZACIÓN
+# PROCEDIMIENTO OPERATIVO ESTANDARIZADO: MEZCLA Y HOMOGENIZACION
 
-| CÓDIGO | VERSIÓN | VIGENCIA | PRÓXIMA REVISIÓN |
-|
-|
-|
-|
-|
-| **CGC-POE-3.06** | **01** | **2026-02-17** | **12 meses o ante cambio regulatorio** |
+| CODIGO | VERSION | VIGENCIA | PROXIMA REVISION |
+|---|---|---|---|
+| CGC-POE-3.06 | 01 | 2026-02-17 | 12 meses o ante cambio regulatorio |
 
 ---
 
 ## 1. OBJETIVO
 
-Estandarizar las operaciones de carga, mezcla y descarga para garantizar la homogeneidad química y física de cada lote de fertilizante o acondicionador producido, asegurando que cada unidad de producto final contenga la concentración de nutrientes declarada en el Registro ICA.
+Estandarizar las operaciones de carga y mezcla para garantizar la homogeneidad quimica y fisica de cada lote, asegurando que el producto final contenga la concentracion de nutrientes declarada en el Registro ICA.
 
 ## 2. ALCANCE
 
-Este procedimiento aplica a todos los procesos de mezcla física (blending) y reacciones de neutralización simple ejecutados en los equipos mezcladores de la planta de **CALFERQUIM S.A.S.**
+Aplica a los dos tipos de proceso de mezcla ejecutados en la planta de CALFERQUIM S.A.S.:
+
+- **Tipo A — Mezcla fisica:** proceso manual de vaciado intercalado y paleado. El granel resultante va directamente a envase (POE 3.10).
+- **Tipo B — Mezcla en tolva para granulacion:** vaciado intercalado en tolva mecanica. El granel resultante pasa al proceso de granulacion (POE 3.08).
 
 ## 3. DEFINICIONES
 
-*   **Homogeneidad:** Distribución uniforme de los componentes activos e inertes en toda la masa del lote.
-*   **Tiempo de Mezcla Efectivo:** Tiempo transcurrido desde la adición del último componente hasta el inicio de la descarga.
-*   **Segregación:** Separación indeseada de partículas por diferencia de tamaño o densidad después de la mezcla.
-*   **Coeficiente de Variación (CV):** Medida estadística de la dispersión de resultados analíticos entre sub-muestras del mismo lote.
+- Vaciado intercalado: Tecnica de carga en que los ingredientes de mayor proporcion se dividen en dos partes y los de menor proporcion se intercalan entre ellas (metodo sandwich).
+- Paleado: Homogenizacion manual del material mediante pala, complementando el vaciado intercalado en el proceso de mezcla fisica.
+- Mezcla fisica (blending): Proceso manual de combinacion de materias primas sin equipo mecanico de agitacion.
+- Tolva: Equipo de mezcla mecanica usado en la preparacion del material para granulacion.
+- Tiempo de Mezcla Efectivo: Tiempo transcurrido desde el cierre de la tolva hasta la apertura para descarga, en el proceso Tipo B.
+- Segregacion: Separacion indeseada de particulas por diferencia de tamano o densidad.
 
 ## 4. DOCUMENTOS DE REFERENCIA
 
-*   **Resolución ICA pv0 (Propuesta):** Anexo I-B, Pilar 17 "Controles del Proceso de Producción".
-*   **Manual de Operación del Equipo Mezclador.**
+- Resolucion ICA pv0 (Propuesta): Anexo I-B, Pilar 17 "Controles del Proceso de Produccion".
+- POE 3.08 Presentacion Fisica y Granulacion.
 
-## 4.1. CONSIDERACIONES GMP (BUENAS PRÁCTICAS DE MANUFACTURA)
+## 4.1. CONSIDERACIONES GMP
 
-El orden de adición de materias primas **debe** respetarse estrictamente para evitar grumos o reacciones indeseadas. **Se prohíbe** adicionar componentes menores (micronutrientes) sin una pre-mezcla o vehículo que asegure su dispersión, a menos que el equipo cuente con sistema de inyección validado. La limpieza entre lotes de diferente fórmula es crítica y **debe** registrarse obligatoriamente.
+El orden de adicion de materias primas debe respetarse para asegurar la distribucion uniforme de todos los componentes. La limpieza entre lotes de diferente formula es obligatoria (POE 3.02).
 
-## 5. RESPONSABILIDADES Y POLÍTICAS (Estilo Opus)
+## 5. RESPONSABILIDADES Y POLITICAS
 
-### 5.1. Jefe de Producción
-*   **Debe** definir los tiempos de mezcla óptimos para cada familia de productos (Anexo 1) basándose en validaciones previas.
-*   **Es responsable** de asegurar que los equipos de mezcla tengan el mantenimiento preventivo al día (revisión de aspas/cintas).
+### 5.1. Jefe de Produccion
+- Define que tipo de proceso aplica para cada producto (Tipo A o Tipo B) segun la Orden de Produccion.
+- En Tipo B, asegura el cumplimiento del tiempo de mezcla de 4 minutos.
+- Recibe el reporte del operario en caso de anomalia visual y define la accion correctiva.
 
-### 5.2. Supervisor de Producción
-*   **Debe** verificar "in situ" la adición correcta de materias primas críticas (micronutrientes, acidulantes).
-*   **Tiene la autoridad** para rechazar una mezcla si observa segregación visual evidente o presencia de material extraño.
+### 5.2. Operario de Mezcla
+- Ejecuta la secuencia de carga y el proceso segun el tipo indicado en la Orden de Produccion.
+- Reporta al Jefe de Produccion cualquier anomalia visual durante el proceso.
 
-### 5.3. Operario de Mezcla
-*   **Debe** ejecutar la secuencia de carga y tiempos tal cual figura en la Orden de Producción.
-*   **Se prohíbe** reducir los tiempos de mezcla para aumentar la velocidad de producción.
+---
 
-### 5.4. Control de Calidad
-*   **Debe** realizar el muestreo de uniformidad y emitir el dictamen de conformidad de la mezcla.
+## 6. PROCEDIMIENTO
 
-## 6. PROCEDIMIENTO (Estilo GLM-4.7)
+### 6.1. Tipo A — Mezcla Fisica (Vaciado Intercalado y Paleado)
 
-### 6.1. Preparación del Equipo
+Este proceso aplica a productos que no requieren granulacion. La mezcla se realiza de forma manual.
 
-1.  **OPERARIO:** **Verificar** limpieza interna del mezclador y compuerta de descarga cerrada y asegurada.
-2.  **SUPERVISOR:** **Autorizar** la carga firmando el despeje de línea.
+1. OPERARIO: Verificar que el area de mezcla este limpia y libre de residuos del lote anterior (POE 3.02).
+2. OPERARIO: Vaciar la primera mitad de los ingredientes de mayor proporcion (segun Orden de Produccion).
+3. OPERARIO: Vaciar los ingredientes de menor proporcion sobre la primera capa.
+4. OPERARIO: Vaciar la segunda mitad de los ingredientes de mayor proporcion cubriendo la carga anterior.
+5. OPERARIO: Palear el conjunto de manera uniforme hasta obtener una mezcla homogenea en color y textura.
+6. OPERARIO: Verificar visualmente la homogeneidad del material (color y textura uniformes, sin zonas diferenciadas).
+7. SI CUMPLE: El granel queda listo para envase (POE 3.10).
+8. SI NO CUMPLE: Continuar paleando y reportar al Jefe de Produccion si la anomalia persiste.
 
-### 6.2. Secuencia de Carga y Mezcla
+---
 
-3.  **OPERARIO:** **Iniciar** el sistema de agitación (si aplica según diseño del equipo).
-4.  **OPERARIO:** **Cargar** los componentes mayores (Macro-elementos) según orden:
-    *   1°: Material de mayor densidad o tamaño de partícula.
-    *   2°: Material intermedio.
-    *   3°: Material fino o de menor densidad.
-5.  **OPERARIO:** **Adicionar** los componentes menores (Micros) en el centro geométrico del mezclador o mediante tolva de aditivos.
-6.  **OPERARIO:** **Cronometrar** el Tiempo de Mezcla Efectivo desde el cierre de la tapa/compuerta.
-    *   *Punto Crítico:* Respetar tiempo mínimo definido en Anexo 1 (ej: 5 - 15 minutos).
+### 6.2. Tipo B — Mezcla en Tolva para Granulacion
 
-### 6.3. Descarga y Control de Homogeneidad
+Este proceso aplica a productos que pasan por granulacion (POE 3.08). La mezcla se realiza en tolva mecanica.
 
-7.  **OPERARIO:** **Finalizar** el tiempo de mezcla y abrir compuerta de descarga.
-8.  **OPERARIO:** **Evitar** caída libre excesiva del producto para minimizar segregación.
-9.  **CALIDAD:** **Tomar** 3 sub-muestras puntuales (Inicio, Medio, Fin de descarga) para verificación visual y química rápida.
-    *   *Criterio:* Las 3 muestras deben ser visualmente indistinguibles en color y textura.
-10. **SI CUMPLE:** **Liberar** el granel para la etapa de envasado (POE 3.10).
-11. **SI NO CUMPLE:** **Retornar** el material al mezclador (si es posible) y re-mezclar por tiempo adicional (+50% del tiempo original). **Registrar** la desviación.
+1. OPERARIO: Verificar limpieza interna de la tolva y compuerta de descarga cerrada y asegurada (POE 3.02).
+2. OPERARIO: Cargar la primera mitad de los ingredientes de mayor proporcion (segun Orden de Produccion).
+3. OPERARIO: Cargar los ingredientes de menor proporcion sobre la primera capa.
+4. OPERARIO: Cargar la segunda mitad de los ingredientes de mayor proporcion cubriendo la carga anterior.
+5. OPERARIO: Cerrar la tolva y cronometrar el Tiempo de Mezcla Efectivo.
+   - Punto Critico: Respetar tiempo minimo de 4 minutos de mezcla efectiva.
+6. OPERARIO: Al completar los 4 minutos, abrir la compuerta de descarga.
+7. OPERARIO: Verificar visualmente la homogeneidad del material durante la descarga (color y textura uniformes, sin puntos diferenciados).
+8. SI CUMPLE: El granel pasa al proceso de granulacion (POE 3.08).
+9. SI NO CUMPLE: Detener la descarga y reportar al Jefe de Produccion para definir la accion correctiva. Registrar la desviacion.
 
-## 7. CRITERIOS DE CONTROL Y ACEPTACIÓN
+---
 
-| PARAMETRO | CRITERIO | ACCIÓN SI FALLA |
-|:---|:---|:---|
-| **Tiempo de Mezcla** | ± 1 minuto del estándar | Ajustar y registrar causa. |
-| **Aspecto Visual** | Homogéneo, sin puntos de color distintos. | Re-mezclar inmediatamente. |
-| **Uniformidad Química (Si aplica)** | CV < 10% entre sub-muestras (Micronutrientes). | Investigar proceso de mezcla. Bloquear lote. |
+## 7. CRITERIOS DE CONTROL Y ACEPTACION
+
+| PROCESO | PARAMETRO | CRITERIO | ACCION SI FALLA |
+|:---|:---|:---|:---|
+| Tipo A | Aspecto visual | Homogeneo, color y textura uniformes tras el paleado | Continuar paleando. Reportar si persiste. |
+| Tipo B | Tiempo de Mezcla | Minimo 4 minutos exactos (cronometrado) | Completar el tiempo. Registrar causa. |
+| Tipo B | Aspecto visual | Homogeneo, sin puntos diferenciados durante descarga | Detener descarga. Reportar a Jefe de Produccion. |
 
 ## 8. REGISTROS ASOCIADOS
 
-*   `Formato_Control_Mezcla_Homogenizacion_V1.csv`: Registro de tiempos y orden de carga.
-*   `Registro_Mezcla_Homogenizacion_V1.csv`: Histórico de lotes mezclados.
+- `Formato_Control_Mezcla_Homogenizacion_V1.csv`: Registro de tipo de proceso, secuencia de carga y controles.
+- `Registro_Mezcla_Homogenizacion_V1.csv`: Historico de lotes mezclados.
 
-## 9. ANEXOS
+## 9. CONTROL DE CAMBIOS
 
-*   **Anexo 1:** Tabla de Tiempos de Mezcla y Secuencias de Carga por Producto.
-
-## 10. CONTROL DE CAMBIOS
-
-| VERSIÓN | FECHA | DESCRIPCIÓN DEL CAMBIO |
-|
-
+| VERSION | FECHA | DESCRIPCION DEL CAMBIO |
+|---|---|---|
+| 01 | 2026-02-17 | Emision inicial. |
+| 01 | 2026-03-05 | Ajuste operacional: metodo sandwich; eliminacion de firma supervisor, rol Calidad en muestreo, criterio CV<10% y remezcla. Verificacion visual por operario. |
+| 01 | 2026-03-05 | Se incluyen dos tipos de proceso: Tipo A (mezcla fisica manual con vaciado intercalado y paleado, granel va a envase) y Tipo B (mezcla en tolva mecanica para granulacion, 4 minutos, granel va a POE 3.08). |

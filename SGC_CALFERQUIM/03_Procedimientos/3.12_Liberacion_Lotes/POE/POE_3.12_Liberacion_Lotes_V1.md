@@ -1,121 +1,94 @@
-# PROCEDIMIENTO OPERATIVO ESTANDARIZADO: LIBERACIÓN DE LOTES DE PRODUCTO TERMINADO
+# PROCEDIMIENTO OPERATIVO ESTANDARIZADO: LIBERACION DE LOTES DE PRODUCTO TERMINADO
 
-| CÓDIGO | VERSIÓN | VIGENCIA | PRÓXIMA REVISIÓN |
-|
-|
-|
-|
-|
-| **CGC-POE-3.12** | **01** | **2026-02-18** | **12 meses o ante cambio regulatorio** |
+| CODIGO | VERSION | VIGENCIA | PROXIMA REVISION |
+|---|---|---|---|
+| CGC-POE-3.12 | 01 | 2026-02-18 | 12 meses o ante cambio regulatorio |
 
 ---
 
 ## 1. OBJETIVO
 
-Establecer la metodología oficial e inequívoca para determinar la conformidad de cada lote de producto terminado fabricado por **CALFERQUIM S.A.S.** antes de su distribución y venta, asegurando que solo los productos que cumplen con todas las especificaciones de calidad y requisitos legales sean liberados al mercado.
+Establecer el proceso de verificacion y liberacion de cada lote de producto terminado antes de su despacho al mercado, asegurando que todos los controles del proceso hayan sido ejecutados y documentados.
 
 ## 2. ALCANCE
 
-Este procedimiento es de aplicación **obligatoria** para el 100% de los lotes de fertilizantes y acondicionadores de suelo fabricados, envasados o acondicionados en la planta de producción. Inicia con la notificación de terminación de lote por Producción y finaliza con el cambio de estatus a "APROBADO" o "RECHAZADO" en el sistema de gestión.
+Aplica al 100% de los lotes de fertilizantes y acondicionadores fabricados en CALFERQUIM S.A.S. Inicia con el traslado del lote a bodega y finaliza con el dictamen de liberacion.
 
 ## 3. DEFINICIONES
 
-*   **Liberación de Lote:** Dictamen formal documentado mediante el cual el Director Técnico certifica que un lote cumple con los requisitos de la Autorización de Comercialización (Registro ICA) y las Buenas Prácticas de Manufactura.
-*   **Cuarentena:** Estado de aislamiento físico o lógico en el que se mantienen los materiales o productos a la espera de una decisión sobre su aprobación o rechazo.
-*   **Expediente de Lote:** Conjunto de documentos que trazan la historia de fabricación de un lote (órdenes, registros de proceso, resultados analíticos, etiquetas).
-*   **Desviación:** Cualquier no cumplimiento de una instrucción o procedimiento aprobado.
+- Liberacion: Dictamen formal que autoriza el despacho del lote al mercado.
+- En Revision: Estado del lote mientras se verifica el cumplimiento de los requisitos de liberacion.
+- Aprobado: Lote que cumple todos los requisitos y puede ser despachado.
+- Rechazado: Lote que presenta incumplimiento critico y no puede ser despachado.
 
 ## 4. DOCUMENTOS DE REFERENCIA
 
-*   **Resolución ICA pv0 (Propuesta):** Anexo I-B, Pilar 5 "Liberación de Lotes".
-*   **Resolución ICA 150 de 2003:** Artículo 14 (Control de Calidad).
-*   **NTC-ISO 2859-1:** Procedimientos de muestreo para inspección por atributos.
+- Resolucion ICA pv0 (Propuesta): Anexo I-B, Pilar 5 "Liberacion de Lotes".
+- POE 3.11 Codificacion de Lotes.
+- POE 3.10 Envase.
 
-## 4.1. CONSIDERACIONES GMP (BUENAS PRÁCTICAS DE MANUFACTURA)
+## 5. RESPONSABILIDADES Y POLITICAS
 
-El personal involucrado en la liberación **debe** garantizar la integridad de los datos. **Se prohíbe explícitamente** la liberación de productos sin resultados analíticos conformes o con desviaciones críticas abiertas sin justificación técnica aprobada. La falsificación o alteración de registros de liberación constituye una falta grave que compromete la licencia de operación de la compañía.
+- Direccion Tecnica verifica la orden de produccion y las etiquetas de los bultos.
+- Calidad emite el certificado de calidad interno del lote.
+- Jefe de Produccion diligencia los datos del proceso en el formato correspondiente.
+- Jefe de Bodega verifica el marcado de lote en los empaques.
+- Se prohibe despachar producto sin dictamen de liberacion firmado.
 
-## 5. RESPONSABILIDADES Y POLÍTICAS (Estilo Opus)
+## 6. PROCEDIMIENTO
 
-### 5.1. Dirección Técnica
-La autoridad final para la liberación de producto recae **exclusivamente** en el Director Técnico.
-*   **Debe** revisar el Expediente de Lote completo antes de firmar la liberación.
-*   **Debe** asegurar que las desviaciones críticas hayan sido investigadas y cerradas satisfactoriamente.
-*   **Tiene la potestad indelegable** de rechazar cualquier lote que no ofrezca garantías de seguridad o eficacia, independientemente de las presiones comerciales.
+### 6.1. Traslado a Bodega
 
-### 5.2. Jefe de Control de Calidad
-*   **Debe** consolidar el Expediente de Lote y verificar que todos los controles en proceso (3.03, 3.06, 3.08, 3.10) estén documentados.
-*   **Debe** garantizar la custodia de la contramuestra (según POE 3.14) antes de presentar el lote para liberación.
-*   **Es responsable** de emitir el Certificado de Análisis (COA) solo cuando el lote haya obtenido el estatus de "APROBADO".
+1. PRODUCCION: Al finalizar el envase y marcado, trasladar el lote a la bodega asignada. El lote queda en estado EN REVISION hasta el dictamen.
 
-### 5.3. Jefe de Producción
-*   **Debe** notificar inmediatamente la terminación del lote y trasladarlo físicamente a la Zona de Cuarentena.
-*   **Se prohíbe** despachar o mover producto fuera de la zona de cuarentena sin la etiqueta verde de "APROBADO" firmada por Calidad.
+### 6.2. Verificaciones Previas al Dictamen
 
-## 6. PROCEDIMIENTO (Estilo GLM-4.7)
+Las siguientes verificaciones se realizan durante o inmediatamente despues de la produccion del lote:
 
-### 6.1. Cierre de Producción y Cuarentena
+2. DIRECCION TECNICA: Verificar la orden de produccion (formulacion, cantidades y datos del lote).
+3. DIRECCION TECNICA: Verificar las etiquetas de los bultos (saco o bigbag) contra el arte aprobado por el ICA.
+4. CALIDAD: Emitir el certificado de calidad interno con el resultado analitico del lote.
+5. JEFE DE PRODUCCION: Diligenciar el formato de produccion con los datos y controles del proceso.
+6. JEFE DE BODEGA: Verificar que el marcado de codigo de lote en los empaques sea legible, correcto y coincida con la orden de produccion.
 
-1.  **PRODUCCIÓN:** Al finalizar el envase, **identificar** cada estiba/bulto con rótulo temporal de color **AMARILLO** ("CUARENTENA").
-2.  **PRODUCCIÓN:** **Trasladar** la totalidad del lote a la zona delimitada de Cuarentena.
-3.  **PRODUCCIÓN:** **Entregar** al Jefe de Calidad el paquete de registros de producción (Molienda, Mezcla, Envase) firmados.
+### 6.3. Dictamen de Liberacion
 
-### 6.2. Revisión del Expediente de Lote
+7. DIRECCION TECNICA: Revisar que las seis verificaciones anteriores esten completas y conformes. Registrar el dictamen en `Formato_Liberacion_Lotes_V1.csv`:
 
-4.  **CALIDAD:** **Verificar** la presencia y completitud de los siguientes documentos en el Expediente de Lote:
-    *   Registro de Balance de Materias Primas (POE 3.05) - *¿Desviación < 2%?*
-    *   Registro de Control de Mezcla (POE 3.06) - *¿Uniformidad OK?*
-    *   Registro de Envase y Rotulado (POE 3.10) - *¿Peso y etiquetas OK?*
-    *   Resultado de Análisis de Laboratorio (Fisicoquímico).
-5.  **CALIDAD:** **Confirmar** que se ha tomado y almacenado la Contramuestra (POE 3.14).
+   - **APROBADO:** Todas las verificaciones conformes. Se autoriza el despacho al mercado.
 
-### 6.3. Dictamen y Decisión
+   - **RECHAZADO:** Incumplimiento critico en alguna verificacion. El lote no puede despacharse. Se abre reporte de no conformidad y se define disposicion final.
 
-6.  **DIRECCIÓN TÉCNICA:** **Evaluar** toda la evidencia documental y analítica.
-7.  **DIRECCIÓN TÉCNICA:** **Tomar decisión** registrándola en el `Formato_Liberacion_Lotes_V1.csv`:
+   - **EN REVISION:** Alguna verificacion pendiente o con duda tecnica. El lote permanece en bodega sin despachar hasta resolver.
 
-    *   **CASO A: APROBADO** (Cumple todos los requisitos)
-        *   **Firmar** liberación en el formato.
-        *   **Autorizar** emisión de Certificado de Análisis.
-        *   **Instruir** cambio de rótulo a color **VERDE** ("APROBADO").
+### 6.4. Comunicacion
 
-    *   **CASO B: RECHAZADO** (Incumplimiento crítico no subsanable)
-        *   **Registrar** motivo de rechazo.
-        *   **Abrir** Reporte de No Conformidad.
-        *   **Instruir** cambio de rótulo a color **ROJO** ("RECHAZADO").
-        *   **Ordenar** traslado a Área de Producto No Conforme para disposición final (destrucción o reproceso mayor).
+8. DIRECCION TECNICA / CALIDAD: Notificar el dictamen al Jefe de Produccion y al Jefe de Bodega.
+9. BODEGA: Despachar el lote unicamente con dictamen APROBADO firmado.
 
-    *   **CASO C: OBSERVADO / CUARENTENA EXTENDIDA** (Duda técnica o falta de datos)
-        *   **Solicitar** re-análisis o investigación adicional.
-        *   **Mantener** estatus de Cuarentena hasta resolución.
+## 7. CRITERIOS DE ACEPTACION
 
-### 6.4. Identificación Física
-
-8.  **CALIDAD:** **Adherir** el rótulo de estatus final (VERDE o ROJO) sobre el rótulo de cuarentena en cada unidad logística (estiba).
-9.  **LOGÍSTICA:** **Mover** el producto al Área de Despachos (si Aprobado) o Área de No Conforme (si Rechazado). **Solo se permite mover producto con etiqueta VERDE.**
-
-## 7. CRITERIOS DE ACEPTACIÓN Y ESTADOS
-
-| ESTADO | COLOR | CRITERIO | ACCIÓN PERMITIDA |
-|
-|
-|:---|:---|
-| **CUARENTENA** | **AMARILLO** | Lote en proceso de análisis o revisión documental. | Almacenamiento restringido. **PROHIBIDO VENDER.** |
-| **APROBADO** | **VERDE** | Cumple 100% especificaciones y documentos completos. | Distribución y Venta libre. |
-| **RECHAZADO** | **ROJO** | Incumple especificaciones críticas o legales. | Bloqueo total. Destrucción o Reproceso. |
+| VERIFICACION | RESPONSABLE | CRITERIO |
+|:---|:---|:---|
+| Orden de produccion | Direccion Tecnica | Formulacion y cantidades correctas, documento completo |
+| Etiquetas de bultos | Direccion Tecnica | Coinciden con arte aprobado por ICA |
+| Certificado de calidad interno | Calidad | Resultado analitico conforme con el Registro ICA |
+| Datos del proceso | Jefe de Produccion | Formato diligenciado y sin desviaciones criticas abiertas |
+| Marcado de lote | Jefe de Bodega | Codigo legible, correcto y coherente con la orden |
 
 ## 8. REGISTROS ASOCIADOS
 
-*   `Formato_Liberacion_Lotes_V1.csv`: Documento maestro donde se registra la decisión final del Director Técnico.
-*   `Registro_Liberacion_Lotes_V1.csv`: Log histórico de todos los lotes liberados y su estatus.
+- `Formato_Liberacion_Lotes_V1.csv`: Registro del dictamen de liberacion.
+- `Registro_Liberacion_Lotes_V1.csv`: Historico de lotes con su estatus final.
 
 ## 9. ANEXOS
 
-*   **Anexo 1:** Flujo de Decisión de Liberación.
-*   **Anexo 2:** Especificaciones de Etiquetas de Estatus (Cuarentena/Aprobado/Rechazado).
+- Anexo 1: Flujo de Decision de Liberacion.
 
 ## 10. CONTROL DE CAMBIOS
 
-| VERSIÓN | FECHA | DESCRIPCIÓN DEL CAMBIO |
-|
-
+| VERSION | FECHA | DESCRIPCION |
+|---|---|---|
+| 01 | 2026-02-18 | Emision inicial. |
+| 01 | 2026-03-05 | Multiples ajustes operacionales: eliminacion de colores, simplificacion de expediente. |
+| 01 | 2026-03-05 | Ajuste definitivo: flujo real de liberacion. Traslado a bodega asignada. Verificaciones por Direccion Tecnica (OP + etiquetas), Calidad (certificado), Jefe Produccion (datos proceso) y Jefe Bodega (marcado). Estados: Aprobado, Rechazado, En Revision. |

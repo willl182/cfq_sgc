@@ -1,0 +1,15 @@
+numeral,destino,archivo_copiado,origen
+3.01_Recepcion_Almacenamiento_MP,SGC_CALFERQUIM/03_Procedimientos/3.01_Recepcion_Almacenamiento_MP/POE/Legacy,04_Calidad__DC-SI26 Compras y Gestión de Proveedores.pdf,202_CALFERQUIM/04 Calidad/DC-SI26 Compras y Gestión de Proveedores.pdf
+3.03_NA_Molienda_Primaria,SGC_CALFERQUIM/03_Procedimientos/3.03_NA_Molienda_Primaria/POE/Legacy,06_SST__PC-SI01 PROCESO DE MOLIDO.pdf,202_CALFERQUIM/06 SST/PC-SI01 PROCESO DE MOLIDO.pdf
+3.05_Balance_Materias_Primas,SGC_CALFERQUIM/03_Procedimientos/3.05_Balance_Materias_Primas/POE/Legacy,03_Operacion__DC-SI05 Identificación y Control de Puntos Criticos.pdf,202_CALFERQUIM/03 Operacion/DC-SI05 Identificación y Control de Puntos Criticos.pdf
+3.06_Mezcla_Homogenizacion,SGC_CALFERQUIM/03_Procedimientos/3.06_Mezcla_Homogenizacion/POE/Legacy,03_Operacion__DC-SI04 Procedimiento de mezclas.pdf,202_CALFERQUIM/03 Operacion/DC-SI04 Procedimiento de mezclas.pdf
+3.06_Mezcla_Homogenizacion,SGC_CALFERQUIM/03_Procedimientos/3.06_Mezcla_Homogenizacion/POE/Legacy,06_SST__PC-SI03 PROCESO DE MEZCLA.pdf,202_CALFERQUIM/06 SST/PC-SI03 PROCESO DE MEZCLA.pdf
+3.08_Presentacion_Fisica_Granulacion,SGC_CALFERQUIM/03_Procedimientos/3.08_Presentacion_Fisica_Granulacion/POE/Legacy,03_Operacion__DC-SI14 Procedimiento de Granulación.pdf,202_CALFERQUIM/03 Operacion/DC-SI14 Procedimiento de Granulación.pdf
+3.08_Presentacion_Fisica_Granulacion,SGC_CALFERQUIM/03_Procedimientos/3.08_Presentacion_Fisica_Granulacion/POE/Legacy,06_SST__PC-SI04 PROCESO DE GRANULACIÓN.pdf,202_CALFERQUIM/06 SST/PC-SI04 PROCESO DE GRANULACIÓN.pdf
+3.08_Presentacion_Fisica_Granulacion,SGC_CALFERQUIM/03_Procedimientos/3.08_Presentacion_Fisica_Granulacion/POE/Legacy,06_SST__PC-SI06 PROCESO DE SEPARACIÓN DE FINOS.pdf,202_CALFERQUIM/06 SST/PC-SI06 PROCESO DE SEPARACIÓN DE FINOS.pdf
+3.09_NA_Molienda_Secundaria,SGC_CALFERQUIM/03_Procedimientos/3.09_NA_Molienda_Secundaria/POE/Legacy,06_SST__PC-SI06 PROCESO DE SEPARACIÓN DE FINOS.pdf,202_CALFERQUIM/06 SST/PC-SI06 PROCESO DE SEPARACIÓN DE FINOS.pdf
+3.09_NA_Molienda_Secundaria,SGC_CALFERQUIM/03_Procedimientos/3.09_NA_Molienda_Secundaria/POE/Legacy,06_SST__PC-SI05 PROCESO DE SECADO.pdf,202_CALFERQUIM/06 SST/PC-SI05 PROCESO DE SECADO.pdf
+3.09_NA_Molienda_Secundaria,SGC_CALFERQUIM/03_Procedimientos/3.09_NA_Molienda_Secundaria/POE/Legacy,06_SST__PC-SI09 PROCESO DE ENFRIAMIENTO.pdf,202_CALFERQUIM/06 SST/PC-SI09 PROCESO DE ENFRIAMIENTO.pdf
+3.11_Codificacion_Lotes,SGC_CALFERQUIM/03_Procedimientos/3.11_Codificacion_Lotes/POE/Legacy,04_Calidad__DC-SI12 Asignación de Lotes, Muestreo y Control de Calidad.pdf,202_CALFERQUIM/04 Calidad/DC-SI12 Asignación de Lotes, Muestreo y Control de Calidad.pdf
+3.11_Codificacion_Lotes,SGC_CALFERQUIM/03_Procedimientos/3.11_Codificacion_Lotes/POE/Legacy,05_Laboratorio__DC-SI34 Ensayos Fisicoquimicos en Laboratorio.pdf,202_CALFERQUIM/05 Laboratorio/DC-SI34 Ensayos Fisicoquimicos en Laboratorio.pdf
+3.12_Liberacion_Lotes,SGC_CALFERQUIM/03_Procedimientos/3.12_Liberacion_Lotes/POE/Legacy,03_Operacion__DC-SI10 Liberación de Lotes al Mercado.pdf,202_CALFERQUIM/03 Operacion/DC-SI10 Liberación de Lotes al Mercado.pdf

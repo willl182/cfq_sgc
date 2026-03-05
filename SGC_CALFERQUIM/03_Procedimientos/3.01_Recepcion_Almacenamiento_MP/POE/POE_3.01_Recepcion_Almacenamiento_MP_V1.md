@@ -15,7 +15,7 @@ Aplica a toda MP que ingresa a CALFERQUIM S.A.S. para produccion propia o formul
 ## 3. DEFINICIONES
 
 - MP: Materia prima usada en formulacion o mezcla.
-- Cuarentena: Estado temporal hasta completar verificacion documental y fisica.
+- Cuarentena: Estado temporal de la MP mientras permanece en el vehiculo de transporte, a la espera de verificacion documental y fisica por parte de Calidad.
 - Lote MP: Identificador de trazabilidad del proveedor o codigo interno asignado.
 - MP critica: Materia prima con impacto directo en seguridad/calidad del producto o con historial de desviaciones, definida por Direccion Tecnica y Calidad.
 
@@ -28,21 +28,23 @@ Aplica a toda MP que ingresa a CALFERQUIM S.A.S. para produccion propia o formul
 ## 5. RESPONSABILIDADES Y POLITICAS
 
 - Compras debe verificar proveedor aprobado antes de emitir orden.
-- Bodega debe recibir en zona de cuarentena y no liberar MP sin verificacion.
-- Calidad debe definir aceptacion/rechazo y registrar evidencia.
+- Calidad debe realizar la inspeccion, definir aceptacion o rechazo y emitir la autorizacion formal antes de que cualquier MP ingrese a bodega.
+- El Jefe de Bodega da instrucciones de ubicacion una vez Calidad emite la autorizacion; solo MP aprobada puede ingresar a bodega.
+- El vehiculo permanece en patio con la carga mientras la MP esta en cuarentena; no se descarga antes de la autorizacion de Calidad.
 - Se prohibe usar MP sin registro completo en formato y registro oficial.
+- En caso de rechazo, la coordinacion de la devolucion es responsabilidad del equipo comercial y la Gerencia, con apoyo de Compras.
 - Se exige certificado de analisis (COA) para MP criticas o cuando aplique por especificacion.
 
 ## 6. PROCEDIMIENTO
 
-1. Bodega recibe el vehiculo, verifica integridad de empaque y cantidad.
+1. El vehiculo llega a planta. Bodega verifica integridad de empaque y cantidad sin descargar.
 2. Bodega revisa documentos: remision, ficha tecnica, hoja de seguridad vigente y COA cuando aplique.
-3. Bodega diligencia `Formato_Inspeccion_Recepcion_MP_V1.csv`.
-4. Calidad realiza inspeccion visual y define si requiere muestreo segun riesgo/proveedor/desviacion historica.
-5. Calidad define estado: Aprobado, Cuarentena o Rechazado y autoriza liberacion de cuarentena.
-6. Bodega etiqueta la MP con estado y lote, y ubica segun anexo de condiciones.
+3. Bodega diligencia `Formato_Inspeccion_Recepcion_MP_V1.csv` con los datos del vehiculo y la carga.
+4. Calidad realiza inspeccion visual del material en el vehiculo y define si requiere muestreo segun riesgo, proveedor o historial de desviaciones.
+5. Calidad define estado (Aprobado o Rechazado) y emite autorizacion formal.
+6. Si Aprobado: el Jefe de Bodega indica la ubicacion de almacenamiento y se descarga el vehiculo directamente al lugar asignado.
 7. Bodega registra ubicacion final en `Registro_Recepcion_Almacenamiento_MP_V1.csv`.
-8. En rechazo, Compras coordina devolucion y cierra no conformidad.
+8. Si Rechazado: el vehiculo no se descarga. El equipo comercial y la Gerencia coordinan la devolucion. Bodega registra la no conformidad.
 
 ## 7. CRITERIOS DE CONTROL Y ACEPTACION
 
@@ -52,6 +54,7 @@ Aplica a toda MP que ingresa a CALFERQUIM S.A.S. para produccion propia o formul
 | COA (cuando aplique) | Debe coincidir con especificacion tecnica de compra |
 | Estado empaque | Sin rotura, humedad ni contaminacion visible |
 | Rotulado | Lote y producto legibles |
+| Autorizacion de ingreso | Solo MP con autorizacion formal de Calidad ingresa a bodega |
 | Ubicacion | Separada por compatibilidad y estatus |
 
 ## 8. REGISTROS ASOCIADOS
@@ -69,3 +72,4 @@ Aplica a toda MP que ingresa a CALFERQUIM S.A.S. para produccion propia o formul
 | VERSION | FECHA | DESCRIPCION |
 |---|---|---|
 | 01 | 2026-02-18 | Emision inicial homologada ICA pv0. |
+| 01 | 2026-03-05 | Ajuste operacional: cuarentena en vehiculo, ingreso condicionado a autorizacion de Calidad, responsabilidad de devolucion a equipo comercial y Gerencia. Se eliminan referencias a colores de etiqueta. |

@@ -92,7 +92,6 @@ Aplica a todas las áreas operativas de la planta: Producción, Envase, Almacén
 ## 9. ANEXOS
 
 *   **Anexo 1:** Clasificación de Residuos por Origen.
-*   **Anexo 2:** Lista de Gestores Autorizados.
 
 ## 10. CONTROL DE CAMBIOS
 
