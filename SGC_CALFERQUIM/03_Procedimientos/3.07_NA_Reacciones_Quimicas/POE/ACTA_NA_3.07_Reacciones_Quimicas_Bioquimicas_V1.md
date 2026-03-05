@@ -53,5 +53,4 @@ La empresa **CALFERQUIM S.A.S.** desarrolla un proceso productivo basado en **op
 |
 |
 |:---|
-| 01 | 2026-02-17 | Creación inicial del acta de no aplicabilidad. |
 

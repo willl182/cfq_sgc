@@ -68,5 +68,3 @@ El consecutivo es asignado por Bodega y se reinicia segun el periodo definido in
 
 | VERSION | FECHA | DESCRIPCION |
 |---|---|---|
-| 01 | 2026-02-18 | Emision inicial. |
-| 01 | 2026-03-05 | Ajuste operacional: Bodega asigna, verifica y marca. Alistamiento confirma. Sin rol de Calidad. Estructura del codigo definida en POE (##-DDMMAA, ej: 65-030326). Se elimina Anexo 1. |

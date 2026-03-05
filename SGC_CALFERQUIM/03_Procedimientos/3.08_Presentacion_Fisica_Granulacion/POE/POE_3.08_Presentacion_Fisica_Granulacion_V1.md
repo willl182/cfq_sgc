@@ -102,5 +102,3 @@ Tolva de mezcla → Olla granuladora → Tubo secador → Separador de finos →
 
 | VERSION | FECHA | DESCRIPCION DEL CAMBIO |
 |---|---|---|
-| 01 | 2026-02-17 | Emision inicial. |
-| 01 | 2026-03-05 | Reescritura completa: se elimina proceso de compactacion, tamizado por zarandas, revision de mallas, criterios Ro-Tap y concepto On-Size. El proceso es granulacion por olla con aglomerante agua o miel. Parametros definidos por Jefe de Produccion en rangos; ajustes solo bajo su orden. |

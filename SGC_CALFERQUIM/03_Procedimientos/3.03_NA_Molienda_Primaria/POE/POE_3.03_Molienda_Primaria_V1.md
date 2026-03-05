@@ -107,4 +107,3 @@ Todo el personal operativo **debe** utilizar el Equipo de Protección Personal (
 
 | VERSIÓN | FECHA | DESCRIPCIÓN DEL CAMBIO |
 |:---:|:---:|:---|
-| 01 | 2026-02-17 | Creación inicial del procedimiento.

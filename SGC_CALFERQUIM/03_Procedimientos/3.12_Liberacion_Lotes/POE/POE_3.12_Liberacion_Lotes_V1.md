@@ -89,6 +89,3 @@ Las siguientes verificaciones se realizan durante o inmediatamente despues de la
 
 | VERSION | FECHA | DESCRIPCION |
 |---|---|---|
-| 01 | 2026-02-18 | Emision inicial. |
-| 01 | 2026-03-05 | Multiples ajustes operacionales: eliminacion de colores, simplificacion de expediente. |
-| 01 | 2026-03-05 | Ajuste definitivo: flujo real de liberacion. Traslado a bodega asignada. Verificaciones por Direccion Tecnica (OP + etiquetas), Calidad (certificado), Jefe Produccion (datos proceso) y Jefe Bodega (marcado). Estados: Aprobado, Rechazado, En Revision. |

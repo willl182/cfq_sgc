@@ -99,6 +99,3 @@ Este proceso aplica a productos que pasan por granulacion (POE 3.08). La mezcla 
 
 | VERSION | FECHA | DESCRIPCION DEL CAMBIO |
 |---|---|---|
-| 01 | 2026-02-17 | Emision inicial. |
-| 01 | 2026-03-05 | Ajuste operacional: metodo sandwich; eliminacion de firma supervisor, rol Calidad en muestreo, criterio CV<10% y remezcla. Verificacion visual por operario. |
-| 01 | 2026-03-05 | Se incluyen dos tipos de proceso: Tipo A (mezcla fisica manual con vaciado intercalado y paleado, granel va a envase) y Tipo B (mezcla en tolva mecanica para granulacion, 4 minutos, granel va a POE 3.08). |

@@ -109,5 +109,3 @@ Antes de iniciar el envasado, se debe realizar un despeje de linea riguroso para
 
 | VERSION | FECHA | DESCRIPCION DEL CAMBIO |
 |---|---|---|
-| 01 | 2026-02-17 | Emision inicial. |
-| 01 | 2026-03-05 | Ajuste operacional: doble pesaje (produccion + alistamiento); tolerancia ±1%. Alcance limitado a sacos y bigbag; se eliminan referencias a frascos, garrafas y productos liquidos. |

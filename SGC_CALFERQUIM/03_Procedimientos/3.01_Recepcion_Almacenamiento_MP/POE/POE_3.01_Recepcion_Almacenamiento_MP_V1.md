@@ -71,5 +71,3 @@ Aplica a toda MP que ingresa a CALFERQUIM S.A.S. para produccion propia o formul
 
 | VERSION | FECHA | DESCRIPCION |
 |---|---|---|
-| 01 | 2026-02-18 | Emision inicial homologada ICA pv0. |
-| 01 | 2026-03-05 | Ajuste operacional: cuarentena en vehiculo, ingreso condicionado a autorizacion de Calidad, responsabilidad de devolucion a equipo comercial y Gerencia. Se eliminan referencias a colores de etiqueta. |

@@ -89,5 +89,3 @@ Aplica a todos los lotes de fertilizantes y acondicionadores de suelo fabricados
 
 | VERSION | FECHA | DESCRIPCION DEL CAMBIO |
 |---|---|---|
-| 01 | 2026-02-17 | Emision inicial. |
-| 01 | 2026-03-05 | Reescritura completa: el procedimiento pasa de balance de masas (entradas/salidas/barreduras) a verificacion de formulacion. El objetivo es confirmar que las cantidades de la Orden de Produccion producen el grado declarado en el Registro ICA, usando la formula concentracion x cantidad MP / ton = concentracion producto final. |

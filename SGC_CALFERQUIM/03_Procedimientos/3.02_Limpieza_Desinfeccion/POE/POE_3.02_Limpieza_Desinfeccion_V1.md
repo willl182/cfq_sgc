@@ -74,5 +74,3 @@ La bodega de empaques es un area aislada. Los materiales de empaque (sacos, bigb
 
 | VERSION | FECHA | DESCRIPCION |
 |---|---|---|
-| 01 | 2026-02-18 | Emision inicial para cierre de brecha critica ICA (pilar 9). |
-| 01 | 2026-03-05 | Ajuste operacional: limpieza es barrido con escoba; se eliminan desinfeccion, hisopado/ATP y verificacion de Calidad. Autoriza Jefe de Produccion. Limpieza de equipo en cambio de produccion. Se diferencia por area: planta, bodega, bodega de empaques. |

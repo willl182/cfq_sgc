@@ -55,5 +55,4 @@ Las formulaciones activas de los productos registrados no exigen este tratamient
 |
 |
 |:---|
-| 01 | 2026-02-17 | Creación inicial del acta de no aplicabilidad. |
 
