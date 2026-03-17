@@ -30,6 +30,9 @@ Aplica a los dos tipos de proceso de mezcla ejecutados en la planta de CALFERQUI
 
 - Resolucion ICA pv0 (Propuesta): Anexo I-B, Pilar 17 "Controles del Proceso de Produccion".
 - POE 3.08 Presentacion Fisica y Granulacion.
+- Legacy de apoyo a muestreo en mezcla:
+  - `Legacy/Instructivo_Sacos.docx` (muestreo de bultos/sacos).
+  - `Legacy/Instructivo_Granel.docx` (muestreo de material a granel).
 
 ## 4.1. CONSIDERACIONES GMP
 
