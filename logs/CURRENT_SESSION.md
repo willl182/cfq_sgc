@@ -1,68 +1,33 @@
-# Session State: SGC CALFERQUIM — Revision documental de dossiers de productos
+# Session State: CFQ SGC - Calferquim
 
-**Last Updated**: 2026-03-17 05:29 -05
+**Last Updated**: 2026-03-17 22:10 -0500
 
 ## Session Objective
 
-Verificar en los dossiers de productos registrados si cada carpeta cuenta con ficha tecnica y hoja de seguridad, dejando trazabilidad del faltante documental.
+Generar balances de masas para los productos en dossier a partir de `list.csv` y `comp.csv`, e indicar cuales no quedaron cubiertos por ausencia o ambiguedad en las fuentes.
 
 ## Current State
 
-- [x] Cargar memoria del proyecto desde `logs/CURRENT_SESSION.md`
-- [x] Revisar contexto reciente en `logs/history/` y `logs/plans/`
-- [x] Inspeccionar `SGC_CALFERQUIM/08_Dossier_Productos_Registrados/`
-- [x] Verificar presencia de archivos en `02_Ficha_Tecnica/` por carpeta
-- [x] Verificar presencia de archivos en `04_Hoja_Seguridad/` por carpeta
-- [x] Identificar carpetas no normalizadas dentro del arbol de dossiers
-- [x] Generar informe en `SGC_CALFERQUIM/00_Inbox/Revision_FT_HS_Dossiers_20260317.md`
+- [x] Leido `logs/CURRENT_SESSION.md` segun protocolo de memoria.
+- [x] Revisados `list.csv`, `comp.csv` y los dossiers en `SGC_CALFERQUIM/05_Dossier_Productos/`.
+- [x] Creado el script reproducible `generar_balance_masas_dossiers.py`.
+- [x] Generados balances `.csv` por dossier para 18 productos con match confiable entre dossier -> `comp.csv` -> `list.csv`.
+- [x] Generado el reporte maestro `SGC_CALFERQUIM/05_Dossier_Productos/_reportes_balance_masas/reporte_balance_masas_20260317.md`.
+- [x] Generado el consolidado `SGC_CALFERQUIM/05_Dossier_Productos/_reportes_balance_masas/reporte_balance_masas_20260317.csv`.
+- [x] Identificados 11 dossiers con producto en `comp.csv` pero sin formula en `list.csv`.
+- [x] Identificados 29 dossiers sin match confiable en `comp.csv`.
+- [ ] Pendiente solo si el usuario solicita ampliar alias/manual mapping para casos ambiguos como `AFOSK`, `NUCLEO CAMASI`, `SUELO-Ca`, `SULFA K 50` o equivalentes.
 
 ## Critical Technical Context
 
-### Resultado principal
-
-En `SGC_CALFERQUIM/08_Dossier_Productos_Registrados/` hay `64` carpetas de primer nivel excluyendo `_Indice_HS`, de las cuales `59` son carpetas numeradas de producto y `5` son carpetas adicionales no normalizadas.
-
-De las `64` carpetas revisadas:
-
-- `50` cuentan con al menos un archivo en `02_Ficha_Tecnica/` y `04_Hoja_Seguridad/`
-- `9` no tienen ficha tecnica
-- `6` no tienen hoja de seguridad
-- `1` no tiene ninguna de las dos
-
-### Faltantes detectados
-
-Sin ficha tecnica:
-
-- `26_FOLLAJE`
-- `28_GANADERO`
-- `47_R-VITAL 17`
-- `61_ORGANIC_M`
-- `FE_SULFATO_ZINC_22`
-- `NUCLEO_CAMASI_GRIS`
-- `NUCLEO_CAMASI_ROJO`
-- `NUCLEO_FOSFORO_10`
-- `SULFATO_DE_CALCIO`
-
-Sin hoja de seguridad:
-
-- `40_NUCLEO MAGNE3`
-- `41_NUCLEO MAGNESIO-AZUFRE`
-- `42_NUCLEO MAGNESIO-SILICIO`
-- `43_NUCLEO MAGNESIO-S`
-- `45_PRODUCCION 17`
-- `61_ORGANIC_M`
-
-### Carpetas no normalizadas
-
-- `FE_SULFATO_ZINC_22`
-- `NUCLEO_CAMASI_GRIS`
-- `NUCLEO_CAMASI_ROJO`
-- `NUCLEO_FOSFORO_10`
-- `SULFATO_DE_CALCIO`
+- Los archivos generados son aditivos y no reemplazan balances historicos existentes.
+- El script excluye empaques y liners del denominador de formulacion cuando calcula composicion nutricional.
+- Para materias primas con varios proveedores en `comp.csv`, el script usa el proveedor exacto solo si `LISTA` coincide con `Cprov`; si todos los proveedores tienen la misma composicion, toma una fila generica; si difieren, marca la MP como ambigua.
+- Se aplicaron overrides manuales conservadores para `BORO GRANULADO`, `FERTIMENORES`, `SILIMAGRAM` y `SULFATO ZINC 22` porque el nombre del dossier no coincide exactamente con `comp.csv` pero el cruce es suficientemente claro.
+- Se detecto y corrigio un error inicial de parseo numerico: `comp.csv` usa decimales con punto, y el parser ya fue ajustado para no inflar porcentajes.
 
 ## Next Steps
 
-1. Si el usuario lo pide, generar una matriz CSV o Markdown de los `59` productos numerados con estado `FT/HS`
-2. Priorizar subsanacion documental de `61_ORGANIC_M`, porque no tiene ninguna de las dos evidencias
-3. Revisar si las `5` carpetas no normalizadas deben integrarse a los `59` dossiers oficiales o mantenerse como auxiliares
-4. Si el usuario lo pide, validar no solo presencia sino vigencia y correspondencia exacta de FT/HS por producto
+1. Si el usuario lo solicita, ampliar el mapeo manual para dossiers ambiguos y regenerar balances.
+2. Si el usuario lo solicita, exportar estos balances a `.xlsx` usando una plantilla o instalando soporte adicional.
+3. Si el usuario lo solicita, producir un resumen ejecutivo por producto con brechas de formulacion versus composicion declarada.
