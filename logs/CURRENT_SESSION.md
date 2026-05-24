@@ -1,33 +1,36 @@
-# Session State: CFQ SGC - Calferquim
+# Session State: SGC Calferquim - Consulta Ulexita
 
-**Last Updated**: 2026-03-17 22:10 -0500
+**Last Updated**: 2026-05-22 12:53 -05
 
 ## Session Objective
 
-Generar balances de masas para los productos en dossier a partir de `list.csv` y `comp.csv`, e indicar cuales no quedaron cubiertos por ausencia o ambiguedad en las fuentes.
+Confirmar si existe ficha tecnica de Ulexita en el repositorio y ubicar los archivos relevantes sin mover ni modificar documentos regulatorios.
 
 ## Current State
 
-- [x] Leido `logs/CURRENT_SESSION.md` segun protocolo de memoria.
-- [x] Revisados `list.csv`, `comp.csv` y los dossiers en `SGC_CALFERQUIM/05_Dossier_Productos/`.
-- [x] Creado el script reproducible `generar_balance_masas_dossiers.py`.
-- [x] Generados balances `.csv` por dossier para 18 productos con match confiable entre dossier -> `comp.csv` -> `list.csv`.
-- [x] Generado el reporte maestro `SGC_CALFERQUIM/05_Dossier_Productos/_reportes_balance_masas/reporte_balance_masas_20260317.md`.
-- [x] Generado el consolidado `SGC_CALFERQUIM/05_Dossier_Productos/_reportes_balance_masas/reporte_balance_masas_20260317.csv`.
-- [x] Identificados 11 dossiers con producto en `comp.csv` pero sin formula en `list.csv`.
-- [x] Identificados 29 dossiers sin match confiable en `comp.csv`.
-- [ ] Pendiente solo si el usuario solicita ampliar alias/manual mapping para casos ambiguos como `AFOSK`, `NUCLEO CAMASI`, `SUELO-Ca`, `SULFA K 50` o equivalentes.
+- [x] Memoria del proyecto revisada.
+- [x] Busqueda por nombre realizada con `rg --files | rg -i 'ulex'`.
+- [x] Confirmado que si existe ficha tecnica de Ulexita.
+- [x] Creadas copias de las versiones principales en `para_gloria_ulexita/`.
 
 ## Critical Technical Context
 
-- Los archivos generados son aditivos y no reemplazan balances historicos existentes.
-- El script excluye empaques y liners del denominador de formulacion cuando calcula composicion nutricional.
-- Para materias primas con varios proveedores en `comp.csv`, el script usa el proveedor exacto solo si `LISTA` coincide con `Cprov`; si todos los proveedores tienen la misma composicion, toma una fila generica; si difieren, marca la MP como ambigua.
-- Se aplicaron overrides manuales conservadores para `BORO GRANULADO`, `FERTIMENORES`, `SILIMAGRAM` y `SULFATO ZINC 22` porque el nombre del dossier no coincide exactamente con `comp.csv` pero el cruce es suficientemente claro.
-- Se detecto y corrigio un error inicial de parseo numerico: `comp.csv` usa decimales con punto, y el parser ya fue ajustado para no inflar porcentajes.
+Archivos relevantes encontrados:
+
+- `SGC_CALFERQUIM/08_Base_Datos_Tecnica/01_Dossier_Materias_Primas/MP-034_ULEXITA/01_Ficha_Tecnica/0_FT.MP_ULEXITA.pdf`
+- `202_CALFERQUIM/09 Fichas Tecnicas/203.15_fichas-tecnicas_N/FICHA TECNICA  ULEXITA.docx`
+- `202_CALFERQUIM/99 Revision/203.10_fichas_tecnicas_mp/_materias-primas/ULEXITA Manuchar.pdf`
+- `202_CALFERQUIM/99 Revision/203.10_fichas_tecnicas_mp/_materias-primas/ULEXITA Atequimicos.pdf`
+- Tambien hay soportes de Ulexita en dossiers de B-ZINC 15 y registros ICA legacy.
+
+Carpeta de entrega creada:
+
+- `para_gloria_ulexita/LEGACY_FICHA_TECNICA_ULEXITA.docx`
+- `para_gloria_ulexita/MP_ULEXITA_Atequimicos.pdf`
+- `para_gloria_ulexita/MP_ULEXITA_Manuchar.pdf`
+- `para_gloria_ulexita/SGC_MP-034_0_FT.MP_ULEXITA.pdf`
 
 ## Next Steps
 
-1. Si el usuario lo solicita, ampliar el mapeo manual para dossiers ambiguos y regenerar balances.
-2. Si el usuario lo solicita, exportar estos balances a `.xlsx` usando una plantilla o instalando soporte adicional.
-3. Si el usuario lo solicita, producir un resumen ejecutivo por producto con brechas de formulacion versus composicion declarada.
+1. Si el usuario lo pide, comparar contenido/versiones de las fichas de Ulexita antes de decidir cual usar.
+2. No mover ni renombrar archivos de registros ICA sin confirmacion explicita.
