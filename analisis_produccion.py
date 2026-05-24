@@ -22,6 +22,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
 CSV_PATH = BASE_DIR / "produccion_plantas.csv"
+RESPRODFIN_PATH = BASE_DIR / "resprodfin.csv"
 OUTPUT_ROOT = BASE_DIR / "SGC_CALFERQUIM" / "00_Inbox"
 
 ITEM_MAP = {
@@ -238,6 +239,43 @@ def load_rows(path: Path) -> list[dict]:
     return rows
 
 
+def load_resprodfin(path: Path) -> dict[str, dict[str, str]]:
+    """Carga resprodfin.csv y devuelve un dict {item_code: {col: valor}}."""
+    data: dict[str, dict[str, str]] = {}
+    if not path.exists():
+        return data
+    with path.open(newline="", encoding="utf-8-sig") as handle:
+        reader = csv.DictReader(handle)
+        for raw in reader:
+            codigo = clean_text(raw.get("Codigo", ""))
+            match = re.match(r"Total\s+(\d+)", codigo)
+            if not match:
+                continue
+            item_code = match.group(1)
+            data[item_code] = {
+                "Humedad": clean_text(raw.get("Humedad", "")),
+                "Dureza": clean_text(raw.get("Dureza", "")),
+                "% Tamiz 4": clean_text(raw.get("% Tamiz 4", "")),
+                "% Tamiz 5": clean_text(raw.get("% Tamiz 5", "")),
+                "% Tamiz 10": clean_text(raw.get("% Tamiz 10", "")),
+                "% Tamiz 18": clean_text(raw.get("% Tamiz 18", "")),
+                "% Bandeja": clean_text(raw.get("% Bandeja", "")),
+                "Abrasion": clean_text(raw.get("Abrasion", "")),
+            }
+    return data
+
+
+def get_product_characteristics(items: list[str], resprodfin: dict[str, dict[str, str]]) -> list[dict[str, str]]:
+    """Devuelve las filas de resprodfin que corresponden a los items del producto."""
+    rows = []
+    seen = set()
+    for item in sorted(items):
+        if item in resprodfin and item not in seen:
+            seen.add(item)
+            rows.append({"item": item, **resprodfin[item]})
+    return rows
+
+
 def index_by_product(rows: list[dict]) -> dict[str, dict[str, list[dict]]]:
     grouped: dict[str, dict[str, list[dict]]] = defaultdict(lambda: defaultdict(list))
     for row in rows:
@@ -333,7 +371,7 @@ def render_warnings(metrics: dict) -> list[str]:
     return warnings
 
 
-def render_product_file(metrics: dict, output_dir: Path) -> Path:
+def render_product_file(metrics: dict, output_dir: Path, resprodfin: dict[str, dict[str, str]] | None = None) -> Path:
     product = metrics["product"]
     headers = ["Indicador", "PLANTA 1", "PLANTA 2"]
     rendimiento_rows = []
@@ -405,6 +443,26 @@ def render_product_file(metrics: dict, output_dir: Path) -> Path:
         "",
         markdown_table(headers, rendimiento_rows),
         "",
+    ]
+
+    # Tabla de caracteristicas del producto desde resprodfin.csv
+    if resprodfin:
+        char_rows = get_product_characteristics(metrics["items"], resprodfin)
+        if char_rows:
+            char_headers = ["Item", "Humedad", "Dureza", "Tamiz 4", "Tamiz 5", "Tamiz 10", "Tamiz 18", "Bandeja", "Abrasion"]
+            char_table_rows = [
+                [r["item"], r["Humedad"], r["Dureza"], r["% Tamiz 4"], r["% Tamiz 5"],
+                 r["% Tamiz 10"], r["% Tamiz 18"], r["% Bandeja"], r["Abrasion"]]
+                for r in char_rows
+            ]
+            content.extend([
+                "## Caracteristicas del Producto",
+                "",
+                markdown_table(char_headers, char_table_rows),
+                "",
+            ])
+
+    content.extend([
         "## Variables de Proceso",
         "",
         markdown_table(headers, variable_rows),
@@ -420,7 +478,7 @@ def render_product_file(metrics: dict, output_dir: Path) -> Path:
         "## Operadores Frecuentes",
         "",
         markdown_table(["Planta", "Granuladores", "Apoyo/Nombres"], operadores_rows),
-    ]
+    ])
     if warnings:
         content.extend(["", "## Alertas", "", *warnings])
 
@@ -527,9 +585,11 @@ def main() -> int:
     output_dir = OUTPUT_ROOT / f"Fichas_Produccion_{date.today().strftime('%Y%m%d')}"
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    resprodfin = load_resprodfin(RESPRODFIN_PATH)
+
     grouped = index_by_product(rows)
     product_stats = [product_metrics(product, plant_rows) for product, plant_rows in sorted(grouped.items())]
-    markdown_files = [render_product_file(stats, output_dir) for stats in product_stats]
+    markdown_files = [render_product_file(stats, output_dir, resprodfin) for stats in product_stats]
     summary_file = render_summary(product_stats, output_dir)
     markdown_files.append(summary_file)
 
