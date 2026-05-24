@@ -4,4 +4,4 @@
 |---|---|---|
 | Alta | 1 dia habil | 5 dias habiles |
 | Media | 2 dias habiles | 10 dias habiles |
-| Baja | 2 dias habiles | 15 dias habiles |
+| Baja | 2 dias habiles | 10 dias habiles |
