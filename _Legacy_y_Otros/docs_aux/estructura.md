@@ -289,12 +289,12 @@ SGC_CALFERQUIM/
 | Prioridad | Documento | Carpeta | Impacto |
 |---|---|---|---|
 | **ALTA** | Contrato Asesor Técnico | `01_.../1.5_Asesor_Tecnico/` | Requisito de registro empresa |
-| **ALTA** | Procedimiento Balance de Masas | `03_.../3.05_.../POE/` | Nuevo requisito crítico pv0 |
-| **ALTA** | Procedimiento Contramuestras | `03_.../3.14_.../POE/` | Nuevo requisito explícito Anexo I-B |
+| **ALTA** | Procedimiento Balance de Masas | `03_.../3.05_.../01_POE/` | Nuevo requisito crítico pv0 |
+| **ALTA** | Procedimiento Contramuestras | `03_.../3.14_.../01_POE/` | Nuevo requisito explícito Anexo I-B |
 | **ALTA** | Procedimiento Recall/Retiro | [En 3.16 o carpeta aparte] | Requisito obligatorio retiros mercado |
-| **ALTA** | Procedimiento Disposición Barreduras | `03_.../3.18_.../POE/` | Prohibición explícita pv0 |
-| MEDIA | Procedimiento Formulaciones Terceros | `03_.../3.19_.../POE/` | Aplica a CALFERQUIM |
-| MEDIA | Procedimiento Entrega MP Importación | `03_.../3.20_.../POE/` | Aplica a CALFERQUIM |
+| **ALTA** | Procedimiento Disposición Barreduras | `03_.../3.18_.../01_POE/` | Prohibición explícita pv0 |
+| MEDIA | Procedimiento Formulaciones Terceros | `03_.../3.19_.../01_POE/` | Aplica a CALFERQUIM |
+| MEDIA | Procedimiento Entrega MP Importación | `03_.../3.20_.../01_POE/` | Aplica a CALFERQUIM |
 | MEDIA | Etiquetas aprobadas por producto | `05_.../[X]/03_Etiqueta_Aprobada/` | Requerido en Anexo II-F |
 | MEDIA | Resolución Laboratorio Registrado ICA | `02_.../2.1_Laboratorio_Registrado/` | Obligatorio para certificados |
 

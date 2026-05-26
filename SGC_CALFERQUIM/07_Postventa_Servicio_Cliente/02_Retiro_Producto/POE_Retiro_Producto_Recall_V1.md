@@ -87,7 +87,7 @@ Activar retiro cuando ocurra cualquiera de estos eventos:
 
 ## 8. REFERENCIAS
 
-- `SGC_CALFERQUIM/03_Procedimientos/3.16_Servicio_Cliente_PQR/POE/POE_3.16A_Retiro_Producto_Recall_V1.md`
+- `SGC_CALFERQUIM/03_Procedimientos/3.16_Servicio_Cliente_PQR/01_POE/POE_3.16A_Retiro_Producto_Recall_V1.md`
 - `SGC_CALFERQUIM/03_Procedimientos/3.12_Liberacion_Lotes/`
 - `SGC_CALFERQUIM/03_Procedimientos/3.13_Muestreo_Control_Calidad/`
 

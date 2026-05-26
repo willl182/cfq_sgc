@@ -1,26 +1,29 @@
-# Session State: SGC Calferquim - Ajuste de Directorio Principal y Sincronización
+# Session State: SGC Calferquim - Reestructuración de Carpetas Internas en Procedimientos
 
-**Last Updated**: 2026-05-26 09:06 -05
+**Last Updated**: 2026-05-26 09:47 -05
 
 ## Session Objective
 
-Ajustar la documentación principal del Sistema de Gestión de Calidad (SGC) para reflejar que el directorio principal activo es `SGC_CALFERQUIM/` (con la estructura alineada al Acta de Visita del ICA, Anexo I-B) y no el directorio legacy `202_CALFERQUIM/`.
+Renombrar las carpetas internas de los 20 procedimientos obligatorios en `03_Procedimientos/` para que la visualización y ordenamiento sea secuencial (01_POE, 02_Formatos, 03_Registros) y no alfabético por defecto, y actualizar todas las referencias textuales a estas carpetas dentro del repositorio.
 
 ## Current State
 
-- [x] Corrección de `README.md` para unificar la documentación en torno a `SGC_CALFERQUIM/` en lugar de `202_CALFERQUIM/`.
-- [x] Mapeo de la estructura real implementada de 10 carpetas del SGC (Anexo I-B) en la Sección 2 ("Estado Actual del SGC") de `README.md`.
-- [x] Actualización de la Sección 5 ("Los 18 Pilares Procedimentales") para direccionar a las rutas de carpeta actuales de `SGC_CALFERQUIM/03_Procedimientos/`.
-- [x] Ajuste de la Sección 7 ("Estructura Implementada del SGC") detallando la justificación de las carpetas 1:1 con el Acta de Visita del ICA.
-- [x] Sincronización de `AGENTS.md` (Sección de Estructura del Repositorio y Plan de Migración) para reflejar la compleción del plan y el uso definitivo de `SGC_CALFERQUIM/` como directorio raíz activo.
+- [x] Renombrado físico de 56 carpetas internas (`POE` -> `01_POE`, `Formatos` -> `02_Formatos`, `Registros` -> `03_Registros`) dentro de `SGC_CALFERQUIM/03_Procedimientos/3.01_*` a `3.20_*`.
+- [x] Actualización de 8 archivos de índice, auditoría y procedimientos de postventa para corregir las rutas modificadas y evitar enlaces rotos en el SGC.
+- [x] Consolidación y trackeo de los cambios en el index de Git (`git add .`).
+- [x] Registro del hito técnico en `logs/history/260526_0945_findings.md`.
 
 ## Critical Technical Context
 
 - La ruta principal activa del SGC es `SGC_CALFERQUIM/`.
-- La estructura interna del SGC está organizada con una correspondencia directa (1:1) con el Acta de Visita de Verificación del ICA (Anexo I-B), facilitando el control y auditoría.
-- La carpeta legacy `202_CALFERQUIM/` se encuentra archivada formalmente dentro del directorio `_Legacy_y_Otros/`.
+- Las subcarpetas internas dentro de cada procedimiento en `03_Procedimientos/` ahora siguen la nomenclatura ordenada:
+  - `01_POE` (Procedimientos Operativos Estándar)
+  - `02_Formatos` (Formatos vacíos)
+  - `03_Registros` (Registros diligenciados)
+- Esto soluciona el problema del visor de archivos que listaba primero `Formatos`, luego `POE` y finalmente `Registros`, afectando la lógica de navegación para las auditorías del ICA.
+- Todos los cambios se encuentran agregados al área de preparación de Git (`staged`), garantizando un historial de versión limpio.
 
 ## Next Steps
 
-1. **Procedimientos del SGC:** Continuar con la elaboración y normalización de los 4 procedimientos obligatorios faltantes (Contramuestras, Control Documental, Retiro de Mercado/Recall, y Gestión del Laboratorio) directamente en `SGC_CALFERQUIM/03_Procedimientos/`.
-2. **Conciliación Documental:** Continuar subsanando las etiquetas y balances de masa identificados como brechas en `reporte_fichas_dossier_formulador.md` y en `implementation_plan.md`.
+1. **Continuación con procedimientos del SGC:** Elaborar y normalizar los procedimientos obligatorios faltantes (Contramuestras, Control Documental, Retiro de Mercado/Recall, y Gestión del Laboratorio) directamente bajo las nuevas subcarpetas ordenadas en `SGC_CALFERQUIM/03_Procedimientos/`.
+2. **Conciliación de Dossiers:** Mantener la coherencia de las etiquetas y balances de masa en `08_Dossier_Productos_Registrados/` y `10_Base_Datos_Tecnica/`.

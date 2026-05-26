@@ -160,7 +160,7 @@ mkdir -p SGC_CALFERQUIM/02_Control_Calidad/2.1_Laboratorio_Registrado/Contratos_
 # Subcarpetas 03 (18 puntos del Anexo I-B)
 mkdir -p SGC_CALFERQUIM/03_Procedimientos/{3.01_Recepcion_Almacenamiento_MP,3.03_Molienda_Primaria,3.04_NA_Pirolisis,3.05_Balance_Materias_Primas,3.06_Mezcla_Homogenizacion,3.07_NA_Reacciones_Quimicas,3.08_Presentacion_Fisica_Granulacion,3.09_Molienda_Secundaria,3.10_Envase,3.11_Codificacion_Lotes,3.12_Liberacion_Lotes,3.13_Muestreo_Control_Calidad,3.14_Contramuestras,3.15_Higiene_Seguridad_Industrial,3.16_Servicio_Cliente_PQR,3.17_Almacenamiento_PT,3.18_Disposicion_Residuos,3.19_Formulaciones_Terceros,3.20_Entrega_MP_Importacion_Terceros}
 
-# Crear subcarpetas POE/Formatos/Registros en cada punto 3.XX
+# Crear subcarpetas POE/02_Formatos/Registros en cada punto 3.XX
 for dir in SGC_CALFERQUIM/03_Procedimientos/3.*[^A]/; do
   mkdir -p "$dir"/{POE,Formatos,Registros}
 done
@@ -227,19 +227,19 @@ mkdir -p SGC_CALFERQUIM/_Archivo/{Registros_2024,Registros_2025,SGC_Legacy/{RRHH
 
 | Origen | Destino | Archivos |
 |---|---|---|
-| `99 Revision/203.8_sgc-ica/1) SISTEMA DE CALIDAD/1. Compras/DC-SI26 Compras y Gestión de Proveedores.pdf` | `03_.../3.01_Recepcion_Almacenamiento_MP/POE/` | 1 |
-| `99 Revision/203.8_sgc-ica/1) SISTEMA DE CALIDAD/1. Compras/RC-SI17, RC-SI35, RC-SI36, RC-SI47` | `03_.../3.01_Recepcion_Almacenamiento_MP/Formatos/` | 4 |
-| `06 SST/PC-SI01 PROCESO DE MOLIDO.pdf` | `03_.../3.03_Molienda_Primaria/POE/` | 1 |
-| `03 Operacion/DC-SI04 Procedimiento de Mezclas.pdf` | `03_.../3.06_Mezcla_Homogenizacion/POE/` | 1 |
-| `06 SST/PC-SI03 PROCESO DE MEZCLA.pdf` | `03_.../3.06_Mezcla_Homogenizacion/POE/` | 1 |
-| `03 Operacion/DC-SI14 Procedimiento de Granulación.pdf` | `03_.../3.08_Presentacion_Fisica_Granulacion/POE/` | 1 |
-| `06 SST/PC-SI04 PROCESO DE GRANULACIÓN.pdf` | `03_.../3.08_Presentacion_Fisica_Granulacion/POE/` | 1 |
-| `06 SST/PC-SI06 PROCESO DE SEPARACIÓN DE FINOS.pdf` | `03_.../3.09_Molienda_Secundaria/POE/` | 1 |
-| `99 Revision/203.7_orden_produccion/` (OPs) | `03_.../3.06_Mezcla_Homogenizacion/Registros/` | ~80 |
+| `99 Revision/203.8_sgc-ica/1) SISTEMA DE CALIDAD/1. Compras/DC-SI26 Compras y Gestión de Proveedores.pdf` | `03_.../3.01_Recepcion_Almacenamiento_MP/01_POE/` | 1 |
+| `99 Revision/203.8_sgc-ica/1) SISTEMA DE CALIDAD/1. Compras/RC-SI17, RC-SI35, RC-SI36, RC-SI47` | `03_.../3.01_Recepcion_Almacenamiento_MP/02_Formatos/` | 4 |
+| `06 SST/PC-SI01 PROCESO DE MOLIDO.pdf` | `03_.../3.03_Molienda_Primaria/01_POE/` | 1 |
+| `03 Operacion/DC-SI04 Procedimiento de Mezclas.pdf` | `03_.../3.06_Mezcla_Homogenizacion/01_POE/` | 1 |
+| `06 SST/PC-SI03 PROCESO DE MEZCLA.pdf` | `03_.../3.06_Mezcla_Homogenizacion/01_POE/` | 1 |
+| `03 Operacion/DC-SI14 Procedimiento de Granulación.pdf` | `03_.../3.08_Presentacion_Fisica_Granulacion/01_POE/` | 1 |
+| `06 SST/PC-SI04 PROCESO DE GRANULACIÓN.pdf` | `03_.../3.08_Presentacion_Fisica_Granulacion/01_POE/` | 1 |
+| `06 SST/PC-SI06 PROCESO DE SEPARACIÓN DE FINOS.pdf` | `03_.../3.09_Molienda_Secundaria/01_POE/` | 1 |
+| `99 Revision/203.7_orden_produccion/` (OPs) | `03_.../3.06_Mezcla_Homogenizacion/03_Registros/` | ~80 |
 
 **Brechas a crear**:
-- `3.05_Balance_Materias_Primas/POE/` - Procedimiento balance de masas
-- `3.10_Envase/POE/` - Procedimiento envasado (si no existe)
+- `3.05_Balance_Materias_Primas/01_POE/` - Procedimiento balance de masas
+- `3.10_Envase/01_POE/` - Procedimiento envasado (si no existe)
 
 **Total**: ~90 archivos
 
@@ -249,13 +249,13 @@ mkdir -p SGC_CALFERQUIM/_Archivo/{Registros_2024,Registros_2025,SGC_Legacy/{RRHH
 
 | Origen | Destino | Archivos |
 |---|---|---|
-| `04 Calidad/DC-SI12 Asignación de Lotes, Muestreo y Control de Calidad.pdf` | `03_.../3.11_Codificacion_Lotes/POE/` y `03_.../3.13_Muestreo_Control_Calidad/POE/` | 1 (copia o shortcut) |
-| `04 Calidad/DC-SI10 Liberación de Lotes al Mercado.pdf` | `03_.../3.12_Liberacion_Lotes/POE/` | 1 |
-| `05 Laboratorio/DC-SI34 Ensayos Fisicoquímicos en Laboratorio.pdf` | `03_.../3.13_Muestreo_Control_Calidad/POE/` | 1 |
+| `04 Calidad/DC-SI12 Asignación de Lotes, Muestreo y Control de Calidad.pdf` | `03_.../3.11_Codificacion_Lotes/01_POE/` y `03_.../3.13_Muestreo_Control_Calidad/01_POE/` | 1 (copia o shortcut) |
+| `04 Calidad/DC-SI10 Liberación de Lotes al Mercado.pdf` | `03_.../3.12_Liberacion_Lotes/01_POE/` | 1 |
+| `05 Laboratorio/DC-SI34 Ensayos Fisicoquímicos en Laboratorio.pdf` | `03_.../3.13_Muestreo_Control_Calidad/01_POE/` | 1 |
 
 **Brechas a crear**:
-- `3.14_Contramuestras/POE/` - Procedimiento contramuestras
-- `3.12_Liberacion_Lotes/Formatos/` - Formato liberación cuarentena → aprobado
+- `3.14_Contramuestras/01_POE/` - Procedimiento contramuestras
+- `3.12_Liberacion_Lotes/02_Formatos/` - Formato liberación cuarentena → aprobado
 
 **Total**: ~5 archivos
 
@@ -265,21 +265,21 @@ mkdir -p SGC_CALFERQUIM/_Archivo/{Registros_2024,Registros_2025,SGC_Legacy/{RRHH
 
 | Origen | Destino | Archivos |
 |---|---|---|
-| `06 SST/DC-SI30 Protocolo de Bioseguridad.pdf` | `03_.../3.15_Higiene_Seguridad_Industrial/POE/` | 1 |
-| `06 SST/DC-SI37 Almacenamiento Seguro y Conteo Bultos.pdf` | `03_.../3.15_Higiene_Seguridad_Industrial/POE/` y `03_.../3.17_Almacenamiento_PT/POE/` | 1 |
-| `04 Calidad/DC-SI07 Quejas y Reclamos.pdf` | `03_.../3.16_Servicio_Cliente_PQR/POE/` | 1 |
-| `04 Calidad/DC-SI11 Servicio al Cliente.pdf` | `03_.../3.16_Servicio_Cliente_PQR/POE/` | 1 |
-| `04 Calidad/DC-SI13 Política Servicio al Cliente.pdf` | `03_.../3.16_Servicio_Cliente_PQR/POE/` | 1 |
-| `04 Calidad/DC-SI15 Política de Quejas y Reclamos.pdf` | `03_.../3.16_Servicio_Cliente_PQR/POE/` | 1 |
-| `04 Calidad/RC-SI08 Formulario Control de Quejas y Reclamos.xlsx` | `03_.../3.16_Servicio_Cliente_PQR/Formatos/` | 1 |
-| `99 Revision/203.8_sgc-ica/.../Respuesta a Reclamaciones/` | `03_.../3.16_Servicio_Cliente_PQR/Registros/` | ~7 |
-| `99 Revision/203.8_sgc-ica/.../Reportes de Problema de Calidad/` | `03_.../3.16_Servicio_Cliente_PQR/Registros/` | ~11 |
-| `despachos/RC-SI53 Traslado de Producto Terminado al Almacen.xlsx` | `03_.../3.17_Almacenamiento_PT/Registros/` | 1 |
+| `06 SST/DC-SI30 Protocolo de Bioseguridad.pdf` | `03_.../3.15_Higiene_Seguridad_Industrial/01_POE/` | 1 |
+| `06 SST/DC-SI37 Almacenamiento Seguro y Conteo Bultos.pdf` | `03_.../3.15_Higiene_Seguridad_Industrial/01_POE/` y `03_.../3.17_Almacenamiento_PT/01_POE/` | 1 |
+| `04 Calidad/DC-SI07 Quejas y Reclamos.pdf` | `03_.../3.16_Servicio_Cliente_PQR/01_POE/` | 1 |
+| `04 Calidad/DC-SI11 Servicio al Cliente.pdf` | `03_.../3.16_Servicio_Cliente_PQR/01_POE/` | 1 |
+| `04 Calidad/DC-SI13 Política Servicio al Cliente.pdf` | `03_.../3.16_Servicio_Cliente_PQR/01_POE/` | 1 |
+| `04 Calidad/DC-SI15 Política de Quejas y Reclamos.pdf` | `03_.../3.16_Servicio_Cliente_PQR/01_POE/` | 1 |
+| `04 Calidad/RC-SI08 Formulario Control de Quejas y Reclamos.xlsx` | `03_.../3.16_Servicio_Cliente_PQR/02_Formatos/` | 1 |
+| `99 Revision/203.8_sgc-ica/.../Respuesta a Reclamaciones/` | `03_.../3.16_Servicio_Cliente_PQR/03_Registros/` | ~7 |
+| `99 Revision/203.8_sgc-ica/.../Reportes de Problema de Calidad/` | `03_.../3.16_Servicio_Cliente_PQR/03_Registros/` | ~11 |
+| `despachos/RC-SI53 Traslado de Producto Terminado al Almacen.xlsx` | `03_.../3.17_Almacenamiento_PT/03_Registros/` | 1 |
 
 **Brechas a crear**:
-- `3.18_Disposicion_Residuos/POE/` - Procedimiento disposición barreduras
-- `3.19_Formulaciones_Terceros/POE/` - Procedimiento formulaciones a terceros
-- `3.20_Entrega_MP_Importacion_Terceros/POE/` - Procedimiento entrega MP importación
+- `3.18_Disposicion_Residuos/01_POE/` - Procedimiento disposición barreduras
+- `3.19_Formulaciones_Terceros/01_POE/` - Procedimiento formulaciones a terceros
+- `3.20_Entrega_MP_Importacion_Terceros/01_POE/` - Procedimiento entrega MP importación
 
 **Notas**:
 - Revisar si existe `RC-SI53` en `despachos/` o `99 Revision/`
@@ -456,12 +456,12 @@ Actualizar `03_.../[carpetas vacías]/PENDIENTE.txt` con:
 | Prioridad | Documento | Carpeta | Tiempo estimado creación |
 |---|---|---|---|
 | **ALTA** | Contrato Asesor Técnico | `01_.../1.5_Asesor_Tecnico/` | 2 horas (redactar + firmar) |
-| **ALTA** | Procedimiento Balance de Masas | `03_.../3.05_.../POE/` | 4 horas (redactar + aprobar) |
-| **ALTA** | Procedimiento Contramuestras | `03_.../3.14_.../POE/` | 3 horas (redactar + aprobar) |
-| **ALTA** | Procedimiento Disposición Barreduras | `03_.../3.18_.../POE/` | 3 horas (redactar + aprobar) |
-| **ALTA** | Formato Liberación Lotes | `03_.../3.12_.../Formatos/` | 1 hora (diseñar en Excel) |
-| MEDIA | Procedimiento Formulaciones Terceros | `03_.../3.19_.../POE/` | 3 horas |
-| MEDIA | Procedimiento Entrega MP Importación | `03_.../3.20_.../POE/` | 3 horas |
+| **ALTA** | Procedimiento Balance de Masas | `03_.../3.05_.../01_POE/` | 4 horas (redactar + aprobar) |
+| **ALTA** | Procedimiento Contramuestras | `03_.../3.14_.../01_POE/` | 3 horas (redactar + aprobar) |
+| **ALTA** | Procedimiento Disposición Barreduras | `03_.../3.18_.../01_POE/` | 3 horas (redactar + aprobar) |
+| **ALTA** | Formato Liberación Lotes | `03_.../3.12_.../02_Formatos/` | 1 hora (diseñar en Excel) |
+| MEDIA | Procedimiento Formulaciones Terceros | `03_.../3.19_.../01_POE/` | 3 horas |
+| MEDIA | Procedimiento Entrega MP Importación | `03_.../3.20_.../01_POE/` | 3 horas |
 | MEDIA | Resolución Laboratorio Registrado ICA | `02_.../2.1_Laboratorio_Registrado/` | Trámite ICA |
 | MEDIA | Etiquetas aprobadas por producto (faltantes) | `05_.../[X]/03_Etiqueta_Aprobada/` | Variable por producto |
 | MEDIA | Fotos señalización y demarcación | `04_.../4.1_Senalizacion_Demarcacion/` | 2 horas (tomar fotos) |

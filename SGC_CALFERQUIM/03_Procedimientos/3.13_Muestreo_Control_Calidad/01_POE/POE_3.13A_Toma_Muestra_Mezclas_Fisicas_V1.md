@@ -23,9 +23,9 @@ Aplica a todos los lotes de mezcla fisica de producto terminado y a cualquier mu
 
 - `Instructivo_Sacos.docx`
 - `Instructivo_Granel.docx`
-- `SGC_CALFERQUIM/03_Procedimientos/3.13_Muestreo_Control_Calidad/POE/POE_3.13_Muestreo_Control_Calidad_V1.md`
-- `SGC_CALFERQUIM/03_Procedimientos/3.13_Muestreo_Control_Calidad/Formatos/Formato_Control_Muestreo_V1.csv`
-- `SGC_CALFERQUIM/03_Procedimientos/3.13_Muestreo_Control_Calidad/Registros/Registro_Muestreo_V1.csv`
+- `SGC_CALFERQUIM/03_Procedimientos/3.13_Muestreo_Control_Calidad/01_POE/POE_3.13_Muestreo_Control_Calidad_V1.md`
+- `SGC_CALFERQUIM/03_Procedimientos/3.13_Muestreo_Control_Calidad/02_Formatos/Formato_Control_Muestreo_V1.csv`
+- `SGC_CALFERQUIM/03_Procedimientos/3.13_Muestreo_Control_Calidad/03_Registros/Registro_Muestreo_V1.csv`
 
 ## 5. RESPONSABILIDADES
 
