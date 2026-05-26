@@ -1,0 +1,263 @@
+{
+    "fuzzy_results": {
+        "11_AFOSK": [
+            {
+                "id": "379-AFOS-K-CALFERQUIM 1-P",
+                "product": "AFOS-K",
+                "clase": "PT",
+                "tipo": "P",
+                "proveedor": "CALFERQUIM",
+                "score": 2
+            }
+        ],
+        "16_CALFERCOBRE": [],
+        "18_CAL DESARROLLO": [
+            {
+                "id": "999-1-CRECIMIENTO-CALFERQUIM 1-",
+                "product": "1-CRECIMIENTO",
+                "clase": "PT",
+                "tipo": NaN,
+                "proveedor": "CALFERQUIM",
+                "score": 1
+            },
+            {
+                "id": "999-2-AVANCE-CALFERQUIM 1-",
+                "product": "2-AVANCE",
+                "clase": "PT",
+                "tipo": NaN,
+                "proveedor": "CALFERQUIM",
+                "score": 1
+            },
+            {
+                "id": "999-3-PRODUCTOR-CALFERQUIM 1-",
+                "product": "3-PRODUCTOR",
+                "clase": "PT",
+                "tipo": NaN,
+                "proveedor": "CALFERQUIM",
+                "score": 1
+            },
+            {
+                "id": "678-ABONO ORGANICO-CALFERQUIM 1-G",
+                "product": "ABONO ORGANICO",
+                "clase": "MP",
+                "tipo": "G",
+                "proveedor": "CALFERQUIM",
+                "score": 1
+            },
+            {
+                "id": "379-AFOS-K-CALFERQUIM 1-P",
+                "product": "AFOS-K",
+                "clase": "PT",
+                "tipo": "P",
+                "proveedor": "CALFERQUIM",
+                "score": 1
+            }
+        ],
+        "19_CALFER FLORACION": [
+            {
+                "id": "999-1-CRECIMIENTO-CALFERQUIM 1-",
+                "product": "1-CRECIMIENTO",
+                "clase": "PT",
+                "tipo": NaN,
+                "proveedor": "CALFERQUIM",
+                "score": 1
+            },
+            {
+                "id": "999-2-AVANCE-CALFERQUIM 1-",
+                "product": "2-AVANCE",
+                "clase": "PT",
+                "tipo": NaN,
+                "proveedor": "CALFERQUIM",
+                "score": 1
+            },
+            {
+                "id": "999-3-PRODUCTOR-CALFERQUIM 1-",
+                "product": "3-PRODUCTOR",
+                "clase": "PT",
+                "tipo": NaN,
+                "proveedor": "CALFERQUIM",
+                "score": 1
+            },
+            {
+                "id": "678-ABONO ORGANICO-CALFERQUIM 1-G",
+                "product": "ABONO ORGANICO",
+                "clase": "MP",
+                "tipo": "G",
+                "proveedor": "CALFERQUIM",
+                "score": 1
+            },
+            {
+                "id": "379-AFOS-K-CALFERQUIM 1-P",
+                "product": "AFOS-K",
+                "clase": "PT",
+                "tipo": "P",
+                "proveedor": "CALFERQUIM",
+                "score": 1
+            }
+        ],
+        "25_FERTICORRECTIVO": [],
+        "26_FOLLAJE": [],
+        "28_GANADERO": [],
+        "40_NUCLEO MAGNE3": [
+            {
+                "id": "655-FE NUCLEO N-CALFERQUIM 1-G",
+                "product": "FE NUCLEO N",
+                "clase": "PT",
+                "tipo": "G",
+                "proveedor": "CALFERQUIM",
+                "score": 1
+            },
+            {
+                "id": "65-NUCLEO 4-CALFERQUIM 1-G",
+                "product": "NUCLEO 4",
+                "clase": "PT",
+                "tipo": "G",
+                "proveedor": "CALFERQUIM",
+                "score": 1
+            },
+            {
+                "id": "1275-NUCLEO CALCIO 40-CALFERQUIM 1-G",
+                "product": "NUCLEO CALCIO 40",
+                "clase": "PT",
+                "tipo": "G",
+                "proveedor": "CALFERQUIM",
+                "score": 1
+            },
+            {
+                "id": "62-NUCLEO CAMASI GRIS-CALFERQUIM 1-G",
+                "product": "NUCLEO CAMASI GRIS",
+                "clase": "PT",
+                "tipo": "G",
+                "proveedor": "CALFERQUIM",
+                "score": 1
+            },
+            {
+                "id": "452-NUCLEO CAMASI ROJO-CALFERQUIM 1-G",
+                "product": "NUCLEO CAMASI ROJO",
+                "clase": "PT",
+                "tipo": "G",
+                "proveedor": "CALFERQUIM",
+                "score": 1
+            }
+        ],
+        "47_R-VITAL 17": [],
+        "51_SUELO-Ca": [],
+        "52_SULFA K 50": [
+            {
+                "id": "306-FE SULFATO CALCIO C-CALFERQUIM 1-",
+                "product": "FE SULFATO CALCIO C",
+                "clase": "PT",
+                "tipo": NaN,
+                "proveedor": "CALFERQUIM",
+                "score": 1
+            },
+            {
+                "id": "559-FE SULFATO CALCIO G-CALFERQUIM 1-G",
+                "product": "FE SULFATO CALCIO G",
+                "clase": "PT",
+                "tipo": "G",
+                "proveedor": "CALFERQUIM",
+                "score": 1
+            },
+            {
+                "id": "141-FE SULFATO CALCIO P-CALFERQUIM 1-G",
+                "product": "FE SULFATO CALCIO P",
+                "clase": "PT",
+                "tipo": "G",
+                "proveedor": "CALFERQUIM",
+                "score": 1
+            },
+            {
+                "id": "213-FE SULFATO CALCIO Z-CALFERQUIM 1-P",
+                "product": "FE SULFATO CALCIO Z",
+                "clase": "PT",
+                "tipo": "P",
+                "proveedor": "CALFERQUIM",
+                "score": 1
+            },
+            {
+                "id": "22-FE SULFATO ZINC-CALFERQUIM 1-",
+                "product": "FE SULFATO ZINC",
+                "clase": "PT",
+                "tipo": NaN,
+                "proveedor": "CALFERQUIM",
+                "score": 1
+            }
+        ],
+        "56_TODERO": [],
+        "57_YESO EN POLVO": [
+            {
+                "id": "680-FE ZUELOCa POLVO-CALFERQUIM 1-P",
+                "product": "FE ZUELOCa POLVO",
+                "clase": "PT",
+                "tipo": "P",
+                "proveedor": "CALFERQUIM",
+                "score": 1
+            }
+        ],
+        "58_YESO GRANULADO": [
+            {
+                "id": "470-POLVILLO KCL GRANULADO- 1-",
+                "product": "POLVILLO KCL GRANULADO",
+                "clase": "MP",
+                "tipo": NaN,
+                "proveedor": NaN,
+                "score": 1
+            },
+            {
+                "id": "638-POLVILLO SAM GRANULADO-CALFERQUIM 1-",
+                "product": "POLVILLO SAM GRANULADO",
+                "clase": "PT",
+                "tipo": NaN,
+                "proveedor": "CALFERQUIM",
+                "score": 1
+            }
+        ],
+        "61_ORGANIC_M": [
+            {
+                "id": "678-ABONO ORGANICO-CALFERQUIM 1-G",
+                "product": "ABONO ORGANICO",
+                "clase": "MP",
+                "tipo": "G",
+                "proveedor": "CALFERQUIM",
+                "score": 1
+            }
+        ]
+    },
+    "pot_matches": [
+        [
+            "167-SULFATO POTASIO-AGRICULTURA Y SERVICIOS 1-G",
+            "SULFATO POTASIO",
+            "MP"
+        ],
+        [
+            "197-SULFATO POTASIO-PRECISAGRO 1-C",
+            "SULFATO POTASIO",
+            "MP"
+        ]
+    ],
+    "clase_counts": {
+        "PT": 344,
+        "MP": 120
+    },
+    "total_pt": 344,
+    "total_mp": 120,
+    "unique_pt_names": 341,
+    "top_duplicated_pt": {
+        "MFE 26N-6P-2K+EM": 2,
+        "MFE 25N-8P-16K+EM": 2,
+        "MFE 13N-26P-6K+EM": 2,
+        "MFE 23N-1P-18K+EM": 1,
+        "MFE 22N-8P-10K+EM": 1,
+        "MFE 22N-8K-7P+MENORES": 1,
+        "MFE 22N-7K-12S+EM": 1,
+        "MFE 22N-6P-3K+EM": 1,
+        "MFE 22N-3P-3K+EM": 1,
+        "MFE 22N-3P-0K+ EM": 1,
+        "MFE 22N-0P-19K+EM": 1,
+        "MFE 21N-7P-8K + EM": 1,
+        "MFE 21N-4P-7K+EM": 1,
+        "MFE 21N-4P-11K+EM": 1,
+        "MFE 20N-4P-18K+EM": 1
+    }
+}

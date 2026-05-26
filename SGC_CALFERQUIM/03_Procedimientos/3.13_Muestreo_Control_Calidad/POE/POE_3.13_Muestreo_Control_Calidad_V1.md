@@ -59,8 +59,22 @@ Aplica a control de calidad de MP, proceso y producto terminado en todas las lin
 
 ## 9. ANEXOS
 
-- Anexo 1: Plan de muestreo por tipo de producto.
-- Anexo 2: Criterios de aceptacion y rechazo.
+### Plan de Muestreo Sistemático por Tipo de Producto
+
+| TIPO PRODUCTO | MOMENTO DE TOMA | CANTIDAD MINIMA | FRECUENCIA |
+|---|---|---|---|
+| MP granulada/polvo | Recepcion (muestreo compuesto) | 300 g | Cada lote recibido o cambio de proveedor |
+| MP liquida | Recepcion (tanque/envase) | 250 ml | Cada lote recibido o cambio de proveedor |
+| Granulado | Inicio, mitad y fin de lote | 500 g total compuesto | Cada lote |
+| Polvo | Inicio y fin de lote | 300 g total compuesto | Cada lote |
+| Liquido | Tanque y linea de envase | 250 ml | Cada lote |
+
+### Criterios de Aceptación y Rechazo Analítico
+
+- Conforme: todos los parametros dentro de especificacion.
+- Condicionado: desviacion menor, requiere aprobacion de Direccion Tecnica.
+- No conforme: desviacion critica, lote bloqueado.
+- Reanalisis: permitido solo con justificacion tecnica y registro.
 
 ## 10. CONTROL DE CAMBIOS
 

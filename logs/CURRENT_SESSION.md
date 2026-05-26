@@ -1,45 +1,36 @@
-# Session State: SGC Calferquim - Cierre Documental
+# Session State: SGC Calferquim - Diagnóstico y Conciliación Documental
 
-**Last Updated**: 2026-05-24 18:20 -05
+**Last Updated**: 2026-05-26 05:57 -05
 
 ## Session Objective
 
-Llevar a cabo el cierre documental y los ajustes de scripts y rutas del SGC, incluyendo:
-1. Eliminación y archivo de carpetas vacías/redundantes.
-2. Corrección del formato y cierre del formulario F-001 (SimplifICA).
-3. Resolución de la colisión de código en el POE de Retiro de Producto (Recall).
-4. Verificación e igualación del SLA en el POE de PQR.
-5. Cierre de brechas, distribución y consolidación del índice centralizado de Hojas de Seguridad (Fase 13).
-6. Corrección de rutas relativas y problemas de codificación de caracteres en los scripts de automatización del SGC.
+Realizar un análisis exhaustivo y reconciliación de las Fichas Técnicas, Hojas de Seguridad, Dossiers de Productos Registrados (`08_Dossier_Productos_Registrados/`) y Procedimientos SGC contra la estructura pv0 requerida para SimplifICA, adoptando la directiva de que las mezclas físicas sí requieren creación de FT/HDS y excluyendo del plan a Alto Magnesio, Calfercat y Sulfocal2.
 
 ## Current State
 
-- [x] Eliminación de carpetas vacías y duplicados en `05_Dossier_Productos` (movidas a `_Legacy_y_Otros/08_Dossier_Productos_Registrados_Legacy`).
-- [x] Corrección del autoincremento en el campo NIT del F-001, estableciéndolo permanentemente en `8150005411` para todas las filas activas.
-- [x] Limpieza de las columnas extra R-Y en el formulario F-001.
-- [x] Actualización del número de registro de FERTIMENORES NP a `3538` en la fila 27 de F-001.
-- [x] Corrección de la colisión de códigos para el POE de Retiro de Producto: se actualizó de `POE 3.14` a `POE 7.02`, renombrando el archivo a `POE_7.02_Retiro_Producto_Recall_V1.md` y de manera segura archivando y regenerando el archivo `.docx` respectivo.
-- [x] Unificación del SLA en la atención de PQR a un máximo de 10 días hábiles (cambiando el valor de "Baja" criticidad en el anexo de tiempos de respuesta de 15 a 10 días hábiles) y recompilación del anexo y POE principal en formato `.docx`.
-- [x] Traslado del archivo extraviado `Hoja de Seguridad GANADERO.docx` desde `26_FOLLAJE/04_Hoja_Seguridad/` a su ubicación correcta en `28_GANADERO/04_Hoja_Seguridad/`.
-- [x] Recuperación de Hojas de Seguridad faltantes desde el histórico para `45_PRODUCCION 17` y `43_NUCLEO MAGNESIO-S`.
-- [x] Generación del índice centralizado y formateado de Hojas de Seguridad del SGC en `SGC_CALFERQUIM/05_Dossier_Productos/_Indice_HS/Indice_Hojas_Seguridad.xlsx`, catalogando 95 archivos de Hojas de Seguridad activos (tanto de Productos Terminados como de Materias Primas).
-- [x] Corrección y estandarización de las rutas relativas en todos los scripts de python en `SGC_CALFERQUIM/scripts/` para evitar `FileNotFoundError` al ser ejecutados en entornos multiplataforma (Windows/Linux) desde la raíz del espacio de trabajo.
-- [x] Corrección del error de codificación de caracteres en consola (`UnicodeEncodeError`) en los scripts de python reemplazando símbolos no soportados por CP1252 en Windows por equivalentes ASCII estándar.
-- [x] Corrección de las asignaciones de nombres en `organizar_hs_dossiers.py` para mapear los insumos y productos directamente a los dossiers numerados oficiales (ej. `62_SILIMAGRAN 30`, `24_FERTIMENORES`, `29_K2K`, `02_NUCLEO CAMASI`, etc.).
-- [x] Re-ejecución exitosa de `organizar_hs_dossiers.py` para distribuir de manera estandarizada los archivos de Hojas de Seguridad (`HS_*.docx`/`*.pdf`) a las carpetas `04_Hoja_Seguridad` de cada dossier numerado.
-- [x] Identificación, saneamiento y archivo de 17 carpetas un-numbered duplicadas en `05_Dossier_Productos` (ej. `K2K`, `FERTIMENORES`, etc.), movidas a `_Legacy_y_Otros/08_Dossier_Productos_Registrados_Legacy/`.
-- [x] Ejecución y validación técnica exitosa de todos los scripts (`generar_balance_masas_dossiers.py`, `composicion_productos.py`, `composicion_productos2.py`, `extraer_balance_masas.py`, `extraer_materias_primas_balances.py`, `copiar_hs_productos.py`, `organizar_hs_dossiers.py`, `analisis_produccion.py`), operando sin errores.
-- [x] Reubicación (por el usuario) de 13 archivos markdown históricos y planes obsoletos de la raíz a `_Legacy_y_Otros/docs_aux/` para limpiar el repositorio.
+- [x] Archivado de las 10 carpetas huérfanas/temporales previas en `08_Dossier_Productos_Registrados/_Archivo_Previo/`.
+- [x] Creación de 26 carpetas normalizadas con prefijo `##_RVF#####_NOMBRE` en correspondencia exacta 1:1 con cada PDF de resolución oficial en `RVF/`.
+- [x] Vinculación del PDF de RVF oficial en `01_Registro_Venta/` para los 26 dossiers activos.
+- [x] Carga de Fichas Técnicas (FT) y Hojas de Seguridad (HS) en el 100% de los 26 dossiers en `08_`.
+- [x] Contraste riguroso de disponibilidad de Fichas Técnicas contra los **344 Productos Terminados (PT)** de `FORMULADOR - PROD.csv`:
+  - Se integra la directiva de que **las mezclas físicas (MF/MFE) SÍ requieren creación de FT e HDS** sistemática.
+  - Se confirman las **exclusiones** de Alto Magnesio (ALTOMG), Calfercat y Sulfocal2 (no aplican).
+  - Se identifican de forma unívoca los **10 productos comerciales del formulador que SÍ requieren creación de dossier, FT e HDS**.
+- [x] Creación y publicación del artefacto `implementation_plan.md` con el plan detallado para la creación masiva de estos documentos y un listado de preguntas abiertas.
+- [x] Auditoría de brechas documentales en los 26 dossiers oficiales (10 sin Etiqueta y 4 sin Balance de Masas).
+- [x] Diagnóstico de cobertura de los 18 pilares procedimentales pv0 del ICA (identificando 4 procedimientos faltantes).
+- [x] Redacción y publicación del reporte de auditoría documental completo en el artefacto `reporte_fichas_dossier_formulador.md`.
 
 ## Critical Technical Context
 
-- Las carpetas del dossier y los procedimientos ya no tienen colisiones de nombres o códigos.
-- Todos los dossiers en `SGC_CALFERQUIM/05_Dossier_Productos/` siguen estrictamente la convención de nomenclatura numérica y legal (57 dossiers activos en total).
-- El archivo maestro del F-001 queda limpio de auto-incrementos inválidos de Excel en la ruta `SGC_CALFERQUIM/08_Base_Datos_Tecnica/F-001-FERTILIZANTES_DILIGENCIADO.xlsx`.
-- El índice centralizado de Hojas de Seguridad cataloga 95 archivos (PT y MP) y se ubica en `SGC_CALFERQUIM/05_Dossier_Productos/_Indice_HS/Indice_Hojas_Seguridad.xlsx`.
-- Todos los scripts en `SGC_CALFERQUIM/scripts/` resuelven sus dependencias de archivos (`list.csv`, `comp.csv`, `materias_primas_balances.csv`, etc.) de forma robusta con respecto a `Path(__file__)`.
-- Los archivos históricos y planes antiguos de la raíz se trasladaron a `_Legacy_y_Otros/docs_aux/`, lo cual mantiene el repositorio limpio y no afecta la funcionalidad del sistema ni de los scripts.
+- La fuente de verdad documental sigue siendo `05_Dossier_Productos/`.
+- Los 26 dossiers activos en `08_Dossier_Productos_Registrados/` representan las únicas marcas comerciales registradas oficialmente ante el ICA (con documento legal RVF en PDF).
+- Las brechas documentales prioritarias son: **10 dossiers sin etiquetas aprobadas**, **4 dossiers sin balances de masas**, **10 productos comerciales/mezclas físicas del formulador sin expediente/FT** y **4 procedimientos críticos faltantes** (Contramuestras, Control Documental, Retiro de Mercado/Recall, y Gestión del Laboratorio).
 
 ## Next Steps
 
-1. Presentar el cierre completo de la reorganización documental, la distribución de Hojas de Seguridad a los dossiers numerados, y la confirmación de la correcta ejecución de todos los scripts de automatización al usuario.
+1. **Obtener retroalimentación del Plan de Implementación:** Validar con el usuario las preguntas abiertas de `implementation_plan.md` sobre el formato de plantilla de Word (.docx) y el origen de las garantías de los productos sin valores.
+2. **Subsanar las 10 Etiquetas Faltantes:** Obtener los PDFs correspondientes de `03_Etiqueta_Aprobada` para los 10 dossiers huérfanos.
+3. **Elaborar los 4 Balances de Masas Faltantes:** Generar los balances de masa en XLSX para `AFOS-K`, `CALFERCOBRE`, `ZUELOCA` y `PRODUCCION 17`.
+4. **Unificación de Duplicados:** Retirar formalmente `51_SUELO-Ca` y consolidar sus documentos en el dossier definitivo de `ZUELOCA`.
+5. **Redactar los 4 POE Faltantes del SGC:** Elaborar las plantillas normalizadas para Contramuestras, Control Documental, Recall/Retiro y Gestión de Laboratorio.

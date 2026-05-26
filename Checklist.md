@@ -17,10 +17,10 @@ Objetivo: Verificar la capacidad de las instalaciones inscritas en el registro c
 | 1.2 | Se evidencia el área de ubicación de las materias primas. La capacidad es apta para el manejo y uso de las materias primas descritas. | Soporte: Listado de materias primas a usar en la fabricación o formulación. |
 | 1.3 | Existe contrato para adelantar el proceso de producción (cuando aplique). | Soporte: Contrato(s) de producción vigente(s) o autorización. |
 | 1.4 | El flujo del proceso en las instalaciones es acorde al diagrama de flujo presentado por cada tipo de proceso. | Soporte: Diagrama de flujo del proceso de formulación, fabricación, envase y almacenamiento de producto. |
-| 1.5 | Información de asesor técnico. | Soporte: Validar información cargada en la solicitud de la plataforma SimplifICA. |
+| 1.5 | Información de asesor técnico. | Soporte: Validar información soportada en la solicitud y en los documentos del SGC. |
 | 2 | REQUISITOS DEL CONTROL DE CALIDAD |  |
 | 2.1 | Realizado por laboratorios externos. |  |
-| 2.1.1 | El registro de laboratorio tiene el alcance para todos los análisis de acuerdo con las formulaciones y parámetros a garantizar en los productos. | Soporte: Para registros nuevos: validar información SimplifICA. Para visitas de seguimiento: certificado de análisis. |
+| 2.1.1 | El registro de laboratorio tiene el alcance para todos los análisis de acuerdo con las formulaciones y parámetros a garantizar en los productos. | Soporte: Para registros nuevos: validar soporte documental completo. Para visitas de seguimiento: certificado de análisis. |
 | 3 | PROCEDIMIENTOS (Se verificará ubicación, equipos y aplicación) | Deben incluir: objetivo, responsable, ubicación, tiempos, mediciones, formatos y registros. |
 | 3.1 | Recepción y almacenamiento de materias primas. |  |
 | 3.3 | Molienda. |  |

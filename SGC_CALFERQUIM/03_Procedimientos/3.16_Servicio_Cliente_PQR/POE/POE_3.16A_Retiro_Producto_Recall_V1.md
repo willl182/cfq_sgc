@@ -94,8 +94,17 @@ Se activa de inmediato cuando ocurra al menos uno de los siguientes eventos:
 
 ## 10. ANEXOS
 
-- `ANX_3.16A_01_Niveles_Recall.md`
-- `ANX_3.16A_02_Guion_Comunicacion_Recall.md`
+### Clasificación de Niveles de Retiro de Producto
+
+| NIVEL | CRITERIO | RESPUESTA OPERATIVA |
+|---|---|---|
+| Nivel 1 - Critico | Riesgo alto para seguridad/uso o requerimiento de autoridad | Activacion inmediata, bloqueo total, notificacion < 24 h |
+| Nivel 2 - Mayor | Incumplimiento relevante sin evidencia de dano inmediato | Activacion controlada, contencion y retiro focalizado |
+| Nivel 3 - Preventivo | Desviacion con riesgo bajo o potencial | Retiro voluntario preventivo y seguimiento reforzado |
+
+## Regla de clasificacion
+
+- Ante duda entre niveles, aplicar el nivel mas severo hasta cerrar analisis tecnico.
 
 ## 11. CONTROL DE CAMBIOS
 

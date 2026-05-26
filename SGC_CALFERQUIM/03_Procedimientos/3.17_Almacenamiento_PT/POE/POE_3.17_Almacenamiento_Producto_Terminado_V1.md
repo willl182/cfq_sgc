@@ -57,8 +57,21 @@ Aplica a PT liberado o en cuarentena dentro de bodegas de CALFERQUIM S.A.S.
 
 ## 9. ANEXOS
 
-- Anexo 1: Condiciones de almacenamiento de PT.
-- Anexo 2: Matriz de compatibilidad de almacenamiento.
+### Estándares de Almacenamiento de Producto Terminado
+
+- Mantener PT en estibas estables y protegidas de humedad.
+- Conservar etiquetas y lote visibles en toda unidad.
+- Separar PT en cuarentena de PT liberado.
+- Proteger de contaminacion cruzada con MP o residuos.
+- Mantener zonas con orden y limpieza permanente.
+
+### Segregación y Compatibilidad en Bodega de PT
+
+| CATEGORIA | PUEDE ALMACENARSE CON | NO ALMACENAR CON |
+|---|---|---|
+| PT granulado | PT granulado compatible | PT con empaque deteriorado |
+| PT liquido | PT liquido compatible | Oxidantes fuertes no compatibles |
+| PT en cuarentena | Solo cuarentena | PT liberado para venta |
 
 ## 10. CONTROL DE CAMBIOS
 

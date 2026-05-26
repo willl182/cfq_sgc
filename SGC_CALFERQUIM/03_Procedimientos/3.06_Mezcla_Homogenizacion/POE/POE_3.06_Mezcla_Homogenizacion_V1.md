@@ -98,7 +98,72 @@ Este proceso aplica a productos que pasan por granulacion (POE 3.08). La mezcla 
 - `Formato_Control_Mezcla_Homogenizacion_V1.csv`: Registro de tipo de proceso, secuencia de carga y controles.
 - `Registro_Mezcla_Homogenizacion_V1.csv`: Historico de lotes mezclados.
 
-## 9. CONTROL DE CAMBIOS
+## 9. ANEXOS
+
+### Flujograma de Ruta del Material en el Proceso de Mezcla
+
+```
+MATERIA PRIMA (pesada y aprobada — POE 3.01)
+         │
+         ▼
+┌─────────────────────────────────────────────────────┐
+│      VERIFICACIÓN DE LIMPIEZA DEL ÁREA (POE 3.02)   │
+└─────────────────────────────────────────────────────┘
+         │
+         ▼
+   ┌─────────────────────────────────────┐
+   │  ¿Producto requiere granulación?    │
+   └─────────────────────────────────────┘
+         │                      │
+        NO                     SÍ
+         │                      │
+         ▼                      ▼
+  ┌─────────────┐       ┌──────────────────┐
+  │   TIPO A    │       │     TIPO B       │
+  │Vaciado      │       │Vaciado intercal. │
+  │intercalado  │       │en TOLVA mecánica │
+  │+ Paleado    │       │→ 4 min mínimo    │
+  └──────┬──────┘       └────────┬─────────┘
+         │                       │
+         ▼                       ▼
+  ┌─────────────────────────────────────────┐
+  │  VERIFICACIÓN VISUAL DE HOMOGENEIDAD   │
+  │  (color y textura uniformes, sin zonas │
+  │   diferenciadas ni puntos de materia   │
+  │   prima sin mezclar)                   │
+  └─────────────────────────────────────────┘
+         │                       │
+    CONFORME                NO CONFORME
+         │                       │
+         ▼                       ▼
+   Tipo A → POE 3.10      Continuar paleando /
+   Tipo B → POE 3.08      reportar a Jefe de Producción
+   (Envase / Granulación)  → registrar desviación
+```
+
+### Parámetros Operativos y Tiempos de Mezcla por Tipo de Proceso
+
+| PARÁMETRO | TIPO A — MEZCLA FÍSICA | TIPO B — TOLVA MECÁNICA |
+|:---|:---|:---|
+| **Equipo** | Manual (pala) | Tolva mezcladora mecánica |
+| **Tiempo mínimo de mezcla** | Hasta homogeneidad visual confirmada | **4 minutos exactos** (cronometrado) |
+| **Tiempo máximo recomendado** | Sin límite (operario decide homogeneidad) | 8 minutos (evitar segregación por sobre-mezcla) |
+| **Criterio de aceptación** | Color y textura uniformes sin zonas diferenciadas | Idem + descarga fluida sin apelmazamientos |
+| **Punto Crítico de Control** | Orden de adición (vaciado intercalado obligatorio) | Tiempo mínimo de 4 min + verificación visual en descarga |
+| **Acción ante desviación** | Continuar paleando; reportar si persiste | Detener descarga; reportar a Jefe de Producción; registrar |
+| **Siguiente proceso** | POE 3.10 (Envase) | POE 3.08 (Granulación) |
+
+### Límites de Tolerancia de Homogeneidad
+
+| INDICADOR | CRITERIO ACEPTABLE | CRITERIO DE RECHAZO |
+|:---|:---|:---|
+| Aspecto visual del granel | Uniforme en color, sin estratificación visible | Vetas o zonas con diferencia cromática evidente |
+| Granulometría visual | Distribución homogénea de tamaños de partícula | Segregación visible de finos o gruesos en zonas específicas |
+| Presencia de MP sin incorporar | Ninguna | Cualquier bolsa o bulto de MP sin disolver/mezclar |
+
+---
+
+## 10. CONTROL DE CAMBIOS
 
 | VERSION | FECHA | DESCRIPCION DEL CAMBIO |
 |---|---|---|

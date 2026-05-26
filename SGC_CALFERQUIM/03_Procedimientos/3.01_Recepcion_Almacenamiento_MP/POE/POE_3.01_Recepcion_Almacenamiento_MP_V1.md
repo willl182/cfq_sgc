@@ -64,8 +64,23 @@ Aplica a toda MP que ingresa a CALFERQUIM S.A.S. para produccion propia o formul
 
 ## 9. ANEXOS
 
-- Anexo 1: Lista de chequeo de inspeccion visual.
-- Anexo 2: Condiciones de almacenamiento de MP.
+### Inspección Visual de MP en Recepción
+
+Verificar y marcar SI/NO en cada recepcion:
+
+- Empaque integro, sin roturas.
+- Sin humedad visible o apelmazamiento.
+- Etiqueta legible (producto, lote, proveedor).
+- Color/olor/apariencia esperada.
+- Sin evidencia de contaminacion externa.
+
+### Estándares de Almacenamiento de Materias Primas
+
+- Mantener MP en estiba y separada del piso y pared.
+- Conservar en area seca y ventilada.
+- Segregar por compatibilidad quimica y estatus.
+- Aplicar rotacion FEFO cuando aplique por vencimiento.
+- Identificar claramente lotes en cuarentena, aprobados y rechazados.
 
 ## 10. CONTROL DE CAMBIOS
 

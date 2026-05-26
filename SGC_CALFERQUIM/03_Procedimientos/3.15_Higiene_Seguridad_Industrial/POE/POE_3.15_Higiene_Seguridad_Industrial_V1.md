@@ -57,7 +57,15 @@ Aplica a personal operativo, contratistas y visitantes que ingresen a areas de p
 
 ## 9. ANEXOS
 
-- Anexo 1: Lista de verificacion higienica diaria.
+### Verificación Preoperacional de Higiene y Orden
+
+Revisar al inicio y cierre de turno:
+
+- EPP completo y en buen estado.
+- Pasillos despejados.
+- Sin acumulacion de polvo/derrames.
+- Guardas y boton de paro operativos.
+- Residuos segregados y retirados.
 
 ## 10. CONTROL DE CAMBIOS
 

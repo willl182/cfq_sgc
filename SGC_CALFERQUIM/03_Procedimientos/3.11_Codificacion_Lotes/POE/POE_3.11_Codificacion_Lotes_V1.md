@@ -64,6 +64,40 @@ El consecutivo es asignado por Bodega y se reinicia segun el periodo definido in
 
 - Orden de produccion (campo codigo de lote).
 
+
+## REFERENCIA TÉCNICA
+
+### Estructura y Reglas del Código de Lote
+
+Formato base recomendado:
+
+`AAAAMMDD-PROD-SERIE`
+
+Ejemplo:
+
+`20260218-SULFAK50-01`
+
+Reglas:
+
+- AAAAMMDD: fecha de fabricacion.
+- PROD: abreviatura unica del producto.
+- SERIE: consecutivo diario de 2 digitos.
+- No se permite reutilizar el mismo codigo.
+
+### Lista Maestra de Abreviaturas de Producto
+
+| ABREVIATURA | PRODUCTO | ESTADO | FECHA APROBACION | RESPONSABLE |
+|---|---|---|---|---|
+| SULFAK50 | SULFAK 50 | Vigente | 2026-02-18 | Direccion Tecnica |
+| CALFERC | CALFERCORRECTIVO | Vigente | 2026-02-18 | Direccion Tecnica |
+| ZUELOCA | ZUELOCa | Vigente | 2026-02-18 | Direccion Tecnica |
+
+Reglas de control:
+
+- Toda abreviatura nueva requiere aprobacion de Direccion Tecnica y Calidad.
+- No se permite reasignar abreviaturas retiradas.
+- Este anexo debe actualizarse antes de usar una abreviatura nueva en lote.
+
 ## 9. CONTROL DE CAMBIOS
 
 | VERSION | FECHA | DESCRIPCION |

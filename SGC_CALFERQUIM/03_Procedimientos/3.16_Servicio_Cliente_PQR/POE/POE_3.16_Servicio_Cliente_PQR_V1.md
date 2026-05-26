@@ -68,8 +68,22 @@ Aplica a PQR de clientes, distribuidores y terceros relacionadas con producto, d
 
 ## 9. ANEXOS
 
-- Anexo 1: Flujo de atencion PQR.
-- Anexo 2: Tiempos de respuesta por criticidad.
+### Flujograma de Atención de PQRS
+
+1. Recepcion y radicacion.
+2. Clasificacion por criticidad.
+3. Analisis tecnico/comercial.
+4. Definicion de respuesta y acciones.
+5. Comunicacion al cliente.
+6. Cierre y archivo de evidencia.
+
+### Plazos Regulatorios de Respuesta al Cliente
+
+| CRITICIDAD | ACUSE DE RECIBO | RESPUESTA OBJETIVO |
+|---|---|---|
+| Alta | 1 dia habil | 5 dias habiles |
+| Media | 2 dias habiles | 10 dias habiles |
+| Baja | 2 dias habiles | 10 dias habiles |
 
 ## 10. CONTROL DE CAMBIOS
 

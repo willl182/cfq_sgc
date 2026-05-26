@@ -1,0 +1,502 @@
+[
+  {
+    "folder": "3.01_Recepcion_Almacenamiento_MP",
+    "poe_subfolder_exists": true,
+    "formatos_subfolder_exists": true,
+    "registros_subfolder_exists": true,
+    "anexos_subfolder_exists": true,
+    "poe_files": [
+      "DC-SI26 Compras y Gesti\u00f3n de Proveedores.pdf",
+      "04_Calidad__DC-SI26 Compras y Gesti\u00f3n de Proveedores.pdf",
+      "POE_3.01_Recepcion_Almacenamiento_MP_V1.docx",
+      "POE_3.01_Recepcion_Almacenamiento_MP_V1.md"
+    ],
+    "formatos_files": [
+      "Formato_Inspeccion_Recepcion_MP_V1.csv"
+    ],
+    "registros_files": [
+      "Registro_Recepcion_Almacenamiento_MP_V1.csv"
+    ],
+    "anexos_files": [
+      "ANX_3.01_01_Lista_Chequeo_Inspeccion_Visual.md",
+      "ANX_3.01_02_Condiciones_Almacenamiento_MP.md",
+      "ANX_3.01_01_Lista_Chequeo_Inspeccion_Visual.docx",
+      "ANX_3.01_02_Condiciones_Almacenamiento_MP.docx"
+    ],
+    "root_files": []
+  },
+  {
+    "folder": "3.02_Limpieza_Desinfeccion",
+    "poe_subfolder_exists": true,
+    "formatos_subfolder_exists": true,
+    "registros_subfolder_exists": true,
+    "anexos_subfolder_exists": true,
+    "poe_files": [
+      "POE_3.02_Limpieza_Desinfeccion_V1.docx",
+      "POE_3.02_Limpieza_Desinfeccion_V1.md"
+    ],
+    "formatos_files": [
+      "Formato_Control_Limpieza_Desinfeccion_V1.csv"
+    ],
+    "registros_files": [
+      "Registro_Limpieza_Desinfeccion_V1.csv"
+    ],
+    "anexos_files": [
+      "ANX_3.02_01_Productos_Limpieza_Autorizados.md",
+      "ANX_3.02_02_Frecuencias_Limpieza_Area.md",
+      "ANX_3.02_01_Productos_Limpieza_Autorizados.docx",
+      "ANX_3.02_02_Frecuencias_Limpieza_Area.docx"
+    ],
+    "root_files": []
+  },
+  {
+    "folder": "3.03_NA_Molienda_Primaria",
+    "poe_subfolder_exists": true,
+    "formatos_subfolder_exists": true,
+    "registros_subfolder_exists": true,
+    "anexos_subfolder_exists": true,
+    "poe_files": [
+      "POE_3.03_Molienda_Primaria_V1.docx",
+      "06_SST__PC-SI01 PROCESO DE MOLIDO.pdf",
+      "POE_3.03_Molienda_Primaria_V1.md",
+      "ACTA_NA_3.03_Molienda_Primaria_V1.md",
+      "ACTA_NA_3.03_Molienda_Primaria_V1.docx"
+    ],
+    "formatos_files": [
+      "Formato_Control_Molienda_Primaria_V1.csv"
+    ],
+    "registros_files": [
+      "Registro_Molienda_Primaria_V1.csv"
+    ],
+    "anexos_files": [
+      "ANX_3.03_01_Lista_Chequeo_Preoperacional_Molino.docx",
+      "ANX_3.03_01_Lista_Chequeo_Preoperacional_Molino.md",
+      "ANX_3.03_02_Parametros_Referencia_Mallas.docx",
+      "ANX_3.03_02_Parametros_Referencia_Mallas.md"
+    ],
+    "root_files": []
+  },
+  {
+    "folder": "3.04_NA_Pirolisis",
+    "poe_subfolder_exists": true,
+    "formatos_subfolder_exists": false,
+    "registros_subfolder_exists": false,
+    "anexos_subfolder_exists": false,
+    "poe_files": [
+      "ACTA_NA_3.04_Tratamiento_Termico_Pirolisis_V1.md",
+      "ACTA_NA_3.04_Tratamiento_Termico_Pirolisis_V1.docx"
+    ],
+    "formatos_files": [],
+    "registros_files": [],
+    "anexos_files": [],
+    "root_files": []
+  },
+  {
+    "folder": "3.05_Balance_Materias_Primas",
+    "poe_subfolder_exists": true,
+    "formatos_subfolder_exists": true,
+    "registros_subfolder_exists": true,
+    "anexos_subfolder_exists": true,
+    "poe_files": [
+      "03_Operacion__DC-SI05 Identificaci\u00f3n y Control de Puntos Criticos.pdf",
+      "POE_3.05_Balance_Materias_Primas_V1.docx",
+      "POE_3.05_Balance_Materias_Primas_V1.md"
+    ],
+    "formatos_files": [
+      "Formato_Balance_Materias_Primas_V1.csv"
+    ],
+    "registros_files": [
+      "Registro_Balance_Materias_Primas_V1.csv"
+    ],
+    "anexos_files": [
+      "ANX_3.05_01_Ejemplo_Calculo_Balance.md",
+      "ANX_3.05_01_Ejemplo_Calculo_Balance.docx"
+    ],
+    "root_files": []
+  },
+  {
+    "folder": "3.06_Mezcla_Homogenizacion",
+    "poe_subfolder_exists": true,
+    "formatos_subfolder_exists": true,
+    "registros_subfolder_exists": true,
+    "anexos_subfolder_exists": true,
+    "poe_files": [
+      "03_Operacion__DC-SI04 Procedimiento de mezclas.pdf",
+      "06_SST__PC-SI03 PROCESO DE MEZCLA.pdf",
+      "POE_3.06_Mezcla_Homogenizacion_V1.docx",
+      "POE_3.06_Mezcla_Homogenizacion_V1.md",
+      "Instructivo_Granel.docx",
+      "Instructivo_Sacos.docx"
+    ],
+    "formatos_files": [
+      "Formato_Control_Mezcla_Homogenizacion_V1.csv"
+    ],
+    "registros_files": [
+      "Registro_Mezcla_Homogenizacion_V1.csv"
+    ],
+    "anexos_files": [],
+    "root_files": []
+  },
+  {
+    "folder": "3.07_NA_Reacciones_Quimicas",
+    "poe_subfolder_exists": true,
+    "formatos_subfolder_exists": false,
+    "registros_subfolder_exists": false,
+    "anexos_subfolder_exists": false,
+    "poe_files": [
+      "ACTA_NA_3.07_Reacciones_Quimicas_Bioquimicas_V1.docx",
+      "ACTA_NA_3.07_Reacciones_Quimicas_Bioquimicas_V1.md"
+    ],
+    "formatos_files": [],
+    "registros_files": [],
+    "anexos_files": [],
+    "root_files": []
+  },
+  {
+    "folder": "3.08_Presentacion_Fisica_Granulacion",
+    "poe_subfolder_exists": true,
+    "formatos_subfolder_exists": true,
+    "registros_subfolder_exists": true,
+    "anexos_subfolder_exists": true,
+    "poe_files": [
+      "03_Operacion__DC-SI14 Procedimiento de Granulaci\u00f3n.pdf",
+      "06_SST__PC-SI04 PROCESO DE GRANULACI\u00d3N.pdf",
+      "06_SST__PC-SI06 PROCESO DE SEPARACI\u00d3N DE FINOS.pdf",
+      "POE_3.08_Presentacion_Fisica_Granulacion_V1.docx",
+      "POE_3.08_Presentacion_Fisica_Granulacion_V1.md"
+    ],
+    "formatos_files": [
+      "Formato_Control_Presentacion_Fisica_V1.csv"
+    ],
+    "registros_files": [
+      "Registro_Presentacion_Fisica_V1.csv"
+    ],
+    "anexos_files": [
+      "ANX_3.08_01_Mallas_Rangos_Granulometricos.md",
+      "ANX_3.08_01_Mallas_Rangos_Granulometricos.docx"
+    ],
+    "root_files": []
+  },
+  {
+    "folder": "3.09_NA_Molienda_Secundaria",
+    "poe_subfolder_exists": true,
+    "formatos_subfolder_exists": true,
+    "registros_subfolder_exists": true,
+    "anexos_subfolder_exists": true,
+    "poe_files": [
+      "POE_3.09_Molienda_Secundaria_V1.docx",
+      "POE_3.09_Molienda_Secundaria_V1.md",
+      "06_SST__PC-SI06 PROCESO DE SEPARACI\u00d3N DE FINOS.pdf",
+      "06_SST__PC-SI05 PROCESO DE SECADO.pdf",
+      "06_SST__PC-SI09 PROCESO DE ENFRIAMIENTO.pdf"
+    ],
+    "formatos_files": [
+      "Formato_Control_Molienda_Secundaria_V1.csv"
+    ],
+    "registros_files": [
+      "Registro_Molienda_Secundaria_V1.csv"
+    ],
+    "anexos_files": [
+      "ANX_3.09_01_Especificaciones_Molienda_Fina.docx",
+      "ANX_3.09_01_Especificaciones_Molienda_Fina.md"
+    ],
+    "root_files": []
+  },
+  {
+    "folder": "3.10_Envase",
+    "poe_subfolder_exists": true,
+    "formatos_subfolder_exists": true,
+    "registros_subfolder_exists": true,
+    "anexos_subfolder_exists": true,
+    "poe_files": [
+      "POE_3.10_Envase_V1.md",
+      "POE_3.10_Envase_V1.docx"
+    ],
+    "formatos_files": [
+      "Formato_Control_Envase_V1.csv"
+    ],
+    "registros_files": [
+      "Registro_Envase_V1.csv"
+    ],
+    "anexos_files": [
+      "ANX_3.10_01_Tolerancias_Peso_Presentacion.md",
+      "ANX_3.10_02_Catalogo_Defectos_Envase.md",
+      "ANX_3.10_01_Tolerancias_Peso_Presentacion.docx",
+      "ANX_3.10_02_Catalogo_Defectos_Envase.docx"
+    ],
+    "root_files": []
+  },
+  {
+    "folder": "3.11_Codificacion_Lotes",
+    "poe_subfolder_exists": true,
+    "formatos_subfolder_exists": true,
+    "registros_subfolder_exists": true,
+    "anexos_subfolder_exists": true,
+    "poe_files": [
+      "DC-SI12 Asignaci\u00f3n de Lotes, Muestreo y Control de Calidad.pdf",
+      "04_Calidad__DC-SI12 Asignaci\u00f3n de Lotes, Muestreo y Control de Calidad.pdf",
+      "05_Laboratorio__DC-SI34 Ensayos Fisicoquimicos en Laboratorio.pdf",
+      "POE_3.11_Codificacion_Lotes_V1.docx",
+      "POE_3.11_Codificacion_Lotes_V1.md"
+    ],
+    "formatos_files": [
+      "Formato_Asignacion_Lotes_V1.csv"
+    ],
+    "registros_files": [
+      "Registro_Codificacion_Lotes_V1.csv"
+    ],
+    "anexos_files": [
+      "ANX_3.11_01_Estructura_Codigo_Lote.md",
+      "ANX_3.11_02_Lista_Maestra_Abreviaturas_Producto.md",
+      "ANX_3.11_01_Estructura_Codigo_Lote.docx",
+      "ANX_3.11_02_Lista_Maestra_Abreviaturas_Producto.docx"
+    ],
+    "root_files": []
+  },
+  {
+    "folder": "3.12_Liberacion_Lotes",
+    "poe_subfolder_exists": true,
+    "formatos_subfolder_exists": true,
+    "registros_subfolder_exists": true,
+    "anexos_subfolder_exists": true,
+    "poe_files": [
+      "DC-SI10 Liberaci\u00f3n de Lotes al Mercado.pdf",
+      "03_Operacion__DC-SI10 Liberaci\u00f3n de Lotes al Mercado.pdf",
+      "POE_3.12_Liberacion_Lotes_V1.md",
+      "POE_3.12_Liberacion_Lotes_V1.docx"
+    ],
+    "formatos_files": [
+      "Formato_Liberacion_Lotes_V1.csv",
+      "ACTA_Liberacion_Lote_Mercado_V1.md",
+      "acta.docx",
+      "Formato_Liberacion_Lotes_v1.docx",
+      "ACTA_Liberacion_Lote_Mercado_V1.docx"
+    ],
+    "registros_files": [
+      "Registro_Liberacion_Lotes_V1.csv"
+    ],
+    "anexos_files": [
+      "ANX_3.12_01_Flujo_Decision_Liberacion.md",
+      "ANX_3.12_01_Flujo_Decision_Liberacion.docx",
+      "ANX_3.12_02_Etiquetas_Estatus.docx"
+    ],
+    "root_files": []
+  },
+  {
+    "folder": "3.13_Muestreo_Control_Calidad",
+    "poe_subfolder_exists": true,
+    "formatos_subfolder_exists": true,
+    "registros_subfolder_exists": true,
+    "anexos_subfolder_exists": true,
+    "poe_files": [
+      "DC-SI12 Asignaci\u00f3n de Lotes, Muestreo y Control de Calidad.pdf",
+      "DC-SI34 Ensayos Fisicoquimicos en Laboratorio.pdf",
+      "POE_3.13_Muestreo_Control_Calidad_V1.docx",
+      "POE_3.13A_Toma_Muestra_Mezclas_Fisicas_V1.docx",
+      "POE_3.13A_Toma_Muestra_Mezclas_Fisicas_V1.md",
+      "POE_3.13_Muestreo_Control_Calidad_V1.md"
+    ],
+    "formatos_files": [
+      "Formato_Control_Muestreo_V1.csv"
+    ],
+    "registros_files": [
+      "Registro_Muestreo_V1.csv"
+    ],
+    "anexos_files": [
+      "ANX_3.13_01_Plan_Muestreo_Tipo_Producto.md",
+      "ANX_3.13_02_Criterios_Aceptacion_Rechazo.md",
+      "ANX_3.13_01_Plan_Muestreo_Tipo_Producto.docx",
+      "ANX_3.13_02_Criterios_Aceptacion_Rechazo.docx"
+    ],
+    "root_files": []
+  },
+  {
+    "folder": "3.14_Contramuestras",
+    "poe_subfolder_exists": true,
+    "formatos_subfolder_exists": true,
+    "registros_subfolder_exists": true,
+    "anexos_subfolder_exists": true,
+    "poe_files": [
+      "POE_3.14_Contramuestras_V1.md",
+      "POE_3.14_Contramuestras_V1.docx"
+    ],
+    "formatos_files": [
+      "Formato_Control_Contramuestras_V1.csv"
+    ],
+    "registros_files": [
+      "Registro_Contramuestras_V1.csv"
+    ],
+    "anexos_files": [
+      "ANX_3.14_01_Rotulo_Contramuestra.md",
+      "ANX_3.14_02_Plano_Muestroteca.md",
+      "ANX_3.14_01_Rotulo_Contramuestra.docx",
+      "ANX_3.14_02_Plano_Muestroteca.docx"
+    ],
+    "root_files": []
+  },
+  {
+    "folder": "3.15_Higiene_Seguridad_Industrial",
+    "poe_subfolder_exists": true,
+    "formatos_subfolder_exists": true,
+    "registros_subfolder_exists": true,
+    "anexos_subfolder_exists": true,
+    "poe_files": [
+      "DC-SI30 Protocolo de Bioseguridad.pdf",
+      "DC-SI37 Procedimiento para el Almacenamiento Seguro y Conteo de Bultos.pdf",
+      "POE_3.15_Higiene_Seguridad_Industrial_V1.md",
+      "POE_3.15_Higiene_Seguridad_Industrial_V1.docx"
+    ],
+    "formatos_files": [
+      "Formato_Verificacion_Higiene_V1.csv"
+    ],
+    "registros_files": [
+      "Registro_Inspecciones_Higiene_V1.csv"
+    ],
+    "anexos_files": [
+      "ANX_3.15_01_Lista_Verificacion_Higiene_Diaria.md",
+      "ANX_3.15_01_Lista_Verificacion_Higiene_Diaria.docx"
+    ],
+    "root_files": []
+  },
+  {
+    "folder": "3.16_Servicio_Cliente_PQR",
+    "poe_subfolder_exists": true,
+    "formatos_subfolder_exists": true,
+    "registros_subfolder_exists": true,
+    "anexos_subfolder_exists": true,
+    "poe_files": [
+      "DC-SI07 Quejas y Reclamos.pdf",
+      "DC-SI11 Servicio al Cliente.pdf",
+      "DC-SI13 Politica Servicio al Cliente.pdf",
+      "DC-SI15 Politica de Quejas y Reclamos.pdf",
+      "POE_3.16A_Retiro_Producto_Recall_V1.md",
+      "POE_3.16_Servicio_Cliente_PQR_V1.md",
+      "POE_3.16B_Estrategia_Postventa_V1.docx",
+      "POE_3.16B_Estrategia_Postventa_V1.md",
+      "POE_3.16A_Retiro_Producto_Recall_V1.docx",
+      "POE_3.16_Servicio_Cliente_PQR_V1.docx"
+    ],
+    "formatos_files": [
+      "RC-SI08 Formulario Control de Quejas y Reclamos (Respuestas).xlsx",
+      "Formato_Registro_PQR_V1.csv",
+      "Formato_Activacion_Recall_3.16A_V1.csv"
+    ],
+    "registros_files": [
+      "Registro_Seguimiento_PQR_V1.csv",
+      "Registro_Trazabilidad_Recall_3.16A_V1.csv",
+      "Registro_Consultas_Tecnicas_V1.csv",
+      "Registro_Devoluciones_V1.csv"
+    ],
+    "anexos_files": [
+      "ANX_3.16_01_Flujo_Atencion_PQR.md",
+      "ANX_3.16_01_Flujo_Atencion_PQR.docx",
+      "ANX_3.16A_01_Niveles_Recall.md",
+      "ANX_3.16A_02_Guion_Comunicacion_Recall.md",
+      "ANX_3.16B_01_Flujo_Estrategia_Postventa.md",
+      "ANX_3.16B_02_Encuesta_Satisfaccion.md",
+      "ANX_3.16B_02_Encuesta_Satisfaccion.docx",
+      "ANX_3.16A_01_Niveles_Recall.docx",
+      "ANX_3.16A_02_Guion_Comunicacion_Recall.docx",
+      "ANX_3.16B_01_Flujo_Estrategia_Postventa.docx",
+      "ANX_3.16_02_Tiempos_Respuesta.docx",
+      "ANX_3.16_02_Tiempos_Respuesta.md"
+    ],
+    "root_files": []
+  },
+  {
+    "folder": "3.17_Almacenamiento_PT",
+    "poe_subfolder_exists": true,
+    "formatos_subfolder_exists": true,
+    "registros_subfolder_exists": true,
+    "anexos_subfolder_exists": true,
+    "poe_files": [
+      "DC-SI37 Procedimiento para el Almacenamiento Seguro y Conteo de Bultos.pdf",
+      "POE_3.17_Almacenamiento_Producto_Terminado_V1.md",
+      "POE_3.17_Almacenamiento_Producto_Terminado_V1.docx"
+    ],
+    "formatos_files": [
+      "Formato_Control_Almacenamiento_PT_V1.csv"
+    ],
+    "registros_files": [
+      "RC-SI53 Traslado de Producto Terminado al Almac\u00e9n.xlsx",
+      "Registro_Almacenamiento_PT_V1.csv"
+    ],
+    "anexos_files": [
+      "ANX_3.17_01_Condiciones_Almacenamiento_PT.md",
+      "ANX_3.17_02_Matriz_Compatibilidad_Almacenamiento.md",
+      "ANX_3.17_01_Condiciones_Almacenamiento_PT.docx",
+      "ANX_3.17_02_Matriz_Compatibilidad_Almacenamiento.docx"
+    ],
+    "root_files": []
+  },
+  {
+    "folder": "3.18_Disposicion_Residuos",
+    "poe_subfolder_exists": true,
+    "formatos_subfolder_exists": true,
+    "registros_subfolder_exists": true,
+    "anexos_subfolder_exists": true,
+    "poe_files": [
+      "POE_3.18_Disposicion_Barreduras_V1.docx",
+      "POE_3.18_Disposicion_Barreduras_V1.md"
+    ],
+    "formatos_files": [
+      "Formato_Control_Disposicion_Residuos_V1.csv"
+    ],
+    "registros_files": [
+      "Registro_Disposicion_Residuos_V1.csv"
+    ],
+    "anexos_files": [
+      "ANX_3.18_01_Clasificacion_Residuos.docx",
+      "ANX_3.18_01_Clasificacion_Residuos.md"
+    ],
+    "root_files": []
+  },
+  {
+    "folder": "3.19_Formulaciones_Terceros",
+    "poe_subfolder_exists": true,
+    "formatos_subfolder_exists": true,
+    "registros_subfolder_exists": true,
+    "anexos_subfolder_exists": true,
+    "poe_files": [
+      "POE_3.19_Formulaciones_Terceros_V1.md",
+      "POE_3.19_Formulaciones_Terceros_V1.docx"
+    ],
+    "formatos_files": [
+      "Formato_Solicitud_Formulacion_Tercero_V1.csv"
+    ],
+    "registros_files": [
+      "Registro_Control_Cambios_Formulacion_Tercero_V1.csv"
+    ],
+    "anexos_files": [
+      "ANX_3.19_01_Flujo_Aprobacion_Formulaciones.md",
+      "ANX_3.19_02_Modelo_Contrato_Confidencialidad.md",
+      "ANX_3.19_01_Flujo_Aprobacion_Formulaciones.docx",
+      "ANX_3.19_02_Modelo_Contrato_Confidencialidad.docx"
+    ],
+    "root_files": []
+  },
+  {
+    "folder": "3.20_Entrega_MP_Importacion_Terceros",
+    "poe_subfolder_exists": true,
+    "formatos_subfolder_exists": true,
+    "registros_subfolder_exists": true,
+    "anexos_subfolder_exists": true,
+    "poe_files": [
+      "POE_3.20_Entrega_MP_Importacion_Terceros_V1.md",
+      "POE_3.20_Entrega_MP_Importacion_Terceros_V1.docx"
+    ],
+    "formatos_files": [
+      "Formato_Control_Entrega_MP_Terceros_V1.csv"
+    ],
+    "registros_files": [
+      "Registro_Conciliacion_MP_Terceros_V1.csv"
+    ],
+    "anexos_files": [
+      "ANX_3.20_01_Lista_Chequeo_Documental_Ingreso.md",
+      "ANX_3.20_02_Modelo_Acta_Entrega.md",
+      "ANX_3.20_01_Lista_Chequeo_Documental_Ingreso.docx",
+      "ANX_3.20_02_Modelo_Acta_Entrega.docx"
+    ],
+    "root_files": []
+  }
+]

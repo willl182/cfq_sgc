@@ -26,12 +26,9 @@ La empresa se encuentra en un periodo de transición regulatoria crítica:
 | Marco Legal | Estado | Plazo |
 |-------------|--------|-------|
 | **Resolución ICA No. 150 de 2003** | Normativa vigente actual (marco legacy) | Sustituida por pv0 |
-| **Propuesta de resolución (pv0)** | Nueva normativa digital | 6 meses tras activación de **SimplifICA** |
-| **SimplifICA** | Plataforma de trámites en línea del ICA | - |
+| **Propuesta de resolución (pv0)** | Nueva normativa en transición | Requiere ajuste documental y técnico |
 
-**Implicación**: El cambio representa una transición de cumplimiento documental estático (R150) a un sistema de gestión operacional basado en riesgos, Buenas Prácticas de Manufactura (BPM) y Buenas Prácticas de Distribución (BPD). El SGC ya no es un archivo pasivo, sino un sistema dinámico con requisitos de interoperabilidad digital.
-
-**Riesgo crítico**: Si la información cargada a SimplifICA contiene errores y no se corrige en dos oportunidades de 15 días hábiles, el registro se pierde y se requiere un "Nuevo Registro" (proceso completo desde cero).
+**Implicación**: El cambio representa una transición de cumplimiento documental estático (R150) a un sistema de gestión operacional basado en riesgos, Buenas Prácticas de Manufactura (BPM) y Buenas Prácticas de Distribución (BPD). El SGC ya no es un archivo pasivo, sino un sistema dinámico con exigencias de control, trazabilidad y evidencia técnica.
 
 ---
 
@@ -99,7 +96,7 @@ Los documentos utilizan el siguiente sistema de códigos:
 
 | Nuevo Mandato (pv0) | Activo SGC Actual | Acción Estratégica Requerida |
 |---------------------|------------------|-------------------------------|
-| **Interoperabilidad Digital** | 2,047 archivos (PDF, DOCX, XLSX) | Categorizar y etiquetar todos los archivos en los 18 pilares procedimentales para carga a SimplifICA |
+| **Organización documental** | 2,047 archivos (PDF, DOCX, XLSX) | Categorizar y etiquetar todos los archivos en los 18 pilares procedimentales |
 | **Análisis de Calidad Anual** | Resultados en `12 Resultados Externos/` | Establecer cronograma anual formal; verificar que Dr. Calderon/Agrilab tienen registro ICA para CADA parámetro garantizado |
 | **Prohibición de "Barreduras"** | Procedimientos en `02 Gestion Ambiental/` | Actualizar protocolos ambientales para prohibir explícitamente reutilización; implementar registros de destrucción |
 | **Expansión Procedimental** | Carpetas `03/` y `04/` (DC-SI / PC-SI) | Convertir documentos `DC-SI` a formato `CGC-POE` para cumplir con los 18 pilares GMP |
@@ -252,13 +249,7 @@ SGC_CALFERQUIM_NUEVA_RESOLUCION/
 | Acción | Herramienta | Objetivo |
 |--------|-------------|----------|
 | Categorización de 2,047 archivos | Manual/Script | Etiquetar cada archivo en los 18 pilares procedimentales |
-| Preparación para SimplifICA | - | Organizar documentos para carga en 6 meses |
-
-### Regla de los "Dos Strikes"
-
-- Plazo corrección primera oportunidad: **15 días hábiles**
-- Prórroga posible: **15 días hábiles adicionales**
-- Si falla segunda oportunidad: **Registro perdido → Nuevo Registro** (catástrofe financiera)
+| Preparación documental | - | Organizar documentos, evidencias y soportes técnicos para transición regulatoria |
 
 ### Riesgos y Mitigación
 

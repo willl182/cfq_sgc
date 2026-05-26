@@ -68,7 +68,22 @@ La bodega de empaques es un area aislada. Los materiales de empaque (sacos, bigb
 
 ## 9. ANEXOS
 
-- Anexo 2: Frecuencias de limpieza por area.
+### Agentes de Limpieza y Desinfección Autorizados
+
+| PRODUCTO | USO | DOSIS REFERENCIAL | OBSERVACION |
+|---|---|---|---|
+| Detergente neutro | Limpieza general | Segun fabricante | Enjuagar si hay contacto con producto |
+| Desinfectante base amonio cuaternario | Superficies no porosas | Segun ficha tecnica | Respetar tiempo de contacto |
+| Alcohol 70% | Puntos de contacto rapido | Aplicacion directa | Solo para superficies compatibles |
+
+### Frecuencias de Limpieza por Área
+
+| AREA / EQUIPO | FRECUENCIA MINIMA | RESPONSABLE |
+|---|---|---|
+| Recepcion MP | Diario y ante derrame | Bodega |
+| Molienda y mezcla | Por cambio de lote y cierre de turno | Produccion |
+| Envase | Inicio y cierre de turno | Produccion |
+| Pasillos y zonas de transito | Diario | Servicios generales |
 
 ## 10. CONTROL DE CAMBIOS
 

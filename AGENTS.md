@@ -4,7 +4,7 @@
 
 Este repositorio contiene el Sistema de Gestion de Calidad (SGC) digital de **CALFERQUIM S.A.S.**, empresa colombiana fabricante, formuladora y registradora de fertilizantes y acondicionadores de suelos bajo regulacion del **ICA (Instituto Colombiano Agropecuario)**.
 
-La empresa se encuentra en transicion regulatoria critica: de la **Resolucion ICA No. 150 de 2003 (R150)** hacia la **propuesta de resolucion (pv0)**, que exige un sistema de gestion operacional basado en riesgos, Buenas Practicas de Manufactura (BPM/GMP) y Buenas Practicas de Distribucion (BPD/GDP), con interoperabilidad digital a traves de la plataforma **SimplifICA**.
+La empresa se encuentra en transicion regulatoria critica: de la **Resolucion ICA No. 150 de 2003 (R150)** hacia la **propuesta de resolucion (pv0)**, que exige un sistema de gestion operacional basado en riesgos, Buenas Practicas de Manufactura (BPM/GMP) y Buenas Practicas de Distribucion (BPD/GDP).
 
 ## Estructura del Repositorio
 
@@ -46,10 +46,8 @@ cfq_sgc/
 
 | Concepto | Detalle |
 |----------|---------|
-| **SimplifICA** | Plataforma digital del ICA para tramites en linea |
-| **Plazo** | 6 meses tras activacion de SimplifICA para migrar toda la informacion |
-| **Regla "Dos Strikes"** | Si la informacion tiene errores: 15 dias habiles para corregir + posible prorroga de 15 dias. Si falla la segunda vez, el registro se pierde y se requiere "Nuevo Registro" (catastrofe financiera) |
-| **Riesgo** | Perder registros de ~300 productos = inoperabilidad comercial |
+| **Riesgo regulatorio** | Asegurar cumplimiento documental y tecnico frente a la transicion R150 -> pv0 |
+| **Riesgo operativo** | Evitar brechas que comprometan registros, dossiers y trazabilidad comercial |
 
 ### Los 18 Pilares Procedimentales (Anexo I-A/I-B de pv0)
 
