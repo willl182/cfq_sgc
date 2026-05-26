@@ -11,8 +11,7 @@ La empresa se encuentra en transicion regulatoria critica: de la **Resolucion IC
 ```
 cfq_sgc/
 ├── README.md                      # Contexto regulatorio, estado actual, diagnostico de brechas
-├── PLAN_MIGRACION_SGC.md          # Plan detallado de 14 fases para migrar el SGC
-├── qms_new.md                     # Estructura nueva propuesta alineada a pv0 (8 carpetas PHVA)
+├── PLAN_MIGRACION_SGC.md          # Plan de 14 fases de migracion (Completado)
 ├── cambio_norma.md                # Comparacion completa R150 vs pv0
 ├── analisis_norma_sgc_demas.md    # Analisis estrategico (ingles): 18 pilares, adopcion GMP/GDP
 ├── sgc_r150_rnueva.md             # Comparacion requisitos de calidad R150 vs pv0
@@ -21,23 +20,19 @@ cfq_sgc/
 │   ├── CURRENT_SESSION.md
 │   ├── history/
 │   └── plans/
-└── 202_CALFERQUIM/                # Directorio principal del SGC actual (~2,047 archivos)
-    ├── 00 Inbox/
-    ├── 01 Documentacion Legal/
-    ├── 02 Gestion Ambiental/
-    ├── 03 Operacion/
-    ├── 04 Calidad/
-    ├── 05 Laboratorio/
-    ├── 06 SST/
-    ├── 07 Hojas de Seguridad/     # ~152 archivos (93 PT + 59 MP)
-    ├── 08 Registros ICA/          # ~544 archivos (22+ productos, duplicados masivos)
-    ├── 09 Fichas Tecnicas/        # ~280 archivos (extrema duplicacion: 5-10 copias por producto)
-    ├── 10 Tramites ICA/
-    ├── 11 Laboratorios Externos/
-    ├── 12 Resultados Externos/    # ~70 PDFs certificados de analisis
-    ├── 13 Base Datos/
-    ├── 99 Revision/               # ~800 archivos SGC legacy, ZIPs, dispersos
-    └── despachos/
+├── SGC_CALFERQUIM/                # Directorio principal del SGC actual organizado por Anexo I-B ICA
+│   ├── 00_Inbox/                  # Recepcion temporal de documentos
+│   ├── 01_Requisitos_Generales/   # Croquis, materias primas, asesor tecnico
+│   ├── 02_Control_Calidad/        # Habilitacion laboratorios externos y certificados
+│   ├── 03_Procedimientos/         # Los 20 procedimientos obligatorios (3.01 al 3.20)
+│   ├── 04_Instalaciones/          # Planos planta, demarcacion, archivo documental
+│   ├── 05_Dossier_Productos/      # Fichas tecnicas y especificaciones por producto
+│   ├── 06_Documentacion_Legal/    # Resoluciones ICA oficiales de venta, actas juridicas
+│   ├── 07_Postventa_Servicio_Cliente/ # Gestion PQRS y planes de recall (retiro)
+│   ├── 08_Dossier_Productos_Registrados/ # Dossiers normalizados de 26 productos activos
+│   ├── 09_SST/                    # SST, EPP y procedimientos LOTO
+│   └── 10_Base_Datos_Tecnica/     # Abreviaturas de productos, inventario de materias primas
+└── _Legacy_y_Otros/               # Directorio historico y legacy (incluye 202_CALFERQUIM)
 ```
 
 ## Marco Regulatorio Critico
@@ -72,26 +67,25 @@ cfq_sgc/
 
 **Estado**: 6 existen, 8 parciales/dispersos, **4 faltantes** (marcados arriba).
 
-## Plan de Migracion Activo
+## Plan de Migracion y Estado Actual
 
-El plan completo esta en `PLAN_MIGRACION_SGC.md`. Tiene **14 fases** que migran de `202_CALFERQUIM/` hacia una nueva estructura `SGC_CALFERQUIM/`.
+El plan de migracion de 14 fases de `_Legacy_y_Otros/202_CALFERQUIM/` hacia la estructura `SGC_CALFERQUIM/` se encuentra completado, quedando estructurado bajo la numeracion del Acta de Visita de Verificacion del ICA:
 
-### Estructura Destino
+### Estructura Implementada
 
 ```
 SGC_CALFERQUIM/
-├── 00_Inbox_Pendientes/
-├── 01_Direccion_Tecnica_Legal/
-├── 02_Gestion_Proveedores_Insumos/
-├── 03_Produccion_Manufactura/
-├── 04_Laboratorio_Control_Calidad/
-├── 05_Trazabilidad_Liberacion/         # NUEVO modulo critico
-├── 06_Gestion_Residuos_Ambiental/
-├── 07_Postventa_Servicio_Cliente/
-├── 08_Dossier_Productos_Registrados/   # 59 productos x 5 subcarpetas cada uno
-├── 09_SST/
-├── 10_Base_Datos_Tecnica/
-└── _Archivo/                           # Versiones anteriores y SGC legacy
+├── 00_Inbox/                           # Recepcion temporal de nuevos documentos
+├── 01_Requisitos_Generales/            # Croquis, listado de materias primas, asesor tecnico
+├── 02_Control_Calidad/                 # Habilitacion laboratorios externos y certificados
+├── 03_Procedimientos/                  # Los 20 procedimientos obligatorios (3.01 al 3.20)
+├── 04_Instalaciones/                   # Planos planta, demarcacion, archivo documental
+├── 05_Dossier_Productos/               # Fichas tecnicas y especificaciones por producto
+├── 06_Documentacion_Legal/             # Resoluciones ICA oficiales de venta, actas juridicas
+├── 07_Postventa_Servicio_Cliente/      # PQRS y planes de recall (retiro)
+├── 08_Dossier_Productos_Registrados/   # Dossiers normalizados de 26 productos activos
+├── 09_SST/                             # SST, EPP y procedimientos LOTO
+└── 10_Base_Datos_Tecnica/              # Abreviaturas de productos, inventario de materias primas
 ```
 
 ### Fases Resumidas

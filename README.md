@@ -32,29 +32,26 @@ La empresa se encuentra en un periodo de transición regulatoria crítica:
 
 ---
 
-## 2. Estado Actual del SGC (Estructura Vigente)
+## 2. Estado Actual del SGC (Estructura de Trabajo)
 
-El directorio principal del SGC se ubica en `202_CALFERQUIM/` y contiene **152 directorios** con **2,047 archivos** organizados de la siguiente manera:
+El directorio principal del SGC activo se ubica en `SGC_CALFERQUIM/` y está organizado en concordancia con el Acta de Visita de Verificación de Requisitos del ICA (Anexo I-B) de la siguiente manera:
 
 ```
-202_CALFERQUIM/
-├── 00 Inbox/                    # Recepción de documentos pendientes de procesamiento
-├── 01 Documentacion Legal/      # Cámara de comercio, RUT, resoluciones ICA, contratos
-├── 02 Gestion Ambiental/        # Protocolos ambientales
-├── 03 Operacion/                # POE de mezcla, granulación, muestreo, liberación de lotes
-├── 04 Calidad/                  # Organigrama, PQRS, compras, procesos de calidad
-├── 05 Laboratorio/              # Macros XLSM para formulación y verificación
-├── 06 SST/                      # Seguridad y Salud en el Trabajo (EPP, bioseguridad, LOTO)
-├── 07 Hojas de Seguridad/       # Hojas de seguridad de MP y productos terminados (~300 productos)
-├── 08 Registros ICA/            # Dossiers de registros de productos (sección más grande)
-├── 09 Fichas Tecnicas/          # Fichas técnicas de productos
-├── 10 Tramites ICA/             # Trámites regulatorios (IVA, RVF)
-├── 11 Laboratorios Externos/    # Contratos y análisis con Dr. Calderon, Agrilab, Campolab
-├── 12 Resultados Externos/      # Certificados de análisis externos (73 archivos)
-├── 13 Base Datos/              # Libros, artículos, recursos técnicos
-├── 99 Revision/                 # Área de trabajo y revisión (incluye plantilla SGC ICA)
-└── despachos/                  # Documentos de despacho y envío
+SGC_CALFERQUIM/
+├── 00_Inbox/                           # Recepción y procesamiento temporal de nuevos documentos
+├── 01_Requisitos_Generales/            # Croquis de áreas, listado de materias primas, contratos de producción y asesor técnico
+├── 02_Control_Calidad/                 # Habilitación de laboratorios externos y certificados de análisis
+├── 03_Procedimientos/                  # Los 20 procedimientos obligatorios (muestreo, contramuestras, balance de masas, etc.)
+├── 04_Instalaciones/                   # Planos de producción, señalizaciones y archivo documental físico/digital
+├── 05_Dossier_Productos/               # Especificaciones técnicas detalladas y subcarpetas numéricas por producto
+├── 06_Documentacion_Legal/             # Resoluciones ICA, certificados de existencia legal y representación
+├── 07_Postventa_Servicio_Cliente/      # Peticiones, quejas y reclamos (PQRS) y plan de retiro del mercado (recall)
+├── 08_Dossier_Productos_Registrados/   # Dossiers normalizados de los productos registrados oficiales ante el ICA (26 dossiers activos)
+├── 09_SST/                             # Seguridad y Salud en el Trabajo (EPP, bioseguridad, procedimientos LOTO)
+└── 10_Base_Datos_Tecnica/              # Abreviaturas de productos, inventario de materias primas y base técnica
 ```
+
+La carpeta heredada `202_CALFERQUIM/` ha sido trasladada a `_Legacy_y_Otros/` como archivo histórico.
 
 ### Sistema de Codificación Legacy
 
@@ -113,26 +110,26 @@ Los documentos utilizan el siguiente sistema de códigos:
 
 La nueva resolución exige formalizar y documentar procedimientos, formatos y registros para 18 puntos específicos. El SGC actual tiene brechas en varios de estos.
 
-| # | Pilar Procedimental | Estado Calferquim | Carpeta Actual | Acción |
-|---|---------------------|-------------------|----------------|--------|
-| 1 | **Control de Proveedores** | Parcial | `04 Calidad/` | Formalizar procedimiento CGC-POE de auditoría y calificación |
-| 2 | **Balance de Materias Primas** | Parcial | `05 Laboratorio/` | Formalizar CGC-POE obligatorio con formatos de balance |
-| 3 | **Codificación de Lotes** | Disperso | `03 Operacion/` | Procedimiento estandarizado para identificación de lotes |
-| 4 | **Procedimientos de Muestreo** | Existe | `03 Operacion/` | CGC-POE-013 ya cubre muestreo según NTC 8633 |
-| 5 | **Liberación de Lotes** | Existe | `03 Operacion/` | CGC-POE-021 cubre liberación al mercado |
-| 6 | **Almacenamiento de Contramuestras** | **FALTA** | - | Crear procedimiento nuevo para gestión de contramuestras |
-| 7 | **Mantenimiento de Equipos** | Parcial | `06 SST/` | Formalizar CGC-POE preventivo y correctivo |
-| 8 | **Calibración** | Disperso | `04 Calidad/` | Centralizar procedimiento de calibración de instrumentos |
-| 9 | **Limpieza y Desinfección** | Parcial | `06 SST/` | Formalizar CGC-POE de protocolos de higiene |
-| 10 | **Manejo de Residuos (Barreduras)** | Existe | `02 Gestion Ambiental/` | Actualizar con prohibición explícita de reutilización |
-| 11 | **Capacitación del Personal** | Parcial | `06 SST/` | Formalizar CGC-POE con cronograma y registros |
-| 12 | **Control Documental** | Disperso | `99 Revision/` | Procedimiento de ciclo de vida del SGC |
-| 13 | **Retiro de Producto / Trazabilidad** | Disperso | `04 Calidad/` | Crear procedimiento de recall |
-| 14 | **Servicio al Cliente (PQR)** | Existe | `04 Calidad/` | CGC-POE-024 cubre atención de quejas |
-| 15 | **Auditorías Internas** | Existe | `04 Calidad/` | CGC-POE-026 ya existe |
-| 16 | **Gestión del Laboratorio** | Disperso | `05/` y `11/` | Centralizar control de laboratorio propio/contratado |
-| 17 | **Controles del Proceso de Producción** | Existe | `03 Operacion/` | POEs de molienda, mezcla, granulación |
-| 18 | **Mantenimiento de Instalaciones e Higiene** | Parcial | `06 SST/` | Integrar con limpieza/desinfección |
+| # | Pilar Procedimental | Estado Calferquim | Carpeta Actual en SGC_CALFERQUIM/ | Acción |
+|---|---------------------|-------------------|----------------------------------|--------|
+| 1 | **Control de Proveedores** | Normalizado | `01_Requisitos_Generales/1.2_` y `03_Procedimientos/3.01_` | Procedimiento y formatos de control de insumos y MP |
+| 2 | **Balance de Materias Primas** | Implementado | `03_Procedimientos/3.05_Balance_Materias_Primas/` | Habilitación de balances mensuales de masa |
+| 3 | **Codificación de Lotes** | Normalizado | `03_Procedimientos/3.11_Codificacion_Lotes/` | Identificación inequívoca por lote y planta |
+| 4 | **Procedimientos de Muestreo** | Existe | `03_Procedimientos/3.13_Muestreo_Control_Calidad/` | Instructivo y planes de muestreo de calidad |
+| 5 | **Liberación de Lotes** | Existe | `03_Procedimientos/3.12_Liberacion_Lotes/` | Control del flujo de inspección técnica |
+| 6 | **Almacenamiento de Contramuestras** | Implementado | `03_Procedimientos/3.14_Contramuestras/` | Nuevo procedimiento e instalaciones físicas de retención |
+| 7 | **Mantenimiento de Equipos** | Normalizado | `03_Procedimientos/3.15_Higiene_Seguridad_Industrial/` | Gestión preventiva y correctiva en planta |
+| 8 | **Calibración** | Normalizado | `03_Procedimientos/3.13_Muestreo_Control_Calidad/` | Frecuencias de ajuste y verificación de balanzas/equipos |
+| 9 | **Limpieza y Desinfección** | Normalizado | `03_Procedimientos/3.02_Limpieza_Desinfeccion/` | Protocolos estrictos de saneamiento y orden |
+| 10 | **Manejo de Residuos (Barreduras)** | Existe | `03_Procedimientos/3.18_Disposicion_Residuos/` | Prohibición explícita de reutilización en procesos |
+| 11 | **Capacitación del Personal** | Normalizado | `03_Procedimientos/3.15_Higiene_Seguridad_Industrial/` | Registros de inducción y capacitaciones |
+| 12 | **Control Documental** | Normalizado | `04_Instalaciones/4.12_Archivo_Documental/` | Control y ciclo de vigencia del SGC digital |
+| 13 | **Retiro de Producto / Trazabilidad** | Implementado | `07_Postventa_Servicio_Cliente/` | Procedimiento formal de retiro de producto (recall) |
+| 14 | **Servicio al Cliente (PQR)** | Existe | `03_Procedimientos/3.16_Servicio_Cliente_PQR/` | Atención formal y registros de PQRS |
+| 15 | **Auditorías Internas** | Existe | `01_Requisitos_Generales/1.5_Asesor_Tecnico/` | Plan y actas de auditoría operativa |
+| 16 | **Gestión del Laboratorio** | Normalizado | `02_Control_Calidad/2.1_Laboratorio_Registrado/` | Gestión de laboratorios con alcance registrado ICA |
+| 17 | **Controles del Proceso de Producción** | Existe | `03_Procedimientos/` | POEs normalizados de molienda, mezcla y empaque |
+| 18 | **Mantenimiento de Instalaciones e Higiene** | Normalizado | `03_Procedimientos/3.15_Higiene_Seguridad_Industrial/` | Control estructural de limpieza y saneamiento de planta |
 
 **Resumen**: 6 pilares existen, 8 están parciales o dispersos, **4 están faltantes** (Contramuestras, Control Documental, Retiro de Producto, Gestión Centralizada del Laboratorio).
 
@@ -186,30 +183,23 @@ La nueva resolución exige formalizar y documentar procedimientos, formatos y re
 
 ---
 
-## 7. Nueva Estructura Propuesta (pv0)
+## 7. Estructura Implementada del SGC (Alineación pv0 / Anexo I-B)
 
-Esta estructura reemplaza la organización numérica anterior por una lógica de flujo de proceso (Ciclo PHVA), alineada con los 18 pilares procedimentales.
+Esta estructura organiza de forma definitiva el SGC digital de Calferquim en concordancia exacta con la lista de verificación del inspector del ICA (Anexo I-B), facilitando el proceso de auditoría y demostración de conformidad.
 
 ```
-SGC_CALFERQUIM_NUEVA_RESOLUCION/
-
-├── 00_Inbox_Pendientes/                      # Recepción de documentos
-
-├── 01_Direccion_Tecnica_Legal/               # Resoluciones ICA, contratos asesor técnico, representación legal
-
-├── 02_Gestion_Proveedores_Insumos/           # Control de proveedores, hojas seguridad MP, recepción/almacenamiento, fichas técnicas MP
-
-├── 03_Produccion_Manufactura/                # Órdenes de producción, POE, balance de masas, envasado/etiquetado, mantenimiento equipos
-
-├── 04_Laboratorio_Control_Calidad/           # Registro laboratorio (propio/contrato), plan muestreo, resultados análisis, contramuestras, verificación equipos
-
-├── 05_Trazabilidad_Liberacion/               # (NUEVO MÓDULO CRÍTICO) Codificación lotes, liberación lotes, trazabilidad ventas
-
-├── 06_Gestion_Residuos_Ambiental/           # Disposición barreduras (prohibida reutilización), residuos líquidos, plan ambiental
-
-├── 07_Postventa_Servicio_Cliente/            # PQRS, retiro de producto (recall)
-
-└── 08_Dossier_Productos_Registrados/         # Por producto: registro venta, ficha técnica, etiqueta aprobada, hoja seguridad, soportes ensayo
+SGC_CALFERQUIM/
+├── 00_Inbox/                           # Recepción y procesamiento temporal de nuevos documentos
+├── 01_Requisitos_Generales/            # Croquis de áreas, listado de materias primas, contratos de producción y asesor técnico
+├── 02_Control_Calidad/                 # Habilitación de laboratorios externos y certificados de análisis
+├── 03_Procedimientos/                  # Los 20 procedimientos obligatorios (muestreo, contramuestras, balance de masas, etc.)
+├── 04_Instalaciones/                   # Planos de producción, señalizaciones y archivo documental físico/digital
+├── 05_Dossier_Productos/               # Especificaciones técnicas detalladas y subcarpetas numéricas por producto
+├── 06_Documentacion_Legal/             # Resoluciones ICA, certificados de existencia legal y representación
+├── 07_Postventa_Servicio_Cliente/      # Peticiones, quejas y reclamos (PQRS) y plan de retiro del mercado (recall)
+├── 08_Dossier_Productos_Registrados/   # Dossiers normalizados de los productos registrados oficiales ante el ICA (26 dossiers activos)
+├── 09_SST/                             # Seguridad y Salud en el Trabajo (EPP, bioseguridad, procedimientos LOTO)
+└── 10_Base_Datos_Tecnica/              # Abreviaturas de productos, inventario de materias primas y base técnica
 ```
 
 ### Justificación de los Cambios Clave
@@ -277,26 +267,31 @@ Los siguientes archivos markdown contienen análisis detallados que respaldan es
 
 ## 10. Convenciones de Nombrado
 
-### Prefijos de Carpetas (Nivel raíz)
+### Prefijos de Carpetas (Estructura SGC_CALFERQUIM)
 
-| Rango | Dominio |
-|-------|---------|
-| `00` | Inbox / Recepción |
-| `01-06` | Departamentos funcionales actuales |
-| `07` | Hojas de seguridad |
-| `08-10` | Registros y trámites regulatorios |
-| `11-13` | Soporte externo y conocimiento |
-| `99` | Revisión y documentos en progreso |
+| Carpeta | Dominio / Uso |
+|---------|---------------|
+| `00_Inbox` | Recepción y procesamiento temporal de nuevos documentos |
+| `01_Requisitos_Generales` | Croquis de planta, flujos de producción, contratos y asesor técnico |
+| `02_Control_Calidad` | Laboratorios registrados ICA y reportes analíticos consolidados |
+| `03_Procedimientos` | Los 20 procedimientos operativos estandarizados exigidos por el ICA |
+| `04_Instalaciones` | Evidencias de señalización, planos y control de archivo digital/físico |
+| `05_Dossier_Productos` | Especificaciones de productos y fichas técnicas legacy |
+| `06_Documentacion_Legal` | Resoluciones ICA, certificados de representación y actas legales |
+| `07_Postventa_Servicio_Cliente` | PQRS y planes de retiro (recall) |
+| `08_Dossier_Productos_Registrados` | Los 26 dossiers normalizados oficiales de las marcas registradas |
+| `09_SST` | Seguridad y Salud en el Trabajo, EPP y LOTO |
+| `10_Base_Datos_Tecnica` | Abreviaturas, inventario de materias primas y base técnica |
 
-### Codificación de Productos y Dossiers
+### Codificación de Dossiers de Producto (en `08_Dossier_Productos_Registrados/`)
 
-| Patrón | Ejemplo | Significado |
-|--------|---------|-------------|
-| `_01-nombre` | `_01-bzinc-15/`, `_02-ferticorrectivo/` | Secuencia numérica + nombre del producto |
-| `202.3_` | `202.3_registros_ica-n/` | Nuevos registros |
-| `203.1_` | `203.1_registros_ica/` | Registros activos |
-| `203.12_` | `203.12_registros/` | Aprobaciones de etiquetas/empaque (RVF) |
-| `01.1_`, `01.2_`, `03_`, `04_`, `06_`, `07_`, `10_`, `12_` | Numeración de checklist | Secuencia de documentos dentro del dossier |
+Cada dossier comercial se nombra bajo el patrón: `##_RVF[Número]_Nombre_Producto` (Ejemplo: `05_RVF4415_AFOS-K_0-40-50/`).
+Dentro de cada dossier se mantiene una estructura obligatoria de 5 subcarpetas:
+1. `01_Registro_Venta/`: Resoluciones de venta y aprobaciones oficiales del ICA.
+2. `02_Ficha_Tecnica/`: Ficha técnica del producto terminado.
+3. `03_Etiqueta_Aprobada/`: Arte final de la etiqueta aprobada legalmente por el ICA.
+4. `04_Hoja_Seguridad/`: Hoja de datos de seguridad del producto terminado (HDS).
+5. `05_Soportes_Ensayo/`: Certificados de análisis de laboratorio externos con registro ICA.
 
 ### Versionado
 
