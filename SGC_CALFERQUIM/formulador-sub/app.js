@@ -5,6 +5,7 @@ import { Formulador } from './modules/formulador.js';
 import { Comparador } from './modules/comparador.js';
 import { FormulasGuardadas } from './modules/formulas-guardadas.js';
 import { Sustitucion } from './modules/sustitucion.js';
+import { InventarioEditor } from './modules/inventario-editor.js';
 
 const DEFAULT_API_URL = window.FORMULADOR_SUB_API_URL || window.FORMULADOR_API_URL || 'https://script.google.com/macros/s/AKfycbzlO8HjfoeQxClhA5Vm7jo6bwHHS_36yutp0nbjPDGRHRa5I1XC2tw3p0luB4wKtrw/exec';
 
@@ -13,7 +14,8 @@ const views = {
   formulador: Formulador,
   comparador: Comparador,
   sustitucion: Sustitucion,
-  formulas: FormulasGuardadas
+  formulas: FormulasGuardadas,
+  inventario: InventarioEditor
 };
 
 const state = {

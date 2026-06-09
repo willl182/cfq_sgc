@@ -1,29 +1,27 @@
 # Session State: formulador_sub
 
-**Last Updated**: 2026-06-05 00:00 America/Bogota
+**Last Updated**: 2026-06-05 02:57 America/Bogota
 
 ## Session Objective
 
-Conectar el flujo de sustitución múltiple desde la vista comparativa del `formulador_sub` y validar la integración.
+Definir la arquitectura de backend real de `formulador-sub` y persistir el estado tecnico despues de validar el despliegue.
 
 ## Current State
 
-- [x] Se agregó la vista `comparador` al router de `app.js`.
-- [x] Se creó `modules/comparador.js` como wrapper ligero sobre `Formulador`.
-- [x] Se extendió `Formulador` para soportar modo `comparar`.
-- [x] Se añadió una strip comparativa con resumen de `grado original` y diferencias por nutriente.
-- [x] Se expuso acción `Comparar` desde `FormulasGuardadas`.
-- [x] Se conectó el botón `Sustitución` desde la vista comparativa hacia `Sustitucion` con receta base precargada.
-- [x] Se añadió carga de receta base y slots origen en `modules/sustitucion.js`.
-- [x] Se validó sintaxis con `node --check` en los archivos tocados.
+- [x] Se confirmó que el frontend de Vercel carga correctamente en produccion.
+- [x] Se confirmó que el backend actual es Google Apps Script + Google Sheets.
+- [x] Se detectó que el flujo depende hoy de CORS hacia `script.google.com`, lo que rompe la carga remota directa en navegador.
+- [x] Se añadieron caches locales/fallback para catálogo y fórmulas en el subproyecto.
+- [x] Se publicó el subproyecto en Vercel como `will-salas-projects/formulador-sub`.
 
 ## Critical Technical Context
 
-- La comparación reutiliza el motor actual de cálculo y la misma UI responsive del formulario.
-- El comparador abre la sustitución con la fórmula original como contexto, evitando perder trazabilidad.
-- `node --check` pasó en todos los archivos modificados, pero no se ejecutó una validación en navegador.
+- `SGC_CALFERQUIM/formulador-sub/modules/api.js` apunta por defecto a un Web App de Google Apps Script.
+- `SGC_CALFERQUIM/formulador-sub/google-apps-script.js` y `SGC_CALFERQUIM/formulador-sub/Codigo.gs` son el backend remoto real; no existe backend Node propio en el repo.
+- El despliegue de Vercel sirve el frontend estático y los assets, pero no reemplaza el backend de Sheets.
+- El repo raíz sigue con un árbol git muy sucio por cambios ajenos; no tocar ni revertir eso.
 
 ## Next Steps
 
-1. Probar en navegador el flujo: receta guardada -> comparar -> sustitución.
-2. Si hace falta, completar la aplicación efectiva de varias sustituciones sobre una copia de la fórmula.
+1. Decidir si Google Sheets seguirá como backend principal o pasará a backup/exportación.
+2. Si Sheets queda como backup, mover el estado operativo a cache/local/Vercel y tratar Sheets como sincronización.

@@ -123,6 +123,25 @@ date: 2026
 * Su granulación exige una ingeniería de bioprocesos impecable.
 * Es vital aislar físicamente la bacteria de la sal mineral.
 
+# Supervivencia en Fertilizantes Inorgánicos
+
+* El contacto directo de *Pseudomonas fluorescens* con fertilizantes inorgánicos suele reducir su viabilidad en pocos días.
+* La presión osmótica y las sales de los NPK deshidratan las células y acortan la vida útil del inoculante.
+* Para co-aplicación exitosa, la bacteria debe protegerse mediante microencapsulación o polímeros protectores.
+* Sin protección, la mezcla líquida directa con gránulos inorgánicos no es recomendable.
+
+# Estrategias de Protección
+
+* Microencapsulación: matrices de alginato con proteína de suero (WPC) o carboximetilcelulosa (CMC) mejoran la supervivencia y permiten liberación controlada.
+* Biopriming polimérico: goma xantana, glicerol o polietilenglicol (PEG) reducen el daño por desecación y por el ambiente químico agresivo.
+* Portadores bio-orgánicos: talco estéril, suelo estéril o bagazo prensado actúan como barrera entre la bacteria y el fertilizante.
+* El manejo térmico es crítico: *P. fluorescens* prospera mejor entre 25 y 30 °C.
+
+# Criterio Práctico
+
+* La co-formulación con fertilizantes orgánicos suele ofrecer mayor estabilidad y mejor desempeño que la mezcla directa con inorgánicos.
+* Si se usan NPK, debe existir una protección física y química efectiva del inoculante.
+
 # Tecnologías de Formulación
 
 * Recubrimiento superficial del gránulo (*Biocoating*).

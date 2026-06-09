@@ -35,7 +35,14 @@ export const FormulasGuardadas = {
   async _load() {
     try {
       Utils.setLoading(true, 'Cargando fórmulas...');
-      this._data = await Api.fetchFormulas();
+      try {
+        this._data = await Api.fetchFormulas();
+      } catch (fetchErr) {
+        this._data = JSON.parse(localStorage.getItem('formulador_sub_cache_formulas') || '[]');
+        if (this._data.length) {
+          Utils.toast('No se pudo leer Sheets; usando fórmulas locales', 'warning', 5000);
+        }
+      }
       this._apply();
       Utils.setLoading(false);
     } catch (err) {
@@ -144,6 +151,8 @@ export const FormulasGuardadas = {
         }
       }
 
+      this._data = recetas;
+      localStorage.setItem('formulador_sub_cache_formulas', JSON.stringify(recetas));
       Utils.setLoading(false);
       await this._load();
       Utils.toast(

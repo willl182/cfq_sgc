@@ -1,0 +1,47 @@
+REF_INSUMO_SIESA;NOMBRE_INS_SIESA;APARICIONES_SIESA;COD_CFQ;PRODUCTO_CFQ;ESTADO;CRITERIO
+MP0033;KCL GRANULADO;63;144;KCL;OK;equivalencia_nombre
+PT0031;RAIFOS 20;32;155;RAIFOS 20;OK;equivalencia_nombre
+PT0431;MFE 41.4-0-6;23;R1;MFE 41.4-0-6;OK;equivalencia_nombre
+PT0012;NUCLEO 4;43;65;NUCLEO 4;OK;equivalencia_nombre
+MP0009;SAM GRANULADO;34;32;SAM;OK;equivalencia_nombre
+PT0150;CARBONITRO;24;;;PENDIENTE;sin_equivalente_cfq_visible
+PT0430;MFE 43.5-0- 0 - 2.4(S);22;R2;MFE 43.5-0-0-2.4S;OK;equivalencia_nombre
+PT0443;BORO GRANULADO EN;2;123;BORO G;OK;equivalencia_nombre
+MP0022;DAP GRANULADO;45;97;DAP;OK;equivalencia_nombre
+PT0007;SILIMAGRAN EN;19;35;SILIMAGRAN;OK;equivalencia_nombre
+PT0028;SULFATO DE ZINC AL 22%;12;643;FE SULFATO ZINC 22;OK;equivalencia_nombre
+PT0034;FERTIMENORES;14;663;FE FERTIMENORES;OK;equivalencia_nombre
+MP0030;AZUFRE MALLA 100;1;145;AZUFRE;OK;equivalencia_nombre
+MP0079;SILICATO DE MAGNESIO;1;;;PENDIENTE;sin_equivalente_cfq_visible
+MP0005;SULFATO DE ZINC 35%;1;;;PENDIENTE;sin_equivalente_cfq_visible
+MP0001;SULFATO DE CALCIO;2;;;PENDIENTE;sin_equivalente_cfq_visible
+MP0080;ROCA FOSFORICA 26%;1;;;PENDIENTE;sin_equivalente_cfq_visible
+MP0092;BENTONITA GRIS;1;;;PENDIENTE;sin_equivalente_cfq_visible
+MP0024;CARBONATO DE CALCIO;1;;;PENDIENTE;sin_equivalente_cfq_visible
+MP0025;CAOLIN GRIS;1;;;PENDIENTE;sin_equivalente_cfq_visible
+MP0028;CAL DOLOMITA;1;;;PENDIENTE;sin_equivalente_cfq_visible
+MP0049;BIOCANECON;1;;;PENDIENTE;sin_equivalente_cfq_visible
+PT0095;CALFERZINC-P;4;150;CALFERZINC P;OK;equivalencia_nombre
+PT0065;K2K SN;19;300;K2K;OK;equivalencia_nombre
+MP0029;BORO GRANULADO SN;11;123;BORO G;OK;equivalencia_nombre
+PT0444;MFE 43.5-0- 0 - 2.4(S)+C;1;;;PENDIENTE;sin_equivalente_cfq_visible
+MP0002;UREA;41;12;UREA;OK;equivalencia_nombre
+MP0016;MAP GRANULADO;8;72;MAP;OK;equivalencia_nombre
+MP0081;UREA PRILLED;1;;;PENDIENTE;sin_equivalente_cfq_visible
+PT0033;ZUELO-CA;11;160;ZUELO CA;OK;equivalencia_nombre
+PT0094;K2K;1;300;K2K;OK;equivalencia_nombre
+PT0091;ZUELO-CA;4;160;ZUELO CA;OK;equivalencia_nombre
+PT0036;MICRON C;1;164;MICRON C;OK;equivalencia_nombre
+PT0093;SILIMAGRAN;2;35;SILIMAGRAN;OK;equivalencia_nombre
+PT0059;RAIFOS 20 SACO;4;155;RAIFOS 20;OK;equivalencia_nombre
+PT0017;F.ESPECIAL MF 17-6-18-2-1;1;84;MF 17-6-18-2-1;OK;equivalencia_nombre
+PT0387;DAP GRANULADO;2;97;DAP;OK;equivalencia_nombre
+PT0392;KCL GRANULADO;2;144;KCL;OK;equivalencia_nombre
+PT0096;FE MAGNE 3 SACO;1;154;MAGNE 3;OK;equivalencia_nombre
+PT0030;FE MAGNE 3;2;154;MAGNE 3;OK;equivalencia_nombre
+PT0067;NUCLEO HIERRO;2;;;PENDIENTE;sin_equivalente_cfq_visible
+PT0020;FORMULACION ESPECIAL BORO;3;;;PENDIENTE;sin_equivalente_cfq_visible
+PT0044;MICRON C-S;1;188;MICRON CS;OK;equivalencia_nombre
+MP0037;SULFATO DE POTASIO GRANULADO;1;167;SULFATO POTASIO;OK;equivalencia_nombre
+MP0036;NITRO;1;;;PENDIENTE;sin_equivalente_cfq_visible
+PT0236;NUCLEO MAGNESIO-SILICIO;1;604;NUCLEO MAGNESIO-SILICIO;OK;equivalencia_nombre
