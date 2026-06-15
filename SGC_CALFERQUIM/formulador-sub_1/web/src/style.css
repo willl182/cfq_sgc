@@ -481,10 +481,10 @@ select:focus, input:focus {
 .status-strip[data-status="NO_CUMPLE"] small { color: #fca5a5; }
 
 .status-strip[data-status="CUMPLE_S"] {
-  background: linear-gradient(135deg, #451a03, #78350f);
-  color: #fef3c7;
+  background: linear-gradient(135deg, #063c1e, #155e37);
+  color: #d1fae5;
 }
-.status-strip[data-status="CUMPLE_S"] small { color: #fde68a; }
+.status-strip[data-status="CUMPLE_S"] small { color: #a7f3d0; }
 
 /* ── Alert ─────────────────────────────────── */
 .alert {
@@ -627,7 +627,7 @@ select:focus, input:focus {
 .nutrient-card em { background: #f0f3ed; color: #7a8a78; }
 .nutrient-card em.C { background: #dcfce7; color: #166534; }
 .nutrient-card em.NC { background: #fee2e2; color: #991b1b; }
-.nutrient-card em.SUP { background: #fef3c7; color: #92400e; }
+.nutrient-card em.SUP { background: #d1fae5; color: #065f46; }
 .nutrient-card em.INFO { background: #f0f3ed; color: #7a8a78; }
 
 /* Card with active value highlight */

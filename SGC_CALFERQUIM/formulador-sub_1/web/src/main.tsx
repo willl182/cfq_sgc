@@ -169,6 +169,9 @@ function mapConvexChange(change: ConvexCatalogChange, catalog: CatalogItem[]): C
 }
 
 function formatPct(value: number) {
+  if (value === 0 || Math.abs(value) < 0.001) {
+    return ''
+  }
   return value.toFixed(2)
 }
 
@@ -440,7 +443,12 @@ function App() {
   }
 
   function getCompositionInputValue(item: CatalogItem, nutrient: NutrientKey) {
-    return compositionDrafts[item.internalId]?.[nutrient] ?? String(item.composition[nutrient])
+    const rawVal = compositionDrafts[item.internalId]?.[nutrient] ?? String(item.composition[nutrient])
+    const num = Number(rawVal)
+    if (rawVal === '0' || rawVal === '0.00' || (Number.isFinite(num) && num === 0 && rawVal !== '0.' && rawVal !== '0.0')) {
+      return ''
+    }
+    return rawVal
   }
 
   function updateComposition(item: CatalogItem, nutrient: NutrientKey, rawValue: string) {
