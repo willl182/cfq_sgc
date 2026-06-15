@@ -1,56 +1,40 @@
-# Session State: Formulador Sub
+# Session State: formulador-sub
 
-**Last Updated**: 2026-06-09 13:40 -05
+**Last Updated**: 2026-06-10 12:15 America/Bogota
 
 ## Session Objective
 
-Comparar los registros y planes `grillme` producidos por Codex, OC y Pi K26, consolidar fortalezas/debilidades/faltantes, y guardar un plan integrado de ajuste para la reconfiguracion del formulador.
+Implementar las funcionalidades del plan_v1.md dentro de la app vanilla JS existente.
 
 ## Current State
 
-- [x] Leida memoria previa del proyecto.
-- [x] Revisados los registros `grillme/grillme_codex.md`, `grillme/grillme_oc.md` y `grillme/grillme_pi_k26.md` mediante subagente.
-- [x] Revisados los planes `grillme/plan_codex.md`, `grillme/plan_oc.md` y `grillme/plan_pi_k26.md` mediante subagente.
-- [x] Identificadas fortalezas, debilidades, faltantes y contradicciones principales entre los seis documentos.
-- [x] Creado `grillme/plan_v1.md` como plan integrado de ajuste.
-- [ ] Implementar la reconfiguracion en codigo.
+- [x] F1: Módulo seed.js con validación CSV, IDs secuenciales, auditoría, admin local
+- [x] F2: Motor de cálculo puro (formulas.js)
+- [x] F2: Motor de tolerancias v2 con CUMPLE/CUMPLE_S/NO_CUMPLE/SIN_OBJETIVO
+- [x] F3: Catálogo unificado con edición inline, auditoría, admin toggle
+- [x] F4: Módulo productLists con listas vivas + snapshots versionados
+- [x] F4: Formulador.js reescrito — integrado con Seed, ProductLists, formulas.js, tolerancias-v2
+- [x] F4: Componentes dinámicos sin límite de 11 (slots.push/pop)
+- [x] F5: Vista Histórico de snapshots
+- [x] CSS para nuevos componentes
+- [ ] Verificar carga del CSV con separador ; desde navegador
+- [ ] F6: Importación futura de listas (baja prioridad)
 
 ## Critical Technical Context
 
-Decisiones consolidadas en `grillme/plan_v1.md`:
-
-- `plan_codex.md` queda como fuente primaria cuando haya conflicto.
-- Modelo canónico recomendado: `catalogItems`, `catalogChangeHistory`, `productLists`, `productListSnapshots`.
-- No duplicar catalogo en tablas separadas `insumos` y `productos`.
-- Convex sera fuente de verdad principal.
-- Catalogo base desde `insumos_ref/mp-pt_mzr.csv`, cargado por boton admin solo si Convex esta vacio.
-- IDs internos exactos: `MP0001`, `PT0001`, `MZR0001`, no editables, con `COD`/`COD_ORIGINAL` conservados para trazabilidad.
-- Componentes de listas pueden ser `MP`, `PT` o `MZR`.
-- Recetas/listas vivas recalculan al leer/renderizar con catalogo vigente; no persistir recalculos derivados como fuente de verdad.
-- Todo guardado persistente de lista crea snapshot versionado (`v1`, `v2`, `v3`) en la misma mutacion server-side.
-- Base fija 1000 kg; no normalizar; permitir guardar con alerta si total no suma 1000.
-- Cantidades maximo 2 decimales; composiciones guardadas hasta 4 y visibles con 2.
-- `SUP` produce `CUMPLE_S`, no `NO_CUMPLE`.
-- Minimos NPK quedan como validacion regulatoria posterior o advertencia separada, no bloquean la fase inicial.
-- Auth real queda para futuro; no fijar WorkOS todavia.
-- Comparador, sustitucion y creacion manual de productos quedan fuera del nucleo inicial.
-
-## Key Files
-
-- `grillme/plan_v1.md`
-- `grillme/plan_codex.md`
-- `grillme/plan_oc.md`
-- `grillme/plan_pi_k26.md`
-- `grillme/grillme_codex.md`
-- `grillme/grillme_oc.md`
-- `grillme/grillme_pi_k26.md`
-- `insumos_ref/mp-pt_mzr.csv`
-- `insumos_ref/formula.md`
-- `insumos_ref/tolerancia.md`
+- `formulador.js` ahora usa `Seed.search('')` como catálogo en vez de `Api.fetchMP()`
+- Guardado usa `ProductLists.create()` + `ProductLists.saveWithSnapshot()` (localStorage)
+- También trata de guardar en Google Sheets vía `Api.saveFormula()` como backup
+- Estado general usa nueva nomenclatura: `CUMPLE`, `CUMPLE_S`, `NO_CUMPLE`, `SIN_OBJETIVO`
+- Botón "Guardar Final" crea lista viva + snapshot versionado
+- Botón "Guardar" solo crea/actualiza lista viva
+- Slots son dinámicos (sin límite de 11) — se usa `this._slots.push()` y `splice()`
+- Fórmulas legacy (Google Sheets) se convierten a formato internalId al cargar
+- `cargarLista(listaId)` permite editar una lista existente de ProductLists
+- CSV usa separador `;` — `seed.js.loadFromText()` convierte a `,` antes de parsear
 
 ## Next Steps
 
-1. Verificar el estado real del scaffold actual (`package.json`, estructura `src/`, `convex/`) antes de tocar codigo.
-2. Verificar contra `insumos_ref/mp-pt_mzr.csv` la regla exacta para clasificar `MZR` (`R`, `R1`, `R2`, etc.).
-3. Implementar Fase 1 del plan: schema Convex canonico, indices, validacion CSV y carga inicial admin.
-4. Implementar Fase 2: motor puro de calculo/tolerancia y pruebas unitarias.
+1. Probar la app completa en navegador (verificar CSV carga, cálculos, guardado)
+2. Integrar `formulas-guardadas.js` con ProductLists para ver/editar/clonar listas
+3. F6: Vista de importación de listas (prioridad baja)

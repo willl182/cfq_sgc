@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+body {
+  font-family: Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+input, select, textarea {
+  outline: none;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #059669;
+  box-shadow: 0 0 0 1px #059669;
+}

@@ -1,0 +1,9 @@
+{
+  "node": "18",
+  "remote": "https://cool-darkness-5c5d82.convex.cloud",
+  "team": "cfqcalferquim",
+  "functions": "convex/",
+  "auth": {
+    "enabled": false
+  }
+}

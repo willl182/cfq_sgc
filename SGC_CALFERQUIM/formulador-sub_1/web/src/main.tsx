@@ -1,0 +1,959 @@
+import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { createRoot } from 'react-dom/client'
+import { ConvexProvider, ConvexReactClient, useMutation, useQuery } from 'convex/react'
+import { Archive, Beaker, ChevronLeft, ChevronRight, Clock3, Database, Download, FileUp, History, ListChecks, PackagePlus, Pencil, Plus, RotateCcw, Save, Search, Shield, UserCog, X } from 'lucide-react'
+import './style.css'
+import { api } from '../convex/_generated/api'
+import { parseCatalogCsv, type CatalogItem } from './domain/catalog'
+import { exportLiveListsCsv, exportLiveListsJson, exportSnapshotsCsv, exportSnapshotsJson } from './domain/exportLists'
+import { summarizeFormula, type FormulaComponentInput } from './domain/formulation'
+import { parseListImportCsv, type ParseListImportResult } from './domain/importLists'
+import { emptyComposition, NUTRIENTS, type CatalogClass, type NutrientKey } from './domain/nutrients'
+
+type Role = 'user' | 'admin'
+type View = 'catalog' | 'formulator' | 'history' | 'import'
+const convexUrl = import.meta.env.VITE_CONVEX_URL as string | undefined
+
+type LiveComponent = {
+  id: string
+  itemId: string
+  quantityKg: number
+}
+
+type ProductList = {
+  id: string
+  displayCode: string
+  targetProductId: string | null
+  components: LiveComponent[]
+  updatedAt: number
+  archivedAt?: number
+}
+
+type ConvexCatalogItem = CatalogItem & {
+  _id: string
+  _creationTime: number
+  createdAt: number
+  updatedAt: number
+}
+
+type ConvexProductList = {
+  _id: string
+  _creationTime: number
+  displayCode: string
+  targetProductId?: string
+  components: { itemInternalId: string; quantityKg: number }[]
+  archivedAt?: number
+  createdAt: number
+  updatedAt: number
+}
+
+type ConvexSnapshot = {
+  _id: string
+  _creationTime: number
+  productListId: string
+  displayCode: string
+  snapshotVersion: string
+  targetProductId?: string
+  frozenTarget?: CatalogItem
+  frozenComponents: FormulaComponentInput[]
+  calculatedComposition: ReturnType<typeof emptyComposition>
+  evaluation: ReturnType<typeof summarizeFormula>['evaluation']
+  generalStatus: string
+  totalKg: number
+  alerts: string[]
+  actor: { id: string; role: Role }
+  archivedAt?: number
+  createdAt: number
+}
+
+type ConvexCatalogChange = {
+  _id: string
+  _creationTime: number
+  internalId: string
+  changedAt: number
+  actor: { id: string; role: Role }
+  origin: string
+  changes: { field: string; before: number | null; after: number | CatalogItem | null }[]
+}
+
+type Snapshot = {
+  id: string
+  productListId: string
+  displayCode: string
+  snapshotVersion: string
+  targetProductId: string | null
+  frozenTarget: CatalogItem | null
+  frozenComponents: FormulaComponentInput[]
+  summary: ReturnType<typeof summarizeFormula>
+  createdAt: number
+  actor: string
+}
+
+type CatalogChange = {
+  id: string
+  itemInternalId: string
+  itemName: string
+  changedAt: number
+  actor: Role
+  field: string
+  before: number
+  after: number
+  origin: 'catalog.detail_edit'
+}
+
+function useLocalState<T>(key: string, initialValue: T) {
+  const [value, setValue] = useState<T>(() => {
+    const raw = localStorage.getItem(key)
+    return raw ? (JSON.parse(raw) as T) : initialValue
+  })
+  const setStored = (next: T) => {
+    localStorage.setItem(key, JSON.stringify(next))
+    setValue(next)
+  }
+  return [value, setStored] as const
+}
+
+function mapConvexList(list: ConvexProductList): ProductList {
+  return {
+    id: list._id,
+    displayCode: list.displayCode,
+    targetProductId: list.targetProductId ?? null,
+    components: list.components.map((component) => ({
+      id: `${list._id}-${component.itemInternalId}-${component.quantityKg}`,
+      itemId: component.itemInternalId,
+      quantityKg: component.quantityKg,
+    })),
+    updatedAt: list.updatedAt,
+    archivedAt: list.archivedAt,
+  }
+}
+
+function mapConvexSnapshot(snapshot: ConvexSnapshot): Snapshot {
+  return {
+    id: snapshot._id,
+    productListId: snapshot.productListId,
+    displayCode: snapshot.displayCode,
+    snapshotVersion: snapshot.snapshotVersion,
+    targetProductId: snapshot.targetProductId ?? null,
+    frozenTarget: snapshot.frozenTarget ?? null,
+    frozenComponents: snapshot.frozenComponents,
+    summary: {
+      totalKg: snapshot.totalKg,
+      composition: snapshot.calculatedComposition,
+      evaluation: snapshot.evaluation,
+      alerts: snapshot.alerts,
+    },
+    createdAt: snapshot.createdAt,
+    actor: snapshot.actor.role,
+  }
+}
+
+function mapConvexChange(change: ConvexCatalogChange, catalog: CatalogItem[]): CatalogChange {
+  const firstChange = change.changes[0]
+  const item = catalog.find((catalogItem) => catalogItem.internalId === change.internalId)
+  return {
+    id: change._id,
+    itemInternalId: change.internalId,
+    itemName: item?.name ?? change.internalId,
+    changedAt: change.changedAt,
+    actor: change.actor.role,
+    field: firstChange?.field ?? change.origin,
+    before: typeof firstChange?.before === 'number' ? firstChange.before : 0,
+    after: typeof firstChange?.after === 'number' ? firstChange.after : 0,
+    origin: 'catalog.detail_edit',
+  }
+}
+
+function formatPct(value: number) {
+  return value.toFixed(2)
+}
+
+function createDisplayCode(target: CatalogItem | null, lists: ProductList[]) {
+  const base = target?.internalId ?? 'BORRADOR'
+  const count = lists.filter((list) => list.displayCode.startsWith(`${base}-L`)).length + 1
+  return `${base}-L${String(count).padStart(3, '0')}`
+}
+
+function exportStamp() {
+  return new Date().toISOString().slice(0, 19).replace(/[-:T]/g, '')
+}
+
+function downloadTextFile(content: string, filename: string, type: string) {
+  const blob = new Blob([content], { type })
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = filename
+  document.body.appendChild(link)
+  link.click()
+  link.remove()
+  URL.revokeObjectURL(url)
+}
+
+function nextCatalogInternalId(catalog: CatalogItem[], itemClass: CatalogClass) {
+  const maxNumber = catalog
+    .filter((item) => item.class === itemClass)
+    .map((item) => Number(item.internalId.replace(itemClass, '')))
+    .filter(Number.isFinite)
+    .reduce((max, value) => Math.max(max, value), 0)
+  return `${itemClass}${String(maxNumber + 1).padStart(4, '0')}`
+}
+
+function App() {
+  const remoteCatalog = useQuery(api.catalog.list, {}) as ConvexCatalogItem[] | undefined
+  const remoteLists = useQuery(api.productLists.liveLists, {}) as ConvexProductList[] | undefined
+  const remoteSnapshots = useQuery(api.productLists.snapshots, {}) as ConvexSnapshot[] | undefined
+  const remoteChanges = useQuery(api.catalog.recentChanges, { limit: 200 }) as ConvexCatalogChange[] | undefined
+  const seedRemoteCatalog = useMutation(api.catalog.seedIfEmpty)
+  const createRemoteCatalogItem = useMutation(api.catalog.createManual)
+  const updateRemoteComposition = useMutation(api.catalog.updateComposition)
+  const archiveRemoteItem = useMutation(api.catalog.archive)
+  const saveRemoteList = useMutation(api.productLists.saveWithSnapshot)
+  const [localCatalog, setLocalCatalog] = useLocalState<CatalogItem[]>('cfq.catalogItems', [])
+  const [localLists, setLocalLists] = useLocalState<ProductList[]>('cfq.productLists', [])
+  const [localSnapshots, setLocalSnapshots] = useLocalState<Snapshot[]>('cfq.productListSnapshots', [])
+  const [localCatalogChanges, setLocalCatalogChanges] = useLocalState<CatalogChange[]>('cfq.catalogChangeHistory', [])
+  const [role, setRole] = useLocalState<Role>('cfq.localRole', 'user')
+  const [view, setView] = useState<View>('formulator')
+  const [query, setQuery] = useState('')
+  const [classFilter, setClassFilter] = useState<'ALL' | 'MP' | 'PT' | 'MZR'>('ALL')
+  const [targetId, setTargetId] = useState('')
+  const [components, setComponents] = useState<LiveComponent[]>([{ id: crypto.randomUUID(), itemId: '', quantityKg: 0 }])
+  const [editingListId, setEditingListId] = useState<string | null>(null)
+  const [selectedCatalogId, setSelectedCatalogId] = useState<string | null>(null)
+  const [newItemClass, setNewItemClass] = useState<CatalogClass>('MP')
+  const [newItemCode, setNewItemCode] = useState('')
+  const [newItemName, setNewItemName] = useState('')
+  const [newItemType, setNewItemType] = useState('')
+  const [newTargetCode, setNewTargetCode] = useState('')
+  const [newTargetName, setNewTargetName] = useState('')
+  const [newTargetType, setNewTargetType] = useState('')
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [editorOpen, setEditorOpen] = useState(false)
+  const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
+  const [importResult, setImportResult] = useState<ParseListImportResult | null>(null)
+  const [importFileName, setImportFileName] = useState('')
+  const [compositionDrafts, setCompositionDrafts] = useState<Record<string, Partial<Record<NutrientKey, string>>>>({})
+  const pendingCompositionValues = useRef<Record<string, Partial<Record<NutrientKey, number>>>>({})
+  const liveCompositionValues = useRef<Record<string, CatalogItem['composition']>>({})
+  const compositionSaveTimers = useRef<Record<string, number>>({})
+  const catalog = remoteCatalog ?? localCatalog
+  const lists = remoteLists?.map(mapConvexList) ?? localLists
+  const snapshots = remoteSnapshots?.map(mapConvexSnapshot) ?? localSnapshots
+  const catalogChanges = remoteChanges?.map((change) => mapConvexChange(change, catalog)) ?? localCatalogChanges
+  const usingConvex = Boolean(convexUrl)
+
+  const activeCatalog = useMemo(() => catalog.filter((item) => !item.archivedAt), [catalog])
+  const target = activeCatalog.find((item) => item.internalId === targetId) ?? null
+  const resolvedComponents: FormulaComponentInput[] = components
+    .map((component) => {
+      const item = activeCatalog.find((catalogItem) => catalogItem.internalId === component.itemId)
+      return item ? { item, quantityKg: component.quantityKg } : null
+    })
+    .filter(Boolean) as FormulaComponentInput[]
+  const summary = summarizeFormula(resolvedComponents, target)
+  const selectedCatalogItem = activeCatalog.find((item) => item.internalId === selectedCatalogId) ?? null
+
+  useEffect(() => {
+    return () => {
+      Object.values(compositionSaveTimers.current).forEach((timer) => window.clearTimeout(timer))
+    }
+  }, [])
+
+  useEffect(() => {
+    activeCatalog.forEach((item) => {
+      if (!pendingCompositionValues.current[item.internalId]) {
+        liveCompositionValues.current[item.internalId] = item.composition
+      }
+    })
+  }, [activeCatalog])
+
+  const filteredCatalog = useMemo(() => {
+    const needle = query.trim().toLowerCase()
+    return activeCatalog.filter((item) => {
+      const classOk = classFilter === 'ALL' || item.class === classFilter
+      const queryOk = !needle || `${item.internalId} ${item.externalCode} ${item.name} ${item.type}`.toLowerCase().includes(needle)
+      return classOk && queryOk
+    })
+  }, [activeCatalog, classFilter, query])
+
+  async function seedCatalog() {
+    if (catalog.length > 0) return
+    setSaveState('saving')
+    const response = await fetch('/data/mp-pt_mzr.csv')
+    const result = parseCatalogCsv(await response.text())
+    if (result.errors.length > 0) {
+      window.alert(`CSV rechazado: ${result.errors.slice(0, 5).map((error) => `fila ${error.row} ${error.field}`).join(', ')}`)
+      setSaveState('error')
+      return
+    }
+    try {
+      if (usingConvex) {
+        await seedRemoteCatalog({ items: result.items, actor: { id: 'local', role } })
+      } else {
+        setLocalCatalog(result.items)
+      }
+      setSaveState('saved')
+    } catch (error) {
+      window.alert(error instanceof Error ? error.message : 'No se pudo cargar el catalogo.')
+      setSaveState('error')
+    }
+  }
+
+  function clearLocalData() {
+    if (!window.confirm('Esto limpiara catalogo, listas vivas, snapshots y rol local de este navegador.')) return
+    localStorage.removeItem('cfq.catalogItems')
+    localStorage.removeItem('cfq.productLists')
+    localStorage.removeItem('cfq.productListSnapshots')
+    localStorage.removeItem('cfq.catalogChangeHistory')
+    localStorage.removeItem('cfq.localRole')
+    setLocalCatalog([])
+    setLocalLists([])
+    setLocalSnapshots([])
+    setLocalCatalogChanges([])
+    setRole('user')
+    setTargetId('')
+    setComponents([{ id: crypto.randomUUID(), itemId: '', quantityKg: 0 }])
+    setEditingListId(null)
+    setSelectedCatalogId(null)
+    setEditorOpen(false)
+    setNewItemClass('MP')
+    setNewItemCode('')
+    setNewItemName('')
+    setNewItemType('')
+    setNewTargetCode('')
+    setNewTargetName('')
+    setNewTargetType('')
+    setView('formulator')
+    setSaveState('idle')
+  }
+
+  function startNewList() {
+    setEditingListId(null)
+    setTargetId('')
+    setComponents([{ id: crypto.randomUUID(), itemId: '', quantityKg: 0 }])
+    setSaveState('idle')
+  }
+
+  async function createCatalogItem() {
+    if (role !== 'admin') return
+    const name = newItemName.trim()
+    const externalCode = newItemCode.trim() || nextCatalogInternalId(catalog, newItemClass)
+    if (!name) {
+      window.alert('El nombre del insumo/producto es obligatorio.')
+      return
+    }
+    const item: CatalogItem = {
+      internalId: nextCatalogInternalId(catalog, newItemClass),
+      externalCode,
+      originalCode: externalCode,
+      name,
+      class: newItemClass,
+      type: newItemType.trim(),
+      origin: 'manual',
+      composition: emptyComposition(),
+    }
+    setSaveState('saving')
+    try {
+      if (usingConvex) {
+        await createRemoteCatalogItem({ item, actor: { id: 'local', role }, reason: 'Creacion manual desde UI local' })
+      } else {
+        setLocalCatalog([...catalog, item])
+      }
+      setSelectedCatalogId(item.internalId)
+      setEditorOpen(true)
+      setNewItemCode('')
+      setNewItemName('')
+      setNewItemType('')
+      setSaveState('saved')
+    } catch (error) {
+      window.alert(error instanceof Error ? error.message : 'No se pudo crear el item.')
+      setSaveState('error')
+    }
+  }
+
+  async function createTargetProduct() {
+    if (role !== 'admin') {
+      window.alert('Cambia a Admin local para crear productos objetivo.')
+      return
+    }
+    const name = newTargetName.trim()
+    if (!name) {
+      window.alert('El nombre del producto objetivo es obligatorio.')
+      return
+    }
+    const externalCode = newTargetCode.trim() || nextCatalogInternalId(catalog, 'PT')
+    const item: CatalogItem = {
+      internalId: nextCatalogInternalId(catalog, 'PT'),
+      externalCode,
+      originalCode: externalCode,
+      name,
+      class: 'PT',
+      type: newTargetType.trim(),
+      origin: 'manual',
+      composition: emptyComposition(),
+    }
+    setSaveState('saving')
+    try {
+      if (usingConvex) {
+        await createRemoteCatalogItem({ item, actor: { id: 'local', role }, reason: 'Creacion de producto objetivo para verificacion' })
+      } else {
+        setLocalCatalog([...catalog, item])
+      }
+      setTargetId(item.internalId)
+      setSelectedCatalogId(item.internalId)
+      setEditorOpen(true)
+      setView('catalog')
+      setNewTargetCode('')
+      setNewTargetName('')
+      setNewTargetType('')
+      setSaveState('saved')
+    } catch (error) {
+      window.alert(error instanceof Error ? error.message : 'No se pudo crear el producto objetivo.')
+      setSaveState('error')
+    }
+  }
+
+  function getCompositionInputValue(item: CatalogItem, nutrient: NutrientKey) {
+    return compositionDrafts[item.internalId]?.[nutrient] ?? String(item.composition[nutrient])
+  }
+
+  function updateComposition(item: CatalogItem, nutrient: NutrientKey, rawValue: string) {
+    if (role !== 'admin' && item.class !== 'MP') return
+    setCompositionDrafts((drafts) => ({
+      ...drafts,
+      [item.internalId]: {
+        ...drafts[item.internalId],
+        [nutrient]: rawValue,
+      },
+    }))
+
+    const value = Number(rawValue)
+    if (!Number.isFinite(value)) return
+    if (rawValue.endsWith('.') || rawValue === '-') return
+    const roundedValue = Math.round(value * 10000) / 10000
+    const before = item.composition[nutrient]
+    if (before === roundedValue) return
+    pendingCompositionValues.current[item.internalId] = {
+      ...pendingCompositionValues.current[item.internalId],
+      [nutrient]: roundedValue,
+    }
+    liveCompositionValues.current[item.internalId] = {
+      ...(liveCompositionValues.current[item.internalId] ?? item.composition),
+      [nutrient]: roundedValue,
+    }
+
+    const timerKey = `${item.internalId}.${nutrient}`
+    window.clearTimeout(compositionSaveTimers.current[timerKey])
+    compositionSaveTimers.current[timerKey] = window.setTimeout(async () => {
+      setSaveState('saving')
+      try {
+        const nextComposition = liveCompositionValues.current[item.internalId] ?? item.composition
+        if (usingConvex) {
+          await updateRemoteComposition({
+            internalId: item.internalId,
+            composition: nextComposition,
+            actor: { id: 'local', role },
+            reason: 'Edicion de composicion desde UI',
+          })
+        } else {
+          setLocalCatalog(
+            catalog.map((catalogItem) =>
+              catalogItem.internalId === item.internalId
+                ? { ...catalogItem, composition: nextComposition }
+                : catalogItem,
+            ),
+          )
+          const change: CatalogChange = {
+            id: crypto.randomUUID(),
+            itemInternalId: item.internalId,
+            itemName: item.name,
+            changedAt: Date.now(),
+            actor: role,
+            field: `composition.${nutrient}`,
+            before,
+            after: roundedValue,
+            origin: 'catalog.detail_edit',
+          }
+          setLocalCatalogChanges([change, ...catalogChanges].slice(0, 200))
+        }
+        setCompositionDrafts((drafts) => {
+          const itemDraft = { ...drafts[item.internalId] }
+          delete itemDraft[nutrient]
+          return {
+            ...drafts,
+            [item.internalId]: itemDraft,
+          }
+        })
+        delete pendingCompositionValues.current[item.internalId]?.[nutrient]
+        setSaveState('saved')
+      } catch (error) {
+        window.alert(error instanceof Error ? error.message : 'No se pudo guardar la composicion.')
+        setSaveState('error')
+      }
+    }, 450)
+  }
+
+  async function archiveItem(item: CatalogItem) {
+    if (role !== 'admin') return
+    const appearsInLiveLists = lists.some((list) => list.components.some((component) => component.itemId === item.internalId))
+    if (appearsInLiveLists && !window.confirm('Este item aparece en listas vivas. Se archivara sin alterar snapshots.')) return
+    setSaveState('saving')
+    try {
+      if (usingConvex) {
+        await archiveRemoteItem({ internalId: item.internalId, actor: { id: 'local', role }, reason: 'Archivado desde UI' })
+      } else {
+        setLocalCatalog(catalog.map((catalogItem) => (catalogItem.internalId === item.internalId ? { ...catalogItem, archivedAt: Date.now() } : catalogItem)))
+      }
+      setSaveState('saved')
+    } catch (error) {
+      window.alert(error instanceof Error ? error.message : 'No se pudo archivar el item.')
+      setSaveState('error')
+    }
+  }
+
+  async function saveList() {
+    setSaveState('saving')
+    const now = Date.now()
+    const liveId = editingListId ?? crypto.randomUUID()
+    const existing = lists.find((list) => list.id === liveId)
+    const displayCode = existing?.displayCode ?? createDisplayCode(target, lists)
+    const liveList: ProductList = {
+      id: liveId,
+      displayCode,
+      targetProductId: target?.internalId ?? null,
+      components,
+      updatedAt: now,
+    }
+    const version = `v${snapshots.filter((snapshot) => snapshot.productListId === liveId).length + 1}`
+    const snapshot: Snapshot = {
+      id: crypto.randomUUID(),
+      productListId: liveId,
+      displayCode,
+      snapshotVersion: version,
+      targetProductId: target?.internalId ?? null,
+      frozenTarget: target,
+      frozenComponents: resolvedComponents,
+      summary,
+      createdAt: now,
+      actor: role,
+    }
+    try {
+      if (usingConvex) {
+        const result = await saveRemoteList({
+          productListId: editingListId ? (editingListId as never) : undefined,
+          displayCode,
+          targetProductId: target?.internalId,
+          components: components
+            .filter((component) => component.itemId)
+            .map((component) => ({ itemInternalId: component.itemId, quantityKg: component.quantityKg })),
+          actor: { id: 'local', role },
+        })
+        setEditingListId(String(result.productListId))
+      } else {
+        setLocalLists(existing ? lists.map((list) => (list.id === liveId ? liveList : list)) : [liveList, ...lists])
+        setLocalSnapshots([snapshot, ...snapshots])
+        setEditingListId(liveId)
+      }
+      window.setTimeout(() => setSaveState('saved'), 200)
+    } catch (error) {
+      window.alert(error instanceof Error ? error.message : 'No se pudo guardar la lista.')
+      setSaveState('error')
+    }
+  }
+
+  function loadList(list: ProductList) {
+    setEditingListId(list.id)
+    setTargetId(list.targetProductId ?? '')
+    setComponents(list.components.length > 0 ? list.components : [{ id: crypto.randomUUID(), itemId: '', quantityKg: 0 }])
+    setView('formulator')
+  }
+
+  function exportLists(format: 'csv' | 'json') {
+    if (lists.length === 0) {
+      window.alert('No hay listas vivas para exportar.')
+      return
+    }
+    const stamp = exportStamp()
+    if (format === 'csv') {
+      downloadTextFile(exportLiveListsCsv(lists, catalog), `cfq-listas-vivas-${stamp}.csv`, 'text/csv;charset=utf-8')
+      return
+    }
+    downloadTextFile(exportLiveListsJson(lists, catalog), `cfq-listas-vivas-${stamp}.json`, 'application/json;charset=utf-8')
+  }
+
+  function exportSnapshotHistory(format: 'csv' | 'json') {
+    if (snapshots.length === 0) {
+      window.alert('No hay snapshots para exportar.')
+      return
+    }
+    const stamp = exportStamp()
+    if (format === 'csv') {
+      downloadTextFile(exportSnapshotsCsv(snapshots), `cfq-snapshots-listas-${stamp}.csv`, 'text/csv;charset=utf-8')
+      return
+    }
+    downloadTextFile(exportSnapshotsJson(snapshots), `cfq-snapshots-listas-${stamp}.json`, 'application/json;charset=utf-8')
+  }
+
+  async function previewListImport(file: File | null) {
+    if (!file) return
+    const text = await file.text()
+    setImportFileName(file.name)
+    setImportResult(parseListImportCsv(text, activeCatalog))
+  }
+
+  const title = view === 'catalog'
+    ? 'Catalogo unificado'
+    : view === 'history'
+      ? 'Snapshots congelados'
+      : view === 'import'
+        ? 'Importacion futura'
+        : 'Lista viva de formulacion'
+
+  return (
+    <main className={`app-shell ${sidebarOpen ? 'sidebar-open' : 'sidebar-collapsed'}`}>
+      <aside className="sidebar">
+        <button className="sidebar-toggle" onClick={() => setSidebarOpen(!sidebarOpen)} title={sidebarOpen ? 'Contraer menu' : 'Expandir menu'}>
+          {sidebarOpen ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
+        </button>
+        <div className="brand">
+          <span className="brand-mark">CFQ</span>
+          <div>
+            <strong>Formulador SGC</strong>
+            <small>Catalogo vivo y snapshots</small>
+          </div>
+        </div>
+        <nav>
+          <button className={view === 'formulator' ? 'active' : ''} onClick={() => setView('formulator')} title="Formular"><Beaker size={18} /> <span>Formular</span></button>
+          <button className={view === 'catalog' ? 'active' : ''} onClick={() => setView('catalog')} title="Catalogo"><Database size={18} /> <span>Catalogo</span></button>
+          <button className={view === 'history' ? 'active' : ''} onClick={() => setView('history')} title="Historico"><History size={18} /> <span>Historico</span></button>
+          <button className={view === 'import' ? 'active' : ''} onClick={() => setView('import')} title="Importar"><FileUp size={18} /> <span>Importar</span></button>
+        </nav>
+        <div className="role-box">
+          <Shield size={18} />
+          <span>{role === 'admin' ? 'Admin local' : 'Usuario normal'}</span>
+          <button onClick={() => setRole(role === 'admin' ? 'user' : 'admin')} title="Cambiar rol"><UserCog size={16} /> <span>Cambiar</span></button>
+        </div>
+      </aside>
+
+      <section className="workspace">
+        <header className="topbar">
+          <div>
+            <h1>{title}</h1>
+            <p>Base fija 1000 kg, IDs internos no editables y recalculo contra catalogo vigente.</p>
+          </div>
+          <div className="topbar-actions">
+            <button className="danger" onClick={clearLocalData}><RotateCcw size={16} /> Limpiar local</button>
+            <div className={`save-pill ${saveState}`}>{saveState === 'saving' ? 'Guardando' : saveState === 'error' ? 'Error' : saveState === 'saved' ? 'Guardado' : 'Listo'}</div>
+          </div>
+        </header>
+
+        {catalog.length === 0 ? (
+          <section className="empty-panel">
+            <Database size={30} />
+            <h2>Cargar catalogo base</h2>
+            <p>La carga inicial lee `mp-pt_mzr.csv` y solo se habilita cuando Convex/local esta vacio.</p>
+            <button className="primary" onClick={seedCatalog}>Cargar CSV base</button>
+          </section>
+        ) : view === 'catalog' ? (
+          <section className="catalog-layout">
+            <div className="panel">
+              <div className="toolbar">
+                <label className="search"><Search size={17} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar por codigo, nombre o tipo" /></label>
+                <select value={classFilter} onChange={(event) => setClassFilter(event.target.value as typeof classFilter)}>
+                  <option value="ALL">Todas las clases</option>
+                  <option value="MP">MP</option>
+                  <option value="PT">PT</option>
+                  <option value="MZR">MZR</option>
+                </select>
+              </div>
+              <div className="catalog-stats">
+                <span><strong>{activeCatalog.filter((item) => item.class === 'MP').length}</strong> MP</span>
+                <span><strong>{activeCatalog.filter((item) => item.class === 'PT').length}</strong> PT</span>
+                <span><strong>{activeCatalog.filter((item) => item.class === 'MZR').length}</strong> MZR</span>
+              </div>
+              <div className="create-catalog-item">
+                <select value={newItemClass} disabled={role !== 'admin'} onChange={(event) => setNewItemClass(event.target.value as CatalogClass)}>
+                  <option value="MP">MP</option>
+                  <option value="PT">PT</option>
+                  <option value="MZR">MZR</option>
+                </select>
+                <input value={newItemCode} disabled={role !== 'admin'} onChange={(event) => setNewItemCode(event.target.value)} placeholder="COD / codigo original" />
+                <input value={newItemName} disabled={role !== 'admin'} onChange={(event) => setNewItemName(event.target.value)} placeholder="Nombre del insumo o producto" />
+                <input value={newItemType} disabled={role !== 'admin'} onChange={(event) => setNewItemType(event.target.value)} placeholder="Tipo" />
+                <button className="primary" disabled={role !== 'admin'} onClick={createCatalogItem}>Crear</button>
+              </div>
+              <div className="catalog-table">
+                <div className="table-head"><span>ID</span><span>Clase</span><span>Producto</span><span>N</span><span>P</span><span>K</span><span></span></div>
+                {filteredCatalog.map((item) => {
+                  const canEdit = role === 'admin' || item.class === 'MP'
+                  return (
+                    <div className={`table-row ${selectedCatalogId === item.internalId ? 'selected' : ''}`} key={item.internalId}>
+                      <span><strong>{item.internalId}</strong><small>COD {item.externalCode}</small></span>
+                      <span className={`class-badge ${item.class}`}>{item.class}</span>
+                      <span>{item.name}<small>{item.type || 'Sin tipo'} · origen {item.origin}</small></span>
+                      {(['N', 'P', 'K'] as NutrientKey[]).map((nutrient) => (
+                        <input
+                          key={nutrient}
+                          disabled={!canEdit}
+                          value={getCompositionInputValue(item, nutrient)}
+                          onClick={(event) => event.stopPropagation()}
+                          onChange={(event) => updateComposition(item, nutrient, event.target.value)}
+                        />
+                      ))}
+                      <div className="row-actions">
+                        <button onClick={() => { setSelectedCatalogId(item.internalId); setEditorOpen(true) }} title="Editar detalle"><Pencil size={16} /></button>
+                        <button disabled={role !== 'admin'} onClick={() => archiveItem(item)} title="Archivar"><Archive size={16} /></button>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+
+            <div className="panel global-changes">
+              <div className="section-title">
+                <h2>Auditoria global reciente</h2>
+                <small>{catalogChanges.length} cambios locales retenidos</small>
+              </div>
+              <div className="change-table">
+                {catalogChanges.slice(0, 18).map((change) => (
+                  <div className="change-table-row" key={change.id}>
+                    <span><strong>{change.itemInternalId}</strong><small>{change.itemName}</small></span>
+                    <span>{change.field.replace('composition.', '')}</span>
+                    <span>{change.before} {'->'} {change.after}</span>
+                    <small>{new Date(change.changedAt).toLocaleString()} · {change.actor}</small>
+                  </div>
+                ))}
+                {catalogChanges.length === 0 && <p className="muted">Sin cambios de catalogo registrados todavia.</p>}
+              </div>
+            </div>
+
+            {editorOpen && (
+              <aside className="detail-drawer">
+                <div className="panel detail-panel">
+                  {selectedCatalogItem ? (
+                <>
+                  <div className="detail-head">
+                    <div>
+                      <strong>{selectedCatalogItem.internalId}</strong>
+                      <small>{selectedCatalogItem.name} · COD {selectedCatalogItem.originalCode}</small>
+                    </div>
+                    <button className="icon-button" onClick={() => setEditorOpen(false)}><X size={16} /></button>
+                  </div>
+                  <div className="permission-note">
+                    {role === 'admin' || selectedCatalogItem.class === 'MP'
+                      ? 'Edicion habilitada. Las composiciones se guardan hasta 4 decimales.'
+                      : 'Usuario normal: solo lectura para PT/MZR.'}
+                  </div>
+                  <div className="composition-editor">
+                    {NUTRIENTS.map((nutrient) => (
+                      <label key={nutrient}>
+                        <span>{nutrient}</span>
+                        <input
+                          type="number"
+                          step="0.0001"
+                          disabled={role !== 'admin' && selectedCatalogItem.class !== 'MP'}
+                          value={getCompositionInputValue(selectedCatalogItem, nutrient)}
+                          onChange={(event) => updateComposition(selectedCatalogItem, nutrient, event.target.value)}
+                        />
+                      </label>
+                    ))}
+                  </div>
+                  <div className="change-log">
+                    <h3><ListChecks size={16} /> Cambios recientes</h3>
+                    {catalogChanges.filter((change) => change.itemInternalId === selectedCatalogItem.internalId).slice(0, 8).map((change) => (
+                      <div className="change-row" key={change.id}>
+                        <strong>{change.field.replace('composition.', '')}</strong>
+                        <span>{change.before} {'->'} {change.after}</span>
+                        <small>{new Date(change.changedAt).toLocaleString()} · {change.actor}</small>
+                      </div>
+                    ))}
+                    {catalogChanges.filter((change) => change.itemInternalId === selectedCatalogItem.internalId).length === 0 && <p className="muted">Sin cambios registrados para este item.</p>}
+                  </div>
+                  </>
+                ) : (
+                <div className="empty-detail">
+                  <Database size={26} />
+                  <p>Selecciona un item para editar los 20 nutrientes y ver auditoria local.</p>
+                </div>
+                )}
+                </div>
+              </aside>
+            )}
+          </section>
+        ) : view === 'formulator' ? (
+          <section className="form-grid">
+            <div className="panel">
+              <div className="section-title">
+                <h2>Objetivo y componentes</h2>
+                <div className="form-actions">
+                  <button className="secondary" onClick={startNewList}><Plus size={17} /> Nueva lista</button>
+                  <button className="secondary" onClick={() => exportLists('csv')}><Download size={17} /> CSV</button>
+                  <button className="secondary" onClick={() => exportLists('json')}><Download size={17} /> JSON</button>
+                  <button className="primary" onClick={saveList}><Save size={17} /> Guardar snapshot</button>
+                </div>
+              </div>
+              <label className="field">Producto objetivo opcional
+                <select value={targetId} onChange={(event) => setTargetId(event.target.value)}>
+                  <option value="">SIN_OBJETIVO / BORRADOR</option>
+                  {activeCatalog.filter((item) => item.class === 'PT').map((item) => <option key={item.internalId} value={item.internalId}>{item.internalId} · {item.name}</option>)}
+                </select>
+              </label>
+              <div className="target-create">
+                <div>
+                  <strong>Nuevo producto objetivo</strong>
+                  <small>Se crea como PT manual para declarar nutrientes y verificar cumplimiento.</small>
+                </div>
+                <input value={newTargetCode} disabled={role !== 'admin'} onChange={(event) => setNewTargetCode(event.target.value)} placeholder="COD opcional" />
+                <input value={newTargetName} disabled={role !== 'admin'} onChange={(event) => setNewTargetName(event.target.value)} placeholder="Nombre del producto nuevo" />
+                <input value={newTargetType} disabled={role !== 'admin'} onChange={(event) => setNewTargetType(event.target.value)} placeholder="Tipo" />
+                <button className="secondary" disabled={role !== 'admin'} onClick={createTargetProduct}><PackagePlus size={17} /> Crear PT</button>
+              </div>
+              <div className="component-list">
+                {components.map((component, index) => (
+                  <div className="component-row" key={component.id}>
+                    <span>{index + 1}</span>
+                    <select value={component.itemId} onChange={(event) => setComponents(components.map((row) => row.id === component.id ? { ...row, itemId: event.target.value } : row))}>
+                      <option value="">Seleccionar MP/PT/MZR</option>
+                      {activeCatalog.map((item) => <option key={item.internalId} value={item.internalId}>{item.internalId} · {item.class} · {item.name}</option>)}
+                    </select>
+                    <input type="number" step="0.01" value={component.quantityKg || ''} onChange={(event) => setComponents(components.map((row) => row.id === component.id ? { ...row, quantityKg: Number(event.target.value) } : row))} placeholder="kg" />
+                    <button onClick={() => setComponents(components.filter((row) => row.id !== component.id))}>Quitar</button>
+                  </div>
+                ))}
+              </div>
+              <button className="secondary" onClick={() => setComponents([...components, { id: crypto.randomUUID(), itemId: '', quantityKg: 0 }])}>Agregar componente</button>
+            </div>
+            <div className="panel result-panel">
+              <div className="status-strip">
+                <strong>{summary.evaluation.generalStatus}</strong>
+                <span>{summary.totalKg.toFixed(2)} kg / 1000 kg</span>
+              </div>
+              {summary.alerts.map((alert) => <div className="alert" key={alert}>{alert}</div>)}
+              <div className="nutrient-grid">
+                {NUTRIENTS.map((nutrient) => {
+                  const evaluation = summary.evaluation.evaluations.find((item) => item.nutrient === nutrient)
+                  return (
+                    <div className="nutrient-card" key={nutrient}>
+                      <span>{nutrient}</span>
+                      <strong>{formatPct(summary.composition[nutrient])}</strong>
+                      <em className={evaluation?.status}>{evaluation?.status}</em>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          </section>
+        ) : view === 'history' ? (
+          <section className="panel">
+            <div className="section-title">
+              <h2>Snapshots congelados</h2>
+              <div className="form-actions">
+                <button className="secondary" onClick={() => exportSnapshotHistory('csv')}><Download size={17} /> CSV</button>
+                <button className="secondary" onClick={() => exportSnapshotHistory('json')}><Download size={17} /> JSON</button>
+              </div>
+            </div>
+            <div className="snapshot-list">
+              {snapshots.map((snapshot) => (
+                <article className="snapshot" key={snapshot.id}>
+                  <div>
+                    <strong>{snapshot.displayCode} · {snapshot.snapshotVersion}</strong>
+                    <small><Clock3 size={14} /> {new Date(snapshot.createdAt).toLocaleString()} · {snapshot.actor}</small>
+                  </div>
+                  <span className="status">{snapshot.summary.evaluation.generalStatus}</span>
+                  <span>{snapshot.summary.totalKg.toFixed(2)} kg</span>
+                  <button onClick={() => loadList(lists.find((list) => list.id === snapshot.productListId) ?? {
+                    id: crypto.randomUUID(),
+                    displayCode: snapshot.displayCode,
+                    targetProductId: snapshot.targetProductId,
+                    components: snapshot.frozenComponents.map((component) => ({ id: crypto.randomUUID(), itemId: component.item.internalId, quantityKg: component.quantityKg })),
+                    updatedAt: Date.now(),
+                  })}>Abrir viva</button>
+                </article>
+              ))}
+              {snapshots.length === 0 && <p className="muted">Todavia no hay snapshots. Guarda una lista para crear `v1`.</p>}
+            </div>
+          </section>
+        ) : (
+          <section className="import-grid">
+            <div className="panel">
+              <div className="section-title">
+                <h2>Preview sin persistencia</h2>
+              </div>
+              <label className="import-drop">
+                <FileUp size={28} />
+                <span>{importFileName || 'Seleccionar CSV de listas'}</span>
+                <small>Cabeceras: productoObjetivoId, listaAlias, componenteId, cantidad</small>
+                <input type="file" accept=".csv,text/csv" onChange={(event) => previewListImport(event.target.files?.[0] ?? null)} />
+              </label>
+              {importResult && (
+                <div className="import-summary">
+                  <span><strong>{importResult.summary.rowsRead}</strong> filas</span>
+                  <span><strong>{importResult.summary.validRows}</strong> validas</span>
+                  <span><strong>{importResult.summary.groups}</strong> listas</span>
+                  <span><strong>{importResult.errors.length}</strong> errores</span>
+                </div>
+              )}
+            </div>
+            <div className="panel">
+              <div className="section-title">
+                <h2>Listas detectadas</h2>
+              </div>
+              <div className="import-preview-list">
+                {importResult?.groups.map((group) => (
+                  <article className="import-group" key={group.key}>
+                    <div>
+                      <strong>{group.productTargetId ?? 'SIN_OBJETIVO'} · {group.listAlias}</strong>
+                      <small>{group.rows.length} componentes · {group.totalKg.toFixed(2)} kg</small>
+                    </div>
+                    {group.totalKg !== 1000 && <span className="warning-badge">Total distinto de 1000 kg</span>}
+                  </article>
+                ))}
+                {(!importResult || importResult.groups.length === 0) && <p className="muted">Carga un archivo para previsualizar grupos validos.</p>}
+              </div>
+            </div>
+            <div className="panel import-errors">
+              <div className="section-title">
+                <h2>Errores de validacion</h2>
+              </div>
+              <div className="change-table">
+                {importResult?.errors.slice(0, 40).map((error, index) => (
+                  <div className="change-table-row" key={`${error.row}-${error.field}-${index}`}>
+                    <span><strong>Fila {error.row}</strong></span>
+                    <span>{error.field}</span>
+                    <small>{error.message}</small>
+                  </div>
+                ))}
+                {(!importResult || importResult.errors.length === 0) && <p className="muted">Sin errores para mostrar.</p>}
+              </div>
+            </div>
+          </section>
+        )}
+      </section>
+    </main>
+  )
+}
+
+const root = createRoot(document.getElementById('app')!)
+
+if (convexUrl) {
+  const convex = new ConvexReactClient(convexUrl)
+  root.render(
+    <React.StrictMode>
+      <ConvexProvider client={convex}>
+        <App />
+      </ConvexProvider>
+    </React.StrictMode>,
+  )
+} else {
+  root.render(
+    <React.StrictMode>
+      <main className="empty-panel missing-config">
+        <Database size={30} />
+        <h1>Falta configurar Convex</h1>
+        <p>Define VITE_CONVEX_URL en .env.local y reinicia Vite.</p>
+      </main>
+    </React.StrictMode>,
+  )
+}

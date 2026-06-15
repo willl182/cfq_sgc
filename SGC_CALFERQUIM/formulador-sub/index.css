@@ -1884,3 +1884,46 @@ input:focus {
 
   .status-badge { border: 1px solid currentColor; }
 }
+
+/* ─── 33. CATALOGO UNIFICADO & HISTORICO EXTENSIONS ─────────────────────── */
+
+.badge-mzr { background: var(--purple-muted, rgba(168,85,247,0.12)); color: #a855f7; }
+.badge-mzr:hover { background: rgba(168,85,247,0.2); }
+
+.expanded-row { background: var(--bg-tertiary); }
+.expanded-row td { padding: var(--sp-4) !important; }
+
+.detail-panel { padding: var(--sp-3); }
+.detail-panel .section-title { margin: var(--sp-4) 0 var(--sp-2); }
+.detail-actions { margin: var(--sp-3) 0; display: flex; gap: var(--sp-2); }
+.detail-note { color: var(--text-tertiary); font-style: italic; padding: var(--sp-2) 0; }
+
+.nutrient-input {
+  width: 72px;
+  padding: 2px 6px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  text-align: right;
+  transition: border-color 0.2s;
+}
+.nutrient-input:focus { border-color: var(--green-400); outline: none; }
+.nutrient-input.saving { border-color: var(--amber-400); }
+.nutrient-input.saved { border-color: var(--green-400); }
+
+.status-cumples, .status-cumple_s { background: rgba(245,158,11,0.12); color: var(--amber-400); }
+.status-nocumple, .status-no_cumple { background: var(--red-muted); color: var(--red-400); }
+.status-cumple, .status-c { background: var(--green-muted); color: var(--green-400); }
+.status-sinobjetivo, .status-sin_objetivo { background: var(--bg-elevated); color: var(--text-tertiary); }
+.status-sup { background: rgba(245,158,11,0.12); color: var(--amber-400); }
+
+.btn-sm { padding: var(--sp-1) var(--sp-2); font-size: var(--fs-xs); }
+
+.sortable { cursor: pointer; user-select: none; }
+.sortable:hover { color: var(--green-400); }
+.sortable::after { content: '↕'; opacity: 0.3; margin-left: 4px; font-size: 0.75em; }
+
+tr.expanded > td { background: rgba(52,211,153,0.04); }
