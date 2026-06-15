@@ -195,6 +195,12 @@ Los 22 productos originales del plan estan en la seccion 2.2 del `PLAN_MIGRACION
 - Todos los demas documentos estan en espanol
 - Comunicarse siempre en espanol con el usuario
 
+## Despliegue de Aplicaciones Web
+
+- Para cambios en aplicaciones web desplegadas, especialmente `SGC_CALFERQUIM/formulador-sub_1/web`, llevar siempre los cambios a produccion despues de validar tests y build, salvo instruccion explicita en contra del usuario.
+- Flujo esperado: implementar cambio, ejecutar `pnpm test`, ejecutar `pnpm build`, desplegar con el comando de produccion del proyecto (por ejemplo `pnpm exec vercel --prod` en `formulador-sub_1/web`) y reportar la URL final.
+- Si el despliegue falla, diagnosticar y resolver el bloqueo dentro de la misma sesion cuando sea posible; no dejar el cambio solo en local sin avisar claramente.
+
 ## Decisiones Confirmadas
 
 | Decision | Valor |

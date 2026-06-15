@@ -8,6 +8,7 @@ import { parseCatalogCsv, type CatalogItem } from './domain/catalog'
 import { exportLiveListsCsv, exportLiveListsJson, exportSnapshotsCsv, exportSnapshotsJson } from './domain/exportLists'
 import { calculateComponentContributions, summarizeFormula, type FormulaComponentInput } from './domain/formulation'
 import { parseListImportCsv, type ParseListImportResult } from './domain/importLists'
+import { summarizeRequiredInputs } from './domain/listTotals'
 import { emptyComposition, NUTRIENTS, type CatalogClass, type NutrientKey } from './domain/nutrients'
 
 type Role = 'user' | 'admin'
@@ -103,6 +104,12 @@ type CatalogChange = {
   before: number
   after: number
   origin: 'catalog.detail_edit'
+}
+
+type ScaleSelection = {
+  id: string
+  listId: string
+  multiplier: number
 }
 
 function useLocalState<T>(key: string, initialValue: T) {
@@ -233,6 +240,7 @@ function App() {
   const [editingListId, setEditingListId] = useState<string | null>(null)
   const [scaleListId, setScaleListId] = useState('')
   const [scaleMultiplier, setScaleMultiplier] = useState(1)
+  const [scaleSelections, setScaleSelections] = useState<ScaleSelection[]>([{ id: crypto.randomUUID(), listId: '', multiplier: 1 }])
   const [selectedCatalogId, setSelectedCatalogId] = useState<string | null>(null)
   const [newItemClass, setNewItemClass] = useState<CatalogClass>('MP')
   const [newItemCode, setNewItemCode] = useState('')
@@ -279,6 +287,13 @@ function App() {
   const scaleBaseKg = selectedScaleList?.components.reduce((sum, component) => sum + Math.max(0, component.quantityKg), 0) ?? 0
   const safeScaleMultiplier = Number.isFinite(scaleMultiplier) && scaleMultiplier > 0 ? scaleMultiplier : 0
   const scaledTotalKg = scaleBaseKg * safeScaleMultiplier
+  const selectedRequirements = summarizeRequiredInputs(
+    lists,
+    scaleSelections.map((selection) => ({ listId: selection.listId, multiplier: selection.multiplier })),
+    activeCatalog,
+  )
+  const selectedRequirementsTotalKg = selectedRequirements.reduce((sum, requirement) => sum + requirement.totalKg, 0)
+  const listIdsKey = lists.map((list) => list.id).join('|')
 
   useEffect(() => {
     return () => {
@@ -293,6 +308,16 @@ function App() {
       }
     })
   }, [activeCatalog])
+
+  useEffect(() => {
+    setScaleSelections((current) => {
+      const next = current.map((selection, index) => ({
+        ...selection,
+        listId: selection.listId || lists[index]?.id || '',
+      }))
+      return next.some((selection, index) => selection.listId !== current[index]?.listId) ? next : current
+    })
+  }, [listIdsKey])
 
   const filteredCatalog = useMemo(() => {
     const needle = query.trim().toLowerCase()
@@ -354,6 +379,18 @@ function App() {
     setNewTargetType('')
     setView('formulator')
     setSaveState('idle')
+  }
+
+  function addScaleSelection() {
+    setScaleSelections([...scaleSelections, { id: crypto.randomUUID(), listId: lists[0]?.id ?? '', multiplier: 1 }])
+  }
+
+  function updateScaleSelection(id: string, patch: Partial<Omit<ScaleSelection, 'id'>>) {
+    setScaleSelections(scaleSelections.map((selection) => selection.id === id ? { ...selection, ...patch } : selection))
+  }
+
+  function removeScaleSelection(id: string) {
+    setScaleSelections(scaleSelections.length > 1 ? scaleSelections.filter((selection) => selection.id !== id) : [{ id: crypto.randomUUID(), listId: '', multiplier: 1 }])
   }
 
   function startNewList() {
@@ -1091,6 +1128,72 @@ function App() {
                   {(selectedScaleComponents ?? []).length === 0 && <p className="muted">La lista seleccionada no tiene componentes validos contra el catalogo activo.</p>}
                 </div>
               ) : <p className="muted">Guarda una lista viva para poder escalar cantidades.</p>}
+            </div>
+            <div className="panel scale-total-panel">
+              <div className="section-title">
+                <h2>Total por insumo</h2>
+                <button className="secondary" onClick={addScaleSelection} disabled={lists.length === 0}><Plus size={17} /> Agregar lista</button>
+              </div>
+              <div className="scale-selection-list">
+                {scaleSelections.map((selection, index) => {
+                  const selectedList = lists.find((list) => list.id === selection.listId)
+                  const baseKg = selectedList?.components.reduce((sum, component) => sum + Math.max(0, component.quantityKg), 0) ?? 0
+                  const multiplier = Number.isFinite(selection.multiplier) && selection.multiplier > 0 ? selection.multiplier : 0
+                  return (
+                    <div className="scale-selection-row" key={selection.id}>
+                      <label className="field">Lista {index + 1}
+                        <select value={selection.listId} onChange={(event) => updateScaleSelection(selection.id, { listId: event.target.value })}>
+                          {lists.length === 0 && <option value="">No hay listas guardadas</option>}
+                          {lists.map((list) => {
+                            const listTarget = list.targetProductId ? activeCatalog.find((item) => item.internalId === list.targetProductId) : null
+                            return <option key={list.id} value={list.id}>{list.displayCode} · {listTarget?.name ?? 'SIN_OBJETIVO'}</option>
+                          })}
+                        </select>
+                      </label>
+                      <label className="field">Multiplicador
+                        <input
+                          type="number"
+                          min="0"
+                          step="0.01"
+                          value={selection.multiplier || ''}
+                          onChange={(event) => updateScaleSelection(selection.id, { multiplier: Number(event.target.value) })}
+                          placeholder="Ej: 3"
+                        />
+                      </label>
+                      <span className="selection-total"><strong>{formatKg(baseKg * multiplier)} kg</strong><small>a preparar</small></span>
+                      <button className="secondary icon-only" onClick={() => removeScaleSelection(selection.id)} aria-label="Quitar lista"><X size={17} /></button>
+                    </div>
+                  )
+                })}
+              </div>
+              <div className="scale-summary scale-total-summary">
+                <span><strong>{scaleSelections.filter((selection) => selection.listId).length}</strong><small>listas incluidas</small></span>
+                <span><strong>{formatKg(selectedRequirementsTotalKg)} kg</strong><small>total de insumos</small></span>
+              </div>
+              {selectedRequirements.length > 0 ? (
+                <div className="scale-table-wrap">
+                  <table className="contribution-table scale-table">
+                    <thead>
+                      <tr>
+                        <th>Insumo</th>
+                        <th>Clase</th>
+                        <th>Total requerido</th>
+                        <th>Viene de</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {selectedRequirements.map((requirement) => (
+                        <tr key={requirement.item.internalId}>
+                          <td><strong>{requirement.item.internalId}</strong><small>{requirement.item.name}</small></td>
+                          <td>{requirement.item.class}</td>
+                          <td><strong>{formatKg(requirement.totalKg)} kg</strong></td>
+                          <td>{requirement.sources.map((source) => `${source.displayCode}: ${formatKg(source.quantityKg)} kg`).join(' · ')}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : <p className="muted">Selecciona una o varias listas guardadas para consolidar la necesidad total de MP por insumo.</p>}
             </div>
           </section>
         ) : view === 'history' ? (
