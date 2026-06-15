@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { parseCatalogCsv } from './catalog'
 import { exportLiveListsCsv, exportSnapshotsCsv } from './exportLists'
-import { calculateComposition, summarizeFormula } from './formulation'
+import { calculateComponentContributions, calculateComposition, summarizeFormula } from './formulation'
 import { parseListImportCsv } from './importLists'
 import { emptyComposition } from './nutrients'
 
@@ -91,6 +91,18 @@ describe('formulation engine', () => {
   it('calcula aporte con formula cantidadKg * concentracion / 1000', () => {
     const composition = calculateComposition([{ item: mp, quantityKg: 500 }])
     expect(composition.N).toBe(23)
+  })
+
+  it('calcula contribucion por insumo y cuadra con la composicion total', () => {
+    const kcl = { ...mp, internalId: 'MP0002', name: 'KCL', composition: { ...emptyComposition(), K: 60 } }
+    const components = [{ item: mp, quantityKg: 500 }, { item: kcl, quantityKg: 250 }]
+    const contributions = calculateComponentContributions(components)
+    const composition = calculateComposition(components)
+
+    expect(contributions[0].contribution.N).toBe(23)
+    expect(contributions[1].contribution.K).toBe(15)
+    expect(contributions.reduce((sum, row) => sum + row.contribution.N, 0)).toBe(composition.N)
+    expect(contributions.reduce((sum, row) => sum + row.contribution.K, 0)).toBe(composition.K)
   })
 
   it('permite guardar total distinto de 1000 con alerta', () => {

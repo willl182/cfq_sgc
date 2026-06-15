@@ -26,6 +26,23 @@ export function calculateComposition(components: FormulaComponentInput[]): Compo
   return composition
 }
 
+export function calculateComponentContributions(components: FormulaComponentInput[]) {
+  return components.map((component) => {
+    const quantity = normalizeQuantity(component.quantityKg)
+    const contribution = emptyComposition()
+
+    for (const nutrient of NUTRIENTS) {
+      contribution[nutrient] = roundTo((quantity * (component.item.composition[nutrient] ?? 0)) / 1000, 4)
+    }
+
+    return {
+      item: component.item,
+      quantityKg: quantity,
+      contribution,
+    }
+  })
+}
+
 export function summarizeFormula(components: FormulaComponentInput[], target?: CatalogItem | null) {
   const totalKg = roundTo(components.reduce((sum, component) => sum + normalizeQuantity(component.quantityKg), 0), 2)
   const composition = calculateComposition(components)

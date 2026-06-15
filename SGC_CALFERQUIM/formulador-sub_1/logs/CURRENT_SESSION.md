@@ -1,27 +1,27 @@
 # Session State: formulador-sub_1
 
-**Last Updated**: 2026-06-11 10:52 America/Bogota
+**Last Updated**: 2026-06-15 12:02 America/Bogota
 
 ## Session Objective
 
-Implementar feature para exportar listas desde la app React/Convex del formulador.
+Llevar a producción el formulador con los ajustes visuales finales de interfaz (quitar cubo flotante) e integración de la tipografía Inter.
 
 ## Current State
 
-- [x] Creado modulo puro `web/src/domain/exportLists.ts` para exportar listas vivas y snapshots.
-- [x] Agregados botones CSV/JSON en vista Formulador para exportar listas vivas.
-- [x] Agregados botones CSV/JSON en vista Historico para exportar snapshots congelados.
-- [x] Agregadas pruebas de exportacion CSV con separador `;` y escape de campos.
-- [x] Verificado con `npm test` y `npm run build` en `web/`.
+- [x] Ajustes de CSS finalizados para una interfaz más clara y sin el "cubo flotante".
+- [x] Fuente Google Fonts (Inter) pre-cargada e integrada.
+- [x] Pruebas pasadas localmente usando `pnpm test` (13 tests OK).
+- [x] Build de producción local compilado con `pnpm build` sin errores.
+- [x] Despliegue productivo en Vercel exitoso mediante `pnpm exec vercel --prod`.
+- [x] Enlace de producción verificado: `https://formulador-sub.vercel.app` (enlace al último build).
 
 ## Critical Technical Context
 
-- La exportacion es solo lectura: no modifica Convex, localStorage, catalogo ni snapshots.
-- Los CSV se generan por componente, con una fila por componente de lista/snapshot.
-- Los archivos descargados usan nombres `cfq-listas-vivas-YYYYMMDDHHMMSS.csv|json` y `cfq-snapshots-listas-YYYYMMDDHHMMSS.csv|json`.
-- El formato CSV usa `;`, alineado con los CSV existentes del proyecto.
+- La aplicación corre en Vercel en la URL principal: `https://formulador-sub.vercel.app`.
+- Se usa `pnpm` exclusivamente como manejador de paquetes por instrucción del usuario.
+- Todos los 13 tests de dominio de formulación, catálogo y exportaciones están vigentes y exitosos.
 
 ## Next Steps
 
-1. Probar manualmente en navegador que las descargas salen desde las vistas Formulador e Historico.
-2. Si se requiere interoperabilidad con importacion futura, alinear cabeceras exportadas con `productoObjetivoId, listaAlias, componenteId, cantidad`.
+1. Monitorear el feedback de los operadores sobre la legibilidad de la fuente Inter.
+2. Continuar con el mapeo e importación de la lista de materias primas adicionales si el usuario lo requiere.
