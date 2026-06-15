@@ -1,18 +1,23 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ConvexProvider, ConvexReactClient, useMutation, useQuery } from 'convex/react'
-import { Archive, Beaker, ChevronLeft, ChevronRight, Clock3, Database, Download, FileUp, History, ListChecks, PackagePlus, Pencil, Plus, RotateCcw, Save, Search, Shield, UserCog, X } from 'lucide-react'
+import { Archive, Beaker, Calculator, ChevronLeft, ChevronRight, Clock3, Database, Download, FileUp, History, ListChecks, PackagePlus, Pencil, Plus, RotateCcw, Save, Search, Shield, UserCog, X } from 'lucide-react'
 import './style.css'
 import { api } from '../convex/_generated/api'
 import { parseCatalogCsv, type CatalogItem } from './domain/catalog'
 import { exportLiveListsCsv, exportLiveListsJson, exportSnapshotsCsv, exportSnapshotsJson } from './domain/exportLists'
-import { summarizeFormula, type FormulaComponentInput } from './domain/formulation'
+import { calculateComponentContributions, summarizeFormula, type FormulaComponentInput } from './domain/formulation'
 import { parseListImportCsv, type ParseListImportResult } from './domain/importLists'
+import { summarizeRequiredInputs } from './domain/listTotals'
 import { emptyComposition, NUTRIENTS, type CatalogClass, type NutrientKey } from './domain/nutrients'
 
 type Role = 'user' | 'admin'
-type View = 'catalog' | 'formulator' | 'history' | 'import'
+type View = 'catalog' | 'formulator' | 'scale' | 'history' | 'import'
 const convexUrl = import.meta.env.VITE_CONVEX_URL as string | undefined
+
+function formatGrade(composition: CatalogItem['composition']) {
+  return `${formatPct(composition.N)}-${formatPct(composition.P)}-${formatPct(composition.K)}`
+}
 
 type LiveComponent = {
   id: string
@@ -101,6 +106,12 @@ type CatalogChange = {
   origin: 'catalog.detail_edit'
 }
 
+type ScaleSelection = {
+  id: string
+  listId: string
+  multiplier: number
+}
+
 function useLocalState<T>(key: string, initialValue: T) {
   const [value, setValue] = useState<T>(() => {
     const raw = localStorage.getItem(key)
@@ -165,7 +176,14 @@ function mapConvexChange(change: ConvexCatalogChange, catalog: CatalogItem[]): C
 }
 
 function formatPct(value: number) {
+  if (value === 0 || Math.abs(value) < 0.001) {
+    return ''
+  }
   return value.toFixed(2)
+}
+
+function formatKg(value: number) {
+  return value.toLocaleString('es-CO', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 }
 
 function createDisplayCode(target: CatalogItem | null, lists: ProductList[]) {
@@ -220,6 +238,9 @@ function App() {
   const [targetId, setTargetId] = useState('')
   const [components, setComponents] = useState<LiveComponent[]>([{ id: crypto.randomUUID(), itemId: '', quantityKg: 0 }])
   const [editingListId, setEditingListId] = useState<string | null>(null)
+  const [scaleListId, setScaleListId] = useState('')
+  const [scaleMultiplier, setScaleMultiplier] = useState(1)
+  const [scaleSelections, setScaleSelections] = useState<ScaleSelection[]>([{ id: crypto.randomUUID(), listId: '', multiplier: 1 }])
   const [selectedCatalogId, setSelectedCatalogId] = useState<string | null>(null)
   const [newItemClass, setNewItemClass] = useState<CatalogClass>('MP')
   const [newItemCode, setNewItemCode] = useState('')
@@ -252,7 +273,27 @@ function App() {
     })
     .filter(Boolean) as FormulaComponentInput[]
   const summary = summarizeFormula(resolvedComponents, target)
+  const componentContributions = calculateComponentContributions(resolvedComponents)
+  const contributionNutrients = NUTRIENTS.filter((nutrient) => componentContributions.some((row) => row.contribution[nutrient] > 0))
   const selectedCatalogItem = activeCatalog.find((item) => item.internalId === selectedCatalogId) ?? null
+  const selectedScaleList = lists.find((list) => list.id === scaleListId) ?? lists.find((list) => list.id === editingListId) ?? lists[0] ?? null
+  const selectedScaleTarget = selectedScaleList?.targetProductId ? activeCatalog.find((item) => item.internalId === selectedScaleList.targetProductId) ?? null : null
+  const selectedScaleComponents = selectedScaleList?.components
+    .map((component) => {
+      const item = activeCatalog.find((catalogItem) => catalogItem.internalId === component.itemId)
+      return item ? { component, item } : null
+    })
+    .filter(Boolean) as { component: LiveComponent; item: CatalogItem }[] | undefined
+  const scaleBaseKg = selectedScaleList?.components.reduce((sum, component) => sum + Math.max(0, component.quantityKg), 0) ?? 0
+  const safeScaleMultiplier = Number.isFinite(scaleMultiplier) && scaleMultiplier > 0 ? scaleMultiplier : 0
+  const scaledTotalKg = scaleBaseKg * safeScaleMultiplier
+  const selectedRequirements = summarizeRequiredInputs(
+    lists,
+    scaleSelections.map((selection) => ({ listId: selection.listId, multiplier: selection.multiplier })),
+    activeCatalog,
+  )
+  const selectedRequirementsTotalKg = selectedRequirements.reduce((sum, requirement) => sum + requirement.totalKg, 0)
+  const listIdsKey = lists.map((list) => list.id).join('|')
 
   useEffect(() => {
     return () => {
@@ -267,6 +308,16 @@ function App() {
       }
     })
   }, [activeCatalog])
+
+  useEffect(() => {
+    setScaleSelections((current) => {
+      const next = current.map((selection, index) => ({
+        ...selection,
+        listId: selection.listId || lists[index]?.id || '',
+      }))
+      return next.some((selection, index) => selection.listId !== current[index]?.listId) ? next : current
+    })
+  }, [listIdsKey])
 
   const filteredCatalog = useMemo(() => {
     const needle = query.trim().toLowerCase()
@@ -315,6 +366,8 @@ function App() {
     setTargetId('')
     setComponents([{ id: crypto.randomUUID(), itemId: '', quantityKg: 0 }])
     setEditingListId(null)
+    setScaleListId('')
+    setScaleMultiplier(1)
     setSelectedCatalogId(null)
     setEditorOpen(false)
     setNewItemClass('MP')
@@ -326,6 +379,18 @@ function App() {
     setNewTargetType('')
     setView('formulator')
     setSaveState('idle')
+  }
+
+  function addScaleSelection() {
+    setScaleSelections([...scaleSelections, { id: crypto.randomUUID(), listId: lists[0]?.id ?? '', multiplier: 1 }])
+  }
+
+  function updateScaleSelection(id: string, patch: Partial<Omit<ScaleSelection, 'id'>>) {
+    setScaleSelections(scaleSelections.map((selection) => selection.id === id ? { ...selection, ...patch } : selection))
+  }
+
+  function removeScaleSelection(id: string) {
+    setScaleSelections(scaleSelections.length > 1 ? scaleSelections.filter((selection) => selection.id !== id) : [{ id: crypto.randomUUID(), listId: '', multiplier: 1 }])
   }
 
   function startNewList() {
@@ -415,7 +480,12 @@ function App() {
   }
 
   function getCompositionInputValue(item: CatalogItem, nutrient: NutrientKey) {
-    return compositionDrafts[item.internalId]?.[nutrient] ?? String(item.composition[nutrient])
+    const rawVal = compositionDrafts[item.internalId]?.[nutrient] ?? String(item.composition[nutrient])
+    const num = Number(rawVal)
+    if (rawVal === '0' || rawVal === '0.00' || (Number.isFinite(num) && num === 0 && rawVal !== '0.' && rawVal !== '0.0')) {
+      return ''
+    }
+    return rawVal
   }
 
   function updateComposition(item: CatalogItem, nutrient: NutrientKey, rawValue: string) {
@@ -564,6 +634,7 @@ function App() {
 
   function loadList(list: ProductList) {
     setEditingListId(list.id)
+    setScaleListId(list.id)
     setTargetId(list.targetProductId ?? '')
     setComponents(list.components.length > 0 ? list.components : [{ id: crypto.randomUUID(), itemId: '', quantityKg: 0 }])
     setView('formulator')
@@ -608,7 +679,9 @@ function App() {
       ? 'Snapshots congelados'
       : view === 'import'
         ? 'Importacion futura'
-        : 'Lista viva de formulacion'
+        : view === 'scale'
+          ? 'Preparacion por multiplicador'
+          : 'Lista viva de formulacion'
 
   return (
     <main className={`app-shell ${sidebarOpen ? 'sidebar-open' : 'sidebar-collapsed'}`}>
@@ -625,6 +698,7 @@ function App() {
         </div>
         <nav>
           <button className={view === 'formulator' ? 'active' : ''} onClick={() => setView('formulator')} title="Formular"><Beaker size={18} /> <span>Formular</span></button>
+          <button className={view === 'scale' ? 'active' : ''} onClick={() => setView('scale')} title="Preparar"><Calculator size={18} /> <span>Preparar</span></button>
           <button className={view === 'catalog' ? 'active' : ''} onClick={() => setView('catalog')} title="Catalogo"><Database size={18} /> <span>Catalogo</span></button>
           <button className={view === 'history' ? 'active' : ''} onClick={() => setView('history')} title="Historico"><History size={18} /> <span>Historico</span></button>
           <button className={view === 'import' ? 'active' : ''} onClick={() => setView('import')} title="Importar"><FileUp size={18} /> <span>Importar</span></button>
@@ -801,14 +875,16 @@ function App() {
                 </select>
               </label>
               <div className="target-create">
-                <div>
+                <div className="target-create-header">
                   <strong>Nuevo producto objetivo</strong>
                   <small>Se crea como PT manual para declarar nutrientes y verificar cumplimiento.</small>
                 </div>
-                <input value={newTargetCode} disabled={role !== 'admin'} onChange={(event) => setNewTargetCode(event.target.value)} placeholder="COD opcional" />
-                <input value={newTargetName} disabled={role !== 'admin'} onChange={(event) => setNewTargetName(event.target.value)} placeholder="Nombre del producto nuevo" />
-                <input value={newTargetType} disabled={role !== 'admin'} onChange={(event) => setNewTargetType(event.target.value)} placeholder="Tipo" />
-                <button className="secondary" disabled={role !== 'admin'} onClick={createTargetProduct}><PackagePlus size={17} /> Crear PT</button>
+                <div className="target-create-fields">
+                  <input value={newTargetCode} disabled={role !== 'admin'} onChange={(event) => setNewTargetCode(event.target.value)} placeholder="COD opcional" />
+                  <input value={newTargetName} disabled={role !== 'admin'} onChange={(event) => setNewTargetName(event.target.value)} placeholder="Nombre del producto nuevo" />
+                  <input value={newTargetType} disabled={role !== 'admin'} onChange={(event) => setNewTargetType(event.target.value)} placeholder="Tipo" />
+                  <button className="secondary" disabled={role !== 'admin'} onClick={createTargetProduct}><PackagePlus size={17} /> Crear PT</button>
+                </div>
               </div>
               <div className="component-list">
                 {components.map((component, index) => (
@@ -826,23 +902,298 @@ function App() {
               <button className="secondary" onClick={() => setComponents([...components, { id: crypto.randomUUID(), itemId: '', quantityKg: 0 }])}>Agregar componente</button>
             </div>
             <div className="panel result-panel">
-              <div className="status-strip">
-                <strong>{summary.evaluation.generalStatus}</strong>
+              <div className="status-strip" data-status={summary.evaluation.generalStatus}>
+                <div>
+                  <strong>
+                    {summary.evaluation.generalStatus === 'CUMPLE' ? '✓ Cumple' :
+                     summary.evaluation.generalStatus === 'NO_CUMPLE' ? '✕ No cumple' :
+                     summary.evaluation.generalStatus === 'CUMPLE_S' ? '⚠ Cumple con exceso' :
+                     'Sin objetivo'}
+                  </strong>
+                  <small>Grado {formatGrade(summary.composition)}</small>
+                  {target && <small>Objetivo {formatGrade(target.composition)}</small>}
+                </div>
                 <span>{summary.totalKg.toFixed(2)} kg / 1000 kg</span>
               </div>
               {summary.alerts.map((alert) => <div className="alert" key={alert}>{alert}</div>)}
-              <div className="nutrient-grid">
-                {NUTRIENTS.map((nutrient) => {
+
+              {/* ── NPK Hero Cards ─── */}
+              <div className="npk-hero">
+                {(['N', 'P', 'K'] as const).map((nutrient) => {
                   const evaluation = summary.evaluation.evaluations.find((item) => item.nutrient === nutrient)
+                  const color = nutrient === 'N' ? '#16a34a' : nutrient === 'P' ? '#d97706' : '#2563eb'
+                  const label = nutrient === 'N' ? 'Nitrógeno (N)' : nutrient === 'P' ? 'Fósforo (P₂O₅)' : 'Potasio (K₂O)'
+                  const pct = evaluation && evaluation.declared > 0 ? Math.min((evaluation.calculated / evaluation.declared) * 100, 150) : 0
                   return (
-                    <div className="nutrient-card" key={nutrient}>
-                      <span>{nutrient}</span>
-                      <strong>{formatPct(summary.composition[nutrient])}</strong>
-                      <em className={evaluation?.status}>{evaluation?.status}</em>
+                    <div className="npk-hero-card" key={nutrient} style={{ '--npk-color': color } as React.CSSProperties}>
+                      <div className="npk-label">{label}</div>
+                      <div className="npk-value">{formatPct(summary.composition[nutrient])}</div>
+                      {evaluation && evaluation.declared > 0 && (
+                        <>
+                          <div className="npk-target">Objetivo: {formatPct(evaluation.declared)} · {formatPct(evaluation.min)}–{formatPct(evaluation.max)}</div>
+                          <div className="npk-bar"><div className="npk-bar-fill" style={{ width: `${Math.min(pct, 100)}%` }} /></div>
+                          <em className={evaluation.status} style={{ justifySelf: 'start', fontStyle: 'normal', fontSize: 10, fontWeight: 800, padding: '2px 6px', borderRadius: 4, marginTop: 4, letterSpacing: '.02em', background: evaluation.status === 'C' ? '#dcfce7' : evaluation.status === 'NC' ? '#fee2e2' : '#fef3c7', color: evaluation.status === 'C' ? '#166534' : evaluation.status === 'NC' ? '#991b1b' : '#92400e' }}>{evaluation.status === 'C' ? '✓ Conforme' : evaluation.status === 'NC' ? '✕ No conforme' : '⚠ Supera'}</em>
+                        </>
+                      )}
                     </div>
                   )
                 })}
               </div>
+
+              {/* ── Formas de N ─── */}
+              {(() => {
+                const nForms = (['N_NH4', 'N_NO3', 'N_org', 'N_ur'] as const).filter((n) => summary.composition[n] > 0 || (summary.evaluation.evaluations.find((e) => e.nutrient === n)?.declared ?? 0) > 0)
+                if (nForms.length === 0) return null
+                return (
+                  <>
+                    <div className="nutrient-section-title">Formas de nitrógeno</div>
+                    <div className="nutrient-grid">
+                      {nForms.map((nutrient) => {
+                        const evaluation = summary.evaluation.evaluations.find((item) => item.nutrient === nutrient)
+                        const val = summary.composition[nutrient]
+                        return (
+                          <div className={`nutrient-card${val === 0 ? ' zero-value' : ' has-value'}`} key={nutrient}>
+                            <span>{nutrient.replace('_', '-')}</span>
+                            <strong>{formatPct(val)}</strong>
+                            {evaluation && evaluation.declared > 0 && (
+                              <dl>
+                                <div><dt>Obj</dt><dd>{formatPct(evaluation.declared)}</dd></div>
+                                <div><dt>Rango</dt><dd>{formatPct(evaluation.min)}–{formatPct(evaluation.max)}</dd></div>
+                              </dl>
+                            )}
+                            {evaluation && <em className={evaluation.status}>{evaluation.status}</em>}
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </>
+                )
+              })()}
+
+              {/* ── Secundarios ─── */}
+              {(() => {
+                const secondaries = (['C', 'CaO', 'MgO', 'S', 'SiO2'] as const).filter((n) => summary.composition[n] > 0 || (summary.evaluation.evaluations.find((e) => e.nutrient === n)?.declared ?? 0) > 0)
+                if (secondaries.length === 0) return null
+                return (
+                  <>
+                    <div className="nutrient-section-title">Secundarios</div>
+                    <div className="nutrient-grid">
+                      {secondaries.map((nutrient) => {
+                        const evaluation = summary.evaluation.evaluations.find((item) => item.nutrient === nutrient)
+                        const val = summary.composition[nutrient]
+                        return (
+                          <div className={`nutrient-card${val === 0 ? ' zero-value' : ' has-value'}`} key={nutrient}>
+                            <span>{nutrient}</span>
+                            <strong>{formatPct(val)}</strong>
+                            {evaluation && evaluation.declared > 0 && (
+                              <dl>
+                                <div><dt>Obj</dt><dd>{formatPct(evaluation.declared)}</dd></div>
+                                <div><dt>Rango</dt><dd>{formatPct(evaluation.min)}–{formatPct(evaluation.max)}</dd></div>
+                              </dl>
+                            )}
+                            {evaluation && <em className={evaluation.status}>{evaluation.status}</em>}
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </>
+                )
+              })()}
+
+              {/* ── Micronutrientes ─── */}
+              {(() => {
+                const micros = (['B', 'Co', 'Cu', 'Fe', 'Mn', 'Mo', 'Zn', 'Na'] as const).filter((n) => summary.composition[n] > 0 || (summary.evaluation.evaluations.find((e) => e.nutrient === n)?.declared ?? 0) > 0)
+                if (micros.length === 0) return null
+                return (
+                  <>
+                    <div className="nutrient-section-title">Micronutrientes</div>
+                    <div className="nutrient-grid">
+                      {micros.map((nutrient) => {
+                        const evaluation = summary.evaluation.evaluations.find((item) => item.nutrient === nutrient)
+                        const val = summary.composition[nutrient]
+                        return (
+                          <div className={`nutrient-card${val === 0 ? ' zero-value' : ' has-value'}`} key={nutrient}>
+                            <span>{nutrient}</span>
+                            <strong>{formatPct(val)}</strong>
+                            {evaluation && evaluation.declared > 0 && (
+                              <dl>
+                                <div><dt>Obj</dt><dd>{formatPct(evaluation.declared)}</dd></div>
+                                <div><dt>Rango</dt><dd>{formatPct(evaluation.min)}–{formatPct(evaluation.max)}</dd></div>
+                              </dl>
+                            )}
+                            {evaluation && <em className={evaluation.status}>{evaluation.status}</em>}
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </>
+                )
+              })()}
+            </div>
+            <div className="panel contribution-panel">
+              <div className="section-title">
+                <h2>Contribucion por insumo</h2>
+                <small>Aporte de cada componente al grado final sobre base 1000 kg.</small>
+              </div>
+              {componentContributions.length > 0 ? (
+                <div className="contribution-table-wrap">
+                  <table className="contribution-table">
+                    <thead>
+                      <tr>
+                        <th>Insumo</th>
+                        <th>kg</th>
+                        {contributionNutrients.map((nutrient) => <th key={nutrient}>{nutrient}</th>)}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {componentContributions.map((row, index) => (
+                        <tr key={`${row.item.internalId}-${index}`}>
+                          <td><strong>{row.item.internalId}</strong><small>{row.item.name}</small></td>
+                          <td>{row.quantityKg.toFixed(2)}</td>
+                          {contributionNutrients.map((nutrient) => <td key={nutrient}>{formatPct(row.contribution[nutrient])}</td>)}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : <p className="muted">Selecciona insumos para ver su aporte por elemento.</p>}
+            </div>
+          </section>
+        ) : view === 'scale' ? (
+          <section className="scale-grid">
+            <div className="panel">
+              <div className="section-title">
+                <h2>Lista y cantidad a preparar</h2>
+              </div>
+              <label className="field">Lista guardada
+                <select value={selectedScaleList?.id ?? ''} onChange={(event) => setScaleListId(event.target.value)}>
+                  {lists.length === 0 && <option value="">No hay listas guardadas</option>}
+                  {lists.map((list) => {
+                    const listTarget = list.targetProductId ? activeCatalog.find((item) => item.internalId === list.targetProductId) : null
+                    return <option key={list.id} value={list.id}>{list.displayCode} · {listTarget?.name ?? 'SIN_OBJETIVO'}</option>
+                  })}
+                </select>
+              </label>
+              <label className="field">Multiplicador
+                <input
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value={scaleMultiplier || ''}
+                  onChange={(event) => setScaleMultiplier(Number(event.target.value))}
+                  placeholder="Ej: 2.5"
+                />
+              </label>
+              <div className="scale-summary">
+                <span><strong>{formatKg(scaleBaseKg)}</strong><small>kg base de la lista</small></span>
+                <span><strong>x {formatKg(safeScaleMultiplier)}</strong><small>multiplicador</small></span>
+                <span><strong>{formatKg(scaledTotalKg)}</strong><small>kg total a preparar</small></span>
+              </div>
+              <p className="muted">Si la lista base esta en 1 kg, 1 tonelada o 1000 kg, solo ingresa el factor correspondiente. El calculo no cambia porcentajes ni guarda snapshots.</p>
+            </div>
+            <div className="panel">
+              <div className="section-title">
+                <h2>Cantidades escaladas</h2>
+                {selectedScaleList && <button className="secondary" onClick={() => loadList(selectedScaleList)}>Abrir en formulador</button>}
+              </div>
+              {selectedScaleList ? (
+                <div className="scale-table-wrap">
+                  <div className="scale-context">
+                    <strong>{selectedScaleList.displayCode}</strong>
+                    <small>{selectedScaleTarget?.name ?? 'SIN_OBJETIVO'} · actualizado {new Date(selectedScaleList.updatedAt).toLocaleString()}</small>
+                  </div>
+                  <table className="contribution-table scale-table">
+                    <thead>
+                      <tr>
+                        <th>Insumo</th>
+                        <th>Clase</th>
+                        <th>Cantidad base</th>
+                        <th>Total preparar</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {(selectedScaleComponents ?? []).map(({ component, item }, index) => {
+                        const scaledQuantity = Math.max(0, component.quantityKg) * safeScaleMultiplier
+                        return (
+                          <tr key={`${component.id}-${index}`}>
+                            <td><strong>{item.internalId}</strong><small>{item.name}</small></td>
+                            <td>{item.class}</td>
+                            <td>{formatKg(component.quantityKg)} kg</td>
+                            <td><strong>{formatKg(scaledQuantity)} kg</strong></td>
+                          </tr>
+                        )
+                      })}
+                    </tbody>
+                  </table>
+                  {(selectedScaleComponents ?? []).length === 0 && <p className="muted">La lista seleccionada no tiene componentes validos contra el catalogo activo.</p>}
+                </div>
+              ) : <p className="muted">Guarda una lista viva para poder escalar cantidades.</p>}
+            </div>
+            <div className="panel scale-total-panel">
+              <div className="section-title">
+                <h2>Total por insumo</h2>
+                <button className="secondary" onClick={addScaleSelection} disabled={lists.length === 0}><Plus size={17} /> Agregar lista</button>
+              </div>
+              <div className="scale-selection-list">
+                {scaleSelections.map((selection, index) => {
+                  const selectedList = lists.find((list) => list.id === selection.listId)
+                  const baseKg = selectedList?.components.reduce((sum, component) => sum + Math.max(0, component.quantityKg), 0) ?? 0
+                  const multiplier = Number.isFinite(selection.multiplier) && selection.multiplier > 0 ? selection.multiplier : 0
+                  return (
+                    <div className="scale-selection-row" key={selection.id}>
+                      <label className="field">Lista {index + 1}
+                        <select value={selection.listId} onChange={(event) => updateScaleSelection(selection.id, { listId: event.target.value })}>
+                          {lists.length === 0 && <option value="">No hay listas guardadas</option>}
+                          {lists.map((list) => {
+                            const listTarget = list.targetProductId ? activeCatalog.find((item) => item.internalId === list.targetProductId) : null
+                            return <option key={list.id} value={list.id}>{list.displayCode} · {listTarget?.name ?? 'SIN_OBJETIVO'}</option>
+                          })}
+                        </select>
+                      </label>
+                      <label className="field">Multiplicador
+                        <input
+                          type="number"
+                          min="0"
+                          step="0.01"
+                          value={selection.multiplier || ''}
+                          onChange={(event) => updateScaleSelection(selection.id, { multiplier: Number(event.target.value) })}
+                          placeholder="Ej: 3"
+                        />
+                      </label>
+                      <span className="selection-total"><strong>{formatKg(baseKg * multiplier)} kg</strong><small>a preparar</small></span>
+                      <button className="secondary icon-only" onClick={() => removeScaleSelection(selection.id)} aria-label="Quitar lista"><X size={17} /></button>
+                    </div>
+                  )
+                })}
+              </div>
+              <div className="scale-summary scale-total-summary">
+                <span><strong>{scaleSelections.filter((selection) => selection.listId).length}</strong><small>listas incluidas</small></span>
+                <span><strong>{formatKg(selectedRequirementsTotalKg)} kg</strong><small>total de insumos</small></span>
+              </div>
+              {selectedRequirements.length > 0 ? (
+                <div className="scale-table-wrap">
+                  <table className="contribution-table scale-table">
+                    <thead>
+                      <tr>
+                        <th>Insumo</th>
+                        <th>Clase</th>
+                        <th>Total requerido</th>
+                        <th>Viene de</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {selectedRequirements.map((requirement) => (
+                        <tr key={requirement.item.internalId}>
+                          <td><strong>{requirement.item.internalId}</strong><small>{requirement.item.name}</small></td>
+                          <td>{requirement.item.class}</td>
+                          <td><strong>{formatKg(requirement.totalKg)} kg</strong></td>
+                          <td>{requirement.sources.map((source) => `${source.displayCode}: ${formatKg(source.quantityKg)} kg`).join(' · ')}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : <p className="muted">Selecciona una o varias listas guardadas para consolidar la necesidad total de MP por insumo.</p>}
             </div>
           </section>
         ) : view === 'history' ? (

@@ -1,8 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import { parseCatalogCsv } from './catalog'
 import { exportLiveListsCsv, exportSnapshotsCsv } from './exportLists'
-import { calculateComposition, summarizeFormula } from './formulation'
+import { calculateComponentContributions, calculateComposition, summarizeFormula } from './formulation'
 import { parseListImportCsv } from './importLists'
+import { summarizeRequiredInputs } from './listTotals'
 import { emptyComposition } from './nutrients'
 
 describe('catalog seed parsing', () => {
@@ -93,6 +94,18 @@ describe('formulation engine', () => {
     expect(composition.N).toBe(23)
   })
 
+  it('calcula contribucion por insumo y cuadra con la composicion total', () => {
+    const kcl = { ...mp, internalId: 'MP0002', name: 'KCL', composition: { ...emptyComposition(), K: 60 } }
+    const components = [{ item: mp, quantityKg: 500 }, { item: kcl, quantityKg: 250 }]
+    const contributions = calculateComponentContributions(components)
+    const composition = calculateComposition(components)
+
+    expect(contributions[0].contribution.N).toBe(23)
+    expect(contributions[1].contribution.K).toBe(15)
+    expect(contributions.reduce((sum, row) => sum + row.contribution.N, 0)).toBe(composition.N)
+    expect(contributions.reduce((sum, row) => sum + row.contribution.K, 0)).toBe(composition.K)
+  })
+
   it('permite guardar total distinto de 1000 con alerta', () => {
     const summary = summarizeFormula([{ item: mp, quantityKg: 500 }], null)
     expect(summary.totalKg).toBe(500)
@@ -171,5 +184,58 @@ describe('list export', () => {
 
     expect(csv).toContain('snapshot-1;lista-1;PT0001-L001;v1')
     expect(csv).toContain(`admin;${summary.evaluation.generalStatus};500`)
+  })
+})
+
+describe('required input totals', () => {
+  const composition = emptyComposition()
+  const catalog = [
+    {
+      internalId: 'MP0001',
+      externalCode: 'M1',
+      originalCode: 'M1',
+      name: 'Urea',
+      class: 'MP' as const,
+      type: 'S',
+      origin: 'manual' as const,
+      composition,
+    },
+    {
+      internalId: 'MP0002',
+      externalCode: 'M2',
+      originalCode: 'M2',
+      name: 'KCL',
+      class: 'MP' as const,
+      type: 'S',
+      origin: 'manual' as const,
+      composition,
+    },
+  ]
+
+  it('suma cantidades de varias listas por insumo', () => {
+    const totals = summarizeRequiredInputs([
+      {
+        id: 'lista-1',
+        displayCode: 'L1',
+        components: [
+          { itemId: 'MP0001', quantityKg: 100 },
+          { itemId: 'MP0002', quantityKg: 25 },
+        ],
+      },
+      {
+        id: 'lista-2',
+        displayCode: 'L2',
+        components: [{ itemId: 'MP0001', quantityKg: 50 }],
+      },
+    ], [
+      { listId: 'lista-1', multiplier: 2 },
+      { listId: 'lista-2', multiplier: 3 },
+    ], catalog)
+
+    expect(totals.map((row) => [row.item.internalId, row.totalKg])).toEqual([
+      ['MP0001', 350],
+      ['MP0002', 50],
+    ])
+    expect(totals[0].sources.map((source) => source.quantityKg)).toEqual([200, 150])
   })
 })
