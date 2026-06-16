@@ -145,9 +145,9 @@ export const snapshots = query({
   args: { productListId: v.optional(v.id('productLists')) },
   handler: async (ctx, args) => {
     if (args.productListId) {
-      return ctx.db.query('productListSnapshots').withIndex('by_productListId', (q) => q.eq('productListId', args.productListId!)).collect()
+      return (await ctx.db.query('productListSnapshots').withIndex('by_productListId', (q) => q.eq('productListId', args.productListId!)).collect()).filter((snapshot) => snapshot.archivedAt === undefined)
     }
-    return ctx.db.query('productListSnapshots').withIndex('by_createdAt').collect()
+    return (await ctx.db.query('productListSnapshots').withIndex('by_createdAt').collect()).filter((snapshot) => snapshot.archivedAt === undefined)
   },
 })
 
@@ -226,5 +226,58 @@ export const saveWithSnapshot = mutation({
       createdAt: now,
     })
     return { productListId, snapshotId, snapshotVersion, generalStatus: evaluation.generalStatus, totalKg, alerts }
+  },
+})
+
+export const updateLiveList = mutation({
+  args: {
+    productListId: v.id('productLists'),
+    targetProductId: v.optional(v.string()),
+    components: v.array(v.object({ itemInternalId: v.string(), quantityKg: v.number() })),
+  },
+  handler: async (ctx, args) => {
+    const list = await ctx.db.get(args.productListId)
+    if (!list || list.archivedAt !== undefined) throw new Error('Lista inexistente o archivada.')
+
+    if (args.targetProductId) {
+      const target = await ctx.db.query('catalogItems').withIndex('by_internalId', (q) => q.eq('internalId', args.targetProductId!)).unique()
+      if (!target || target.archivedAt !== undefined || target.class !== 'PT') {
+        throw new Error(`Producto objetivo invalido o archivado: ${args.targetProductId}`)
+      }
+    }
+
+    for (const component of args.components) {
+      const item = await ctx.db.query('catalogItems').withIndex('by_internalId', (q) => q.eq('internalId', component.itemInternalId)).unique()
+      if (!item || item.archivedAt !== undefined) throw new Error(`Componente invalido o archivado: ${component.itemInternalId}`)
+    }
+
+    const normalizedComponents = args.components.map((component) => ({
+      itemInternalId: component.itemInternalId,
+      quantityKg: normalizeQuantity(component.quantityKg),
+    }))
+
+    await ctx.db.patch(args.productListId, {
+      targetProductId: args.targetProductId,
+      components: normalizedComponents,
+      updatedAt: Date.now(),
+    })
+
+    return { productListId: args.productListId }
+  },
+})
+
+export const archiveLiveList = mutation({
+  args: { productListId: v.id('productLists') },
+  handler: async (ctx, args) => {
+    const list = await ctx.db.get(args.productListId)
+    if (!list || list.archivedAt !== undefined) throw new Error('Lista inexistente o archivada.')
+
+    const now = Date.now()
+    await ctx.db.patch(args.productListId, { archivedAt: now, updatedAt: now })
+
+    const snapshots = await ctx.db.query('productListSnapshots').withIndex('by_productListId', (q) => q.eq('productListId', args.productListId)).collect()
+    await Promise.all(snapshots.filter((snapshot) => snapshot.archivedAt === undefined).map((snapshot) => ctx.db.patch(snapshot._id, { archivedAt: now })))
+
+    return { productListId: args.productListId }
   },
 })

@@ -74,7 +74,7 @@ export function parseCatalogCsv(text: string): ParseCatalogResult {
   }
 
   for (const header of headers) {
-    if (header.includes('-') && !(header in CSV_NUTRIENT_MAP)) {
+    if (header.includes('-') && !(header in CSV_NUTRIENT_MAP) && !(header.toUpperCase() in CSV_NUTRIENT_MAP)) {
       errors.push({ row: 1, field: header, message: `Nutriente no reconocido: ${header}` })
     }
   }
@@ -84,6 +84,12 @@ export function parseCatalogCsv(text: string): ParseCatalogResult {
   }
 
   const index = Object.fromEntries(headers.map((header, i) => [header, i]))
+  const nutrientIndex = Object.fromEntries(
+    headers.flatMap((header, i) => {
+      const nutrientKey = CSV_NUTRIENT_MAP[header] ?? CSV_NUTRIENT_MAP[header.toUpperCase()]
+      return nutrientKey ? [[nutrientKey, i]] : []
+    }),
+  ) as Partial<Record<keyof Composition, number>>
   dataRows.forEach((row, rowIndex) => {
     const rowNumber = rowIndex + 2
     const code = row[index.COD] ?? ''
@@ -99,11 +105,11 @@ export function parseCatalogCsv(text: string): ParseCatalogResult {
     if (!itemClass) itemErrors.push({ row: rowNumber, field: 'CLASE', message: `Clase no reconocida: ${rawClass}` })
 
     const composition = emptyComposition()
-    for (const [csvHeader, nutrientKey] of Object.entries(CSV_NUTRIENT_MAP)) {
-      const cell = row[index[csvHeader]] ?? ''
+    for (const nutrientKey of Object.values(CSV_NUTRIENT_MAP)) {
+      const cell = row[nutrientIndex[nutrientKey] ?? -1] ?? ''
       const parsed = parseNumber(cell)
       if (parsed === null) {
-        itemErrors.push({ row: rowNumber, field: csvHeader, message: `Valor numerico invalido: ${cell}` })
+        itemErrors.push({ row: rowNumber, field: nutrientKey, message: `Valor numerico invalido: ${cell}` })
       } else {
         composition[nutrientKey] = parsed
       }

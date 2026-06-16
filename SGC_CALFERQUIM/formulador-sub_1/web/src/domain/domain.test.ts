@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import { parseCatalogCsv } from './catalog'
-import { exportLiveListsCsv, exportSnapshotsCsv } from './exportLists'
+import { exportCatalogCsv, exportLiveListsCsv, exportSnapshotsCsv } from './exportLists'
 import { calculateComponentContributions, calculateComposition, summarizeFormula } from './formulation'
 import { parseListImportCsv } from './importLists'
 import { summarizeRequiredInputs } from './listTotals'
-import { emptyComposition } from './nutrients'
+import { canonicalNutrientLabel, emptyComposition, normalizeComposition } from './nutrients'
 
 describe('catalog seed parsing', () => {
   it('asigna IDs secuenciales reproducibles por clase', () => {
@@ -34,6 +34,49 @@ describe('catalog seed parsing', () => {
     expect(result.errors).toEqual([])
     expect(result.items.map((item) => item.internalId)).toEqual(['MZR0001', 'MZR0002'])
     expect(result.items.map((item) => item.class)).toEqual(['MZR', 'MZR'])
+  })
+
+  it('acepta nutrientes con encabezados en mayuscula total y conserva claves canonicas', () => {
+    const csv = 'COD;PRODUCTO;CLASE;TIPO;N-ORG;N-UR;CAO;MGO;CU;FE;MN;MO;SIO2;ZN;NA\n1;Mineral;MP;S;10;11;1;2;3;4;5;6;7;8;9'
+    const result = parseCatalogCsv(csv)
+
+    expect(result.errors).toEqual([])
+    expect(result.items[0].composition.N_org).toBe(10)
+    expect(result.items[0].composition.N_ur).toBe(11)
+    expect(result.items[0].composition.CaO).toBe(1)
+    expect(result.items[0].composition.MgO).toBe(2)
+    expect(result.items[0].composition.Cu).toBe(3)
+    expect(result.items[0].composition.Fe).toBe(4)
+    expect(result.items[0].composition.Mn).toBe(5)
+    expect(result.items[0].composition.Mo).toBe(6)
+    expect(result.items[0].composition.SiO2).toBe(7)
+    expect(result.items[0].composition.Zn).toBe(8)
+    expect(result.items[0].composition.Na).toBe(9)
+  })
+})
+
+describe('nutrient nomenclature', () => {
+  it('normaliza composiciones heredadas sin persistir claves en mayuscula total', () => {
+    const composition = normalizeComposition({ 'N-ORG': 10, 'N-UR': 11, CAO: 1, MGO: 2, CU: 3, FE: 4, MN: 5, MO: 6, SIO2: 7, ZN: 8, NA: 9 })
+
+    expect(composition.N_org).toBe(10)
+    expect(composition.N_ur).toBe(11)
+    expect(composition.CaO).toBe(1)
+    expect(composition.MgO).toBe(2)
+    expect(composition.Cu).toBe(3)
+    expect(composition.Fe).toBe(4)
+    expect(composition.Mn).toBe(5)
+    expect(composition.Mo).toBe(6)
+    expect(composition.SiO2).toBe(7)
+    expect(composition.Zn).toBe(8)
+    expect(composition.Na).toBe(9)
+  })
+
+  it('muestra etiquetas quimicas canonicas', () => {
+    expect(canonicalNutrientLabel('CaO')).toBe('CaO')
+    expect(canonicalNutrientLabel('MgO')).toBe('MgO')
+    expect(canonicalNutrientLabel('Cu')).toBe('Cu')
+    expect(canonicalNutrientLabel('Na')).toBe('Na')
   })
 })
 
@@ -148,6 +191,13 @@ describe('list export', () => {
     origin: 'manual' as const,
     composition,
   }
+
+  it('exporta el catalogo activo con composicion completa', () => {
+    const csv = exportCatalogCsv([{ ...mp, composition: { ...composition, N: 46, K: 1.5 } }])
+
+    expect(csv.split('\n')[0]).toContain('idInterno;codigoExterno;codigoOriginal;producto;clase;tipo;origen;archivado;C;N;N-NH4')
+    expect(csv).toContain('MP0001;M1;M1;"Materia; prima ""especial""";MP;S;manual;;0;46')
+  })
 
   it('exporta listas vivas como CSV plano por componente', () => {
     const csv = exportLiveListsCsv([

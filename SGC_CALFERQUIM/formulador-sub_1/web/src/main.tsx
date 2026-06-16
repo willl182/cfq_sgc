@@ -1,15 +1,15 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ConvexProvider, ConvexReactClient, useMutation, useQuery } from 'convex/react'
-import { Archive, Beaker, Calculator, ChevronLeft, ChevronRight, Clock3, Database, Download, FileUp, History, ListChecks, PackagePlus, Pencil, Plus, RotateCcw, Save, Search, Shield, UserCog, X } from 'lucide-react'
+import { Archive, Beaker, Calculator, ChevronLeft, ChevronRight, Clock3, Copy, Database, Download, FileUp, History, ListChecks, PackagePlus, Pencil, Plus, RotateCcw, Save, Search, Shield, Trash2, UserCog, X } from 'lucide-react'
 import './style.css'
 import { api } from '../convex/_generated/api'
 import { parseCatalogCsv, type CatalogItem } from './domain/catalog'
-import { exportLiveListsCsv, exportLiveListsJson, exportSnapshotsCsv, exportSnapshotsJson } from './domain/exportLists'
+import { exportCatalogCsv, exportLiveListsCsv, exportLiveListsJson, exportSnapshotsCsv, exportSnapshotsJson } from './domain/exportLists'
 import { calculateComponentContributions, summarizeFormula, type FormulaComponentInput } from './domain/formulation'
 import { parseListImportCsv, type ParseListImportResult } from './domain/importLists'
 import { summarizeRequiredInputs } from './domain/listTotals'
-import { emptyComposition, NUTRIENTS, type CatalogClass, type NutrientKey } from './domain/nutrients'
+import { canonicalNutrientLabel, emptyComposition, normalizeComposition, NUTRIENTS, type CatalogClass, type NutrientKey } from './domain/nutrients'
 
 type Role = 'user' | 'admin'
 type View = 'catalog' | 'formulator' | 'scale' | 'history' | 'import'
@@ -112,6 +112,9 @@ type ScaleSelection = {
   multiplier: number
 }
 
+type SnapshotSortKey = 'displayCode' | 'targetName' | 'createdAt' | 'totalKg' | 'status'
+type SortDirection = 'asc' | 'desc'
+
 function useLocalState<T>(key: string, initialValue: T) {
   const [value, setValue] = useState<T>(() => {
     const raw = localStorage.getItem(key)
@@ -182,8 +185,28 @@ function formatPct(value: number) {
   return value.toFixed(2)
 }
 
+function normalizeCatalogItem(item: CatalogItem): CatalogItem {
+  return { ...item, composition: normalizeComposition(item.composition) }
+}
+
+function formatCompositionField(field: string) {
+  const key = field.replace('composition.', '') as NutrientKey
+  return NUTRIENTS.includes(key) ? canonicalNutrientLabel(key) : field
+}
+
 function formatKg(value: number) {
   return value.toLocaleString('es-CO', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+}
+
+function latestSnapshotsOnly(snapshots: Snapshot[]) {
+  const latestByList = new Map<string, Snapshot>()
+  for (const snapshot of snapshots) {
+    const current = latestByList.get(snapshot.productListId)
+    if (!current || snapshot.createdAt > current.createdAt) {
+      latestByList.set(snapshot.productListId, snapshot)
+    }
+  }
+  return Array.from(latestByList.values())
 }
 
 function createDisplayCode(target: CatalogItem | null, lists: ProductList[]) {
@@ -217,8 +240,181 @@ function nextCatalogInternalId(catalog: CatalogItem[], itemClass: CatalogClass) 
   return `${itemClass}${String(maxNumber + 1).padStart(4, '0')}`
 }
 
+function catalogOptionLabel(item: CatalogItem) {
+  return `${item.internalId} · ${item.class} · ${item.name}`
+}
+
+function CatalogCombobox({
+  value,
+  items,
+  onChange,
+  placeholder,
+  emptyLabel = 'Sin resultados',
+}: {
+  value: string
+  items: CatalogItem[]
+  onChange: (value: string) => void
+  placeholder: string
+  emptyLabel?: string
+}) {
+  const selected = items.find((item) => item.internalId === value) ?? null
+  const [inputValue, setInputValue] = useState(selected ? catalogOptionLabel(selected) : '')
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    setInputValue(selected ? catalogOptionLabel(selected) : '')
+  }, [selected?.internalId])
+
+  const filteredItems = useMemo(() => {
+    const needle = inputValue.trim().toLowerCase()
+    if (!needle || selected?.internalId === value && inputValue === catalogOptionLabel(selected)) return items.slice(0, 20)
+    return items.filter((item) => {
+      const haystack = `${item.internalId} ${item.class} ${item.name} ${item.externalCode} ${item.type}`.toLowerCase()
+      return haystack.includes(needle)
+    }).slice(0, 20)
+  }, [inputValue, items, selected, value])
+
+  function selectItem(item: CatalogItem) {
+    onChange(item.internalId)
+    setInputValue(catalogOptionLabel(item))
+    setOpen(false)
+  }
+
+  return (
+    <div className="combo">
+      <input
+        value={inputValue}
+        onFocus={() => setOpen(true)}
+        onChange={(event) => {
+          setInputValue(event.target.value)
+          setOpen(true)
+          if (event.target.value.trim() === '') onChange('')
+        }}
+        onBlur={() => {
+          window.setTimeout(() => {
+            setOpen(false)
+            setInputValue(selected ? catalogOptionLabel(selected) : '')
+          }, 120)
+        }}
+        placeholder={placeholder}
+      />
+      <button type="button" className="combo-arrow" onMouseDown={(event) => { event.preventDefault(); setOpen((current) => !current) }}>⌄</button>
+      {open && (
+        <div className="combo-menu">
+          {filteredItems.map((item) => (
+            <button type="button" className="combo-option" key={item.internalId} onMouseDown={(event) => { event.preventDefault(); selectItem(item) }}>
+              <strong>{item.internalId}</strong>
+              <span>{item.class}</span>
+              <small>{item.name}</small>
+            </button>
+          ))}
+          {filteredItems.length === 0 && <div className="combo-empty">{emptyLabel}</div>}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function CatalogSearchCombobox({
+  value,
+  items,
+  onChange,
+  placeholder,
+}: {
+  value: string
+  items: CatalogItem[]
+  onChange: (value: string) => void
+  placeholder: string
+}) {
+  const [open, setOpen] = useState(false)
+  const filteredItems = useMemo(() => {
+    const needle = value.trim().toLowerCase()
+    if (!needle) return items.slice(0, 20)
+    return items.filter((item) => {
+      const haystack = `${item.internalId} ${item.class} ${item.name} ${item.externalCode} ${item.type}`.toLowerCase()
+      return haystack.includes(needle)
+    }).slice(0, 20)
+  }, [items, value])
+
+  return (
+    <div className="combo catalog-search-combo">
+      <input
+        value={value}
+        onFocus={() => setOpen(true)}
+        onChange={(event) => {
+          onChange(event.target.value)
+          setOpen(true)
+        }}
+        onBlur={() => window.setTimeout(() => setOpen(false), 120)}
+        placeholder={placeholder}
+      />
+      <button type="button" className="combo-arrow" onMouseDown={(event) => { event.preventDefault(); setOpen((current) => !current) }}>⌄</button>
+      {open && (
+        <div className="combo-menu">
+          {filteredItems.map((item) => (
+            <button type="button" className="combo-option" key={item.internalId} onMouseDown={(event) => { event.preventDefault(); onChange(item.internalId); setOpen(false) }}>
+              <strong>{item.internalId}</strong>
+              <span>{item.class}</span>
+              <small>{item.name}</small>
+            </button>
+          ))}
+          {filteredItems.length === 0 && <div className="combo-empty">Sin resultados</div>}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function SnapshotSearchCombobox({
+  value,
+  snapshots,
+  getTargetName,
+  onChange,
+}: {
+  value: string
+  snapshots: Snapshot[]
+  getTargetName: (snapshot: Snapshot) => string
+  onChange: (value: string) => void
+}) {
+  const [open, setOpen] = useState(false)
+  const latestSnapshots = useMemo(() => latestSnapshotsOnly(snapshots), [snapshots])
+  const filteredSnapshots = useMemo(() => {
+    const needle = value.trim().toLowerCase()
+    const source = needle
+      ? latestSnapshots.filter((snapshot) => `${snapshot.displayCode} ${getTargetName(snapshot)} ${formatKg(snapshot.summary.totalKg)} kg ${snapshot.summary.evaluation.generalStatus} ${new Date(snapshot.createdAt).toLocaleString()}`.toLowerCase().includes(needle))
+      : latestSnapshots
+    return source.slice(0, 20)
+  }, [getTargetName, latestSnapshots, value])
+
+  return (
+    <div className="combo catalog-search-combo">
+      <input
+        value={value}
+        onFocus={() => setOpen(true)}
+        onChange={(event) => { onChange(event.target.value); setOpen(true) }}
+        onBlur={() => window.setTimeout(() => setOpen(false), 120)}
+        placeholder="Buscar por codigo, producto, kg, fecha o estado"
+      />
+      <button type="button" className="combo-arrow" onMouseDown={(event) => { event.preventDefault(); setOpen((current) => !current) }}>⌄</button>
+      {open && (
+        <div className="combo-menu">
+          {filteredSnapshots.map((snapshot) => (
+            <button type="button" className="combo-option snapshot-combo-option" key={snapshot.id} onMouseDown={(event) => { event.preventDefault(); onChange(snapshot.displayCode); setOpen(false) }}>
+              <strong>{snapshot.displayCode}</strong>
+              <span>{snapshot.snapshotVersion}</span>
+              <small>{getTargetName(snapshot)}</small>
+            </button>
+          ))}
+          {filteredSnapshots.length === 0 && <div className="combo-empty">Sin resultados</div>}
+        </div>
+      )}
+    </div>
+  )
+}
+
 function App() {
   const remoteCatalog = useQuery(api.catalog.list, {}) as ConvexCatalogItem[] | undefined
+  const remoteCatalogWithArchived = useQuery(api.catalog.list, { includeArchived: true }) as ConvexCatalogItem[] | undefined
   const remoteLists = useQuery(api.productLists.liveLists, {}) as ConvexProductList[] | undefined
   const remoteSnapshots = useQuery(api.productLists.snapshots, {}) as ConvexSnapshot[] | undefined
   const remoteChanges = useQuery(api.catalog.recentChanges, { limit: 200 }) as ConvexCatalogChange[] | undefined
@@ -227,6 +423,8 @@ function App() {
   const updateRemoteComposition = useMutation(api.catalog.updateComposition)
   const archiveRemoteItem = useMutation(api.catalog.archive)
   const saveRemoteList = useMutation(api.productLists.saveWithSnapshot)
+  const updateRemoteLiveList = useMutation(api.productLists.updateLiveList)
+  const archiveRemoteLiveList = useMutation(api.productLists.archiveLiveList)
   const [localCatalog, setLocalCatalog] = useLocalState<CatalogItem[]>('cfq.catalogItems', [])
   const [localLists, setLocalLists] = useLocalState<ProductList[]>('cfq.productLists', [])
   const [localSnapshots, setLocalSnapshots] = useLocalState<Snapshot[]>('cfq.productListSnapshots', [])
@@ -234,6 +432,8 @@ function App() {
   const [role, setRole] = useLocalState<Role>('cfq.localRole', 'user')
   const [view, setView] = useState<View>('formulator')
   const [query, setQuery] = useState('')
+  const [snapshotQuery, setSnapshotQuery] = useState('')
+  const [snapshotSort, setSnapshotSort] = useState<{ key: SnapshotSortKey; direction: SortDirection }>({ key: 'createdAt', direction: 'desc' })
   const [classFilter, setClassFilter] = useState<'ALL' | 'MP' | 'PT' | 'MZR'>('ALL')
   const [targetId, setTargetId] = useState('')
   const [components, setComponents] = useState<LiveComponent[]>([{ id: crypto.randomUUID(), itemId: '', quantityKg: 0 }])
@@ -258,7 +458,12 @@ function App() {
   const pendingCompositionValues = useRef<Record<string, Partial<Record<NutrientKey, number>>>>({})
   const liveCompositionValues = useRef<Record<string, CatalogItem['composition']>>({})
   const compositionSaveTimers = useRef<Record<string, number>>({})
-  const catalog = remoteCatalog ?? localCatalog
+  const liveListSaveTimer = useRef<number | null>(null)
+  const loadedListSignature = useRef('')
+  const rawCatalog = remoteCatalog ?? localCatalog
+  const rawCatalogWithArchived = remoteCatalogWithArchived ?? localCatalog
+  const catalog = useMemo(() => rawCatalog.map(normalizeCatalogItem), [rawCatalog])
+  const catalogWithArchived = useMemo(() => rawCatalogWithArchived.map(normalizeCatalogItem), [rawCatalogWithArchived])
   const lists = remoteLists?.map(mapConvexList) ?? localLists
   const snapshots = remoteSnapshots?.map(mapConvexSnapshot) ?? localSnapshots
   const catalogChanges = remoteChanges?.map((change) => mapConvexChange(change, catalog)) ?? localCatalogChanges
@@ -298,8 +503,45 @@ function App() {
   useEffect(() => {
     return () => {
       Object.values(compositionSaveTimers.current).forEach((timer) => window.clearTimeout(timer))
+      if (liveListSaveTimer.current !== null) window.clearTimeout(liveListSaveTimer.current)
     }
   }, [])
+
+  useEffect(() => {
+    if (!editingListId) return
+    const signature = JSON.stringify({ targetId, components: components.map((component) => ({ itemId: component.itemId, quantityKg: component.quantityKg })) })
+    if (signature === loadedListSignature.current) return
+    if (liveListSaveTimer.current !== null) window.clearTimeout(liveListSaveTimer.current)
+
+    liveListSaveTimer.current = window.setTimeout(async () => {
+      const existing = lists.find((list) => list.id === editingListId)
+      if (!existing) return
+      const now = Date.now()
+      const validComponents = components.filter((component) => component.itemId)
+      setSaveState('saving')
+      try {
+        if (usingConvex) {
+          await updateRemoteLiveList({
+            productListId: editingListId as never,
+            targetProductId: target?.internalId,
+            components: validComponents.map((component) => ({ itemInternalId: component.itemId, quantityKg: component.quantityKg })),
+          })
+        } else {
+          setLocalLists(lists.map((list) => list.id === editingListId ? {
+            ...list,
+            targetProductId: target?.internalId ?? null,
+            components,
+            updatedAt: now,
+          } : list))
+        }
+        loadedListSignature.current = signature
+        setSaveState('saved')
+      } catch (error) {
+        window.alert(error instanceof Error ? error.message : 'No se pudo autoguardar la lista.')
+        setSaveState('error')
+      }
+    }, 650)
+  }, [components, editingListId, lists, setLocalLists, target?.internalId, targetId, updateRemoteLiveList, usingConvex])
 
   useEffect(() => {
     activeCatalog.forEach((item) => {
@@ -328,6 +570,58 @@ function App() {
     })
   }, [activeCatalog, classFilter, query])
 
+  function snapshotTargetName(snapshot: Snapshot) {
+    const liveList = lists.find((list) => list.id === snapshot.productListId)
+    const liveTarget = liveList?.targetProductId ? activeCatalog.find((item) => item.internalId === liveList.targetProductId) ?? null : null
+    return liveTarget?.name
+      ?? snapshot.frozenTarget?.name
+      ?? (snapshot.targetProductId ? activeCatalog.find((item) => item.internalId === snapshot.targetProductId)?.name : null)
+      ?? 'SIN_OBJETIVO'
+  }
+
+  function snapshotVisibleSummary(snapshot: Snapshot) {
+    const liveList = lists.find((list) => list.id === snapshot.productListId)
+    const liveTarget = liveList?.targetProductId ? activeCatalog.find((item) => item.internalId === liveList.targetProductId) ?? null : null
+    const liveComponents = liveList?.components
+      .map((component) => {
+        const item = activeCatalog.find((catalogItem) => catalogItem.internalId === component.itemId)
+        return item ? { item, quantityKg: component.quantityKg } : null
+      })
+      .filter(Boolean) as FormulaComponentInput[] | undefined
+    return liveComponents ? summarizeFormula(liveComponents, liveTarget) : snapshot.summary
+  }
+
+  function updateSnapshotSort(key: SnapshotSortKey) {
+    setSnapshotSort((current) => ({ key, direction: current.key === key && current.direction === 'asc' ? 'desc' : 'asc' }))
+  }
+
+  const visibleSnapshots = useMemo(() => {
+    const needle = snapshotQuery.trim().toLowerCase()
+    const latestSnapshots = latestSnapshotsOnly(snapshots)
+    const filtered = latestSnapshots.filter((snapshot) => {
+      if (!needle) return true
+      const summary = snapshotVisibleSummary(snapshot)
+      const haystack = `${snapshot.displayCode} ${snapshotTargetName(snapshot)} ${formatKg(summary.totalKg)} kg ${new Date(snapshot.createdAt).toLocaleString()} ${summary.evaluation.generalStatus}`.toLowerCase()
+      return haystack.includes(needle)
+    })
+    return [...filtered].sort((a, b) => {
+      const summaryA = snapshotVisibleSummary(a)
+      const summaryB = snapshotVisibleSummary(b)
+      const targetA = snapshotTargetName(a)
+      const targetB = snapshotTargetName(b)
+      const values: Record<SnapshotSortKey, [string | number, string | number]> = {
+        displayCode: [a.displayCode, b.displayCode],
+        targetName: [targetA, targetB],
+        createdAt: [a.createdAt, b.createdAt],
+        totalKg: [summaryA.totalKg, summaryB.totalKg],
+        status: [summaryA.evaluation.generalStatus, summaryB.evaluation.generalStatus],
+      }
+      const [left, right] = values[snapshotSort.key]
+      const result = typeof left === 'number' && typeof right === 'number' ? left - right : String(left).localeCompare(String(right), 'es')
+      return snapshotSort.direction === 'asc' ? result : -result
+    })
+  }, [activeCatalog, lists, snapshotQuery, snapshotSort, snapshots])
+
   async function seedCatalog() {
     if (catalog.length > 0) return
     setSaveState('saving')
@@ -352,7 +646,7 @@ function App() {
   }
 
   function clearLocalData() {
-    if (!window.confirm('Esto limpiara catalogo, listas vivas, snapshots y rol local de este navegador.')) return
+    if (!window.confirm('Esto limpiara catalogo, listas guardadas, catalogo de listas y rol local de este navegador.')) return
     localStorage.removeItem('cfq.catalogItems')
     localStorage.removeItem('cfq.productLists')
     localStorage.removeItem('cfq.productListSnapshots')
@@ -403,13 +697,13 @@ function App() {
   async function createCatalogItem() {
     if (role !== 'admin') return
     const name = newItemName.trim()
-    const externalCode = newItemCode.trim() || nextCatalogInternalId(catalog, newItemClass)
+    const externalCode = newItemCode.trim() || nextCatalogInternalId(catalogWithArchived, newItemClass)
     if (!name) {
       window.alert('El nombre del insumo/producto es obligatorio.')
       return
     }
     const item: CatalogItem = {
-      internalId: nextCatalogInternalId(catalog, newItemClass),
+      internalId: nextCatalogInternalId(catalogWithArchived, newItemClass),
       externalCode,
       originalCode: externalCode,
       name,
@@ -423,7 +717,7 @@ function App() {
       if (usingConvex) {
         await createRemoteCatalogItem({ item, actor: { id: 'local', role }, reason: 'Creacion manual desde UI local' })
       } else {
-        setLocalCatalog([...catalog, item])
+        setLocalCatalog([...catalogWithArchived, item])
       }
       setSelectedCatalogId(item.internalId)
       setEditorOpen(true)
@@ -447,9 +741,9 @@ function App() {
       window.alert('El nombre del producto objetivo es obligatorio.')
       return
     }
-    const externalCode = newTargetCode.trim() || nextCatalogInternalId(catalog, 'PT')
+    const externalCode = newTargetCode.trim() || nextCatalogInternalId(catalogWithArchived, 'PT')
     const item: CatalogItem = {
-      internalId: nextCatalogInternalId(catalog, 'PT'),
+      internalId: nextCatalogInternalId(catalogWithArchived, 'PT'),
       externalCode,
       originalCode: externalCode,
       name,
@@ -463,7 +757,7 @@ function App() {
       if (usingConvex) {
         await createRemoteCatalogItem({ item, actor: { id: 'local', role }, reason: 'Creacion de producto objetivo para verificacion' })
       } else {
-        setLocalCatalog([...catalog, item])
+        setLocalCatalog([...catalogWithArchived, item])
       }
       setTargetId(item.internalId)
       setSelectedCatalogId(item.internalId)
@@ -567,13 +861,13 @@ function App() {
   async function archiveItem(item: CatalogItem) {
     if (role !== 'admin') return
     const appearsInLiveLists = lists.some((list) => list.components.some((component) => component.itemId === item.internalId))
-    if (appearsInLiveLists && !window.confirm('Este item aparece en listas vivas. Se archivara sin alterar snapshots.')) return
+    if (appearsInLiveLists && !window.confirm('Este item aparece en listas guardadas. Se archivara sin alterar el catalogo de listas.')) return
     setSaveState('saving')
     try {
       if (usingConvex) {
         await archiveRemoteItem({ internalId: item.internalId, actor: { id: 'local', role }, reason: 'Archivado desde UI' })
       } else {
-        setLocalCatalog(catalog.map((catalogItem) => (catalogItem.internalId === item.internalId ? { ...catalogItem, archivedAt: Date.now() } : catalogItem)))
+        setLocalCatalog(catalogWithArchived.map((catalogItem) => (catalogItem.internalId === item.internalId ? { ...catalogItem, archivedAt: Date.now() } : catalogItem)))
       }
       setSaveState('saved')
     } catch (error) {
@@ -637,33 +931,140 @@ function App() {
     setScaleListId(list.id)
     setTargetId(list.targetProductId ?? '')
     setComponents(list.components.length > 0 ? list.components : [{ id: crypto.randomUUID(), itemId: '', quantityKg: 0 }])
+    loadedListSignature.current = JSON.stringify({ targetId: list.targetProductId ?? '', components: list.components.map((component) => ({ itemId: component.itemId, quantityKg: component.quantityKg })) })
     setView('formulator')
+  }
+
+  async function cloneListFromHistory(snapshot: Snapshot) {
+    const liveList = lists.find((list) => list.id === snapshot.productListId)
+    const sourceTargetId = liveList?.targetProductId ?? snapshot.targetProductId
+    const cloneTarget = sourceTargetId ? activeCatalog.find((item) => item.internalId === sourceTargetId && item.class === 'PT') ?? null : null
+    const sourceComponents = liveList?.components ?? snapshot.frozenComponents.map((component) => ({
+      id: crypto.randomUUID(),
+      itemId: component.item.internalId,
+      quantityKg: component.quantityKg,
+    }))
+    const cloneComponents = sourceComponents
+      .filter((component) => activeCatalog.some((item) => item.internalId === component.itemId))
+      .map((component) => ({ ...component, id: crypto.randomUUID() }))
+
+    if (sourceComponents.length > 0 && cloneComponents.length === 0) {
+      window.alert('No se pudo clonar: los componentes de la lista no existen en el catalogo activo.')
+      return
+    }
+
+    const now = Date.now()
+    const cloneId = crypto.randomUUID()
+    const displayCode = createDisplayCode(cloneTarget, lists)
+    setSaveState('saving')
+    try {
+      if (usingConvex) {
+        const result = await saveRemoteList({
+          displayCode,
+          targetProductId: cloneTarget?.internalId,
+          components: cloneComponents.map((component) => ({ itemInternalId: component.itemId, quantityKg: component.quantityKg })),
+          actor: { id: 'local', role },
+        })
+        const clonedListId = String(result.productListId)
+        setEditingListId(clonedListId)
+        setScaleListId(clonedListId)
+      } else {
+        const clonedList: ProductList = {
+          id: cloneId,
+          displayCode,
+          targetProductId: cloneTarget?.internalId ?? null,
+          components: cloneComponents,
+          updatedAt: now,
+        }
+        const frozenComponents = cloneComponents
+          .map((component) => {
+            const item = activeCatalog.find((catalogItem) => catalogItem.internalId === component.itemId)
+            return item ? { item, quantityKg: component.quantityKg } : null
+          })
+          .filter(Boolean) as FormulaComponentInput[]
+        const cloneSummary = summarizeFormula(frozenComponents, cloneTarget)
+        setLocalLists([clonedList, ...lists])
+        setLocalSnapshots([{
+          id: crypto.randomUUID(),
+          productListId: cloneId,
+          displayCode,
+          snapshotVersion: 'v1',
+          targetProductId: cloneTarget?.internalId ?? null,
+          frozenTarget: cloneTarget,
+          frozenComponents,
+          summary: cloneSummary,
+          createdAt: now,
+          actor: role,
+        }, ...snapshots])
+        setEditingListId(cloneId)
+        setScaleListId(cloneId)
+      }
+      setTargetId(cloneTarget?.internalId ?? '')
+      setComponents(cloneComponents.length > 0 ? cloneComponents : [{ id: crypto.randomUUID(), itemId: '', quantityKg: 0 }])
+      loadedListSignature.current = JSON.stringify({ targetId: cloneTarget?.internalId ?? '', components: cloneComponents.map((component) => ({ itemId: component.itemId, quantityKg: component.quantityKg })) })
+      setView('formulator')
+      setSaveState('saved')
+    } catch (error) {
+      window.alert(error instanceof Error ? error.message : 'No se pudo clonar la lista.')
+      setSaveState('error')
+    }
+  }
+
+  async function deleteListFromHistory(snapshot: Snapshot) {
+    const confirmed = window.confirm(`Eliminar la lista ${snapshot.displayCode}? Se ocultara de listas guardadas y del catalogo de listas, pero el registro queda archivado.`)
+    if (!confirmed) return
+
+    setSaveState('saving')
+    try {
+      if (usingConvex) {
+        await archiveRemoteLiveList({ productListId: snapshot.productListId as never })
+      } else {
+        setLocalLists(lists.filter((list) => list.id !== snapshot.productListId))
+        setLocalSnapshots(snapshots.filter((item) => item.productListId !== snapshot.productListId))
+      }
+      if (editingListId === snapshot.productListId) {
+        setEditingListId(null)
+        setScaleListId('')
+      }
+      setSaveState('saved')
+    } catch (error) {
+      window.alert(error instanceof Error ? error.message : 'No se pudo eliminar la lista.')
+      setSaveState('error')
+    }
   }
 
   function exportLists(format: 'csv' | 'json') {
     if (lists.length === 0) {
-      window.alert('No hay listas vivas para exportar.')
+      window.alert('No hay listas guardadas para exportar.')
       return
     }
     const stamp = exportStamp()
     if (format === 'csv') {
-      downloadTextFile(exportLiveListsCsv(lists, catalog), `cfq-listas-vivas-${stamp}.csv`, 'text/csv;charset=utf-8')
+      downloadTextFile(exportLiveListsCsv(lists, catalog), `cfq-listas-guardadas-${stamp}.csv`, 'text/csv;charset=utf-8')
       return
     }
-    downloadTextFile(exportLiveListsJson(lists, catalog), `cfq-listas-vivas-${stamp}.json`, 'application/json;charset=utf-8')
+    downloadTextFile(exportLiveListsJson(lists, catalog), `cfq-listas-guardadas-${stamp}.json`, 'application/json;charset=utf-8')
   }
 
   function exportSnapshotHistory(format: 'csv' | 'json') {
     if (snapshots.length === 0) {
-      window.alert('No hay snapshots para exportar.')
+      window.alert('No hay listas en el catalogo para exportar.')
       return
     }
     const stamp = exportStamp()
     if (format === 'csv') {
-      downloadTextFile(exportSnapshotsCsv(snapshots), `cfq-snapshots-listas-${stamp}.csv`, 'text/csv;charset=utf-8')
+      downloadTextFile(exportSnapshotsCsv(snapshots), `cfq-catalogo-listas-${stamp}.csv`, 'text/csv;charset=utf-8')
       return
     }
-    downloadTextFile(exportSnapshotsJson(snapshots), `cfq-snapshots-listas-${stamp}.json`, 'application/json;charset=utf-8')
+    downloadTextFile(exportSnapshotsJson(snapshots), `cfq-catalogo-listas-${stamp}.json`, 'application/json;charset=utf-8')
+  }
+
+  function exportCatalog() {
+    if (activeCatalog.length === 0) {
+      window.alert('No hay productos activos en el catalogo para exportar.')
+      return
+    }
+    downloadTextFile(exportCatalogCsv(activeCatalog), `cfq-catalogo-productos-${exportStamp()}.csv`, 'text/csv;charset=utf-8')
   }
 
   async function previewListImport(file: File | null) {
@@ -676,12 +1077,12 @@ function App() {
   const title = view === 'catalog'
     ? 'Catalogo unificado'
     : view === 'history'
-      ? 'Snapshots congelados'
+      ? 'Catalogo de listas'
       : view === 'import'
         ? 'Importacion futura'
         : view === 'scale'
           ? 'Preparacion por multiplicador'
-          : 'Lista viva de formulacion'
+          : 'Lista de formulacion'
 
   return (
     <main className={`app-shell ${sidebarOpen ? 'sidebar-open' : 'sidebar-collapsed'}`}>
@@ -693,14 +1094,14 @@ function App() {
           <span className="brand-mark">CFQ</span>
           <div>
             <strong>Formulador SGC</strong>
-            <small>Catalogo vivo y snapshots</small>
+            <small>Catalogo y listas guardadas</small>
           </div>
         </div>
         <nav>
           <button className={view === 'formulator' ? 'active' : ''} onClick={() => setView('formulator')} title="Formular"><Beaker size={18} /> <span>Formular</span></button>
           <button className={view === 'scale' ? 'active' : ''} onClick={() => setView('scale')} title="Preparar"><Calculator size={18} /> <span>Preparar</span></button>
           <button className={view === 'catalog' ? 'active' : ''} onClick={() => setView('catalog')} title="Catalogo"><Database size={18} /> <span>Catalogo</span></button>
-          <button className={view === 'history' ? 'active' : ''} onClick={() => setView('history')} title="Historico"><History size={18} /> <span>Historico</span></button>
+          <button className={view === 'history' ? 'active' : ''} onClick={() => setView('history')} title="Catalogo de listas"><History size={18} /> <span>Listas</span></button>
           <button className={view === 'import' ? 'active' : ''} onClick={() => setView('import')} title="Importar"><FileUp size={18} /> <span>Importar</span></button>
         </nav>
         <div className="role-box">
@@ -733,7 +1134,7 @@ function App() {
           <section className="catalog-layout">
             <div className="panel">
               <div className="toolbar">
-                <label className="search"><Search size={17} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar por codigo, nombre o tipo" /></label>
+                <div className="search"><Search size={17} /><CatalogSearchCombobox value={query} items={activeCatalog} onChange={setQuery} placeholder="Buscar por codigo, nombre o tipo" /></div>
                 <select value={classFilter} onChange={(event) => setClassFilter(event.target.value as typeof classFilter)}>
                   <option value="ALL">Todas las clases</option>
                   <option value="MP">MP</option>
@@ -745,6 +1146,7 @@ function App() {
                 <span><strong>{activeCatalog.filter((item) => item.class === 'MP').length}</strong> MP</span>
                 <span><strong>{activeCatalog.filter((item) => item.class === 'PT').length}</strong> PT</span>
                 <span><strong>{activeCatalog.filter((item) => item.class === 'MZR').length}</strong> MZR</span>
+                <button className="secondary" onClick={exportCatalog}><Download size={17} /> Exportar CSV</button>
               </div>
               <div className="create-catalog-item">
                 <select value={newItemClass} disabled={role !== 'admin'} onChange={(event) => setNewItemClass(event.target.value as CatalogClass)}>
@@ -794,7 +1196,7 @@ function App() {
                 {catalogChanges.slice(0, 18).map((change) => (
                   <div className="change-table-row" key={change.id}>
                     <span><strong>{change.itemInternalId}</strong><small>{change.itemName}</small></span>
-                    <span>{change.field.replace('composition.', '')}</span>
+                    <span>{formatCompositionField(change.field)}</span>
                     <span>{change.before} {'->'} {change.after}</span>
                     <small>{new Date(change.changedAt).toLocaleString()} · {change.actor}</small>
                   </div>
@@ -823,7 +1225,7 @@ function App() {
                   <div className="composition-editor">
                     {NUTRIENTS.map((nutrient) => (
                       <label key={nutrient}>
-                        <span>{nutrient}</span>
+                        <span>{canonicalNutrientLabel(nutrient)}</span>
                         <input
                           type="number"
                           step="0.0001"
@@ -838,7 +1240,7 @@ function App() {
                     <h3><ListChecks size={16} /> Cambios recientes</h3>
                     {catalogChanges.filter((change) => change.itemInternalId === selectedCatalogItem.internalId).slice(0, 8).map((change) => (
                       <div className="change-row" key={change.id}>
-                        <strong>{change.field.replace('composition.', '')}</strong>
+                        <strong>{formatCompositionField(change.field)}</strong>
                         <span>{change.before} {'->'} {change.after}</span>
                         <small>{new Date(change.changedAt).toLocaleString()} · {change.actor}</small>
                       </div>
@@ -869,10 +1271,12 @@ function App() {
                 </div>
               </div>
               <label className="field">Producto objetivo opcional
-                <select value={targetId} onChange={(event) => setTargetId(event.target.value)}>
-                  <option value="">SIN_OBJETIVO / BORRADOR</option>
-                  {activeCatalog.filter((item) => item.class === 'PT').map((item) => <option key={item.internalId} value={item.internalId}>{item.internalId} · {item.name}</option>)}
-                </select>
+                <CatalogCombobox
+                  value={targetId}
+                  items={activeCatalog.filter((item) => item.class === 'PT')}
+                  onChange={setTargetId}
+                  placeholder="Escribe codigo o nombre; vacio = SIN_OBJETIVO"
+                />
               </label>
               <div className="target-create">
                 <div className="target-create-header">
@@ -890,10 +1294,12 @@ function App() {
                 {components.map((component, index) => (
                   <div className="component-row" key={component.id}>
                     <span>{index + 1}</span>
-                    <select value={component.itemId} onChange={(event) => setComponents(components.map((row) => row.id === component.id ? { ...row, itemId: event.target.value } : row))}>
-                      <option value="">Seleccionar MP/PT/MZR</option>
-                      {activeCatalog.map((item) => <option key={item.internalId} value={item.internalId}>{item.internalId} · {item.class} · {item.name}</option>)}
-                    </select>
+                    <CatalogCombobox
+                      value={component.itemId}
+                      items={activeCatalog}
+                      onChange={(value) => setComponents(components.map((row) => row.id === component.id ? { ...row, itemId: value } : row))}
+                      placeholder="Seleccionar MP/PT/MZR"
+                    />
                     <input type="number" step="0.01" value={component.quantityKg || ''} onChange={(event) => setComponents(components.map((row) => row.id === component.id ? { ...row, quantityKg: Number(event.target.value) } : row))} placeholder="kg" />
                     <button onClick={() => setComponents(components.filter((row) => row.id !== component.id))}>Quitar</button>
                   </div>
@@ -953,7 +1359,7 @@ function App() {
                         const val = summary.composition[nutrient]
                         return (
                           <div className={`nutrient-card${val === 0 ? ' zero-value' : ' has-value'}`} key={nutrient}>
-                            <span>{nutrient.replace('_', '-')}</span>
+                            <span>{canonicalNutrientLabel(nutrient)}</span>
                             <strong>{formatPct(val)}</strong>
                             {evaluation && evaluation.declared > 0 && (
                               <dl>
@@ -983,7 +1389,7 @@ function App() {
                         const val = summary.composition[nutrient]
                         return (
                           <div className={`nutrient-card${val === 0 ? ' zero-value' : ' has-value'}`} key={nutrient}>
-                            <span>{nutrient}</span>
+                            <span>{canonicalNutrientLabel(nutrient)}</span>
                             <strong>{formatPct(val)}</strong>
                             {evaluation && evaluation.declared > 0 && (
                               <dl>
@@ -1013,7 +1419,7 @@ function App() {
                         const val = summary.composition[nutrient]
                         return (
                           <div className={`nutrient-card${val === 0 ? ' zero-value' : ' has-value'}`} key={nutrient}>
-                            <span>{nutrient}</span>
+                            <span>{canonicalNutrientLabel(nutrient)}</span>
                             <strong>{formatPct(val)}</strong>
                             {evaluation && evaluation.declared > 0 && (
                               <dl>
@@ -1042,7 +1448,7 @@ function App() {
                       <tr>
                         <th>Insumo</th>
                         <th>kg</th>
-                        {contributionNutrients.map((nutrient) => <th key={nutrient}>{nutrient}</th>)}
+                        {contributionNutrients.map((nutrient) => <th key={nutrient}>{canonicalNutrientLabel(nutrient)}</th>)}
                       </tr>
                     </thead>
                     <tbody>
@@ -1089,7 +1495,7 @@ function App() {
                 <span><strong>x {formatKg(safeScaleMultiplier)}</strong><small>multiplicador</small></span>
                 <span><strong>{formatKg(scaledTotalKg)}</strong><small>kg total a preparar</small></span>
               </div>
-              <p className="muted">Si la lista base esta en 1 kg, 1 tonelada o 1000 kg, solo ingresa el factor correspondiente. El calculo no cambia porcentajes ni guarda snapshots.</p>
+                <p className="muted">Si la lista base esta en 1 kg, 1 tonelada o 1000 kg, solo ingresa el factor correspondiente. El calculo no cambia porcentajes ni guarda versiones nuevas.</p>
             </div>
             <div className="panel">
               <div className="section-title">
@@ -1127,7 +1533,7 @@ function App() {
                   </table>
                   {(selectedScaleComponents ?? []).length === 0 && <p className="muted">La lista seleccionada no tiene componentes validos contra el catalogo activo.</p>}
                 </div>
-              ) : <p className="muted">Guarda una lista viva para poder escalar cantidades.</p>}
+              ) : <p className="muted">Guarda una lista para poder escalar cantidades.</p>}
             </div>
             <div className="panel scale-total-panel">
               <div className="section-title">
@@ -1199,31 +1605,58 @@ function App() {
         ) : view === 'history' ? (
           <section className="panel">
             <div className="section-title">
-              <h2>Snapshots congelados</h2>
+              <h2>Catalogo de listas</h2>
               <div className="form-actions">
                 <button className="secondary" onClick={() => exportSnapshotHistory('csv')}><Download size={17} /> CSV</button>
                 <button className="secondary" onClick={() => exportSnapshotHistory('json')}><Download size={17} /> JSON</button>
               </div>
             </div>
+            <div className="snapshot-toolbar">
+              <div className="search"><Search size={17} /><SnapshotSearchCombobox value={snapshotQuery} snapshots={snapshots} getTargetName={snapshotTargetName} onChange={setSnapshotQuery} /></div>
+              <div className="sort-buttons" aria-label="Ordenar listas">
+                {([
+                  ['displayCode', 'Codigo'],
+                  ['targetName', 'Producto'],
+                  ['createdAt', 'Fecha'],
+                  ['totalKg', 'Kg'],
+                  ['status', 'Estado'],
+                ] as [SnapshotSortKey, string][]).map(([key, label]) => (
+                  <button className={snapshotSort.key === key ? 'active' : ''} key={key} onClick={() => updateSnapshotSort(key)}>
+                    {label} {snapshotSort.key === key ? (snapshotSort.direction === 'asc' ? '↑' : '↓') : ''}
+                  </button>
+                ))}
+              </div>
+            </div>
             <div className="snapshot-list">
-              {snapshots.map((snapshot) => (
-                <article className="snapshot" key={snapshot.id}>
-                  <div>
-                    <strong>{snapshot.displayCode} · {snapshot.snapshotVersion}</strong>
-                    <small><Clock3 size={14} /> {new Date(snapshot.createdAt).toLocaleString()} · {snapshot.actor}</small>
-                  </div>
-                  <span className="status">{snapshot.summary.evaluation.generalStatus}</span>
-                  <span>{snapshot.summary.totalKg.toFixed(2)} kg</span>
-                  <button onClick={() => loadList(lists.find((list) => list.id === snapshot.productListId) ?? {
-                    id: crypto.randomUUID(),
-                    displayCode: snapshot.displayCode,
-                    targetProductId: snapshot.targetProductId,
-                    components: snapshot.frozenComponents.map((component) => ({ id: crypto.randomUUID(), itemId: component.item.internalId, quantityKg: component.quantityKg })),
-                    updatedAt: Date.now(),
-                  })}>Abrir viva</button>
-                </article>
-              ))}
-              {snapshots.length === 0 && <p className="muted">Todavia no hay snapshots. Guarda una lista para crear `v1`.</p>}
+              {visibleSnapshots.map((snapshot) => {
+                const visibleSummary = snapshotVisibleSummary(snapshot)
+                const targetName = snapshotTargetName(snapshot)
+
+                return (
+                  <article className="snapshot" key={snapshot.id}>
+                    <div>
+                      <strong>{snapshot.displayCode} · {snapshot.snapshotVersion}</strong>
+                      <small><Clock3 size={14} /> {new Date(snapshot.createdAt).toLocaleString()} · {snapshot.actor}</small>
+                    </div>
+                    <span className="snapshot-product">{targetName}</span>
+                    <span className="status">{visibleSummary.evaluation.generalStatus}</span>
+                    <span>{visibleSummary.totalKg.toFixed(2)} kg</span>
+                    <div className="snapshot-actions">
+                      <button onClick={() => loadList(lists.find((list) => list.id === snapshot.productListId) ?? {
+                        id: crypto.randomUUID(),
+                        displayCode: snapshot.displayCode,
+                        targetProductId: snapshot.targetProductId,
+                        components: snapshot.frozenComponents.map((component) => ({ id: crypto.randomUUID(), itemId: component.item.internalId, quantityKg: component.quantityKg })),
+                        updatedAt: Date.now(),
+                      })}>Abrir lista</button>
+                      <button className="secondary" onClick={() => cloneListFromHistory(snapshot)}><Copy size={15} /> Clonar lista</button>
+                      <button className="danger" onClick={() => deleteListFromHistory(snapshot)}><Trash2 size={15} /> Eliminar</button>
+                    </div>
+                  </article>
+                )
+              })}
+              {snapshots.length === 0 && <p className="muted">Todavia no hay listas en el catalogo. Guarda una lista para crear `v1`.</p>}
+              {snapshots.length > 0 && visibleSnapshots.length === 0 && <p className="muted">No hay listas que coincidan con el filtro.</p>}
             </div>
           </section>
         ) : (

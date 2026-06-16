@@ -23,7 +23,7 @@ const actorValidator = v.object({ id: v.string(), role: v.union(v.literal('user'
 export const list = query({
   args: { includeArchived: v.optional(v.boolean()) },
   handler: async (ctx, args) => {
-    const items = await ctx.db.query('catalogItems').collect()
+    const items = await ctx.db.query('catalogItems').withIndex('by_internalId').order('asc').collect()
     return args.includeArchived ? items : items.filter((item) => item.archivedAt === undefined)
   },
 })
@@ -47,6 +47,42 @@ export const seedIfEmpty = mutation({
       await ctx.db.insert('catalogItems', { ...item, createdAt: now, updatedAt: now })
     }
     return { rowsRead: args.items.length, inserted: args.items.length, rejected: 0 }
+  },
+})
+
+export const importMissingCsvItems = mutation({
+  args: { items: v.array(itemValidator), actor: actorValidator, dryRun: v.optional(v.boolean()) },
+  handler: async (ctx, args) => {
+    if (args.actor.role !== 'admin') throw new Error('Solo admin puede importar faltantes CSV.')
+    const now = Date.now()
+    const inserted: string[] = []
+    const skipped: string[] = []
+
+    for (const item of args.items) {
+      if (item.origin !== 'csv') throw new Error(`importMissingCsvItems solo acepta origin=csv: ${item.internalId}`)
+      const existing = await ctx.db.query('catalogItems').withIndex('by_internalId', (q) => q.eq('internalId', item.internalId)).unique()
+      if (existing) {
+        skipped.push(item.internalId)
+        continue
+      }
+      if (args.dryRun) {
+        inserted.push(item.internalId)
+        continue
+      }
+      const catalogItemId = await ctx.db.insert('catalogItems', { ...item, createdAt: now, updatedAt: now })
+      await ctx.db.insert('catalogChangeHistory', {
+        catalogItemId,
+        internalId: item.internalId,
+        changedAt: now,
+        actor: args.actor,
+        reason: 'Importacion controlada de faltantes desde CSV publicado',
+        origin: 'catalog.csv_import_missing',
+        changes: [{ field: 'item', before: null, after: item }],
+      })
+      inserted.push(item.internalId)
+    }
+
+    return { rowsRead: args.items.length, inserted: inserted.length, skipped: skipped.length, insertedIds: inserted, skippedIds: skipped }
   },
 })
 

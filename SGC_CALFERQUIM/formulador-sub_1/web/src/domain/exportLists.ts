@@ -1,5 +1,6 @@
 import type { CatalogItem } from './catalog'
 import type { FormulaComponentInput } from './formulation'
+import { canonicalNutrientLabel, NUTRIENTS } from './nutrients'
 
 export type ExportLiveList = {
   id: string
@@ -57,6 +58,18 @@ const snapshotHeaders = [
   'cantidadKg',
 ]
 
+const catalogHeaders = [
+  'idInterno',
+  'codigoExterno',
+  'codigoOriginal',
+  'producto',
+  'clase',
+  'tipo',
+  'origen',
+  'archivado',
+  ...NUTRIENTS.map(canonicalNutrientLabel),
+]
+
 function csvEscape(value: unknown) {
   const text = value === null || value === undefined ? '' : String(value)
   return /[;"\n\r]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text
@@ -110,6 +123,21 @@ export function exportSnapshotsCsv(snapshots: ExportSnapshot[]) {
     ]),
   )
   return toCsv(snapshotHeaders, rows)
+}
+
+export function exportCatalogCsv(catalog: CatalogItem[]) {
+  const rows = catalog.map((item) => [
+    item.internalId,
+    item.externalCode,
+    item.originalCode,
+    item.name,
+    item.class,
+    item.type,
+    item.origin,
+    item.archivedAt ? new Date(item.archivedAt).toISOString() : '',
+    ...NUTRIENTS.map((nutrient) => item.composition[nutrient]),
+  ])
+  return toCsv(catalogHeaders, rows)
 }
 
 export function exportLiveListsJson(lists: ExportLiveList[], catalog: CatalogItem[]) {

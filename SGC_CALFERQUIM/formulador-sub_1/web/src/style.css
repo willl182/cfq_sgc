@@ -209,6 +209,10 @@ h2 { font-size: 17px; font-weight: 700; }
 }
 .search:focus-within { border-color: #2d8c5a; box-shadow: 0 0 0 3px rgba(45,140,90,.08); }
 .search input { border: 0; background: transparent; padding: 10px 0; }
+.search .combo { flex: 1; }
+.search .combo input { box-shadow: none; }
+.search .combo input:focus { box-shadow: none; }
+.catalog-search-combo .combo-menu { left: -34px; right: 0; }
 
 select, input {
   width: 100%;
@@ -391,6 +395,81 @@ select:focus, input:focus {
 .field { display: grid; gap: 6px; font-weight: 600; font-size: 13px; margin-bottom: 14px; color: #4a5a48; }
 .field select { font-weight: 400; }
 
+.combo {
+  position: relative;
+  min-width: 0;
+}
+.combo input {
+  padding-right: 36px;
+  text-align: left;
+}
+.combo-arrow {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: calc(100% - 8px);
+  border-radius: 6px;
+  background: transparent;
+  color: #4a5a48;
+  font-size: 16px;
+}
+.combo-arrow:hover { background: #f0f3ed; }
+.combo-menu {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  max-height: 280px;
+  overflow: auto;
+  padding: 6px;
+  border: 1px solid #dce0d7;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 12px 30px rgba(22, 33, 25, .16);
+}
+.combo-option {
+  display: grid;
+  grid-template-columns: 76px 44px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 7px;
+  background: transparent;
+  color: #1a2e23;
+  text-align: left;
+}
+.combo-option:hover { background: #f0f3ed; }
+.combo-option strong { font-size: 12px; letter-spacing: .01em; }
+.combo-option span {
+  justify-self: start;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: #e8efe7;
+  color: #2a3d2e;
+  font-size: 10px;
+  font-weight: 800;
+}
+.combo-option small {
+  overflow: hidden;
+  color: #4a5a48;
+  font-size: 12px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.snapshot-combo-option { grid-template-columns: 120px 52px minmax(0, 1fr); }
+.combo-empty {
+  padding: 12px;
+  color: #7a8a78;
+  font-size: 13px;
+  text-align: center;
+}
+
 .target-create {
   display: grid;
   gap: 10px;
@@ -434,6 +513,7 @@ select:focus, input:focus {
 }
 .component-row select { font-size: 13px; padding: 8px 10px; }
 .component-row input { font-size: 13px; padding: 8px 10px; text-align: right; }
+.component-row .combo input { text-align: left; }
 .component-row button {
   font-size: 12px;
   padding: 6px 10px;
@@ -726,10 +806,35 @@ select:focus, input:focus {
 .scale-total-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
 /* ── Snapshots ─────────────────────────────── */
+.snapshot-toolbar {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.sort-buttons {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.sort-buttons button {
+  padding: 7px 10px;
+  border: 1px solid #dce0d7;
+  border-radius: 999px;
+  background: #f0f3ed;
+  color: #2a3d2e;
+  font-size: 12px;
+  font-weight: 700;
+}
+.sort-buttons button:hover { background: #e6eae2; }
+.sort-buttons button.active {
+  border-color: #2d8c5a;
+  background: #dcfce7;
+  color: #166534;
+}
 .snapshot-list { display: grid; gap: 8px; }
 .snapshot {
   display: grid;
-  grid-template-columns: minmax(260px, 1fr) 130px 100px 100px;
+  grid-template-columns: minmax(240px, 1fr) minmax(220px, 1fr) 130px 100px minmax(210px, auto);
   gap: 12px;
   align-items: center;
   padding: 12px 14px;
@@ -740,6 +845,8 @@ select:focus, input:focus {
 }
 .snapshot:hover { border-color: #c8cec3; }
 .snapshot small { display: flex; align-items: center; gap: 5px; margin-top: 4px; font-size: 12px; }
+.snapshot-product { font-weight: 700; color: #23372a; }
+.snapshot-actions { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
 .status { font-weight: 800; color: #1d6b42; font-size: 13px; }
 
 /* ── Import ────────────────────────────────── */

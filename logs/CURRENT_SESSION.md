@@ -1,29 +1,34 @@
-# Session State: formulador-sub_2
+# Session State: formulador-sub_1
 
-**Last Updated**: 2026-06-10 14:01 America/Bogota
+**Last Updated**: 2026-06-16 07:56 -05
 
 ## Session Objective
 
-Verificar carga CSV en navegador e integrar formulas-guardadas.js con ProductLists (catálogo).
+Implementar exportacion CSV de la base de productos/catalogo en la app web, verificando que la exportacion de listas ya existiera.
 
 ## Current State
 
-- [x] CsvParser detecta automáticamente delimitador ";" (puntoycoma) vs "," vs tab
-- [x] parseProductos() maneja columnas faltantes (ID_PROD ausente → fallback a COD)
-- [x] Catalogo._preloadFromBundledCsv() busca insumos_ref/mp-pt_mzr.csv como fuente primaria
-- [x] FormulasGuardadas carga catálogo vía Api.fetchMP() y resuelve NOMBRE_DESTINO desde el catálogo
-- [x] Prueba de integración: 296 productos parseados (8 MP, 288 PT)
+- [x] Se verifico memoria del proyecto al iniciar.
+- [x] Se confirmo que las listas ya tienen exportacion CSV/JSON en `Catalogo de listas`.
+- [x] Se agrego `exportCatalogCsv(catalog)` en `SGC_CALFERQUIM/formulador-sub_1/web/src/domain/exportLists.ts`.
+- [x] Se agrego boton `Exportar CSV` en la vista `Catalogo` usando el catalogo activo.
+- [x] Se agrego prueba de exportacion CSV del catalogo con escape de separadores/comillas y nutrientes.
+- [x] `pnpm test` paso: 18 tests.
+- [x] `pnpm build` paso.
+- [x] Produccion desplegada y alias actualizado: `https://formulador-sub.vercel.app`.
 
 ## Critical Technical Context
 
-- `insumos_ref/mp-pt_mzr.csv` usa `;` como delimitador (no `,`)
-- El CSV no tiene columna `ID_PROD`; el código ahora usa `COD` como fallback para `ID_PROD`
-- `FormulasGuardadas` ahora carga catálogo en `_loadCatalogo()` y usa `_resolveNombreDestino()` para mostrar nombres de producto
-- `_preloadFromBundledCsv()` intenta rutas con `import.meta.url` y luego rutas relativas como fallback
-- El backend real sigue siendo Google Apps Script; CORS es el bloqueo para carga directa desde navegador
+- Archivos modificados por esta sesion:
+- `SGC_CALFERQUIM/formulador-sub_1/web/src/domain/exportLists.ts`
+- `SGC_CALFERQUIM/formulador-sub_1/web/src/main.tsx`
+- `SGC_CALFERQUIM/formulador-sub_1/web/src/domain/domain.test.ts`
+- El CSV del catalogo exporta solo `activeCatalog`, por lo que no incluye productos archivados.
+- Columnas del CSV: datos base (`idInterno`, codigos, producto, clase, tipo, origen, archivado) mas todos los nutrientes canonicos de `NUTRIENTS`.
+- Las listas vivas siguen exportandose desde `exportLists('csv')`; el catalogo de listas/snapshots sigue exportandose desde `exportSnapshotHistory('csv')`.
+- Produccion: `https://formulador-sub.vercel.app`.
 
 ## Next Steps
 
-1. Verificar que el servidor local (Vercel dev o similar) sirva insumos_ref/mp-pt_mzr.csv correctamente
-2. Probar la importación manual de CSV desde el botón "Importar CSV" en Catálogo
-3. Validar que el flujo Recetas → Formulador mantiene datos del catálogo al editar/clonar
+1. Probar visualmente en produccion la descarga desde `Catalogo` -> `Exportar CSV`.
+2. Si se requiere auditoria completa, agregar una segunda exportacion que incluya tambien productos archivados.
