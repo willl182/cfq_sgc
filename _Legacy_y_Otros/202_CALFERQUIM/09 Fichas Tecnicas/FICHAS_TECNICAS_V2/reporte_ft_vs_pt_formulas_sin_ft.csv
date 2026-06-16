@@ -1,0 +1,239 @@
+idInterno;codigoExterno;producto;tipo;origen;estado;archivo_ficha;score;razon
+PT0008;411;MF 0-15-15+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0009;137;MF 10-20-20;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0010;86;MF 10-30-10;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0011;407;MF 10-10-20+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0012;396;MF 10-15-20+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0013;495;MF 10-15-29+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0014;408;MF 10-20-20+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0015;464;MF 10-20-28+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0016;423;MF 10-20-30+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0017;406;MF 10-24-4+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0018;387;MF 10-28-6+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0019;390;MF 10-6-4 + EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0020;670;MF 10-9-30;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0021;458;MF 10-9-30+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0022;388;MF 11-5-27;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0023;543;MF 11-29-12+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0024;268;MF 12-24-12;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0025;317;MF 12-24-12+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0026;318;MF 12-7-12+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0027;496;MF 12-30-10+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0028;490;MF 13-26-10+ EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0029;419;MF 13-7-12+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0030;381;MF 14-3-19-7Ca+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0031;433;MF 14-4-23+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0032;516;MF 14-4-24+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0034;462;MF 15-4-23+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0035;426;MF 15-6-8+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0036;612;MF 16-26-12;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0037;517;MF 16-16-16+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0038;441;MF 16-17-0-7Ca+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0039;405;MF 16-3-14+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0040;84;MF 17-6-18-2-1;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0041;402;MF 17-6-18-6+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0042;401;MF 17-8-11+EM+CO;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0043;478;MF 17-4-23+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0044;477;MF 17-5-7+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0046;353;MF 18-8-5-4+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0047;301;MF 19-1-2-1+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0048;304;MF 19-5-9-5+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0049;384;MF 19-1-3 + MEORES;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0050;442;MF 19-3-18+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0051;284;MF 20-17-18+TCM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0052;529;MF 20-0-30-3S;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0053;519;MF 20-3-15+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0054;457;MF 20-6-0-5CA+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0055;631;MF 20-8-10+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0056;172;MF 21-1-2+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0057;357;MF 21-5-10-6S+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0058;415;MF 21-2-8+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0059;316;MF 21-3-8-3Ca+MEORES;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0060;307;MF 21-4-5-3Ca+MEORES;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0061;497;MF 21-5-10+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0062;471;MF 21-5-9+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0063;632;MF 21-9-9+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0064;315;MF 22 3 13 4S+MEORES;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0065;524;MF 22-0-25-3S;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0066;526;MF 22-0-3+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0067;511;MF 22-4-8+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0068;525;MF 22-5-13+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0069;456;MF 22-6-3+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0070;398;MF 22-6-7Ca+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0071;633;MF 22-6-7+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0072;634;MF 22-9-9+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0073;20;MF 23-3-20;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0074;618;MF 23 6 8 + EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0075;394;MF 23-3-20+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0076;506;MF 23-5-6+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0077;508;MF 23-6-8+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0078;308;MF 24-0-17+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0079;174;MF 24-3-9-3+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0080;348;MF 24-5-7-5S-3Ca+1CO;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0081;436;MF 24-0-2+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0082;532;MF 24-3-12+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0083;440;MF 24-4-11+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0084;473;MF 24-5-6+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0085;328;MF 25-0-15+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0086;146;MF 25-0-17-4S+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0087;148;MF 25-10-18+ MEORES;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0088;175;MF 25-10-18+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0089;382;MF 25-15-2-3-2;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0091;518;MF 25-17-1+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0092;455;MF 25-1-13+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0093;509;MF 25-4-11+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0094;656;MF 25-4-17+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0095;367;MF 25-5-0-8Ca+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0096;533;MF 25-5-12+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0097;492;MF 25-7K-2CA+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0098;652;MF 25-7-7+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0099;648;MF 25-8-14+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0100;159;MF 26-0-17+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0101;176;MF 26-1-12-+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0102;619;MF 26 7 6 + EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0103;514;MF 26-1-11+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0104;512;MF 26-5-11+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0105;476;MF 26-9-9+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0106;136;MF 27-17-0Ca;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0107;630;MF 27-0-14+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0108;385;MF 27-15K-5S-2Si-0,80CO;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0109;445;MF 27-1-12-2Ca+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0110;475;MF 27-1-7+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0111;653;MF 27-1-8+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0112;642;MF 27-3-12+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0113;536;MF 27-3-3+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0114;438;MF 27-4-3+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0115;606;MF 27-6-13+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0116;480;MF 27-9K-10S+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0117;299;MF 28-0-6-2Ca+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0118;312;MF 28-0-9-2Ca+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0119;165;MF 28-1-12+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0120;303;MF 28-1-6-2Ca+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0121;352;MF 28-1-6-5S-EM+1CO;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0122;620;MF 28-1-7 +EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0123;617;MF 28 1 8 + EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0124;513;MF 28-0-12+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0125;537;MF 28-14-10+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0126;432;MF 28-1-12+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0127;487;MF 28-4-15 +EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0128;469;MF 28-5-6+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0129;527;MF 29-0-16-4S;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0130;522;MF 29-10-10+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0131;417;MF 29-3-15+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0132;389;MF 3-10-2 + EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0133;163;MF 30-0-20 +EM +TMC;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0134;418;MF 30 0 20;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0135;538;MF 30-11-10+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0136;493;MF 30-12K-2CA+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0137;298;MF 31-0-20+X;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0138;187;MF 31-0-20+TMC;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0139;81;MF 31-8-8-2;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0140;521;MF 31-6-11+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0141;380;MF 32-0-6+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0142;327;MF 32-6-5-2SI-1CO;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0143;383;MF 32 1 6 2Ca+ EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0144;665;MF 32-1-12+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0145;626;MF 33-1-12+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0146;479;MF 33-5-12;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0147;523;MF 37-0-11;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0148;434;MF 37-2Ca-2Mg+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0149;168;MF 38-0-0-8;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0150;399;MF 38-10K_;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0151;640;MF 3-13-32+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0152;369;MF 40-3-0-2+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0154;391;MF 6-9-6+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0155;356;MF 7-7-5-3S+EM+2CO;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0156;545;MF 7-14-29+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0157;313;MF 8-24-8+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0158;435;MF 8-15-23+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0159;510;MF 8-17-34-1S;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0160;453;MF 8-20-12+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0161;439;MF 9-12-24+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0163;22;MF-23-3-20-4Ca-3Si;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0164;673;MFE 0-10+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0165;588;MFE 10 11 29;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0166;641;MFE 10-24-14 +EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0167;542;MFE 10-25-8+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0168;589;MFE 10-6-16 +EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0169;668;MFE 10-6-6+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0170;569;MFE 10-9-18+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0171;544;MFE 11-24-9+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0173;660;MFE 11-9-18+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0174;587;MFE 12 25 9;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0175;659;MFE 13-15-10+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0176;314;MFE 13-26-6+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0178;601;MFE 13-6-6+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0179;590;MFE 15-12-20+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0180;623;MFE 15-20-2+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0181;602;MFE 15-21-1+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0182;635;MFE 15-9-20+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0183;658;MFE 16-21-5+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0185;649;MFE 18-2-0+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0186;414;MFE 18-9-29+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0187;674;MFE 19-25-6+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0188;566;MFE 19-4-10+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0189;586;MFE 19-4-18;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0190;596;MFE 20-3-14+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0191;413;MFE 20-4-18+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0192;555;MFE 21-4-11+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0193;654;MFE 21-7-8 + EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0194;1410;MFE 22-3-7;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0195;664;MFE 22-0-19+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0196;560;MFE 22-3-0+ EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0197;645;MFE 22-3-3+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0198;662;MFE 22-6-3+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0199;605;MFE 22-7K-12S+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0200;639;MFE 22-8-10+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0201;535;MFE 22-9-0+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0202;669;MFE 23-1-18+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0203;651;MFE 23-4-16+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0204;593;MFE 23-4-9+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0205;420;MFE 23-5-10+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0206;554;MFE 23-9-11+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0207;650;MFE 24-2-9+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0208;585;MFE 24-4-2K+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0209;965;MFE 24-4-10+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0210;616;MFE 24-6-7+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0211;591;MFE 24-9K-12S+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0212;614;MFE 24-9-7S+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0213;629;MFE 25-0-8+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0214;412;MFE 25-13-12 +EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0215;628;MFE 25-4-14+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0216;677;MFE 25-6-0+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0217;568;MFE 25-6-13+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0218;644;MFE 25-8-16+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0219;594;MFE 26-11-6+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0220;582;MFE 26-20K-4S;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0221;627;MFE 26-2-9-2Ca;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0223;682;MFE 26-7-0+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0224;625;MFE 27-18K-5S;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0225;672;MFE 27-20-0+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0226;539;MFE 27-5-11+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0227;610;MFE 27-8-9+EM ILO;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0228;621;MFE 28-24-0;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0229;1401;MFE 28 5 5.4 + EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0230;600;MFE 28-14-6+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0231;657;MFE 28-4-9+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0232;592;MFE 28-5-0+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0233;548;MFE 28-5-15+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0234;609;MFE 28-5-9+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0235;608;MFE 29 10 6 + EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0236;428;MFE 29-15-5+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0237;607;MFE 29-1-11+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0238;683;MFE 29-6-12+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0239;840;MFE 30-0-20;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0240;598;MFE 30-11-6+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0241;465;MFE 30-8-0-5CA+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0242;676;MFE 30-9-0+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0243;671;MFE 31-5-0+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0244;597;MFE 31-6-7+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0245;581;MFE 31-7K-9S;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0246;1080;MFE 32-0-9;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0247;1402;MFE 32 1 12;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0248;599;MFE 33-6-6+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0250;622;MFE 5-8-29+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0251;603;MFE 6-6-33+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0252;661;MFE 7-8-30+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0253;551;MFE 8-6-24+EM;G;csv;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0275;PT0275;MFE 20-7-10;G;manual;NO ESPECIFICA;;0.00;formula sin FT especifica
+PT0276;PT0276;MFE 43.5-0-0-2.4S;PT;manual;NO ESPECIFICA;;0.00;formula sin FT especifica

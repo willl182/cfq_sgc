@@ -1,0 +1,2143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reporte FT vs PT - CALFERQUIM</title>
+
+<style>
+  :root { --ok: #28a745; --fuerte: #ffc107; --noespec: #6c757d; --falta: #dc3545; --primary: #4a90e2; }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; background: #f8f9fa; color: #212529; }
+  .container { max-width: 1500px; margin: 0 auto; padding: 2rem; }
+  h1 { color: #1a1a2e; border-bottom: 3px solid var(--primary); padding-bottom: 0.5rem; }
+  h2 { margin-top: 2.5rem; color: #333; }
+  .toolbar { display: flex; gap: 0.75rem; flex-wrap: wrap; margin: 1rem 0; align-items: center; }
+  .btn { padding: 0.6rem 1.2rem; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.95rem; transition: opacity 0.2s; }
+  .btn:hover { opacity: 0.85; }
+  .btn-primary { background: var(--primary); color: white; }
+  .btn-success { background: var(--ok); color: white; }
+  .btn-secondary { background: #6c757d; color: white; }
+  .btn-warning { background: var(--fuerte); color: #212529; }
+  .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+  .card { padding: 1.2rem; border-radius: 10px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.08); }
+  .card.ok { background: #d4edda; border-left: 5px solid var(--ok); }
+  .card.fuerte { background: #fff3cd; border-left: 5px solid var(--fuerte); }
+  .card.noespec { background: #e2e3e5; border-left: 5px solid var(--noespec); }
+  .card.falta { background: #f8d7da; border-left: 5px solid var(--falta); }
+  .card .number { font-size: 2.2rem; font-weight: bold; display: block; }
+  .card .label { font-size: 0.95rem; opacity: 0.9; }
+  table { width: 100%; border-collapse: collapse; margin-top: 1rem; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th { background: #343a40; color: white; padding: 0.75rem; text-align: left; position: sticky; top: 0; }
+  td { padding: 0.55rem 0.75rem; border-bottom: 1px solid #dee2e6; vertical-align: middle; }
+  tr:hover { background: #f1f3f5; }
+  tr.verified { background: #e8f5e9 !important; }
+  tr.custom-row { background: #fff8e1; }
+  .badge { display: inline-block; padding: 0.25rem 0.6rem; border-radius: 12px; font-size: 0.78rem; font-weight: 600; }
+  .badge-ok { background: var(--ok); color: white; }
+  .badge-fuerte { background: var(--fuerte); color: #212529; }
+  .badge-noespec { background: var(--noespec); color: white; }
+  .badge-falta { background: var(--falta); color: white; }
+  .badge-custom { background: #17a2b8; color: white; }
+  .filename { font-family: "SFMono-Regular", Consolas, monospace; font-size: 0.82rem; color: #495057; }
+  .note { background: #e7f3ff; border-left: 4px solid var(--primary); padding: 1rem; margin: 2rem 0; border-radius: 0 6px 6px 0; }
+  .section-ok { border-left: 4px solid var(--ok); padding-left: 1rem; }
+  .section-fuerte { border-left: 4px solid var(--fuerte); padding-left: 1rem; }
+  .section-noespec { border-left: 4px solid var(--noespec); padding-left: 1rem; }
+  .section-falta { border-left: 4px solid var(--falta); padding-left: 1rem; }
+  input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; }
+  input[type="text"] { width: 100%; padding: 0.35rem; border: 1px solid #ced4da; border-radius: 4px; font-size: 0.9rem; }
+  .actions { white-space: nowrap; }
+  .del-btn { background: #dc3545; color: white; border: none; border-radius: 4px; padding: 0.3rem 0.6rem; cursor: pointer; font-size: 0.8rem; }
+  .del-btn:hover { background: #c82333; }
+  .sticky-toolbar { position: sticky; top: 0; z-index: 100; background: #f8f9fa; padding: 0.75rem 0; border-bottom: 1px solid #dee2e6; }
+  .filter-input { padding: 0.5rem; border: 1px solid #ced4da; border-radius: 6px; min-width: 250px; }
+  .counter { font-size: 0.9rem; color: #666; margin-left: auto; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Reporte: Fichas Técnicas vs Productos Terminados (PT)</h1>
+<p><strong>Fecha:</strong> 2026-06-16 | <strong>Catálogo:</strong> cfq-catalogo-productos-20260616125731.csv</p>
+<div class="summary">
+  <div class="card ok"><span class="number">29</span><span class="label">FT específica (OK)</span></div>
+  <div class="card fuerte"><span class="number">17</span><span class="label">Posible FT (FUERTE)</span></div>
+  <div class="card noespec"><span class="number">238</span><span class="label">Fórmula sin FT específica</span></div>
+  <div class="card falta"><span class="number">14</span><span class="label">Sin FT identificada (FALTA)</span></div>
+</div>
+<div class="sticky-toolbar">
+  <div class="toolbar">
+    <input type="text" id="global-filter" class="filter-input" placeholder="Buscar en todas las tablas..." onkeyup="filterTables()">
+    <button class="btn btn-success" onclick="exportVerifiedCSV()">Exportar verificación CSV</button>
+    <button class="btn btn-secondary" onclick="resetVerification()">Resetear verificación</button>
+    <span id="counter-verified" class="counter">0 de 298 PT verificados</span>
+  </div>
+</div>
+<div class="note">
+<strong>Total PT en catálogo:</strong> 298 | <strong>Fichas técnicas únicas detectadas:</strong> 53<br>
+Marca el checkbox ✅ cuando verifiques manualmente un PT. Usa "Agregar hallazgo" para registrar fichas técnicas que encuentres faltantes o correcciones. Los datos se guardan automáticamente en el navegador.
+</div>
+<div class="section-ok">
+<h2>✅ PT con Ficha Técnica Específica (29)</h2>
+<table id="table-ok">
+<thead>
+<tr><th>✓</th><th>ID</th><th>Código</th><th>Producto</th><th>Archivo Ficha Técnica</th><th>Score</th><th>Estado / Razón</th><th>Nota de verificación</th></tr>
+</thead>
+<tbody>
+<tr data-id="PT0002">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0002</td>
+  <td>150</td>
+  <td>CALFERZINC P</td>
+  <td class="filename">250718_FT CALFERZINC-P.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto nombre</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0006">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0006</td>
+  <td>300</td>
+  <td>K2K</td>
+  <td class="filename">250718_FT K2K.pdf</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto nombre</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0033">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0033</td>
+  <td>85</td>
+  <td>MF 15-15-15</td>
+  <td class="filename">250718_FT 15-15-15.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto formula NPK</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0045">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0045</td>
+  <td>83</td>
+  <td>MF 18-18-18</td>
+  <td class="filename">250718_FT 18-18-18 - copia.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto formula NPK</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0090">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0090</td>
+  <td>82</td>
+  <td>MF 25-4-24</td>
+  <td class="filename">250718_FT 25-4-24.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto formula NPK</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0162">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0162</td>
+  <td>21</td>
+  <td>MF-17-6-18-2</td>
+  <td class="filename">250718_FT 17-6-18-2.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto formula NPK</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0172">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0172</td>
+  <td>646</td>
+  <td>MFE 11-25-9+EM</td>
+  <td class="filename">FT MFE 11-25-9.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto formula NPK</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0177">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0177</td>
+  <td>489</td>
+  <td>MFE 13-36-10+EM</td>
+  <td class="filename">FT MFE 13-36-10 - copia.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto formula NPK</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0184">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0184</td>
+  <td>429</td>
+  <td>MFE 18-18-18+EM</td>
+  <td class="filename">250718_FT 18-18-18 - copia.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto formula NPK</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0222">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0222</td>
+  <td>431</td>
+  <td>MFE 26-6-2+EM</td>
+  <td class="filename">FT MFE 26-6-2.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto formula NPK</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0249">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0249</td>
+  <td>666</td>
+  <td>MFE 4-9-0+ EM</td>
+  <td class="filename">FT MFE 4-9-0.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto formula NPK</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0254">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0254</td>
+  <td>164</td>
+  <td>MICRON C</td>
+  <td class="filename">251030_FT MICRON C.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto nombre</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0255">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0255</td>
+  <td>188</td>
+  <td>MICRON CS</td>
+  <td class="filename">251030_FT MICRON CS.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto nombre</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0256">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0256</td>
+  <td>65</td>
+  <td>NUCLEO 4</td>
+  <td class="filename">250718_FT NUCLEO 4.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto nombre</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0258">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0258</td>
+  <td>563</td>
+  <td>NUCLEO CAMASI YARA</td>
+  <td class="filename">250718_FT NUCLEO CAMASI YARA.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto nombre</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0260">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0260</td>
+  <td>679</td>
+  <td>NUCLEO FOSFORO 10</td>
+  <td class="filename">250718_FT NUCLEO FOSFORO-10.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto nombre</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0262">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0262</td>
+  <td>803</td>
+  <td>NUCLEO MAGNESIO-S</td>
+  <td class="filename">250718_FT NUCLEO MAGNESIO-S.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto nombre</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0263">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0263</td>
+  <td>604</td>
+  <td>NUCLEO MAGNESIO-SILICIO</td>
+  <td class="filename">250718_FT NUCLEO MAGNESIO-SILICIO.pdf</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto nombre</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0265">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0265</td>
+  <td>155</td>
+  <td>RAIFOS 20</td>
+  <td class="filename">250718_FT RAIFOS 20.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto nombre</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0266">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0266</td>
+  <td>35</td>
+  <td>SILIMAGRAN</td>
+  <td class="filename">250718_FT SILIMAGRAN.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto nombre</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0281">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0281</td>
+  <td>PT0281</td>
+  <td>CALFER LLENADO</td>
+  <td class="filename">FT CALFER LLENADO.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto nombre</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0282">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0282</td>
+  <td>PT0282</td>
+  <td>CALFER MENORES</td>
+  <td class="filename">FT CALFER MENORES.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto nombre</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0283">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0283</td>
+  <td>PT0283</td>
+  <td>SOLURAIFOS</td>
+  <td class="filename">250718_FT SOLURAIFOS.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto nombre</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0285">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0285</td>
+  <td>PT0285</td>
+  <td>PRODUCCION 17</td>
+  <td class="filename">250718_FT PRODUCCION 17.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto nombre</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0292">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0292</td>
+  <td>PT0292</td>
+  <td>CALFERCORRECTIVO</td>
+  <td class="filename">250718_FT CALFERCORRECTIVO.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto nombre</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0293">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0293</td>
+  <td>PT0293</td>
+  <td>NUCLEO N</td>
+  <td class="filename">250718_FT NUCLEO N.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto nombre</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0294">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0294</td>
+  <td>PT0294</td>
+  <td>1-CRECIMIENTO</td>
+  <td class="filename">FT 1 CRECIMIENTO.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto nombre</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0295">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0295</td>
+  <td>PT0295</td>
+  <td>2-AVANCE</td>
+  <td class="filename">FT 2 AVANCE.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto nombre</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0296">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0296</td>
+  <td>PT0296</td>
+  <td>3-PRODUCTOR</td>
+  <td class="filename">FT 3 PRODUCTOR.docx</td>
+  <td>1.00</td>
+  <td><span class="badge badge-ok">OK</span><br><small>exacto nombre</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+</tbody>
+<tfoot><tr><td colspan="8" style="text-align:center; padding: 0.75rem;">
+<button class="btn btn-primary" onclick="addFinding('OK')">+ Agregar hallazgo</button>
+<table style="margin-top:0.5rem;"><tbody id="custom-rows-OK"></tbody></table>
+</td></tr></tfoot>
+</table>
+</div>
+<div class="section-fuerte">
+<h2>🔶 PT con Posible Ficha Técnica (17)</h2>
+<table id="table-fuerte">
+<thead>
+<tr><th>✓</th><th>ID</th><th>Código</th><th>Producto</th><th>Archivo Ficha Técnica</th><th>Score</th><th>Estado / Razón</th><th>Nota de verificación</th></tr>
+</thead>
+<tbody>
+<tr data-id="PT0001">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0001</td>
+  <td>123</td>
+  <td>BORO G</td>
+  <td class="filename">250809_FT BORO GRANULADO.docx</td>
+  <td>0.95</td>
+  <td><span class="badge badge-fuerte">FUERTE</span><br><small>sinonimo: BORO GRANULADO</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0003">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0003</td>
+  <td>663</td>
+  <td>FE FERTIMENORES</td>
+  <td class="filename">250718_FT FERTIMENORES NP.pdf</td>
+  <td>0.95</td>
+  <td><span class="badge badge-fuerte">FUERTE</span><br><small>sinonimo: FERTIMENORES NP</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0004">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0004</td>
+  <td>141</td>
+  <td>FE SULFATO CALCIO P</td>
+  <td class="filename">FT FE SULFATO DE CALCIO .docx</td>
+  <td>0.91</td>
+  <td><span class="badge badge-fuerte">FUERTE</span><br><small>coincidencia fuerte</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0005">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0005</td>
+  <td>643</td>
+  <td>FE SULFATO ZINC 22</td>
+  <td class="filename">250718_FT SULFATO ZINC 22.pdf</td>
+  <td>0.93</td>
+  <td><span class="badge badge-fuerte">FUERTE</span><br><small>coincidencia fuerte</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0007">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0007</td>
+  <td>154</td>
+  <td>MAGNE 3</td>
+  <td class="filename">250718_FT NUCLEO MAGNE3.docx</td>
+  <td>0.95</td>
+  <td><span class="badge badge-fuerte">FUERTE</span><br><small>sinonimo: NUCLEO MAGNE3</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0257">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0257</td>
+  <td>62</td>
+  <td>NUCLEO CAMASI GRIS</td>
+  <td class="filename">250718_FT NUCLEO CAMASI.docx</td>
+  <td>0.95</td>
+  <td><span class="badge badge-fuerte">FUERTE</span><br><small>sinonimo: NUCLEO CAMASI</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0261">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0261</td>
+  <td>208</td>
+  <td>NUCLEO MAGNESIO</td>
+  <td class="filename">250718_FT NUCLEO MAGNESIO-S.docx</td>
+  <td>0.95</td>
+  <td><span class="badge badge-fuerte">FUERTE</span><br><small>contencion tokens</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0264">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0264</td>
+  <td>558</td>
+  <td>NUCLEO MAGNESIO-SILICIO EM</td>
+  <td class="filename">FT NUCLEO MAGNESIO-SILICIO.docx</td>
+  <td>0.95</td>
+  <td><span class="badge badge-fuerte">FUERTE</span><br><small>coincidencia fuerte</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0267">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0267</td>
+  <td>564</td>
+  <td>SULFATO ZINC 30%</td>
+  <td class="filename">250718_FT SULFATO ZINC 22.docx</td>
+  <td>0.95</td>
+  <td><span class="badge badge-fuerte">FUERTE</span><br><small>sinonimo: SULFATO ZINC 22</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0268">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0268</td>
+  <td>160</td>
+  <td>ZUELO CA</td>
+  <td class="filename">250718_FT ZUELOCa.pdf</td>
+  <td>1.00</td>
+  <td><span class="badge badge-fuerte">FUERTE</span><br><small>coincidencia fuerte</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0277">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0277</td>
+  <td>PT0277</td>
+  <td>NUCLEO FOSFORO 1 - 1</td>
+  <td class="filename">250718_FT NUCLEO FOSFORO-1.docx</td>
+  <td>0.95</td>
+  <td><span class="badge badge-fuerte">FUERTE</span><br><small>contencion tokens</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0278">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0278</td>
+  <td>PT0278</td>
+  <td>NUCLEO FOSFORO 1 - 2</td>
+  <td class="filename">FT NUCLEO FOSFORO-1.docx</td>
+  <td>0.97</td>
+  <td><span class="badge badge-fuerte">FUERTE</span><br><small>coincidencia fuerte</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0279">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0279</td>
+  <td>PT0279</td>
+  <td>NUCLEO CAMASI ROJO</td>
+  <td class="filename">250718_FT NUCLEO CAMASI.docx</td>
+  <td>0.95</td>
+  <td><span class="badge badge-fuerte">FUERTE</span><br><small>sinonimo: NUCLEO CAMASI</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0284">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0284</td>
+  <td>PT0284</td>
+  <td>SULFA K 50</td>
+  <td class="filename">250718_FT SULFAK-50.pdf</td>
+  <td>1.00</td>
+  <td><span class="badge badge-fuerte">FUERTE</span><br><small>coincidencia fuerte</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0291">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0291</td>
+  <td>PT0291</td>
+  <td>FE SULFATO CALCIO</td>
+  <td class="filename">250718_FT FE SULFATO DE CALCIO .pdf</td>
+  <td>0.95</td>
+  <td><span class="badge badge-fuerte">FUERTE</span><br><small>contencion tokens</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0297">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0297</td>
+  <td>PT0297</td>
+  <td>ZUELO CA P</td>
+  <td class="filename">250718_FT ZUELOCa.pdf</td>
+  <td>0.93</td>
+  <td><span class="badge badge-fuerte">FUERTE</span><br><small>coincidencia fuerte</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0298">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0298</td>
+  <td>PT0298</td>
+  <td>FERTIMENORES</td>
+  <td class="filename">FT FERTIMENORES NP.docx</td>
+  <td>0.92</td>
+  <td><span class="badge badge-fuerte">FUERTE</span><br><small>coincidencia fuerte</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+</tbody>
+<tfoot><tr><td colspan="8" style="text-align:center; padding: 0.75rem;">
+<button class="btn btn-primary" onclick="addFinding('FUERTE')">+ Agregar hallazgo</button>
+<table style="margin-top:0.5rem;"><tbody id="custom-rows-FUERTE"></tbody></table>
+</td></tr></tfoot>
+</table>
+</div>
+<div class="section-falta">
+<h2>❌ PT sin Ficha Técnica Identificada (14)</h2>
+<table id="table-falta">
+<thead>
+<tr><th>✓</th><th>ID</th><th>Código</th><th>Producto</th><th>Archivo Ficha Técnica</th><th>Score</th><th>Estado / Razón</th><th>Nota de verificación</th></tr>
+</thead>
+<tbody>
+<tr data-id="PT0153">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0153</td>
+  <td>292</td>
+  <td>MF 52K-1,1B-0,5Z</td>
+  <td class="filename">—</td>
+  <td>—</td>
+  <td><span class="badge badge-falta">FALTA</span><br><small>sin coincidencia</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0259">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0259</td>
+  <td>140</td>
+  <td>NUCLEO FERCON</td>
+  <td class="filename">—</td>
+  <td>—</td>
+  <td><span class="badge badge-falta">FALTA</span><br><small>sin coincidencia</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0269">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0269</td>
+  <td>PT0269</td>
+  <td>CALFEIMPULSO</td>
+  <td class="filename">—</td>
+  <td>—</td>
+  <td><span class="badge badge-falta">FALTA</span><br><small>sin coincidencia</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0270">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0270</td>
+  <td>PT0270</td>
+  <td>RETAPE</td>
+  <td class="filename">—</td>
+  <td>—</td>
+  <td><span class="badge badge-falta">FALTA</span><br><small>sin coincidencia</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0271">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0271</td>
+  <td>PT0271</td>
+  <td>DESYERBE</td>
+  <td class="filename">—</td>
+  <td>—</td>
+  <td><span class="badge badge-falta">FALTA</span><br><small>sin coincidencia</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0272">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0272</td>
+  <td>PT0272</td>
+  <td>RICE START C+EM</td>
+  <td class="filename">—</td>
+  <td>—</td>
+  <td><span class="badge badge-falta">FALTA</span><br><small>sin coincidencia</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0273">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0273</td>
+  <td>PT0273</td>
+  <td>RICE BALANCE C+EM</td>
+  <td class="filename">—</td>
+  <td>—</td>
+  <td><span class="badge badge-falta">FALTA</span><br><small>sin coincidencia</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0274">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0274</td>
+  <td>PT0274</td>
+  <td>PALM DRIVE C+EM</td>
+  <td class="filename">—</td>
+  <td>—</td>
+  <td><span class="badge badge-falta">FALTA</span><br><small>sin coincidencia</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0280">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0280</td>
+  <td>PT0280</td>
+  <td>CALFER FLORACION</td>
+  <td class="filename">—</td>
+  <td>—</td>
+  <td><span class="badge badge-falta">FALTA</span><br><small>sin coincidencia</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0286">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0286</td>
+  <td>PT0286</td>
+  <td>CALFER DESARROLLO</td>
+  <td class="filename">—</td>
+  <td>—</td>
+  <td><span class="badge badge-falta">FALTA</span><br><small>sin coincidencia</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0287">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0287</td>
+  <td>PT0287</td>
+  <td>R-VITAL 17</td>
+  <td class="filename">—</td>
+  <td>—</td>
+  <td><span class="badge badge-falta">FALTA</span><br><small>sin coincidencia</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0288">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0288</td>
+  <td>PT0288</td>
+  <td>ORGANIC M</td>
+  <td class="filename">—</td>
+  <td>—</td>
+  <td><span class="badge badge-falta">FALTA</span><br><small>sin coincidencia</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0289">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0289</td>
+  <td>PT0289</td>
+  <td>FOLLAJE</td>
+  <td class="filename">—</td>
+  <td>—</td>
+  <td><span class="badge badge-falta">FALTA</span><br><small>sin coincidencia</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0290">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0290</td>
+  <td>PT0290</td>
+  <td>GANADERO</td>
+  <td class="filename">—</td>
+  <td>—</td>
+  <td><span class="badge badge-falta">FALTA</span><br><small>sin coincidencia</small></td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+</tbody>
+<tfoot><tr><td colspan="8" style="text-align:center; padding: 0.75rem;">
+<button class="btn btn-primary" onclick="addFinding('FALTA')">+ Agregar hallazgo</button>
+<table style="margin-top:0.5rem;"><tbody id="custom-rows-FALTA"></tbody></table>
+</td></tr></tfoot>
+</table>
+</div>
+<div class="section-noespec">
+<h2>⚪ PT Fórmula sin FT Específica (238)</h2>
+<table id="table-noespec">
+<thead><tr><th>✓</th><th>ID</th><th>Código</th><th>Producto</th><th>Nota</th></tr></thead>
+<tbody>
+<tr data-id="PT0008">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0008</td><td>411</td><td>MF 0-15-15+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0009">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0009</td><td>137</td><td>MF 10-20-20</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0010">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0010</td><td>86</td><td>MF 10-30-10</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0011">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0011</td><td>407</td><td>MF 10-10-20+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0012">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0012</td><td>396</td><td>MF 10-15-20+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0013">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0013</td><td>495</td><td>MF 10-15-29+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0014">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0014</td><td>408</td><td>MF 10-20-20+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0015">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0015</td><td>464</td><td>MF 10-20-28+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0016">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0016</td><td>423</td><td>MF 10-20-30+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0017">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0017</td><td>406</td><td>MF 10-24-4+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0018">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0018</td><td>387</td><td>MF 10-28-6+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0019">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0019</td><td>390</td><td>MF 10-6-4 + EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0020">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0020</td><td>670</td><td>MF 10-9-30</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0021">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0021</td><td>458</td><td>MF 10-9-30+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0022">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0022</td><td>388</td><td>MF 11-5-27</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0023">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0023</td><td>543</td><td>MF 11-29-12+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0024">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0024</td><td>268</td><td>MF 12-24-12</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0025">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0025</td><td>317</td><td>MF 12-24-12+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0026">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0026</td><td>318</td><td>MF 12-7-12+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0027">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0027</td><td>496</td><td>MF 12-30-10+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0028">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0028</td><td>490</td><td>MF 13-26-10+ EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0029">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0029</td><td>419</td><td>MF 13-7-12+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0030">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0030</td><td>381</td><td>MF 14-3-19-7Ca+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0031">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0031</td><td>433</td><td>MF 14-4-23+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0032">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0032</td><td>516</td><td>MF 14-4-24+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0034">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0034</td><td>462</td><td>MF 15-4-23+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0035">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0035</td><td>426</td><td>MF 15-6-8+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0036">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0036</td><td>612</td><td>MF 16-26-12</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0037">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0037</td><td>517</td><td>MF 16-16-16+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0038">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0038</td><td>441</td><td>MF 16-17-0-7Ca+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0039">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0039</td><td>405</td><td>MF 16-3-14+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0040">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0040</td><td>84</td><td>MF 17-6-18-2-1</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0041">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0041</td><td>402</td><td>MF 17-6-18-6+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0042">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0042</td><td>401</td><td>MF 17-8-11+EM+CO</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0043">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0043</td><td>478</td><td>MF 17-4-23+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0044">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0044</td><td>477</td><td>MF 17-5-7+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0046">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0046</td><td>353</td><td>MF 18-8-5-4+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0047">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0047</td><td>301</td><td>MF 19-1-2-1+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0048">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0048</td><td>304</td><td>MF 19-5-9-5+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0049">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0049</td><td>384</td><td>MF 19-1-3 + MEORES</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0050">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0050</td><td>442</td><td>MF 19-3-18+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0051">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0051</td><td>284</td><td>MF 20-17-18+TCM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0052">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0052</td><td>529</td><td>MF 20-0-30-3S</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0053">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0053</td><td>519</td><td>MF 20-3-15+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0054">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0054</td><td>457</td><td>MF 20-6-0-5CA+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0055">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0055</td><td>631</td><td>MF 20-8-10+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0056">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0056</td><td>172</td><td>MF 21-1-2+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0057">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0057</td><td>357</td><td>MF 21-5-10-6S+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0058">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0058</td><td>415</td><td>MF 21-2-8+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0059">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0059</td><td>316</td><td>MF 21-3-8-3Ca+MEORES</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0060">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0060</td><td>307</td><td>MF 21-4-5-3Ca+MEORES</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0061">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0061</td><td>497</td><td>MF 21-5-10+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0062">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0062</td><td>471</td><td>MF 21-5-9+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0063">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0063</td><td>632</td><td>MF 21-9-9+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0064">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0064</td><td>315</td><td>MF 22 3 13 4S+MEORES</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0065">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0065</td><td>524</td><td>MF 22-0-25-3S</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0066">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0066</td><td>526</td><td>MF 22-0-3+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0067">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0067</td><td>511</td><td>MF 22-4-8+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0068">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0068</td><td>525</td><td>MF 22-5-13+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0069">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0069</td><td>456</td><td>MF 22-6-3+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0070">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0070</td><td>398</td><td>MF 22-6-7Ca+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0071">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0071</td><td>633</td><td>MF 22-6-7+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0072">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0072</td><td>634</td><td>MF 22-9-9+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0073">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0073</td><td>20</td><td>MF 23-3-20</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0074">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0074</td><td>618</td><td>MF 23 6 8 + EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0075">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0075</td><td>394</td><td>MF 23-3-20+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0076">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0076</td><td>506</td><td>MF 23-5-6+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0077">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0077</td><td>508</td><td>MF 23-6-8+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0078">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0078</td><td>308</td><td>MF 24-0-17+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0079">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0079</td><td>174</td><td>MF 24-3-9-3+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0080">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0080</td><td>348</td><td>MF 24-5-7-5S-3Ca+1CO</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0081">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0081</td><td>436</td><td>MF 24-0-2+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0082">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0082</td><td>532</td><td>MF 24-3-12+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0083">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0083</td><td>440</td><td>MF 24-4-11+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0084">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0084</td><td>473</td><td>MF 24-5-6+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0085">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0085</td><td>328</td><td>MF 25-0-15+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0086">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0086</td><td>146</td><td>MF 25-0-17-4S+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0087">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0087</td><td>148</td><td>MF 25-10-18+ MEORES</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0088">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0088</td><td>175</td><td>MF 25-10-18+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0089">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0089</td><td>382</td><td>MF 25-15-2-3-2</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0091">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0091</td><td>518</td><td>MF 25-17-1+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0092">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0092</td><td>455</td><td>MF 25-1-13+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0093">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0093</td><td>509</td><td>MF 25-4-11+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0094">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0094</td><td>656</td><td>MF 25-4-17+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0095">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0095</td><td>367</td><td>MF 25-5-0-8Ca+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0096">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0096</td><td>533</td><td>MF 25-5-12+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0097">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0097</td><td>492</td><td>MF 25-7K-2CA+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0098">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0098</td><td>652</td><td>MF 25-7-7+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0099">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0099</td><td>648</td><td>MF 25-8-14+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0100">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0100</td><td>159</td><td>MF 26-0-17+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0101">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0101</td><td>176</td><td>MF 26-1-12-+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0102">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0102</td><td>619</td><td>MF 26 7 6 + EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0103">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0103</td><td>514</td><td>MF 26-1-11+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0104">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0104</td><td>512</td><td>MF 26-5-11+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0105">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0105</td><td>476</td><td>MF 26-9-9+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0106">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0106</td><td>136</td><td>MF 27-17-0Ca</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0107">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0107</td><td>630</td><td>MF 27-0-14+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0108">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0108</td><td>385</td><td>MF 27-15K-5S-2Si-0,80CO</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0109">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0109</td><td>445</td><td>MF 27-1-12-2Ca+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0110">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0110</td><td>475</td><td>MF 27-1-7+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0111">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0111</td><td>653</td><td>MF 27-1-8+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0112">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0112</td><td>642</td><td>MF 27-3-12+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0113">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0113</td><td>536</td><td>MF 27-3-3+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0114">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0114</td><td>438</td><td>MF 27-4-3+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0115">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0115</td><td>606</td><td>MF 27-6-13+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0116">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0116</td><td>480</td><td>MF 27-9K-10S+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0117">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0117</td><td>299</td><td>MF 28-0-6-2Ca+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0118">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0118</td><td>312</td><td>MF 28-0-9-2Ca+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0119">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0119</td><td>165</td><td>MF 28-1-12+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0120">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0120</td><td>303</td><td>MF 28-1-6-2Ca+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0121">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0121</td><td>352</td><td>MF 28-1-6-5S-EM+1CO</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0122">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0122</td><td>620</td><td>MF 28-1-7 +EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0123">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0123</td><td>617</td><td>MF 28 1 8 + EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0124">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0124</td><td>513</td><td>MF 28-0-12+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0125">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0125</td><td>537</td><td>MF 28-14-10+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0126">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0126</td><td>432</td><td>MF 28-1-12+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0127">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0127</td><td>487</td><td>MF 28-4-15 +EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0128">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0128</td><td>469</td><td>MF 28-5-6+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0129">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0129</td><td>527</td><td>MF 29-0-16-4S</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0130">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0130</td><td>522</td><td>MF 29-10-10+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0131">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0131</td><td>417</td><td>MF 29-3-15+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0132">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0132</td><td>389</td><td>MF 3-10-2 + EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0133">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0133</td><td>163</td><td>MF 30-0-20 +EM +TMC</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0134">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0134</td><td>418</td><td>MF 30 0 20</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0135">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0135</td><td>538</td><td>MF 30-11-10+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0136">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0136</td><td>493</td><td>MF 30-12K-2CA+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0137">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0137</td><td>298</td><td>MF 31-0-20+X</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0138">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0138</td><td>187</td><td>MF 31-0-20+TMC</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0139">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0139</td><td>81</td><td>MF 31-8-8-2</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0140">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0140</td><td>521</td><td>MF 31-6-11+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0141">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0141</td><td>380</td><td>MF 32-0-6+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0142">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0142</td><td>327</td><td>MF 32-6-5-2SI-1CO</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0143">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0143</td><td>383</td><td>MF 32 1 6 2Ca+ EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0144">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0144</td><td>665</td><td>MF 32-1-12+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0145">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0145</td><td>626</td><td>MF 33-1-12+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0146">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0146</td><td>479</td><td>MF 33-5-12</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0147">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0147</td><td>523</td><td>MF 37-0-11</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0148">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0148</td><td>434</td><td>MF 37-2Ca-2Mg+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0149">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0149</td><td>168</td><td>MF 38-0-0-8</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0150">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0150</td><td>399</td><td>MF 38-10K_</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0151">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0151</td><td>640</td><td>MF 3-13-32+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0152">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0152</td><td>369</td><td>MF 40-3-0-2+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0154">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0154</td><td>391</td><td>MF 6-9-6+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0155">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0155</td><td>356</td><td>MF 7-7-5-3S+EM+2CO</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0156">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0156</td><td>545</td><td>MF 7-14-29+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0157">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0157</td><td>313</td><td>MF 8-24-8+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0158">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0158</td><td>435</td><td>MF 8-15-23+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0159">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0159</td><td>510</td><td>MF 8-17-34-1S</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0160">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0160</td><td>453</td><td>MF 8-20-12+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0161">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0161</td><td>439</td><td>MF 9-12-24+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0163">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0163</td><td>22</td><td>MF-23-3-20-4Ca-3Si</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0164">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0164</td><td>673</td><td>MFE 0-10+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0165">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0165</td><td>588</td><td>MFE 10 11 29</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0166">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0166</td><td>641</td><td>MFE 10-24-14 +EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0167">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0167</td><td>542</td><td>MFE 10-25-8+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0168">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0168</td><td>589</td><td>MFE 10-6-16 +EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0169">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0169</td><td>668</td><td>MFE 10-6-6+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0170">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0170</td><td>569</td><td>MFE 10-9-18+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0171">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0171</td><td>544</td><td>MFE 11-24-9+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0173">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0173</td><td>660</td><td>MFE 11-9-18+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0174">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0174</td><td>587</td><td>MFE 12 25 9</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0175">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0175</td><td>659</td><td>MFE 13-15-10+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0176">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0176</td><td>314</td><td>MFE 13-26-6+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0178">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0178</td><td>601</td><td>MFE 13-6-6+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0179">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0179</td><td>590</td><td>MFE 15-12-20+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0180">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0180</td><td>623</td><td>MFE 15-20-2+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0181">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0181</td><td>602</td><td>MFE 15-21-1+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0182">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0182</td><td>635</td><td>MFE 15-9-20+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0183">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0183</td><td>658</td><td>MFE 16-21-5+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0185">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0185</td><td>649</td><td>MFE 18-2-0+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0186">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0186</td><td>414</td><td>MFE 18-9-29+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0187">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0187</td><td>674</td><td>MFE 19-25-6+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0188">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0188</td><td>566</td><td>MFE 19-4-10+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0189">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0189</td><td>586</td><td>MFE 19-4-18</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0190">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0190</td><td>596</td><td>MFE 20-3-14+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0191">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0191</td><td>413</td><td>MFE 20-4-18+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0192">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0192</td><td>555</td><td>MFE 21-4-11+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0193">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0193</td><td>654</td><td>MFE 21-7-8 + EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0194">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0194</td><td>1410</td><td>MFE 22-3-7</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0195">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0195</td><td>664</td><td>MFE 22-0-19+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0196">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0196</td><td>560</td><td>MFE 22-3-0+ EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0197">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0197</td><td>645</td><td>MFE 22-3-3+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0198">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0198</td><td>662</td><td>MFE 22-6-3+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0199">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0199</td><td>605</td><td>MFE 22-7K-12S+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0200">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0200</td><td>639</td><td>MFE 22-8-10+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0201">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0201</td><td>535</td><td>MFE 22-9-0+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0202">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0202</td><td>669</td><td>MFE 23-1-18+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0203">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0203</td><td>651</td><td>MFE 23-4-16+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0204">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0204</td><td>593</td><td>MFE 23-4-9+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0205">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0205</td><td>420</td><td>MFE 23-5-10+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0206">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0206</td><td>554</td><td>MFE 23-9-11+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0207">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0207</td><td>650</td><td>MFE 24-2-9+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0208">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0208</td><td>585</td><td>MFE 24-4-2K+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0209">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0209</td><td>965</td><td>MFE 24-4-10+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0210">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0210</td><td>616</td><td>MFE 24-6-7+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0211">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0211</td><td>591</td><td>MFE 24-9K-12S+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0212">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0212</td><td>614</td><td>MFE 24-9-7S+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0213">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0213</td><td>629</td><td>MFE 25-0-8+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0214">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0214</td><td>412</td><td>MFE 25-13-12 +EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0215">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0215</td><td>628</td><td>MFE 25-4-14+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0216">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0216</td><td>677</td><td>MFE 25-6-0+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0217">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0217</td><td>568</td><td>MFE 25-6-13+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0218">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0218</td><td>644</td><td>MFE 25-8-16+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0219">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0219</td><td>594</td><td>MFE 26-11-6+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0220">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0220</td><td>582</td><td>MFE 26-20K-4S</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0221">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0221</td><td>627</td><td>MFE 26-2-9-2Ca</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0223">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0223</td><td>682</td><td>MFE 26-7-0+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0224">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0224</td><td>625</td><td>MFE 27-18K-5S</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0225">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0225</td><td>672</td><td>MFE 27-20-0+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0226">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0226</td><td>539</td><td>MFE 27-5-11+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0227">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0227</td><td>610</td><td>MFE 27-8-9+EM ILO</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0228">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0228</td><td>621</td><td>MFE 28-24-0</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0229">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0229</td><td>1401</td><td>MFE 28 5 5.4 + EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0230">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0230</td><td>600</td><td>MFE 28-14-6+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0231">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0231</td><td>657</td><td>MFE 28-4-9+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0232">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0232</td><td>592</td><td>MFE 28-5-0+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0233">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0233</td><td>548</td><td>MFE 28-5-15+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0234">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0234</td><td>609</td><td>MFE 28-5-9+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0235">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0235</td><td>608</td><td>MFE 29 10 6 + EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0236">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0236</td><td>428</td><td>MFE 29-15-5+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0237">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0237</td><td>607</td><td>MFE 29-1-11+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0238">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0238</td><td>683</td><td>MFE 29-6-12+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0239">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0239</td><td>840</td><td>MFE 30-0-20</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0240">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0240</td><td>598</td><td>MFE 30-11-6+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0241">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0241</td><td>465</td><td>MFE 30-8-0-5CA+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0242">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0242</td><td>676</td><td>MFE 30-9-0+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0243">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0243</td><td>671</td><td>MFE 31-5-0+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0244">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0244</td><td>597</td><td>MFE 31-6-7+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0245">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0245</td><td>581</td><td>MFE 31-7K-9S</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0246">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0246</td><td>1080</td><td>MFE 32-0-9</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0247">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0247</td><td>1402</td><td>MFE 32 1 12</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0248">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0248</td><td>599</td><td>MFE 33-6-6+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0250">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0250</td><td>622</td><td>MFE 5-8-29+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0251">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0251</td><td>603</td><td>MFE 6-6-33+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0252">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0252</td><td>661</td><td>MFE 7-8-30+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0253">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0253</td><td>551</td><td>MFE 8-6-24+EM</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0275">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0275</td><td>PT0275</td><td>MFE 20-7-10</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+<tr data-id="PT0276">
+  <td><input type="checkbox" title="Verificado" onchange="toggleVerify(this)"></td>
+  <td>PT0276</td><td>PT0276</td><td>MFE 43.5-0-0-2.4S</td>
+  <td><input type="text" class="note-input" placeholder="Observación..." onchange="updateNote(this)"></td>
+</tr>
+</tbody>
+<tfoot><tr><td colspan="5" style="text-align:center; padding: 0.75rem;">
+<button class="btn btn-primary" onclick="addFinding('NO ESPECIFICA')">+ Agregar hallazgo</button>
+<table style="margin-top:0.5rem;"><tbody id="custom-rows-NO ESPECIFICA"></tbody></table>
+</td></tr></tfoot>
+</table>
+</div>
+<h2>📁 Fichas Técnicas Detectadas en Directorio</h2>
+<table>
+<tr><th>Ficha Técnica</th><th>Archivos</th></tr>
+<tr><td><strong>0 BASE</strong></td><td><span class="filename">FT 0 BASE.docx</span></td></tr>
+<tr><td><strong>1 CRECIMIENTO</strong></td><td><span class="filename">FT 1 CRECIMIENTO.docx</span></td></tr>
+<tr><td><strong>15-15-15</strong></td><td><span class="filename">250718_FT 15-15-15.docx</span><br><span class="filename">250718_FT 15-15-15.pdf</span></td></tr>
+<tr><td><strong>17-6-18-2</strong></td><td><span class="filename">250718_FT 17-6-18-2.docx</span><br><span class="filename">250718_FT 17-6-18-2.pdf</span></td></tr>
+<tr><td><strong>18-18-18</strong></td><td><span class="filename">250718_FT 18-18-18.docx</span><br><span class="filename">250718_FT 18-18-18.pdf</span></td></tr>
+<tr><td><strong>18-18-18 - COPIA</strong></td><td><span class="filename">250718_FT 18-18-18 - copia.docx</span></td></tr>
+<tr><td><strong>2 AVANCE</strong></td><td><span class="filename">FT 2 AVANCE.docx</span></td></tr>
+<tr><td><strong>25-4-24</strong></td><td><span class="filename">250718_FT 25-4-24.docx</span><br><span class="filename">250718_FT 25-4-24.pdf</span></td></tr>
+<tr><td><strong>3 PRODUCTOR</strong></td><td><span class="filename">FT 3 PRODUCTOR.docx</span></td></tr>
+<tr><td><strong>AFOSK</strong></td><td><span class="filename">250718_FT AFOSK.docx</span><br><span class="filename">250718_FT AFOSK.pdf</span><br><span class="filename">FT AFOSK.docx</span></td></tr>
+<tr><td><strong>BIOPLANTAS</strong></td><td><span class="filename">250718_FT BIOPLANTAS.docx</span><br><span class="filename">250718_FT BIOPLANTAS.pdf</span><br><span class="filename">FT BIOPLANTAS.docx</span></td></tr>
+<tr><td><strong>BORO GRANULADO</strong></td><td><span class="filename">250809_FT BORO GRANULADO.docx</span><br><span class="filename">250809_FT BORO GRANULADO.pdf</span><br><span class="filename">251111_FT BORO GRANULADO.pdf</span><br><span class="filename">FT BORO GRANULADO.pdf</span></td></tr>
+<tr><td><strong>CALFER LLENADO</strong></td><td><span class="filename">FT CALFER LLENADO.docx</span></td></tr>
+<tr><td><strong>CALFER MENORES</strong></td><td><span class="filename">FT CALFER MENORES.docx</span></td></tr>
+<tr><td><strong>CALFERCOBRE</strong></td><td><span class="filename">250718_FT CALFERCOBRE.pdf</span><br><span class="filename">FT CALFERCOBRE.docx</span></td></tr>
+<tr><td><strong>CALFERCORRECTIVO</strong></td><td><span class="filename">250718_FT CALFERCORRECTIVO.docx</span><br><span class="filename">250718_FT CALFERCORRECTIVO.pdf</span></td></tr>
+<tr><td><strong>CALFERMAGNESIO</strong></td><td><span class="filename">250718_FT CALFERMAGNESIO.docx</span><br><span class="filename">250718_FT CALFERMAGNESIO.pdf</span></td></tr>
+<tr><td><strong>CALFERZINC-P</strong></td><td><span class="filename">250718_FT CALFERZINC-P.docx</span><br><span class="filename">250718_FT CALFERZINC-P.pdf</span></td></tr>
+<tr><td><strong>FE SULFATO DE CALCIO</strong></td><td><span class="filename">250718_FT FE SULFATO DE CALCIO .pdf</span><br><span class="filename">FT FE SULFATO DE CALCIO .docx</span></td></tr>
+<tr><td><strong>FERTIMENORES NP</strong></td><td><span class="filename">250718_FT FERTIMENORES NP.pdf</span><br><span class="filename">FT FERTIMENORES NP.docx</span></td></tr>
+<tr><td><strong>FOSFORITA NEIVA</strong></td><td><span class="filename">250718_FT FOSFORITA NEIVA.docx</span><br><span class="filename">250718_FT FOSFORITA NEIVA.pdf</span></td></tr>
+<tr><td><strong>K2K</strong></td><td><span class="filename">250718_FT K2K.pdf</span><br><span class="filename">250809_FT K2K.pdf</span><br><span class="filename">FT K2K.docx</span></td></tr>
+<tr><td><strong>MFE 11-25-9</strong></td><td><span class="filename">FT MFE 11-25-9.docx</span></td></tr>
+<tr><td><strong>MFE 13-36-10</strong></td><td><span class="filename">FT MFE 13-36-10.docx</span></td></tr>
+<tr><td><strong>MFE 13-36-10 - COPIA</strong></td><td><span class="filename">FT MFE 13-36-10 - copia.docx</span></td></tr>
+<tr><td><strong>MFE 17-17-17</strong></td><td><span class="filename">260609_FT MFE 17-17-17.pdf</span><br><span class="filename">FT MFE 17-17-17.docx</span></td></tr>
+<tr><td><strong>MFE 26-6-2</strong></td><td><span class="filename">FT MFE 26-6-2.docx</span></td></tr>
+<tr><td><strong>MFE 30-8-0</strong></td><td><span class="filename">FT MFE 30-8-0.docx</span></td></tr>
+<tr><td><strong>MFE 31-8-8-2-2</strong></td><td><span class="filename">FT MFE 31-8-8-2-2.docx</span><br><span class="filename">FT MFE 31-8-8-2-2.pdf</span></td></tr>
+<tr><td><strong>MFE 4-9-0</strong></td><td><span class="filename">FT MFE 4-9-0.docx</span></td></tr>
+<tr><td><strong>MFE 7-15-29</strong></td><td><span class="filename">FT MFE 7-15-29.docx</span></td></tr>
+<tr><td><strong>MFE 8-17-34</strong></td><td><span class="filename">FT MFE 8-17-34.docx</span></td></tr>
+<tr><td><strong>MICRON C</strong></td><td><span class="filename">251030_FT MICRON C.docx</span><br><span class="filename">251030_FT MICRON C.pdf</span></td></tr>
+<tr><td><strong>MICRON CS</strong></td><td><span class="filename">251030_FT MICRON CS.docx</span></td></tr>
+<tr><td><strong>NUCLEO 4</strong></td><td><span class="filename">250718_FT NUCLEO 4.docx</span><br><span class="filename">250718_FT NUCLEO 4.pdf</span><br><span class="filename">FT NUCLEO 4.docx</span></td></tr>
+<tr><td><strong>NUCLEO CAMASI</strong></td><td><span class="filename">250718_FT NUCLEO CAMASI.docx</span><br><span class="filename">250718_FT NUCLEO CAMASI.pdf</span><br><span class="filename">260311_FT NUCLEO CAMASI.docx</span><br><span class="filename">260311_FT NUCLEO CAMASI.pdf</span><br><span class="filename">FT NUCLEO CAMASI.docx</span></td></tr>
+<tr><td><strong>NUCLEO CAMASI YARA</strong></td><td><span class="filename">250718_FT NUCLEO CAMASI YARA.docx</span><br><span class="filename">251111_FT NUCLEO CAMASI YARA.docx</span><br><span class="filename">251111_FT NUCLEO CAMASI YARA.pdf</span><br><span class="filename">FT NUCLEO CAMASI YARA.pdf</span></td></tr>
+<tr><td><strong>NUCLEO FOSFORO-1</strong></td><td><span class="filename">250718_FT NUCLEO FOSFORO-1.docx</span><br><span class="filename">250718_FT NUCLEO FOSFORO-1.pdf</span><br><span class="filename">FT NUCLEO FOSFORO-1.docx</span></td></tr>
+<tr><td><strong>NUCLEO FOSFORO-10</strong></td><td><span class="filename">250718_FT NUCLEO FOSFORO-10.docx</span></td></tr>
+<tr><td><strong>NUCLEO MAGNE3</strong></td><td><span class="filename">250718_FT NUCLEO MAGNE3.docx</span><br><span class="filename">250718_FT NUCLEO MAGNE3.pdf</span><br><span class="filename">FT NUCLEO MAGNE3.docx</span></td></tr>
+<tr><td><strong>NUCLEO MAGNESIO-S</strong></td><td><span class="filename">250718_FT NUCLEO MAGNESIO-S.docx</span><br><span class="filename">250718_FT NUCLEO MAGNESIO-S.pdf</span><br><span class="filename">FT NUCLEO MAGNESIO-S.docx</span></td></tr>
+<tr><td><strong>NUCLEO MAGNESIO-SILICIO</strong></td><td><span class="filename">250718_FT NUCLEO MAGNESIO-SILICIO.pdf</span><br><span class="filename">FT NUCLEO MAGNESIO-SILICIO.docx</span></td></tr>
+<tr><td><strong>NUCLEO N</strong></td><td><span class="filename">250718_FT NUCLEO N.docx</span><br><span class="filename">250718_FT NUCLEO N.pdf</span><br><span class="filename">FT NUCLEO N.docx</span></td></tr>
+<tr><td><strong>PRODUCCION 17</strong></td><td><span class="filename">250718_FT PRODUCCION 17.docx</span><br><span class="filename">250718_FT PRODUCCION 17.pdf</span><br><span class="filename">FT PRODUCCION 17.docx</span></td></tr>
+<tr><td><strong>RAIFOS 20</strong></td><td><span class="filename">250718_FT RAIFOS 20.docx</span><br><span class="filename">250718_FT RAIFOS 20.pdf</span><br><span class="filename">FT RAIFOS 20.docx</span><br><span class="filename">FT RAIFOS 20.pdf</span></td></tr>
+<tr><td><strong>SILIMAGRAN</strong></td><td><span class="filename">250718_FT SILIMAGRAN.docx</span><br><span class="filename">250718_FT SILIMAGRAN.pdf</span><br><span class="filename">FT SILIMAGRAN.docx</span></td></tr>
+<tr><td><strong>SOLURAIFOS</strong></td><td><span class="filename">250718_FT SOLURAIFOS.docx</span><br><span class="filename">250718_FT SOLURAIFOS.pdf</span><br><span class="filename">FT SOLURAIFOS.docx</span></td></tr>
+<tr><td><strong>SUL-CALCIO</strong></td><td><span class="filename">FT SUL-CALCIO.docx</span><br><span class="filename">FT SUL-CALCIO.pdf</span></td></tr>
+<tr><td><strong>SULFAK-50</strong></td><td><span class="filename">250718_FT SULFAK-50.docx</span><br><span class="filename">250718_FT SULFAK-50.pdf</span></td></tr>
+<tr><td><strong>SULFATO DE CALCIO</strong></td><td><span class="filename">FT SULFATO DE CALCIO.docx</span></td></tr>
+<tr><td><strong>SULFATO DE CALCIO PRECISAGRO</strong></td><td><span class="filename">FT SULFATO DE CALCIO PRECISAGRO.docx</span></td></tr>
+<tr><td><strong>SULFATO ZINC 22</strong></td><td><span class="filename">250718_FT SULFATO ZINC 22.docx</span><br><span class="filename">250718_FT SULFATO ZINC 22.pdf</span></td></tr>
+<tr><td><strong>ZUELOCA</strong></td><td><span class="filename">250718_FT ZUELOCa.docx</span><br><span class="filename">250718_FT ZUELOCa.pdf</span></td></tr>
+</table>
+<div class="note">
+<strong>Nota metodológica:</strong> Se ignoraron archivos temporales de Word y hojas de seguridad. El matching consideró coincidencia exacta de nombre, coincidencia exacta de fórmula NPK y sinónimos validados.<br>
+<strong>Uso:</strong> Marca el checkbox cuando verifiques un PT. Escribe notas. Agrega filas para hallazgos nuevos. Exporta a CSV cuando termines.
+</div>
+</div>
+
+<script>
+const STORAGE_KEY = 'reporte_ft_vs_pt_verificacion';
+
+function getState() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+  catch (e) { return {}; }
+}
+
+function saveState(state) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  updateCounters();
+}
+
+function rowKey(tr) {
+  return tr.dataset.id || tr.dataset.customId;
+}
+
+function toggleVerify(checkbox) {
+  const tr = checkbox.closest('tr');
+  const id = rowKey(tr);
+  const state = getState();
+  state[id] = state[id] || {};
+  state[id].verified = checkbox.checked;
+  saveState(state);
+  tr.classList.toggle('verified', checkbox.checked);
+}
+
+function updateNote(input) {
+  const tr = input.closest('tr');
+  const id = rowKey(tr);
+  const state = getState();
+  state[id] = state[id] || {};
+  state[id].note = input.value;
+  saveState(state);
+}
+
+function deleteCustomRow(btn) {
+  const tr = btn.closest('tr');
+  const id = rowKey(tr);
+  const state = getState();
+  delete state[id];
+  saveState(state);
+  tr.remove();
+}
+
+function addFinding(estado) {
+  const tbody = document.getElementById('custom-rows-' + estado);
+  const customId = 'CUSTOM_' + Date.now();
+  const tr = document.createElement('tr');
+  tr.className = 'custom-row';
+  tr.dataset.customId = customId;
+  tr.innerHTML = `
+    <td><input type="checkbox" onchange="toggleVerify(this)"></td>
+    <td><input type="text" placeholder="ID PT" onchange="updateCell(this, 'id')"></td>
+    <td><input type="text" placeholder="Código" onchange="updateCell(this, 'codigo')"></td>
+    <td><input type="text" placeholder="Nombre producto" onchange="updateCell(this, 'producto')"></td>
+    <td><input type="text" placeholder="Archivo FT" onchange="updateCell(this, 'archivo')"></td>
+    <td><input type="text" placeholder="Observación" onchange="updateCell(this, 'observacion')"></td>
+    <td class="actions"><button class="del-btn" onclick="deleteCustomRow(this)">Eliminar</button></td>
+  `;
+  tbody.appendChild(tr);
+  const state = getState();
+  state[customId] = { estado: estado, custom: true };
+  saveState(state);
+}
+
+function updateCell(input, field) {
+  const tr = input.closest('tr');
+  const id = rowKey(tr);
+  const state = getState();
+  state[id] = state[id] || {};
+  state[id][field] = input.value;
+  saveState(state);
+}
+
+function applyState() {
+  const state = getState();
+  document.querySelectorAll('tr[data-id], tr[data-custom-id]').forEach(tr => {
+    const id = rowKey(tr);
+    if (state[id]) {
+      const cb = tr.querySelector('input[type="checkbox"]');
+      if (cb && state[id].verified) {
+        cb.checked = true;
+        tr.classList.add('verified');
+      }
+      const note = tr.querySelector('.note-input');
+      if (note && state[id].note) note.value = state[id].note;
+      if (tr.dataset.customId) {
+        const inputs = tr.querySelectorAll('input[type="text"]');
+        if (inputs[0] && state[id].id) inputs[0].value = state[id].id;
+        if (inputs[1] && state[id].codigo) inputs[1].value = state[id].codigo;
+        if (inputs[2] && state[id].producto) inputs[2].value = state[id].producto;
+        if (inputs[3] && state[id].archivo) inputs[3].value = state[id].archivo;
+        if (inputs[4] && state[id].observacion) inputs[4].value = state[id].observacion;
+      }
+    }
+  });
+  updateCounters();
+}
+
+function updateCounters() {
+  const total = document.querySelectorAll('tr[data-id]').length;
+  const checked = document.querySelectorAll('tr[data-id] input[type="checkbox"]:checked').length;
+  document.getElementById('counter-verified').textContent = `${checked} de ${total} PT verificados`;
+}
+
+function filterTables() {
+  const term = document.getElementById('global-filter').value.toLowerCase();
+  document.querySelectorAll('table tbody').forEach(tbody => {
+    tbody.querySelectorAll('tr').forEach(tr => {
+      const text = tr.innerText.toLowerCase();
+      tr.style.display = text.includes(term) ? '' : 'none';
+    });
+  });
+}
+
+function exportVerifiedCSV() {
+  let rows = [];
+  document.querySelectorAll('tr[data-id]').forEach(tr => {
+    const cb = tr.querySelector('input[type="checkbox"]');
+    const note = tr.querySelector('.note-input');
+    const tds = tr.querySelectorAll('td');
+    const cells = Array.from(tds).map(td => td.innerText.replace(/"/g, '""'));
+    rows.push([cb.checked ? 'SI' : 'NO', ...cells, note ? note.value : ''].map(x => `"${x}"`).join(';'));
+  });
+  document.querySelectorAll('tr[data-custom-id]').forEach(tr => {
+    const inputs = tr.querySelectorAll('input');
+    const vals = Array.from(inputs).map(i => i.value.replace(/"/g, '""'));
+    rows.push(['"CUSTOM"', ...vals.map(x => `"${x}"`)].join(';'));
+  });
+  const header = '"VERIFICADO";"ID";"CODIGO";"PRODUCTO";"ARCHIVO_FT";"SCORE";"ESTADO";"RAZON";"NOTA"';
+  const csv = [header, ...rows].join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'verificacion_ft_vs_pt.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+function resetVerification() {
+  if (confirm('¿Borrar todo el progreso de verificación?')) {
+    localStorage.removeItem(STORAGE_KEY);
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+    document.querySelectorAll('.note-input').forEach(n => n.value = '');
+    document.querySelectorAll('tr').forEach(tr => tr.classList.remove('verified'));
+    document.querySelectorAll('tr[data-custom-id]').forEach(tr => tr.remove());
+    updateCounters();
+  }
+}
+
+window.addEventListener('DOMContentLoaded', applyState);
+</script>
+</body>
+</html>

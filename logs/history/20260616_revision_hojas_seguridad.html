@@ -1,0 +1,2701 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revisión de Hojas de Seguridad - CALFERQUIM</title>
+<style>
+  :root {
+    --bg: #f8f9fa;
+    --text: #212529;
+    --primary: #0056b3;
+    --accent: #17a2b8;
+    --border: #dee2e6;
+    --success: #28a745;
+    --danger: #dc3545;
+    --warning: #ffc107;
+  }
+  body {
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  h1 {
+    color: var(--primary);
+    border-bottom: 3px solid var(--primary);
+    padding-bottom: 10px;
+  }
+  h2 {
+    color: var(--primary);
+    margin-top: 35px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+  }
+  h3 {
+    color: var(--accent);
+    margin-top: 25px;
+  }
+  p {
+    margin: 0.6em 0;
+  }
+  ul {
+    margin: 0.5em 0 1em 1.2em;
+  }
+  li {
+    margin: 0.3em 0;
+  }
+  code {
+    background: #eef1f4;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: Consolas, monospace;
+    font-size: 0.95em;
+  }
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0 25px 0;
+    font-size: 0.92em;
+  }
+  .data-table th, .data-table td {
+    border: 1px solid var(--border);
+    padding: 8px 10px;
+    text-align: left;
+  }
+  .data-table th {
+    background: var(--primary);
+    color: #fff;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+  }
+  .data-table tr:nth-child(even) {
+    background: #f1f5f9;
+  }
+  .data-table tr:hover {
+    background: #e9f2ff;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: 600;
+  }
+  .badge-si { background: #d4edda; color: #155724; }
+  .badge-no { background: #f8d7da; color: #721c24; }
+  .summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+  }
+  .summary-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 15px;
+    text-align: center;
+  }
+  .summary-card .number {
+    font-size: 2em;
+    font-weight: 700;
+    color: var(--primary);
+  }
+  .summary-card .label {
+    font-size: 0.9em;
+    color: #6c757d;
+  }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .container { box-shadow: none; max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>REVISION DE HOJAS DE SEGURIDAD</h1>
+
+<p>Directorio: <code>/mnt/z/cfq_sgc/_Legacy_y_Otros/202_CALFERQUIM/07 Hojas de Seguridad</code></p>
+<p>Catalogo: <code>/mnt/z/cfq_sgc/_Legacy_y_Otros/202_CALFERQUIM/07 Hojas de Seguridad/cfq-catalogo-productos-20260616125731.csv</code></p>
+
+<h2>RESUMEN</h2>
+<ul>
+<li><strong>Total productos en catalogo:</strong> 372</li>
+<li><strong>Con Hoja de Seguridad (SI):</strong> 49</li>
+<li><strong>Sin Hoja de Seguridad (NO):</strong> 323</li>
+<li><strong>Archivos en directorio:</strong> 153</li>
+<li>Identificados como HS: 112</li>
+<li>No son HS (fichas tecnicas/certificados/otros): 41</li>
+<li><strong>Archivos HS sin emparejar a producto del catalogo:</strong> 74</li>
+</ul>
+
+<h3>Desglose por grupo</h3>
+
+<table class="data-table">
+<tr>
+<th>Grupo</th>
+<th>Con HS (SI)</th>
+<th>Sin HS (NO)</th>
+<th>Total</th>
+</tr>
+<tr>
+<td>MP (Materias Primas)</td>
+<td>22</td>
+<td>32</td>
+<td>54</td>
+</tr>
+<tr>
+<td>MF/MFE (formulaciones NPK)</td>
+<td>0</td>
+<td>266</td>
+<td>266</td>
+</tr>
+<tr>
+<td>PT Comercial (nombres de marca)</td>
+<td>27</td>
+<td>25</td>
+<td>52</td>
+</tr>
+</table>
+
+<h2>PRODUCTOS CON HOJA DE SEGURIDAD (SI)</h2>
+
+<h3>MP - Materias Primas</h3>
+
+<table class="data-table">
+<tr>
+<th>idInterno</th>
+<th>codigoExterno</th>
+<th>clase</th>
+<th>producto</th>
+<th>score</th>
+<th>archivo HS</th>
+</tr>
+<tr>
+<td>MP0001</td>
+<td>145</td>
+<td>MP</td>
+<td>AZUFRE</td>
+<td>1.0</td>
+<td>HOJA DE SEGURIDAD -  AZUFREA MALLA 100.docx</td>
+</tr>
+<tr>
+<td>MP0002</td>
+<td>97</td>
+<td>MP</td>
+<td>DAP</td>
+<td>1.0</td>
+<td>16) HS DAP CIAMSA.pdf</td>
+</tr>
+<tr>
+<td>MP0003</td>
+<td>144</td>
+<td>MP</td>
+<td>KCL</td>
+<td>1.0</td>
+<td>17) HS KCL CIAMSA.pdf</td>
+</tr>
+<tr>
+<td>MP0004</td>
+<td>75</td>
+<td>MP</td>
+<td>KIESERITA</td>
+<td>1.0</td>
+<td>29. Ficha de datos de seguridad de Kieserita - Sulfato de magnesio monohidratado, kieserite.pdf</td>
+</tr>
+<tr>
+<td>MP0005</td>
+<td>72</td>
+<td>MP</td>
+<td>MAP</td>
+<td>1.0</td>
+<td>18) HS MAP CIAMSA.pdf</td>
+</tr>
+<tr>
+<td>MP0006</td>
+<td>32</td>
+<td>MP</td>
+<td>SAM</td>
+<td>1.0</td>
+<td>004 - FDS SAM (1).pdf</td>
+</tr>
+<tr>
+<td>MP0007</td>
+<td>167</td>
+<td>MP</td>
+<td>SULFATO POTASIO</td>
+<td>0.5</td>
+<td>HOJA DE SEGURIDAD SULFATO DE POTASIO.docx</td>
+</tr>
+<tr>
+<td>MP0008</td>
+<td>12</td>
+<td>MP</td>
+<td>UREA</td>
+<td>1.0</td>
+<td>21) HS Urea CIAMSA.pdf</td>
+</tr>
+<tr>
+<td>MP0012</td>
+<td>130</td>
+<td>MP</td>
+<td>AZUFRE M100</td>
+<td>1.0</td>
+<td>HOJA DE SEGURIDAD -  AZUFREA MALLA 100.docx</td>
+</tr>
+<tr>
+<td>MP0024</td>
+<td>226</td>
+<td>MP</td>
+<td>DAP TECNICO</td>
+<td>0.5</td>
+<td>16) HS DAP CIAMSA.pdf</td>
+</tr>
+<tr>
+<td>MP0026</td>
+<td>437</td>
+<td>MP</td>
+<td>FOSFORITA NEIVA</td>
+<td>1.0</td>
+<td>HOJA DE SEGURIDAD - FOSFORITA NEIVA.docx</td>
+</tr>
+<tr>
+<td>MP0028</td>
+<td>143</td>
+<td>MP</td>
+<td>KCL STD</td>
+<td>0.5</td>
+<td>17) HS KCL CIAMSA.pdf</td>
+</tr>
+<tr>
+<td>MP0029</td>
+<td>74</td>
+<td>MP</td>
+<td>KIESERITA</td>
+<td>1.0</td>
+<td>29. Ficha de datos de seguridad de Kieserita - Sulfato de magnesio monohidratado, kieserite.pdf</td>
+</tr>
+<tr>
+<td>MP0031</td>
+<td>193</td>
+<td>MP</td>
+<td>MAP STD</td>
+<td>1.0</td>
+<td>18) HS MAP CIAMSA.pdf</td>
+</tr>
+<tr>
+<td>MP0039</td>
+<td>40</td>
+<td>MP</td>
+<td>SAM STD</td>
+<td>0.5</td>
+<td>004 - FDS SAM (1).pdf</td>
+</tr>
+<tr>
+<td>MP0041</td>
+<td>274</td>
+<td>MP</td>
+<td>SILICATO MAGNESIO</td>
+<td>0.5</td>
+<td>20) HS Silicato de Magnesio Pulverizar.pdf</td>
+</tr>
+<tr>
+<td>MP0042</td>
+<td>37</td>
+<td>MP</td>
+<td>SILICATO SODIO</td>
+<td>0.5</td>
+<td>19) HS Silicato de Sodio NP-41 JADESI SA.pdf</td>
+</tr>
+<tr>
+<td>MP0043</td>
+<td>5</td>
+<td>MP</td>
+<td>SULFATO CALCIO</td>
+<td>1.0</td>
+<td>HOJA DE SEGURIDAD - YESO EN POLVO.docx</td>
+</tr>
+<tr>
+<td>MP0044</td>
+<td>505</td>
+<td>MP</td>
+<td>SULFATO CALCIO SUCROAL</td>
+<td>1.0</td>
+<td>HOJA DE SEGURIDAD - YESO EN POLVO.docx</td>
+</tr>
+<tr>
+<td>MP0045</td>
+<td>831</td>
+<td>MP</td>
+<td>SULFATO COBRE</td>
+<td>0.5</td>
+<td>11) HS Sulfato de Cobre Pentahidratado 25_ CONAGRAN.pdf</td>
+</tr>
+<tr>
+<td>MP0046</td>
+<td>30</td>
+<td>MP</td>
+<td>SULFATO COBRE 22</td>
+<td>0.5</td>
+<td>11) HS Sulfato de Cobre Pentahidratado 25_ CONAGRAN.pdf</td>
+</tr>
+<tr>
+<td>MP0050</td>
+<td>425</td>
+<td>MP</td>
+<td>SULFATO MANGANESO</td>
+<td>0.5</td>
+<td>29. Ficha de datos de seguridad de Sulfato de Manganeso Monohidratado Fino - 17S+31Mn 20231025 22.pdf</td>
+</tr>
+</table>
+
+<h3>MF/MFE - Formulaciones NPK</h3>
+
+<p>_Ningun producto MF/MFE tiene HS asignada._</p>
+
+<h3>PT Comercial - Nombres de marca</h3>
+
+<table class="data-table">
+<tr>
+<th>idInterno</th>
+<th>codigoExterno</th>
+<th>clase</th>
+<th>producto</th>
+<th>score</th>
+<th>archivo HS</th>
+</tr>
+<tr>
+<td>PT0001</td>
+<td>123</td>
+<td>PT</td>
+<td>BORO G</td>
+<td>0.5</td>
+<td>HDS ACIDO BORICO PQP .pdf</td>
+</tr>
+<tr>
+<td>PT0002</td>
+<td>150</td>
+<td>PT</td>
+<td>CALFERZINC P</td>
+<td>1.0</td>
+<td>HOJA DE SEGURIDAD - CALFERZINC-P.docx</td>
+</tr>
+<tr>
+<td>PT0003</td>
+<td>663</td>
+<td>PT</td>
+<td>FE FERTIMENORES</td>
+<td>1.0</td>
+<td>Hoja de Seguridad Fertimenores FE.docx</td>
+</tr>
+<tr>
+<td>PT0005</td>
+<td>643</td>
+<td>PT</td>
+<td>FE SULFATO ZINC 22</td>
+<td>1.0</td>
+<td>HS Sulfato Zinc22 FE.docx</td>
+</tr>
+<tr>
+<td>PT0006</td>
+<td>300</td>
+<td>PT</td>
+<td>K2K</td>
+<td>1.0</td>
+<td>HOJA DE SEGURIDAD - K2K.docx</td>
+</tr>
+<tr>
+<td>PT0007</td>
+<td>154</td>
+<td>PT</td>
+<td>MAGNE 3</td>
+<td>1.0</td>
+<td>HOJA DE SEGURIDAD -  MAGNE 3.docx</td>
+</tr>
+<tr>
+<td>PT0254</td>
+<td>164</td>
+<td>PT</td>
+<td>MICRON C</td>
+<td>1.0</td>
+<td>HOJA DE SEGURIDAD - MICRON CS.docx</td>
+</tr>
+<tr>
+<td>PT0255</td>
+<td>188</td>
+<td>PT</td>
+<td>MICRON CS</td>
+<td>1.0</td>
+<td>HOJA DE SEGURIDAD - MICRON CS.docx</td>
+</tr>
+<tr>
+<td>PT0256</td>
+<td>65</td>
+<td>PT</td>
+<td>NUCLEO 4</td>
+<td>1.0</td>
+<td>Hoja de Seguridad Nucleo 4.docx</td>
+</tr>
+<tr>
+<td>PT0258</td>
+<td>563</td>
+<td>PT</td>
+<td>NUCLEO CAMASI YARA</td>
+<td>1.0</td>
+<td>HS DE NÚCLEO CAMASI YARA.docx</td>
+</tr>
+<tr>
+<td>PT0260</td>
+<td>679</td>
+<td>PT</td>
+<td>NUCLEO FOSFORO 10</td>
+<td>1.0</td>
+<td>HOJA DE SEGURIDAD -NUCLEO FOSFORO.docx</td>
+</tr>
+<tr>
+<td>PT0265</td>
+<td>155</td>
+<td>PT</td>
+<td>RAIFOS 20</td>
+<td>1.0</td>
+<td>Hoja de Seguridad RaiFOS 20.docx</td>
+</tr>
+<tr>
+<td>PT0268</td>
+<td>160</td>
+<td>PT</td>
+<td>ZUELO CA</td>
+<td>1.0</td>
+<td>1.109.06_HOJA SEGURIDAD ZUELOCa.docx</td>
+</tr>
+<tr>
+<td>PT0277</td>
+<td>PT0277</td>
+<td>PT</td>
+<td>NUCLEO FOSFORO 1 - 1</td>
+<td>1.0</td>
+<td>HOJA DE SEGURIDAD -NUCLEO FOSFORO.docx</td>
+</tr>
+<tr>
+<td>PT0278</td>
+<td>PT0278</td>
+<td>PT</td>
+<td>NUCLEO FOSFORO 1 - 2</td>
+<td>1.0</td>
+<td>HOJA DE SEGURIDAD -NUCLEO FOSFORO.docx</td>
+</tr>
+<tr>
+<td>PT0280</td>
+<td>PT0280</td>
+<td>PT</td>
+<td>CALFER FLORACION</td>
+<td>1.0</td>
+<td>Hoja de Seguridad CALFER FLORACIÓN.docx</td>
+</tr>
+<tr>
+<td>PT0281</td>
+<td>PT0281</td>
+<td>PT</td>
+<td>CALFER LLENADO</td>
+<td>1.0</td>
+<td>1.103.10_4_Hoja de Seguridad CALFER LLENADO.docx</td>
+</tr>
+<tr>
+<td>PT0282</td>
+<td>PT0282</td>
+<td>PT</td>
+<td>CALFER MENORES</td>
+<td>1.0</td>
+<td>1.104.09_4_Hoja de Seguridad CALFER MENORES.docx</td>
+</tr>
+<tr>
+<td>PT0283</td>
+<td>PT0283</td>
+<td>PT</td>
+<td>SOLURAIFOS</td>
+<td>1.0</td>
+<td>Hoja de Seguridad SOLURaiFOS.docx</td>
+</tr>
+<tr>
+<td>PT0284</td>
+<td>PT0284</td>
+<td>PT</td>
+<td>SULFA K 50</td>
+<td>1.0</td>
+<td>Hoja de Seguridad SULFA K 50.docx</td>
+</tr>
+<tr>
+<td>PT0286</td>
+<td>PT0286</td>
+<td>PT</td>
+<td>CALFER DESARROLLO</td>
+<td>1.0</td>
+<td>4-C_ Hoja de Seguridad CALFER DESARROLLO.docx</td>
+</tr>
+<tr>
+<td>PT0289</td>
+<td>PT0289</td>
+<td>PT</td>
+<td>FOLLAJE</td>
+<td>1.0</td>
+<td>Hoja de Seguridad FOLLAJE.docx</td>
+</tr>
+<tr>
+<td>PT0290</td>
+<td>PT0290</td>
+<td>PT</td>
+<td>GANADERO</td>
+<td>1.0</td>
+<td>Hoja de Seguridad GANADERO.docx</td>
+</tr>
+<tr>
+<td>PT0292</td>
+<td>PT0292</td>
+<td>PT</td>
+<td>CALFERCORRECTIVO</td>
+<td>1.0</td>
+<td>04_Hoja de Seguridad CALFERCORRECTIVO.docx</td>
+</tr>
+<tr>
+<td>PT0293</td>
+<td>PT0293</td>
+<td>PT</td>
+<td>NUCLEO N</td>
+<td>1.0</td>
+<td>Hoja de Seguridad Nucleo N.docx</td>
+</tr>
+<tr>
+<td>PT0297</td>
+<td>PT0297</td>
+<td>PT</td>
+<td>ZUELO CA P</td>
+<td>1.0</td>
+<td>1.109.06_HOJA SEGURIDAD ZUELOCa.docx</td>
+</tr>
+<tr>
+<td>PT0298</td>
+<td>PT0298</td>
+<td>PT</td>
+<td>FERTIMENORES</td>
+<td>1.0</td>
+<td>HOJA DE SEGURIDAD - FERTIMENORES.docx</td>
+</tr>
+</table>
+
+<h2>PRODUCTOS SIN HOJA DE SEGURIDAD (NO)</h2>
+
+<h3>MP - Materias Primas</h3>
+
+<table class="data-table">
+<tr>
+<th>idInterno</th>
+<th>codigoExterno</th>
+<th>clase</th>
+<th>producto</th>
+</tr>
+<tr>
+<td>MP0010</td>
+<td>361</td>
+<td>MP</td>
+<td>AMINOACIDOS 43</td>
+</tr>
+<tr>
+<td>MP0011</td>
+<td>360</td>
+<td>MP</td>
+<td>AMINOACIDOS 80</td>
+</tr>
+<tr>
+<td>MP0013</td>
+<td>1204</td>
+<td>MP</td>
+<td>BASE 1</td>
+</tr>
+<tr>
+<td>MP0014</td>
+<td>223</td>
+<td>MP</td>
+<td>BENTONITA CALCICA</td>
+</tr>
+<tr>
+<td>MP0015</td>
+<td>370</td>
+<td>MP</td>
+<td>BENTONITA GRIS</td>
+</tr>
+<tr>
+<td>MP0016</td>
+<td>111</td>
+<td>MP</td>
+<td>BENTONITA ROJA</td>
+</tr>
+<tr>
+<td>MP0017</td>
+<td>198</td>
+<td>MP</td>
+<td>BENTONITA SODICA</td>
+</tr>
+<tr>
+<td>MP0018</td>
+<td>204</td>
+<td>MP</td>
+<td>BIOCANE</td>
+</tr>
+<tr>
+<td>MP0019</td>
+<td>463</td>
+<td>MP</td>
+<td>CAL APAGADA</td>
+</tr>
+<tr>
+<td>MP0020</td>
+<td>120</td>
+<td>MP</td>
+<td>CAL DOLOMITA</td>
+</tr>
+<tr>
+<td>MP0021</td>
+<td>110</td>
+<td>MP</td>
+<td>CAOLIN GRIS</td>
+</tr>
+<tr>
+<td>MP0022</td>
+<td>105</td>
+<td>MP</td>
+<td>CARBONATO CALCIO</td>
+</tr>
+<tr>
+<td>MP0023</td>
+<td>103</td>
+<td>MP</td>
+<td>CITRATO ZINC</td>
+</tr>
+<tr>
+<td>MP0025</td>
+<td>359</td>
+<td>MP</td>
+<td>EXTRACTO ALGAS</td>
+</tr>
+<tr>
+<td>MP0027</td>
+<td>501</td>
+<td>MP</td>
+<td>HIDROXIDO CALCIO</td>
+</tr>
+<tr>
+<td>MP0030</td>
+<td>152</td>
+<td>MP</td>
+<td>LEONARDITA</td>
+</tr>
+<tr>
+<td>MP0032</td>
+<td>57</td>
+<td>MP</td>
+<td>OXIDO MAGNESIO</td>
+</tr>
+<tr>
+<td>MP0033</td>
+<td>448</td>
+<td>MP</td>
+<td>PRODUCTO A</td>
+</tr>
+<tr>
+<td>MP0034</td>
+<td>31</td>
+<td>MP</td>
+<td>ROCA FOSFORICA</td>
+</tr>
+<tr>
+<td>MP0035</td>
+<td>832</td>
+<td>MP</td>
+<td>ROCA FOSFORICA-24</td>
+</tr>
+<tr>
+<td>MP0036</td>
+<td>290</td>
+<td>MP</td>
+<td>ROCA FOSFORICA-26</td>
+</tr>
+<tr>
+<td>MP0037</td>
+<td>34</td>
+<td>MP</td>
+<td>ROCA FOSFORICA-28</td>
+</tr>
+<tr>
+<td>MP0038</td>
+<td>681</td>
+<td>MP</td>
+<td>ROCA FOSFORICA-30</td>
+</tr>
+<tr>
+<td>MP0040</td>
+<td>171</td>
+<td>MP</td>
+<td>SILICATO HIERRO</td>
+</tr>
+<tr>
+<td>MP0047</td>
+<td>173</td>
+<td>MP</td>
+<td>SULFATO COBRE 25</td>
+</tr>
+<tr>
+<td>MP0048</td>
+<td>23</td>
+<td>MP</td>
+<td>SULFATO DE ZINC 35</td>
+</tr>
+<tr>
+<td>MP0049</td>
+<td>28</td>
+<td>MP</td>
+<td>SULFATO HIERRO</td>
+</tr>
+<tr>
+<td>MP0051</td>
+<td>21</td>
+<td>MP</td>
+<td>SULFATO ZINC 22 MP</td>
+</tr>
+<tr>
+<td>MP0052</td>
+<td>227</td>
+<td>MP</td>
+<td>SULFATO ZINC 32</td>
+</tr>
+<tr>
+<td>MP0053</td>
+<td>23</td>
+<td>MP</td>
+<td>SULFATO ZINC 35</td>
+</tr>
+<tr>
+<td>MP0054</td>
+<td>323</td>
+<td>MP</td>
+<td>SULFATO ZINC 38</td>
+</tr>
+<tr>
+<td>MP0055</td>
+<td>16</td>
+<td>MP</td>
+<td>ULEXITA</td>
+</tr>
+</table>
+
+<h3>MF/MFE - Formulaciones NPK</h3>
+
+<table class="data-table">
+<tr>
+<th>idInterno</th>
+<th>codigoExterno</th>
+<th>clase</th>
+<th>producto</th>
+</tr>
+<tr>
+<td>MZR0001</td>
+<td>R</td>
+<td>MZR</td>
+<td>MF 10-24-4</td>
+</tr>
+<tr>
+<td>MZR0002</td>
+<td>R</td>
+<td>MZR</td>
+<td>MF 17-5-7</td>
+</tr>
+<tr>
+<td>MZR0003</td>
+<td>R</td>
+<td>MZR</td>
+<td>MF 17-7-2 / MAX UTEO</td>
+</tr>
+<tr>
+<td>MZR0004</td>
+<td>R</td>
+<td>MZR</td>
+<td>MF 27-1-12</td>
+</tr>
+<tr>
+<td>MZR0005</td>
+<td>R</td>
+<td>MZR</td>
+<td>MFE 10-15-20</td>
+</tr>
+<tr>
+<td>MZR0006</td>
+<td>R</td>
+<td>MZR</td>
+<td>MFE 10-30-10</td>
+</tr>
+<tr>
+<td>MZR0007</td>
+<td>R</td>
+<td>MZR</td>
+<td>MFE 11-10-3</td>
+</tr>
+<tr>
+<td>MZR0008</td>
+<td>R</td>
+<td>MZR</td>
+<td>MFE 14-4-23</td>
+</tr>
+<tr>
+<td>MZR0009</td>
+<td>R</td>
+<td>MZR</td>
+<td>MFE 16-16-16</td>
+</tr>
+<tr>
+<td>MZR0010</td>
+<td>R</td>
+<td>MZR</td>
+<td>MFE 21-5-1</td>
+</tr>
+<tr>
+<td>MZR0011</td>
+<td>R</td>
+<td>MZR</td>
+<td>MFE 22-3-13</td>
+</tr>
+<tr>
+<td>MZR0012</td>
+<td>R</td>
+<td>MZR</td>
+<td>MFE 22-3-7</td>
+</tr>
+<tr>
+<td>MZR0013</td>
+<td>R</td>
+<td>MZR</td>
+<td>MFE 23-5-10</td>
+</tr>
+<tr>
+<td>MZR0014</td>
+<td>R</td>
+<td>MZR</td>
+<td>MFE 24-2-14</td>
+</tr>
+<tr>
+<td>MZR0015</td>
+<td>R</td>
+<td>MZR</td>
+<td>MFE 26-6-2 / SUPER PASTURA</td>
+</tr>
+<tr>
+<td>MZR0016</td>
+<td>R</td>
+<td>MZR</td>
+<td>MFE 28-0-6</td>
+</tr>
+<tr>
+<td>MZR0017</td>
+<td>R</td>
+<td>MZR</td>
+<td>MFE 28-1-12</td>
+</tr>
+<tr>
+<td>MZR0018</td>
+<td>R</td>
+<td>MZR</td>
+<td>MFE 31-0-20 TMC</td>
+</tr>
+<tr>
+<td>MZR0019</td>
+<td>R1</td>
+<td>MZR</td>
+<td>MFE 41.4-0-6</td>
+</tr>
+<tr>
+<td>MZR0020</td>
+<td>R2</td>
+<td>MZR</td>
+<td>MFE 43.5-0-0-2.4S</td>
+</tr>
+<tr>
+<td>PT0008</td>
+<td>411</td>
+<td>PT</td>
+<td>MF 0-15-15+EM</td>
+</tr>
+<tr>
+<td>PT0009</td>
+<td>137</td>
+<td>PT</td>
+<td>MF 10-20-20</td>
+</tr>
+<tr>
+<td>PT0010</td>
+<td>86</td>
+<td>PT</td>
+<td>MF 10-30-10</td>
+</tr>
+<tr>
+<td>PT0011</td>
+<td>407</td>
+<td>PT</td>
+<td>MF 10-10-20+EM</td>
+</tr>
+<tr>
+<td>PT0012</td>
+<td>396</td>
+<td>PT</td>
+<td>MF 10-15-20+EM</td>
+</tr>
+<tr>
+<td>PT0013</td>
+<td>495</td>
+<td>PT</td>
+<td>MF 10-15-29+EM</td>
+</tr>
+<tr>
+<td>PT0014</td>
+<td>408</td>
+<td>PT</td>
+<td>MF 10-20-20+EM</td>
+</tr>
+<tr>
+<td>PT0015</td>
+<td>464</td>
+<td>PT</td>
+<td>MF 10-20-28+EM</td>
+</tr>
+<tr>
+<td>PT0016</td>
+<td>423</td>
+<td>PT</td>
+<td>MF 10-20-30+EM</td>
+</tr>
+<tr>
+<td>PT0017</td>
+<td>406</td>
+<td>PT</td>
+<td>MF 10-24-4+EM</td>
+</tr>
+<tr>
+<td>PT0018</td>
+<td>387</td>
+<td>PT</td>
+<td>MF 10-28-6+EM</td>
+</tr>
+<tr>
+<td>PT0019</td>
+<td>390</td>
+<td>PT</td>
+<td>MF 10-6-4 + EM</td>
+</tr>
+<tr>
+<td>PT0020</td>
+<td>670</td>
+<td>PT</td>
+<td>MF 10-9-30</td>
+</tr>
+<tr>
+<td>PT0021</td>
+<td>458</td>
+<td>PT</td>
+<td>MF 10-9-30+EM</td>
+</tr>
+<tr>
+<td>PT0022</td>
+<td>388</td>
+<td>PT</td>
+<td>MF 11-5-27</td>
+</tr>
+<tr>
+<td>PT0023</td>
+<td>543</td>
+<td>PT</td>
+<td>MF 11-29-12+EM</td>
+</tr>
+<tr>
+<td>PT0024</td>
+<td>268</td>
+<td>PT</td>
+<td>MF 12-24-12</td>
+</tr>
+<tr>
+<td>PT0025</td>
+<td>317</td>
+<td>PT</td>
+<td>MF 12-24-12+EM</td>
+</tr>
+<tr>
+<td>PT0026</td>
+<td>318</td>
+<td>PT</td>
+<td>MF 12-7-12+EM</td>
+</tr>
+<tr>
+<td>PT0027</td>
+<td>496</td>
+<td>PT</td>
+<td>MF 12-30-10+EM</td>
+</tr>
+<tr>
+<td>PT0028</td>
+<td>490</td>
+<td>PT</td>
+<td>MF 13-26-10+ EM</td>
+</tr>
+<tr>
+<td>PT0029</td>
+<td>419</td>
+<td>PT</td>
+<td>MF 13-7-12+EM</td>
+</tr>
+<tr>
+<td>PT0030</td>
+<td>381</td>
+<td>PT</td>
+<td>MF 14-3-19-7Ca+EM</td>
+</tr>
+<tr>
+<td>PT0031</td>
+<td>433</td>
+<td>PT</td>
+<td>MF 14-4-23+EM</td>
+</tr>
+<tr>
+<td>PT0032</td>
+<td>516</td>
+<td>PT</td>
+<td>MF 14-4-24+EM</td>
+</tr>
+<tr>
+<td>PT0033</td>
+<td>85</td>
+<td>PT</td>
+<td>MF 15-15-15</td>
+</tr>
+<tr>
+<td>PT0034</td>
+<td>462</td>
+<td>PT</td>
+<td>MF 15-4-23+EM</td>
+</tr>
+<tr>
+<td>PT0035</td>
+<td>426</td>
+<td>PT</td>
+<td>MF 15-6-8+EM</td>
+</tr>
+<tr>
+<td>PT0036</td>
+<td>612</td>
+<td>PT</td>
+<td>MF 16-26-12</td>
+</tr>
+<tr>
+<td>PT0037</td>
+<td>517</td>
+<td>PT</td>
+<td>MF 16-16-16+EM</td>
+</tr>
+<tr>
+<td>PT0038</td>
+<td>441</td>
+<td>PT</td>
+<td>MF 16-17-0-7Ca+EM</td>
+</tr>
+<tr>
+<td>PT0039</td>
+<td>405</td>
+<td>PT</td>
+<td>MF 16-3-14+EM</td>
+</tr>
+<tr>
+<td>PT0040</td>
+<td>84</td>
+<td>PT</td>
+<td>MF 17-6-18-2-1</td>
+</tr>
+<tr>
+<td>PT0041</td>
+<td>402</td>
+<td>PT</td>
+<td>MF 17-6-18-6+EM</td>
+</tr>
+<tr>
+<td>PT0042</td>
+<td>401</td>
+<td>PT</td>
+<td>MF 17-8-11+EM+CO</td>
+</tr>
+<tr>
+<td>PT0043</td>
+<td>478</td>
+<td>PT</td>
+<td>MF 17-4-23+EM</td>
+</tr>
+<tr>
+<td>PT0044</td>
+<td>477</td>
+<td>PT</td>
+<td>MF 17-5-7+EM</td>
+</tr>
+<tr>
+<td>PT0045</td>
+<td>83</td>
+<td>PT</td>
+<td>MF 18-18-18</td>
+</tr>
+<tr>
+<td>PT0046</td>
+<td>353</td>
+<td>PT</td>
+<td>MF 18-8-5-4+EM</td>
+</tr>
+<tr>
+<td>PT0047</td>
+<td>301</td>
+<td>PT</td>
+<td>MF 19-1-2-1+EM</td>
+</tr>
+<tr>
+<td>PT0048</td>
+<td>304</td>
+<td>PT</td>
+<td>MF 19-5-9-5+EM</td>
+</tr>
+<tr>
+<td>PT0049</td>
+<td>384</td>
+<td>PT</td>
+<td>MF 19-1-3 + MEORES</td>
+</tr>
+<tr>
+<td>PT0050</td>
+<td>442</td>
+<td>PT</td>
+<td>MF 19-3-18+EM</td>
+</tr>
+<tr>
+<td>PT0051</td>
+<td>284</td>
+<td>PT</td>
+<td>MF 20-17-18+TCM</td>
+</tr>
+<tr>
+<td>PT0052</td>
+<td>529</td>
+<td>PT</td>
+<td>MF 20-0-30-3S</td>
+</tr>
+<tr>
+<td>PT0053</td>
+<td>519</td>
+<td>PT</td>
+<td>MF 20-3-15+EM</td>
+</tr>
+<tr>
+<td>PT0054</td>
+<td>457</td>
+<td>PT</td>
+<td>MF 20-6-0-5CA+EM</td>
+</tr>
+<tr>
+<td>PT0055</td>
+<td>631</td>
+<td>PT</td>
+<td>MF 20-8-10+EM</td>
+</tr>
+<tr>
+<td>PT0056</td>
+<td>172</td>
+<td>PT</td>
+<td>MF 21-1-2+EM</td>
+</tr>
+<tr>
+<td>PT0057</td>
+<td>357</td>
+<td>PT</td>
+<td>MF 21-5-10-6S+EM</td>
+</tr>
+<tr>
+<td>PT0058</td>
+<td>415</td>
+<td>PT</td>
+<td>MF 21-2-8+EM</td>
+</tr>
+<tr>
+<td>PT0059</td>
+<td>316</td>
+<td>PT</td>
+<td>MF 21-3-8-3Ca+MEORES</td>
+</tr>
+<tr>
+<td>PT0060</td>
+<td>307</td>
+<td>PT</td>
+<td>MF 21-4-5-3Ca+MEORES</td>
+</tr>
+<tr>
+<td>PT0061</td>
+<td>497</td>
+<td>PT</td>
+<td>MF 21-5-10+EM</td>
+</tr>
+<tr>
+<td>PT0062</td>
+<td>471</td>
+<td>PT</td>
+<td>MF 21-5-9+EM</td>
+</tr>
+<tr>
+<td>PT0063</td>
+<td>632</td>
+<td>PT</td>
+<td>MF 21-9-9+EM</td>
+</tr>
+<tr>
+<td>PT0064</td>
+<td>315</td>
+<td>PT</td>
+<td>MF 22 3 13 4S+MEORES</td>
+</tr>
+<tr>
+<td>PT0065</td>
+<td>524</td>
+<td>PT</td>
+<td>MF 22-0-25-3S</td>
+</tr>
+<tr>
+<td>PT0066</td>
+<td>526</td>
+<td>PT</td>
+<td>MF 22-0-3+EM</td>
+</tr>
+<tr>
+<td>PT0067</td>
+<td>511</td>
+<td>PT</td>
+<td>MF 22-4-8+EM</td>
+</tr>
+<tr>
+<td>PT0068</td>
+<td>525</td>
+<td>PT</td>
+<td>MF 22-5-13+EM</td>
+</tr>
+<tr>
+<td>PT0069</td>
+<td>456</td>
+<td>PT</td>
+<td>MF 22-6-3+EM</td>
+</tr>
+<tr>
+<td>PT0070</td>
+<td>398</td>
+<td>PT</td>
+<td>MF 22-6-7Ca+EM</td>
+</tr>
+<tr>
+<td>PT0071</td>
+<td>633</td>
+<td>PT</td>
+<td>MF 22-6-7+EM</td>
+</tr>
+<tr>
+<td>PT0072</td>
+<td>634</td>
+<td>PT</td>
+<td>MF 22-9-9+EM</td>
+</tr>
+<tr>
+<td>PT0073</td>
+<td>20</td>
+<td>PT</td>
+<td>MF 23-3-20</td>
+</tr>
+<tr>
+<td>PT0074</td>
+<td>618</td>
+<td>PT</td>
+<td>MF 23 6 8 + EM</td>
+</tr>
+<tr>
+<td>PT0075</td>
+<td>394</td>
+<td>PT</td>
+<td>MF 23-3-20+EM</td>
+</tr>
+<tr>
+<td>PT0076</td>
+<td>506</td>
+<td>PT</td>
+<td>MF 23-5-6+EM</td>
+</tr>
+<tr>
+<td>PT0077</td>
+<td>508</td>
+<td>PT</td>
+<td>MF 23-6-8+EM</td>
+</tr>
+<tr>
+<td>PT0078</td>
+<td>308</td>
+<td>PT</td>
+<td>MF 24-0-17+EM</td>
+</tr>
+<tr>
+<td>PT0079</td>
+<td>174</td>
+<td>PT</td>
+<td>MF 24-3-9-3+EM</td>
+</tr>
+<tr>
+<td>PT0080</td>
+<td>348</td>
+<td>PT</td>
+<td>MF 24-5-7-5S-3Ca+1CO</td>
+</tr>
+<tr>
+<td>PT0081</td>
+<td>436</td>
+<td>PT</td>
+<td>MF 24-0-2+EM</td>
+</tr>
+<tr>
+<td>PT0082</td>
+<td>532</td>
+<td>PT</td>
+<td>MF 24-3-12+EM</td>
+</tr>
+<tr>
+<td>PT0083</td>
+<td>440</td>
+<td>PT</td>
+<td>MF 24-4-11+EM</td>
+</tr>
+<tr>
+<td>PT0084</td>
+<td>473</td>
+<td>PT</td>
+<td>MF 24-5-6+EM</td>
+</tr>
+<tr>
+<td>PT0085</td>
+<td>328</td>
+<td>PT</td>
+<td>MF 25-0-15+EM</td>
+</tr>
+<tr>
+<td>PT0086</td>
+<td>146</td>
+<td>PT</td>
+<td>MF 25-0-17-4S+EM</td>
+</tr>
+<tr>
+<td>PT0087</td>
+<td>148</td>
+<td>PT</td>
+<td>MF 25-10-18+ MEORES</td>
+</tr>
+<tr>
+<td>PT0088</td>
+<td>175</td>
+<td>PT</td>
+<td>MF 25-10-18+EM</td>
+</tr>
+<tr>
+<td>PT0089</td>
+<td>382</td>
+<td>PT</td>
+<td>MF 25-15-2-3-2</td>
+</tr>
+<tr>
+<td>PT0090</td>
+<td>82</td>
+<td>PT</td>
+<td>MF 25-4-24</td>
+</tr>
+<tr>
+<td>PT0091</td>
+<td>518</td>
+<td>PT</td>
+<td>MF 25-17-1+EM</td>
+</tr>
+<tr>
+<td>PT0092</td>
+<td>455</td>
+<td>PT</td>
+<td>MF 25-1-13+EM</td>
+</tr>
+<tr>
+<td>PT0093</td>
+<td>509</td>
+<td>PT</td>
+<td>MF 25-4-11+EM</td>
+</tr>
+<tr>
+<td>PT0094</td>
+<td>656</td>
+<td>PT</td>
+<td>MF 25-4-17+EM</td>
+</tr>
+<tr>
+<td>PT0095</td>
+<td>367</td>
+<td>PT</td>
+<td>MF 25-5-0-8Ca+EM</td>
+</tr>
+<tr>
+<td>PT0096</td>
+<td>533</td>
+<td>PT</td>
+<td>MF 25-5-12+EM</td>
+</tr>
+<tr>
+<td>PT0097</td>
+<td>492</td>
+<td>PT</td>
+<td>MF 25-7K-2CA+EM</td>
+</tr>
+<tr>
+<td>PT0098</td>
+<td>652</td>
+<td>PT</td>
+<td>MF 25-7-7+EM</td>
+</tr>
+<tr>
+<td>PT0099</td>
+<td>648</td>
+<td>PT</td>
+<td>MF 25-8-14+EM</td>
+</tr>
+<tr>
+<td>PT0100</td>
+<td>159</td>
+<td>PT</td>
+<td>MF 26-0-17+EM</td>
+</tr>
+<tr>
+<td>PT0101</td>
+<td>176</td>
+<td>PT</td>
+<td>MF 26-1-12-+EM</td>
+</tr>
+<tr>
+<td>PT0102</td>
+<td>619</td>
+<td>PT</td>
+<td>MF 26 7 6 + EM</td>
+</tr>
+<tr>
+<td>PT0103</td>
+<td>514</td>
+<td>PT</td>
+<td>MF 26-1-11+EM</td>
+</tr>
+<tr>
+<td>PT0104</td>
+<td>512</td>
+<td>PT</td>
+<td>MF 26-5-11+EM</td>
+</tr>
+<tr>
+<td>PT0105</td>
+<td>476</td>
+<td>PT</td>
+<td>MF 26-9-9+EM</td>
+</tr>
+<tr>
+<td>PT0106</td>
+<td>136</td>
+<td>PT</td>
+<td>MF 27-17-0Ca</td>
+</tr>
+<tr>
+<td>PT0107</td>
+<td>630</td>
+<td>PT</td>
+<td>MF 27-0-14+EM</td>
+</tr>
+<tr>
+<td>PT0108</td>
+<td>385</td>
+<td>PT</td>
+<td>MF 27-15K-5S-2Si-0,80CO</td>
+</tr>
+<tr>
+<td>PT0109</td>
+<td>445</td>
+<td>PT</td>
+<td>MF 27-1-12-2Ca+EM</td>
+</tr>
+<tr>
+<td>PT0110</td>
+<td>475</td>
+<td>PT</td>
+<td>MF 27-1-7+EM</td>
+</tr>
+<tr>
+<td>PT0111</td>
+<td>653</td>
+<td>PT</td>
+<td>MF 27-1-8+EM</td>
+</tr>
+<tr>
+<td>PT0112</td>
+<td>642</td>
+<td>PT</td>
+<td>MF 27-3-12+EM</td>
+</tr>
+<tr>
+<td>PT0113</td>
+<td>536</td>
+<td>PT</td>
+<td>MF 27-3-3+EM</td>
+</tr>
+<tr>
+<td>PT0114</td>
+<td>438</td>
+<td>PT</td>
+<td>MF 27-4-3+EM</td>
+</tr>
+<tr>
+<td>PT0115</td>
+<td>606</td>
+<td>PT</td>
+<td>MF 27-6-13+EM</td>
+</tr>
+<tr>
+<td>PT0116</td>
+<td>480</td>
+<td>PT</td>
+<td>MF 27-9K-10S+EM</td>
+</tr>
+<tr>
+<td>PT0117</td>
+<td>299</td>
+<td>PT</td>
+<td>MF 28-0-6-2Ca+EM</td>
+</tr>
+<tr>
+<td>PT0118</td>
+<td>312</td>
+<td>PT</td>
+<td>MF 28-0-9-2Ca+EM</td>
+</tr>
+<tr>
+<td>PT0119</td>
+<td>165</td>
+<td>PT</td>
+<td>MF 28-1-12+EM</td>
+</tr>
+<tr>
+<td>PT0120</td>
+<td>303</td>
+<td>PT</td>
+<td>MF 28-1-6-2Ca+EM</td>
+</tr>
+<tr>
+<td>PT0121</td>
+<td>352</td>
+<td>PT</td>
+<td>MF 28-1-6-5S-EM+1CO</td>
+</tr>
+<tr>
+<td>PT0122</td>
+<td>620</td>
+<td>PT</td>
+<td>MF 28-1-7 +EM</td>
+</tr>
+<tr>
+<td>PT0123</td>
+<td>617</td>
+<td>PT</td>
+<td>MF 28 1 8 + EM</td>
+</tr>
+<tr>
+<td>PT0124</td>
+<td>513</td>
+<td>PT</td>
+<td>MF 28-0-12+EM</td>
+</tr>
+<tr>
+<td>PT0125</td>
+<td>537</td>
+<td>PT</td>
+<td>MF 28-14-10+EM</td>
+</tr>
+<tr>
+<td>PT0126</td>
+<td>432</td>
+<td>PT</td>
+<td>MF 28-1-12+EM</td>
+</tr>
+<tr>
+<td>PT0127</td>
+<td>487</td>
+<td>PT</td>
+<td>MF 28-4-15 +EM</td>
+</tr>
+<tr>
+<td>PT0128</td>
+<td>469</td>
+<td>PT</td>
+<td>MF 28-5-6+EM</td>
+</tr>
+<tr>
+<td>PT0129</td>
+<td>527</td>
+<td>PT</td>
+<td>MF 29-0-16-4S</td>
+</tr>
+<tr>
+<td>PT0130</td>
+<td>522</td>
+<td>PT</td>
+<td>MF 29-10-10+EM</td>
+</tr>
+<tr>
+<td>PT0131</td>
+<td>417</td>
+<td>PT</td>
+<td>MF 29-3-15+EM</td>
+</tr>
+<tr>
+<td>PT0132</td>
+<td>389</td>
+<td>PT</td>
+<td>MF 3-10-2 + EM</td>
+</tr>
+<tr>
+<td>PT0133</td>
+<td>163</td>
+<td>PT</td>
+<td>MF 30-0-20 +EM +TMC</td>
+</tr>
+<tr>
+<td>PT0134</td>
+<td>418</td>
+<td>PT</td>
+<td>MF 30 0 20</td>
+</tr>
+<tr>
+<td>PT0135</td>
+<td>538</td>
+<td>PT</td>
+<td>MF 30-11-10+EM</td>
+</tr>
+<tr>
+<td>PT0136</td>
+<td>493</td>
+<td>PT</td>
+<td>MF 30-12K-2CA+EM</td>
+</tr>
+<tr>
+<td>PT0137</td>
+<td>298</td>
+<td>PT</td>
+<td>MF 31-0-20+X</td>
+</tr>
+<tr>
+<td>PT0138</td>
+<td>187</td>
+<td>PT</td>
+<td>MF 31-0-20+TMC</td>
+</tr>
+<tr>
+<td>PT0139</td>
+<td>81</td>
+<td>PT</td>
+<td>MF 31-8-8-2</td>
+</tr>
+<tr>
+<td>PT0140</td>
+<td>521</td>
+<td>PT</td>
+<td>MF 31-6-11+EM</td>
+</tr>
+<tr>
+<td>PT0141</td>
+<td>380</td>
+<td>PT</td>
+<td>MF 32-0-6+EM</td>
+</tr>
+<tr>
+<td>PT0142</td>
+<td>327</td>
+<td>PT</td>
+<td>MF 32-6-5-2SI-1CO</td>
+</tr>
+<tr>
+<td>PT0143</td>
+<td>383</td>
+<td>PT</td>
+<td>MF 32 1 6 2Ca+ EM</td>
+</tr>
+<tr>
+<td>PT0144</td>
+<td>665</td>
+<td>PT</td>
+<td>MF 32-1-12+EM</td>
+</tr>
+<tr>
+<td>PT0145</td>
+<td>626</td>
+<td>PT</td>
+<td>MF 33-1-12+EM</td>
+</tr>
+<tr>
+<td>PT0146</td>
+<td>479</td>
+<td>PT</td>
+<td>MF 33-5-12</td>
+</tr>
+<tr>
+<td>PT0147</td>
+<td>523</td>
+<td>PT</td>
+<td>MF 37-0-11</td>
+</tr>
+<tr>
+<td>PT0148</td>
+<td>434</td>
+<td>PT</td>
+<td>MF 37-2Ca-2Mg+EM</td>
+</tr>
+<tr>
+<td>PT0149</td>
+<td>168</td>
+<td>PT</td>
+<td>MF 38-0-0-8</td>
+</tr>
+<tr>
+<td>PT0150</td>
+<td>399</td>
+<td>PT</td>
+<td>MF 38-10K_</td>
+</tr>
+<tr>
+<td>PT0151</td>
+<td>640</td>
+<td>PT</td>
+<td>MF 3-13-32+EM</td>
+</tr>
+<tr>
+<td>PT0152</td>
+<td>369</td>
+<td>PT</td>
+<td>MF 40-3-0-2+EM</td>
+</tr>
+<tr>
+<td>PT0153</td>
+<td>292</td>
+<td>PT</td>
+<td>MF 52K-1,1B-0,5Z</td>
+</tr>
+<tr>
+<td>PT0154</td>
+<td>391</td>
+<td>PT</td>
+<td>MF 6-9-6+EM</td>
+</tr>
+<tr>
+<td>PT0155</td>
+<td>356</td>
+<td>PT</td>
+<td>MF 7-7-5-3S+EM+2CO</td>
+</tr>
+<tr>
+<td>PT0156</td>
+<td>545</td>
+<td>PT</td>
+<td>MF 7-14-29+EM</td>
+</tr>
+<tr>
+<td>PT0157</td>
+<td>313</td>
+<td>PT</td>
+<td>MF 8-24-8+EM</td>
+</tr>
+<tr>
+<td>PT0158</td>
+<td>435</td>
+<td>PT</td>
+<td>MF 8-15-23+EM</td>
+</tr>
+<tr>
+<td>PT0159</td>
+<td>510</td>
+<td>PT</td>
+<td>MF 8-17-34-1S</td>
+</tr>
+<tr>
+<td>PT0160</td>
+<td>453</td>
+<td>PT</td>
+<td>MF 8-20-12+EM</td>
+</tr>
+<tr>
+<td>PT0161</td>
+<td>439</td>
+<td>PT</td>
+<td>MF 9-12-24+EM</td>
+</tr>
+<tr>
+<td>PT0164</td>
+<td>673</td>
+<td>PT</td>
+<td>MFE 0-10+EM</td>
+</tr>
+<tr>
+<td>PT0165</td>
+<td>588</td>
+<td>PT</td>
+<td>MFE 10 11 29</td>
+</tr>
+<tr>
+<td>PT0166</td>
+<td>641</td>
+<td>PT</td>
+<td>MFE 10-24-14 +EM</td>
+</tr>
+<tr>
+<td>PT0167</td>
+<td>542</td>
+<td>PT</td>
+<td>MFE 10-25-8+EM</td>
+</tr>
+<tr>
+<td>PT0168</td>
+<td>589</td>
+<td>PT</td>
+<td>MFE 10-6-16 +EM</td>
+</tr>
+<tr>
+<td>PT0169</td>
+<td>668</td>
+<td>PT</td>
+<td>MFE 10-6-6+EM</td>
+</tr>
+<tr>
+<td>PT0170</td>
+<td>569</td>
+<td>PT</td>
+<td>MFE 10-9-18+EM</td>
+</tr>
+<tr>
+<td>PT0171</td>
+<td>544</td>
+<td>PT</td>
+<td>MFE 11-24-9+EM</td>
+</tr>
+<tr>
+<td>PT0172</td>
+<td>646</td>
+<td>PT</td>
+<td>MFE 11-25-9+EM</td>
+</tr>
+<tr>
+<td>PT0173</td>
+<td>660</td>
+<td>PT</td>
+<td>MFE 11-9-18+EM</td>
+</tr>
+<tr>
+<td>PT0174</td>
+<td>587</td>
+<td>PT</td>
+<td>MFE 12 25 9</td>
+</tr>
+<tr>
+<td>PT0175</td>
+<td>659</td>
+<td>PT</td>
+<td>MFE 13-15-10+EM</td>
+</tr>
+<tr>
+<td>PT0176</td>
+<td>314</td>
+<td>PT</td>
+<td>MFE 13-26-6+EM</td>
+</tr>
+<tr>
+<td>PT0177</td>
+<td>489</td>
+<td>PT</td>
+<td>MFE 13-36-10+EM</td>
+</tr>
+<tr>
+<td>PT0178</td>
+<td>601</td>
+<td>PT</td>
+<td>MFE 13-6-6+EM</td>
+</tr>
+<tr>
+<td>PT0179</td>
+<td>590</td>
+<td>PT</td>
+<td>MFE 15-12-20+EM</td>
+</tr>
+<tr>
+<td>PT0180</td>
+<td>623</td>
+<td>PT</td>
+<td>MFE 15-20-2+EM</td>
+</tr>
+<tr>
+<td>PT0181</td>
+<td>602</td>
+<td>PT</td>
+<td>MFE 15-21-1+EM</td>
+</tr>
+<tr>
+<td>PT0182</td>
+<td>635</td>
+<td>PT</td>
+<td>MFE 15-9-20+EM</td>
+</tr>
+<tr>
+<td>PT0183</td>
+<td>658</td>
+<td>PT</td>
+<td>MFE 16-21-5+EM</td>
+</tr>
+<tr>
+<td>PT0184</td>
+<td>429</td>
+<td>PT</td>
+<td>MFE 18-18-18+EM</td>
+</tr>
+<tr>
+<td>PT0185</td>
+<td>649</td>
+<td>PT</td>
+<td>MFE 18-2-0+EM</td>
+</tr>
+<tr>
+<td>PT0186</td>
+<td>414</td>
+<td>PT</td>
+<td>MFE 18-9-29+EM</td>
+</tr>
+<tr>
+<td>PT0187</td>
+<td>674</td>
+<td>PT</td>
+<td>MFE 19-25-6+EM</td>
+</tr>
+<tr>
+<td>PT0188</td>
+<td>566</td>
+<td>PT</td>
+<td>MFE 19-4-10+EM</td>
+</tr>
+<tr>
+<td>PT0189</td>
+<td>586</td>
+<td>PT</td>
+<td>MFE 19-4-18</td>
+</tr>
+<tr>
+<td>PT0190</td>
+<td>596</td>
+<td>PT</td>
+<td>MFE 20-3-14+EM</td>
+</tr>
+<tr>
+<td>PT0191</td>
+<td>413</td>
+<td>PT</td>
+<td>MFE 20-4-18+EM</td>
+</tr>
+<tr>
+<td>PT0192</td>
+<td>555</td>
+<td>PT</td>
+<td>MFE 21-4-11+EM</td>
+</tr>
+<tr>
+<td>PT0193</td>
+<td>654</td>
+<td>PT</td>
+<td>MFE 21-7-8 + EM</td>
+</tr>
+<tr>
+<td>PT0194</td>
+<td>1410</td>
+<td>PT</td>
+<td>MFE 22-3-7</td>
+</tr>
+<tr>
+<td>PT0195</td>
+<td>664</td>
+<td>PT</td>
+<td>MFE 22-0-19+EM</td>
+</tr>
+<tr>
+<td>PT0196</td>
+<td>560</td>
+<td>PT</td>
+<td>MFE 22-3-0+ EM</td>
+</tr>
+<tr>
+<td>PT0197</td>
+<td>645</td>
+<td>PT</td>
+<td>MFE 22-3-3+EM</td>
+</tr>
+<tr>
+<td>PT0198</td>
+<td>662</td>
+<td>PT</td>
+<td>MFE 22-6-3+EM</td>
+</tr>
+<tr>
+<td>PT0199</td>
+<td>605</td>
+<td>PT</td>
+<td>MFE 22-7K-12S+EM</td>
+</tr>
+<tr>
+<td>PT0200</td>
+<td>639</td>
+<td>PT</td>
+<td>MFE 22-8-10+EM</td>
+</tr>
+<tr>
+<td>PT0201</td>
+<td>535</td>
+<td>PT</td>
+<td>MFE 22-9-0+EM</td>
+</tr>
+<tr>
+<td>PT0202</td>
+<td>669</td>
+<td>PT</td>
+<td>MFE 23-1-18+EM</td>
+</tr>
+<tr>
+<td>PT0203</td>
+<td>651</td>
+<td>PT</td>
+<td>MFE 23-4-16+EM</td>
+</tr>
+<tr>
+<td>PT0204</td>
+<td>593</td>
+<td>PT</td>
+<td>MFE 23-4-9+EM</td>
+</tr>
+<tr>
+<td>PT0205</td>
+<td>420</td>
+<td>PT</td>
+<td>MFE 23-5-10+EM</td>
+</tr>
+<tr>
+<td>PT0206</td>
+<td>554</td>
+<td>PT</td>
+<td>MFE 23-9-11+EM</td>
+</tr>
+<tr>
+<td>PT0207</td>
+<td>650</td>
+<td>PT</td>
+<td>MFE 24-2-9+EM</td>
+</tr>
+<tr>
+<td>PT0208</td>
+<td>585</td>
+<td>PT</td>
+<td>MFE 24-4-2K+EM</td>
+</tr>
+<tr>
+<td>PT0209</td>
+<td>965</td>
+<td>PT</td>
+<td>MFE 24-4-10+EM</td>
+</tr>
+<tr>
+<td>PT0210</td>
+<td>616</td>
+<td>PT</td>
+<td>MFE 24-6-7+EM</td>
+</tr>
+<tr>
+<td>PT0211</td>
+<td>591</td>
+<td>PT</td>
+<td>MFE 24-9K-12S+EM</td>
+</tr>
+<tr>
+<td>PT0212</td>
+<td>614</td>
+<td>PT</td>
+<td>MFE 24-9-7S+EM</td>
+</tr>
+<tr>
+<td>PT0213</td>
+<td>629</td>
+<td>PT</td>
+<td>MFE 25-0-8+EM</td>
+</tr>
+<tr>
+<td>PT0214</td>
+<td>412</td>
+<td>PT</td>
+<td>MFE 25-13-12 +EM</td>
+</tr>
+<tr>
+<td>PT0215</td>
+<td>628</td>
+<td>PT</td>
+<td>MFE 25-4-14+EM</td>
+</tr>
+<tr>
+<td>PT0216</td>
+<td>677</td>
+<td>PT</td>
+<td>MFE 25-6-0+EM</td>
+</tr>
+<tr>
+<td>PT0217</td>
+<td>568</td>
+<td>PT</td>
+<td>MFE 25-6-13+EM</td>
+</tr>
+<tr>
+<td>PT0218</td>
+<td>644</td>
+<td>PT</td>
+<td>MFE 25-8-16+EM</td>
+</tr>
+<tr>
+<td>PT0219</td>
+<td>594</td>
+<td>PT</td>
+<td>MFE 26-11-6+EM</td>
+</tr>
+<tr>
+<td>PT0220</td>
+<td>582</td>
+<td>PT</td>
+<td>MFE 26-20K-4S</td>
+</tr>
+<tr>
+<td>PT0221</td>
+<td>627</td>
+<td>PT</td>
+<td>MFE 26-2-9-2Ca</td>
+</tr>
+<tr>
+<td>PT0222</td>
+<td>431</td>
+<td>PT</td>
+<td>MFE 26-6-2+EM</td>
+</tr>
+<tr>
+<td>PT0223</td>
+<td>682</td>
+<td>PT</td>
+<td>MFE 26-7-0+EM</td>
+</tr>
+<tr>
+<td>PT0224</td>
+<td>625</td>
+<td>PT</td>
+<td>MFE 27-18K-5S</td>
+</tr>
+<tr>
+<td>PT0225</td>
+<td>672</td>
+<td>PT</td>
+<td>MFE 27-20-0+EM</td>
+</tr>
+<tr>
+<td>PT0226</td>
+<td>539</td>
+<td>PT</td>
+<td>MFE 27-5-11+EM</td>
+</tr>
+<tr>
+<td>PT0227</td>
+<td>610</td>
+<td>PT</td>
+<td>MFE 27-8-9+EM ILO</td>
+</tr>
+<tr>
+<td>PT0228</td>
+<td>621</td>
+<td>PT</td>
+<td>MFE 28-24-0</td>
+</tr>
+<tr>
+<td>PT0229</td>
+<td>1401</td>
+<td>PT</td>
+<td>MFE 28 5 5.4 + EM</td>
+</tr>
+<tr>
+<td>PT0230</td>
+<td>600</td>
+<td>PT</td>
+<td>MFE 28-14-6+EM</td>
+</tr>
+<tr>
+<td>PT0231</td>
+<td>657</td>
+<td>PT</td>
+<td>MFE 28-4-9+EM</td>
+</tr>
+<tr>
+<td>PT0232</td>
+<td>592</td>
+<td>PT</td>
+<td>MFE 28-5-0+EM</td>
+</tr>
+<tr>
+<td>PT0233</td>
+<td>548</td>
+<td>PT</td>
+<td>MFE 28-5-15+EM</td>
+</tr>
+<tr>
+<td>PT0234</td>
+<td>609</td>
+<td>PT</td>
+<td>MFE 28-5-9+EM</td>
+</tr>
+<tr>
+<td>PT0235</td>
+<td>608</td>
+<td>PT</td>
+<td>MFE 29 10 6 + EM</td>
+</tr>
+<tr>
+<td>PT0236</td>
+<td>428</td>
+<td>PT</td>
+<td>MFE 29-15-5+EM</td>
+</tr>
+<tr>
+<td>PT0237</td>
+<td>607</td>
+<td>PT</td>
+<td>MFE 29-1-11+EM</td>
+</tr>
+<tr>
+<td>PT0238</td>
+<td>683</td>
+<td>PT</td>
+<td>MFE 29-6-12+EM</td>
+</tr>
+<tr>
+<td>PT0239</td>
+<td>840</td>
+<td>PT</td>
+<td>MFE 30-0-20</td>
+</tr>
+<tr>
+<td>PT0240</td>
+<td>598</td>
+<td>PT</td>
+<td>MFE 30-11-6+EM</td>
+</tr>
+<tr>
+<td>PT0241</td>
+<td>465</td>
+<td>PT</td>
+<td>MFE 30-8-0-5CA+EM</td>
+</tr>
+<tr>
+<td>PT0242</td>
+<td>676</td>
+<td>PT</td>
+<td>MFE 30-9-0+EM</td>
+</tr>
+<tr>
+<td>PT0243</td>
+<td>671</td>
+<td>PT</td>
+<td>MFE 31-5-0+EM</td>
+</tr>
+<tr>
+<td>PT0244</td>
+<td>597</td>
+<td>PT</td>
+<td>MFE 31-6-7+EM</td>
+</tr>
+<tr>
+<td>PT0245</td>
+<td>581</td>
+<td>PT</td>
+<td>MFE 31-7K-9S</td>
+</tr>
+<tr>
+<td>PT0246</td>
+<td>1080</td>
+<td>PT</td>
+<td>MFE 32-0-9</td>
+</tr>
+<tr>
+<td>PT0247</td>
+<td>1402</td>
+<td>PT</td>
+<td>MFE 32 1 12</td>
+</tr>
+<tr>
+<td>PT0248</td>
+<td>599</td>
+<td>PT</td>
+<td>MFE 33-6-6+EM</td>
+</tr>
+<tr>
+<td>PT0249</td>
+<td>666</td>
+<td>PT</td>
+<td>MFE 4-9-0+ EM</td>
+</tr>
+<tr>
+<td>PT0250</td>
+<td>622</td>
+<td>PT</td>
+<td>MFE 5-8-29+EM</td>
+</tr>
+<tr>
+<td>PT0251</td>
+<td>603</td>
+<td>PT</td>
+<td>MFE 6-6-33+EM</td>
+</tr>
+<tr>
+<td>PT0252</td>
+<td>661</td>
+<td>PT</td>
+<td>MFE 7-8-30+EM</td>
+</tr>
+<tr>
+<td>PT0253</td>
+<td>551</td>
+<td>PT</td>
+<td>MFE 8-6-24+EM</td>
+</tr>
+<tr>
+<td>PT0275</td>
+<td>PT0275</td>
+<td>PT</td>
+<td>MFE 20-7-10</td>
+</tr>
+<tr>
+<td>PT0276</td>
+<td>PT0276</td>
+<td>PT</td>
+<td>MFE 43.5-0-0-2.4S</td>
+</tr>
+</table>
+
+<h3>PT Comercial - Nombres de marca</h3>
+
+<table class="data-table">
+<tr>
+<th>idInterno</th>
+<th>codigoExterno</th>
+<th>clase</th>
+<th>producto</th>
+</tr>
+<tr>
+<td>PT0004</td>
+<td>141</td>
+<td>PT</td>
+<td>FE SULFATO CALCIO P</td>
+</tr>
+<tr>
+<td>PT0162</td>
+<td>21</td>
+<td>PT</td>
+<td>MF-17-6-18-2</td>
+</tr>
+<tr>
+<td>PT0163</td>
+<td>22</td>
+<td>PT</td>
+<td>MF-23-3-20-4Ca-3Si</td>
+</tr>
+<tr>
+<td>PT0257</td>
+<td>62</td>
+<td>PT</td>
+<td>NUCLEO CAMASI GRIS</td>
+</tr>
+<tr>
+<td>PT0259</td>
+<td>140</td>
+<td>PT</td>
+<td>NUCLEO FERCON</td>
+</tr>
+<tr>
+<td>PT0261</td>
+<td>208</td>
+<td>PT</td>
+<td>NUCLEO MAGNESIO</td>
+</tr>
+<tr>
+<td>PT0262</td>
+<td>803</td>
+<td>PT</td>
+<td>NUCLEO MAGNESIO-S</td>
+</tr>
+<tr>
+<td>PT0263</td>
+<td>604</td>
+<td>PT</td>
+<td>NUCLEO MAGNESIO-SILICIO</td>
+</tr>
+<tr>
+<td>PT0264</td>
+<td>558</td>
+<td>PT</td>
+<td>NUCLEO MAGNESIO-SILICIO EM</td>
+</tr>
+<tr>
+<td>PT0266</td>
+<td>35</td>
+<td>PT</td>
+<td>SILIMAGRAN</td>
+</tr>
+<tr>
+<td>PT0267</td>
+<td>564</td>
+<td>PT</td>
+<td>SULFATO ZINC 30%</td>
+</tr>
+<tr>
+<td>PT0269</td>
+<td>PT0269</td>
+<td>PT</td>
+<td>CALFEIMPULSO</td>
+</tr>
+<tr>
+<td>PT0270</td>
+<td>PT0270</td>
+<td>PT</td>
+<td>RETAPE</td>
+</tr>
+<tr>
+<td>PT0271</td>
+<td>PT0271</td>
+<td>PT</td>
+<td>DESYERBE</td>
+</tr>
+<tr>
+<td>PT0272</td>
+<td>PT0272</td>
+<td>PT</td>
+<td>RICE START C+EM</td>
+</tr>
+<tr>
+<td>PT0273</td>
+<td>PT0273</td>
+<td>PT</td>
+<td>RICE BALANCE C+EM</td>
+</tr>
+<tr>
+<td>PT0274</td>
+<td>PT0274</td>
+<td>PT</td>
+<td>PALM DRIVE C+EM</td>
+</tr>
+<tr>
+<td>PT0279</td>
+<td>PT0279</td>
+<td>PT</td>
+<td>NUCLEO CAMASI ROJO</td>
+</tr>
+<tr>
+<td>PT0285</td>
+<td>PT0285</td>
+<td>PT</td>
+<td>PRODUCCION 17</td>
+</tr>
+<tr>
+<td>PT0287</td>
+<td>PT0287</td>
+<td>PT</td>
+<td>R-VITAL 17</td>
+</tr>
+<tr>
+<td>PT0288</td>
+<td>PT0288</td>
+<td>PT</td>
+<td>ORGANIC M</td>
+</tr>
+<tr>
+<td>PT0291</td>
+<td>PT0291</td>
+<td>PT</td>
+<td>FE SULFATO CALCIO</td>
+</tr>
+<tr>
+<td>PT0294</td>
+<td>PT0294</td>
+<td>PT</td>
+<td>1-CRECIMIENTO</td>
+</tr>
+<tr>
+<td>PT0295</td>
+<td>PT0295</td>
+<td>PT</td>
+<td>2-AVANCE</td>
+</tr>
+<tr>
+<td>PT0296</td>
+<td>PT0296</td>
+<td>PT</td>
+<td>3-PRODUCTOR</td>
+</tr>
+</table>
+
+<h2>ARCHIVOS HS SIN EMPAREJAR A PRODUCTO DEL CATALOGO</h2>
+<p>(Posibles duplicados, archivos obsoletos o productos fuera del catalogo)</p>
+
+<ul>
+<li>01) Citrato de Zinc- Trihidratado-TZC HDS SUCRO 2014.pdf</li>
+<li>04_Hoja de Seguridad FERTICORRECTIVO.docx</li>
+<li>04_Hoja de Seguridad TODERO_v2.docx</li>
+<li>1.105.09_4_Hoja de Seguridad BIOCALFER.docx</li>
+<li>1.108.09_Hoja de Seguridad 3-PRODUCTOR.docx</li>
+<li>12) HS Sulfato de Zinc 28_ CONAGRAN.pdf</li>
+<li>4 HOJA DE SEGURIDAD CafiCarga17.docx</li>
+<li>4-C_Hoja de Seguridad 1-CRECIMIENTO.docx</li>
+<li>4-C_Hoja de Seguridad 2-AVANCE.docx</li>
+<li>4-C_Hoja de Seguridad 3-PRODUCTOR.docx</li>
+<li>4-C_Hoja de Seguridad CALFER LLENADO.docx</li>
+<li>4-C_Hoja de Seguridad CALFER MENORES.docx</li>
+<li>4_Hoja de Seguridad 1-CRECIMIENTO.docx</li>
+<li>4_Hoja de Seguridad 2-AVANCE.docx</li>
+<li>4_Hoja de Seguridad 3-PRODUCTOR.docx</li>
+<li>4_Hoja de Seguridad BIOCalfer.docx</li>
+<li>4_Hoja de Seguridad CALFER LLENADO.docx</li>
+<li>4_Hoja de Seguridad CALFER MENORES.docx</li>
+<li>4_Hoja de Seguridad TODERO_v2.docx</li>
+<li>Cloruro de Potasio-FDS-CO (1).pdf</li>
+<li>Ficha tecnica y de seguridad FOSFORITA 30-Ingeol.pdf</li>
+<li>HDS NÚCLEO CAMASI 2 (1).docx</li>
+<li>HOJA DE SEGURIDAD  - SAM ESTANDAR (1).pdf</li>
+<li>HOJA DE SEGURIDAD -  SULFATO DE ZINC AL 35_.docx</li>
+<li>HOJA DE SEGURIDAD - 15-15-15.docx</li>
+<li>HOJA DE SEGURIDAD - 17-6-18-2.docx</li>
+<li>HOJA DE SEGURIDAD - 18-18-18.docx</li>
+<li>HOJA DE SEGURIDAD - 25-4-24.docx</li>
+<li>HOJA DE SEGURIDAD - AFOS-K.docx</li>
+<li>HOJA DE SEGURIDAD - BIOPLANTAS.docx</li>
+<li>HOJA DE SEGURIDAD - BORO CALFERQUIM.docx</li>
+<li>HOJA DE SEGURIDAD - BORO CALFERQUIM.pdf</li>
+<li>HOJA DE SEGURIDAD - CALFERCOBRE.docx</li>
+<li>HOJA DE SEGURIDAD - CALFERMAGNESIO.docx</li>
+<li>HOJA DE SEGURIDAD - MICRON-C.docx</li>
+<li>HOJA DE SEGURIDAD - SILIMAGRAM.docx</li>
+<li>HOJA DE SEGURIDAD - YESO GRANULADO.docx</li>
+<li>HOJA DE SEGURIDAD -RAIFOS.docx</li>
+<li>HOJA DE SEGURIDAD -SILICATO DE MAGNESIO.docx</li>
+<li>HOJA DE SEGURIDAD -SUELO CA.docx</li>
+<li>Hoja de Seguridad 1-CRECIMIENTO.docx</li>
+<li>Hoja de Seguridad 10-20-20.docx</li>
+<li>Hoja de Seguridad 2-AVANCE.docx</li>
+<li>Hoja de Seguridad 3-PRODUCTOR.docx</li>
+<li>Hoja de Seguridad APDR 233_SULFATO DE AMONIO (1).PDF</li>
+<li>Hoja de Seguridad ASUAGRO SAS2.pdf</li>
+<li>Hoja de Seguridad BIOCALFER.docx</li>
+<li>Hoja de Seguridad CALFER DESARROLLO.docx</li>
+<li>Hoja de Seguridad CALFER LLENADO.docx</li>
+<li>Hoja de Seguridad CALFER MENORES.docx</li>
+<li>Hoja de Seguridad CALFERCORRECTIVO.pdf</li>
+<li>Hoja de Seguridad Ferticorrectivo FE.docx</li>
+<li>Hoja de Seguridad FERTICORRECTIVO.docx</li>
+<li>Hoja de Seguridad K2K.docx</li>
+<li>HOJA DE SEGURIDAD KCL STANDAR.pdf</li>
+<li>HOJA DE SEGURIDAD KIESERITA P.docx</li>
+<li>Hoja de Seguridad N4.docx</li>
+<li>Hoja de Seguridad R-VITAL 17.docx</li>
+<li>Hoja de Seguridad SUELO-Ca.docx</li>
+<li>Hoja de Seguridad SulfatoZinc22 FE.docx</li>
+<li>Hoja de Seguridad SulfatoZinc22 FE.pdf</li>
+<li>Hoja de Seguridad SulfatoZinc22.docx</li>
+<li>Hoja de Seguridad SulfatoZinc22.pdf</li>
+<li>Hoja de Seguridad TODERO.docx</li>
+<li>Hoja de Seguridad ZUELOCa.docx</li>
+<li>HOJA DE SEGURIDAD.docx</li>
+<li>HS 2017 Calcinit.pdf</li>
+<li>HS DE NÚCLEO CAMASI YARA.pdf</li>
+<li>HS Sulfato Zinc22 FE.pdf</li>
+<li>HS-CC-51 Sulfato de Magnesio Técnico.pdf</li>
+<li>MSDS - Fosfato Monoamonico.pdf</li>
+<li>MSDS - Sulfato de Zinc Monohidratado.pdf</li>
+<li>MSDS Nitrato de potasio soluble nov 2016 v03 (1).pdf</li>
+<li>SULFATO DE ZINC MONO MAXIMO-360-POLVO-HS..pdf</li>
+</ul>
+
+<h2>ARCHIVOS NO CLASIFICADOS COMO HOJAS DE SEGURIDAD</h2>
+<p>(Fichas tecnicas, certificados, COA, PDS, FT, etc.)</p>
+
+<ul>
+<li>02) Aceite Usado.pdf</li>
+<li>03) Silicato de Magnesio.jpg</li>
+<li>04) Cal Agricola HELVECIA.pdf</li>
+<li>04_Hoja d Seguridad CALFER FLORACIÓN.docx</li>
+<li>04_Hoja d Seguridad_13-5-27.docx</li>
+<li>06) HI-PIX 6733 02-16 INGREDION.pdf</li>
+<li>09) Silicato de Sodio  NP-41  JADESI SA.pdf</li>
+<li>10) Silicato de Magnesio 30-30  CALES RIO CLARO.pdf</li>
+<li>13) Ulexita calcinada Calcined ulexite 45 - TDS (Español) TIERRA SA.pdf</li>
+<li>15) Yeso Agricola Natural Santa Rosa .pdf</li>
+<li>22) Trizinc citrate trihydrate Spec ENG 2015-11-18.pdf</li>
+<li>30023149  YARATERA CALCINIT B (1).pdf</li>
+<li>Amilsol SOP_005b_1.0_GHS_Spanish.pdf</li>
+<li>Certificado Pedido 6620093121 ABONO ORGANICO.pdf</li>
+<li>COA MC21214.pdf</li>
+<li>Ficha tecnica - Abono Terrabono(4).pdf</li>
+<li>Ficha tecnica Dolomita + PRNT actualizada.pdf</li>
+<li>Ficha tecnica Dolomita +CAL DOLOMITA.pdf</li>
+<li>Ficha Técnica CAL90 V6.pdf</li>
+<li>FICHA-TECNICA-FOSFORITA-28P-V.9 (1).pdf</li>
+<li>FPT211 YaraLiva CALCINIT B.pdf</li>
+<li>FT AGROCALES.pdf</li>
+<li>FT-GC-131 Ulexita V-1.pdf</li>
+<li>ft_caolin_antec_c_98.pdf</li>
+<li>HOJA DE SERGURIDAD  CALFERZINC-P.docx</li>
+<li>HOJA SEGURIDAD - SAM GRA (Sulfato de Amonio).pdf</li>
+<li>Hoja Seguridad BORO CALFERQUIM.docx</li>
+<li>Hoja Seguridad FORMULACIÓN ENMIENDA ESPECIAL.docx</li>
+<li>Hoja Seguridad MAGNE -3.docx</li>
+<li>Hoja Seguridad MAGNE 3_v2.docx</li>
+<li>HOJA SEGURIDAD RaiFOS 20.docx</li>
+<li>HOJA SEGURIDAD ZUELOCa.docx</li>
+<li>HS-GC-025 SULFATO DE POTASIO V-1.pdf</li>
+<li>HS-GC-177 NITRONS Ca - B V-1.pdf</li>
+<li>KCL STANDAR FICHA TECNICA.pdf</li>
+<li>PDS Amilsol SOP.pdf</li>
+<li>PDS Cloruro de Potasio Granular Rojo (3) KCL GRA.pdf</li>
+<li>PDS Cloruro de Potasio Soluble.pdf</li>
+<li>SGC-FT-10 FICHA TECNICA SICADOL 40_ - HELVECIA.pdf</li>
+<li>SULFATO DE POTASIO V-1 (1).pdf</li>
+<li>ÍO fichaTecnica Romeral - M100- PDF 2.pdf</li>
+</ul>
+
+<h2>METODOLOGIA</h2>
+<p>El emparejamiento se realizo por nombre de producto normalizado, palabras clave comerciales y coincidencia exacta de formulacion NPK. Los archivos que contienen &#x27;ficha tecnica&#x27;, &#x27;certificado&#x27;, &#x27;COA&#x27; o similares se excluyeron como HS salvo que tambien indiquen explicitamente seguridad/datos de seguridad. Los productos se agruparon en MP, MF/MFE (todos los productos cuyo nombre comienza con MF/MFE, tanto PT como MZR) y PT Comercial (productos terminados con nombre de marca).</p>
+</div>
+</body>
+</html>
