@@ -14,6 +14,7 @@ const itemValidator = v.object({
   name: v.string(),
   class: v.union(v.literal('MP'), v.literal('PT'), v.literal('MZR')),
   type: v.string(),
+  physicalState: v.optional(v.union(v.literal('P'), v.literal('G'), v.literal(''))),
   origin: v.union(v.literal('csv'), v.literal('manual')),
   composition: compositionValidator,
 })
@@ -141,6 +142,58 @@ export const updateComposition = mutation({
   },
 })
 
+export const updatePhysicalState = mutation({
+  args: {
+    internalId: v.string(),
+    physicalState: v.union(v.literal('P'), v.literal('G'), v.literal('')),
+    actor: actorValidator,
+    reason: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const item = await ctx.db.query('catalogItems').withIndex('by_internalId', (q) => q.eq('internalId', args.internalId)).unique()
+    if (!item) throw new Error(`No existe catalog item ${args.internalId}`)
+    if (args.actor.role !== 'admin') throw new Error('Solo admin puede editar el estado fisico.')
+    if (item.physicalState === args.physicalState) return { changed: false }
+    await ctx.db.patch(item._id, { physicalState: args.physicalState, updatedAt: Date.now() })
+    await ctx.db.insert('catalogChangeHistory', {
+      catalogItemId: item._id,
+      internalId: item.internalId,
+      changedAt: Date.now(),
+      actor: args.actor,
+      reason: args.reason,
+      origin: 'catalog.physical_state_edit',
+      changes: [{ field: 'physicalState', before: item.physicalState ?? '', after: args.physicalState }],
+    })
+    return { changed: true }
+  },
+})
+
+export const updateClass = mutation({
+  args: {
+    internalId: v.string(),
+    class: v.union(v.literal('MP'), v.literal('PT'), v.literal('MZR')),
+    actor: actorValidator,
+    reason: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const item = await ctx.db.query('catalogItems').withIndex('by_internalId', (q) => q.eq('internalId', args.internalId)).unique()
+    if (!item) throw new Error(`No existe catalog item ${args.internalId}`)
+    if (args.actor.role !== 'admin') throw new Error('Solo admin puede editar la clase.')
+    if (item.class === args.class) return { changed: false }
+    await ctx.db.patch(item._id, { class: args.class, updatedAt: Date.now() })
+    await ctx.db.insert('catalogChangeHistory', {
+      catalogItemId: item._id,
+      internalId: item.internalId,
+      changedAt: Date.now(),
+      actor: args.actor,
+      reason: args.reason,
+      origin: 'catalog.class_edit',
+      changes: [{ field: 'class', before: item.class, after: args.class }],
+    })
+    return { changed: true }
+  },
+})
+
 export const archive = mutation({
   args: {
     internalId: v.string(),
@@ -164,5 +217,26 @@ export const archive = mutation({
       changes: [{ field: 'archivedAt', before: null, after: now }],
     })
     return { archived: true }
+  },
+})
+
+export const migratePhysicalState = mutation({
+  args: { actor: actorValidator, dryRun: v.optional(v.boolean()) },
+  handler: async (ctx, args) => {
+    if (args.actor.role !== 'admin') throw new Error('Solo admin puede ejecutar migraciones.')
+    const items = await ctx.db.query('catalogItems').collect()
+    const updates: { internalId: string; type: string; physicalState: string }[] = []
+
+    for (const item of items) {
+      const typeNormalized = item.type.trim().toUpperCase()
+      if (!item.physicalState && (typeNormalized === 'P' || typeNormalized === 'G')) {
+        updates.push({ internalId: item.internalId, type: item.type, physicalState: typeNormalized })
+        if (!args.dryRun) {
+          await ctx.db.patch(item._id, { physicalState: typeNormalized as 'P' | 'G', updatedAt: Date.now() })
+        }
+      }
+    }
+
+    return { dryRun: args.dryRun ?? false, updated: updates.length, items: updates }
   },
 })

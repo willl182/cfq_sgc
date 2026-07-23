@@ -25,6 +25,7 @@ const composition = v.object({
 })
 
 const catalogClass = v.union(v.literal('MP'), v.literal('PT'), v.literal('MZR'))
+const physicalState = v.optional(v.union(v.literal('P'), v.literal('G'), v.literal('')))
 const actor = v.object({ id: v.string(), role: v.union(v.literal('user'), v.literal('admin')) })
 
 export default defineSchema({
@@ -35,6 +36,7 @@ export default defineSchema({
     name: v.string(),
     class: catalogClass,
     type: v.string(),
+    physicalState,
     origin: v.union(v.literal('csv'), v.literal('manual')),
     composition,
     archivedAt: v.optional(v.number()),

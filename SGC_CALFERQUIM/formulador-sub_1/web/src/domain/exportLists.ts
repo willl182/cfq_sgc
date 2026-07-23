@@ -1,6 +1,10 @@
-import type { CatalogItem } from './catalog'
+import { parsePhysicalState, type CatalogItem } from './catalog'
 import type { FormulaComponentInput } from './formulation'
 import { canonicalNutrientLabel, NUTRIENTS } from './nutrients'
+
+function resolvedPhysicalState(item: CatalogItem): CatalogItem['physicalState'] {
+  return item.physicalState || parsePhysicalState(item.type)
+}
 
 export type ExportLiveList = {
   id: string
@@ -36,6 +40,7 @@ const liveHeaders = [
   'componenteId',
   'componenteNombre',
   'componenteClase',
+  'componenteEstadoFisico',
   'cantidadKg',
   'actualizado',
 ]
@@ -55,6 +60,7 @@ const snapshotHeaders = [
   'componenteId',
   'componenteNombre',
   'componenteClase',
+  'componenteEstadoFisico',
   'cantidadKg',
 ]
 
@@ -65,6 +71,7 @@ const catalogHeaders = [
   'producto',
   'clase',
   'tipo',
+  'estadoFisico',
   'origen',
   'archivado',
   ...NUTRIENTS.map(canonicalNutrientLabel),
@@ -94,6 +101,7 @@ export function exportLiveListsCsv(lists: ExportLiveList[], catalog: CatalogItem
         component.itemId,
         item?.name ?? '',
         item?.class ?? '',
+        item ? resolvedPhysicalState(item) : '',
         component.quantityKg,
         new Date(list.updatedAt).toISOString(),
       ]
@@ -119,6 +127,7 @@ export function exportSnapshotsCsv(snapshots: ExportSnapshot[]) {
       component.item.internalId,
       component.item.name,
       component.item.class,
+      resolvedPhysicalState(component.item),
       component.quantityKg,
     ]),
   )
@@ -133,6 +142,7 @@ export function exportCatalogCsv(catalog: CatalogItem[]) {
     item.name,
     item.class,
     item.type,
+    resolvedPhysicalState(item),
     item.origin,
     item.archivedAt ? new Date(item.archivedAt).toISOString() : '',
     ...NUTRIENTS.map((nutrient) => item.composition[nutrient]),

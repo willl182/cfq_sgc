@@ -1,4 +1,6 @@
-import { CSV_NUTRIENT_MAP, type CatalogClass, type Composition, emptyComposition } from './nutrients'
+import { CSV_NUTRIENT_MAP, NUTRIENTS, type CatalogClass, type Composition, emptyComposition } from './nutrients'
+
+export type PhysicalState = 'P' | 'G' | ''
 
 export type CatalogItem = {
   internalId: string
@@ -7,6 +9,7 @@ export type CatalogItem = {
   name: string
   class: CatalogClass
   type: string
+  physicalState: PhysicalState
   origin: 'csv' | 'manual'
   composition: Composition
   archivedAt?: number
@@ -35,6 +38,12 @@ export function classifyCatalogRow(rawClass: string, code: string): CatalogClass
   const normalizedClass = rawClass.trim().toUpperCase()
   if (normalizedClass === 'MP' || normalizedClass === 'PT' || normalizedClass === 'MZR') return normalizedClass
   return null
+}
+
+export function parsePhysicalState(value: string): PhysicalState {
+  const normalized = value.trim().toUpperCase()
+  if (normalized === 'P' || normalized === 'G') return normalized
+  return ''
 }
 
 function nextInternalId(counters: Record<CatalogClass, number>, itemClass: CatalogClass): string {
@@ -96,6 +105,7 @@ export function parseCatalogCsv(text: string): ParseCatalogResult {
     const name = row[index.PRODUCTO] ?? ''
     const rawClass = row[index.CLASE] ?? ''
     const type = row[index.TIPO] ?? ''
+    const physicalState = parsePhysicalState(type)
     const itemErrors: CsvValidationError[] = []
 
     if (!name.trim()) itemErrors.push({ row: rowNumber, field: 'PRODUCTO', message: 'Fila sin nombre de producto' })
@@ -127,6 +137,7 @@ export function parseCatalogCsv(text: string): ParseCatalogResult {
       name: name.trim(),
       class: itemClass,
       type: type.trim(),
+      physicalState,
       origin: 'csv',
       composition,
     })
@@ -141,4 +152,8 @@ export function parseCatalogCsv(text: string): ParseCatalogResult {
       rejected: dataRows.length - items.length,
     },
   }
+}
+
+export function hasCompositionInfo(item: CatalogItem): boolean {
+  return NUTRIENTS.some((nutrient) => item.composition[nutrient] > 0)
 }

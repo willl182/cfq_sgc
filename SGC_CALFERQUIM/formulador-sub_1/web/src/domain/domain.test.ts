@@ -53,6 +53,14 @@ describe('catalog seed parsing', () => {
     expect(result.items[0].composition.Zn).toBe(8)
     expect(result.items[0].composition.Na).toBe(9)
   })
+
+  it('extrae estado fisico P (polvo) o G (granular) desde la columna TIPO', () => {
+    const csv = 'COD;PRODUCTO;CLASE;TIPO;N\n1;Polvo;MP;P;10\n2;Granular;MP;G;20\n3;Otro;MP;L;30'
+    const result = parseCatalogCsv(csv)
+
+    expect(result.errors).toEqual([])
+    expect(result.items.map((item) => item.physicalState)).toEqual(['P', 'G', ''])
+  })
 })
 
 describe('nutrient nomenclature', () => {
@@ -89,6 +97,7 @@ describe('future list import preview', () => {
       name: 'Producto objetivo',
       class: 'PT' as const,
       type: 'L',
+      physicalState: '' as const,
       origin: 'manual' as const,
       composition: emptyComposition(),
     },
@@ -99,6 +108,7 @@ describe('future list import preview', () => {
       name: 'Materia prima',
       class: 'MP' as const,
       type: 'S',
+      physicalState: '' as const,
       origin: 'manual' as const,
       composition: emptyComposition(),
     },
@@ -128,6 +138,7 @@ describe('formulation engine', () => {
     name: 'Urea',
     class: 'MP' as const,
     type: 'G',
+    physicalState: 'G' as const,
     origin: 'csv' as const,
     composition: { ...emptyComposition(), N: 46 },
   }
@@ -178,6 +189,7 @@ describe('list export', () => {
     name: 'Materia; prima "especial"',
     class: 'MP' as const,
     type: 'S',
+    physicalState: '' as const,
     origin: 'manual' as const,
     composition,
   }
@@ -188,15 +200,16 @@ describe('list export', () => {
     name: 'Producto objetivo',
     class: 'PT' as const,
     type: 'L',
+    physicalState: '' as const,
     origin: 'manual' as const,
     composition,
   }
 
-  it('exporta el catalogo activo con composicion completa', () => {
-    const csv = exportCatalogCsv([{ ...mp, composition: { ...composition, N: 46, K: 1.5 } }])
+  it('exporta el catalogo activo con estado fisico y composicion completa', () => {
+    const csv = exportCatalogCsv([{ ...mp, physicalState: 'G', composition: { ...composition, N: 46, K: 1.5 } }])
 
-    expect(csv.split('\n')[0]).toContain('idInterno;codigoExterno;codigoOriginal;producto;clase;tipo;origen;archivado;C;N;N-NH4')
-    expect(csv).toContain('MP0001;M1;M1;"Materia; prima ""especial""";MP;S;manual;;0;46')
+    expect(csv.split('\n')[0]).toContain('idInterno;codigoExterno;codigoOriginal;producto;clase;tipo;estadoFisico;origen;archivado;C;N;N-NH4')
+    expect(csv).toContain('MP0001;M1;M1;"Materia; prima ""especial""";MP;S;G;manual;;0;46')
   })
 
   it('exporta listas vivas como CSV plano por componente', () => {
@@ -247,6 +260,7 @@ describe('required input totals', () => {
       name: 'Urea',
       class: 'MP' as const,
       type: 'S',
+      physicalState: '' as const,
       origin: 'manual' as const,
       composition,
     },
@@ -257,6 +271,7 @@ describe('required input totals', () => {
       name: 'KCL',
       class: 'MP' as const,
       type: 'S',
+      physicalState: '' as const,
       origin: 'manual' as const,
       composition,
     },

@@ -1,34 +1,36 @@
-# Session State: formulador-sub_1
+# Session State: formulador-sub_1 — Indicador de composición en catálogo
 
-**Last Updated**: 2026-06-15 12:22 America/Bogota
+**Last Updated**: 2026-06-17 11:25
 
 ## Session Objective
 
-Implementar suma de varias listas guardadas para obtener el total requerido de MP/insumos por cada insumo.
+Agregar un feature al catálogo del formulador web para identificar rápidamente qué productos tienen información de composición nutricional y cuáles no.
 
 ## Current State
 
-- [x] Creado `web/src/domain/listTotals.ts` con `summarizeRequiredInputs()` para consolidar cantidades por `itemId`.
-- [x] Agregada prueba unitaria que valida suma de dos listas con multiplicadores distintos.
-- [x] Extendida la vista `Escalar` en `web/src/main.tsx` con bloque `Total por insumo`.
-- [x] El usuario puede agregar varias listas, asignar multiplicador individual y ver total requerido por insumo.
-- [x] La tabla muestra desglose de origen por lista (`displayCode: kg`) para trazabilidad operacional.
-- [x] Ajustados estilos responsive en `web/src/style.css`.
-- [x] Ejecutado `pnpm test`: 14/14 tests pasaron.
-- [x] Ejecutado `pnpm build`: build de TypeScript/Vite exitoso.
-- [x] Desplegado a Vercel produccion con `pnpm exec vercel --prod`.
-- [x] Alias de produccion actualizado: `https://formulador-sub.vercel.app`.
-- [x] Actualizado `AGENTS.md` para exigir despliegue a produccion despues de tests/build en cambios web, salvo instruccion explicita en contra.
+- [x] Helper `hasCompositionInfo()` en `web/src/domain/catalog.ts`.
+- [x] Filtro de catálogo: "Toda la composición" / "Con composición" / "Sin composición".
+- [x] Badge visual en cada fila del catálogo (`Con composición` / `Sin composición`).
+- [x] Estadísticas resumen: contadores de items con y sin composición.
+- [x] Estilos CSS para badge y contadores en `web/src/style.css`.
+- [x] Tests unitarios para `hasCompositionInfo` en `web/src/domain/catalog.test.ts`.
+- [x] `pnpm test` pasa (29/29).
+- [x] `pnpm build` y `vercel build` locales OK.
+- [x] Deploy a producción en Vercel OK.
 
 ## Critical Technical Context
 
-- La suma no modifica ni guarda snapshots; es una vista operacional para calcular requerimientos de preparación/compras.
-- Las cantidades se agrupan por `CatalogItem.internalId` y se ignoran listas/insumos inexistentes o archivados.
-- Cada selección usa un `multiplier`; si la lista base está en 1000 kg, el multiplicador representa cuántas veces preparar esa lista.
-- La función de dominio redondea cantidades a 2 decimales para mantener consistencia con la normalización existente.
-- URL activa de produccion: `https://formulador-sub.vercel.app`.
+- Proyecto real está en `web/`; despliegue Vercel sirve desde `formulador-sub_1/web/`.
+- El helper considera que un item tiene composición si **algún nutriente** de la lista `NUTRIENTS` es mayor a `0`.
+- El filtro opera sobre `activeCatalog` junto con los filtros existentes de clase y búsqueda.
+- Producción aliased a: https://formulador-sub.vercel.app
+
+## URLs
+
+- Producción: https://formulador-sub.vercel.app
+- Deploy directo: https://formulador-6fw962213-will-salas-projects.vercel.app
 
 ## Next Steps
 
-1. Probar visualmente la vista `Escalar` en produccion con datos reales de listas guardadas.
-2. Si se requiere para operación, agregar exportación CSV del consolidado `Total por insumo`.
+1. Verificar visualmente en producción el badge y el filtro con el catálogo cargado.
+2. Considerar si se necesita exportar la columna "tiene composición" en el CSV de catálogo.
