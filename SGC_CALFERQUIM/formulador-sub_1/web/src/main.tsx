@@ -5,6 +5,7 @@ import { Archive, ArrowDown, ArrowUp, Beaker, Calculator, ChevronLeft, ChevronRi
 import './style.css'
 import { api } from '../convex/_generated/api'
 import { hasCompositionInfo, parseCatalogCsv, parsePhysicalState, type CatalogItem } from './domain/catalog'
+import { exportBalanceCsv } from './domain/exportBalance'
 import { exportCatalogCsv, exportLiveListsCsv, exportLiveListsJson, exportSnapshotsCsv, exportSnapshotsJson } from './domain/exportLists'
 import { calculateComponentContributions, summarizeFormula, type FormulaComponentInput } from './domain/formulation'
 import { parseListImportCsv, type ParseListImportResult } from './domain/importLists'
@@ -1303,12 +1304,8 @@ function App() {
       ])
     }
 
-    const csv = [headers, ...rows].map((r) => r.map((cell) => {
-      const text = cell === null || cell === undefined ? '' : String(cell)
-      return /[;"\n\r]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text
-    }).join(';')).join('\n')
-
-    downloadTextFile(csv, `cfq-balance-materias-${exportStamp()}.csv`, 'text/csv;charset=utf-8')
+    const { csv, filename } = exportBalanceCsv(target?.name ?? 'Sin producto', headers, rows, exportStamp())
+    downloadTextFile(csv, filename, 'text/csv;charset=utf-8')
   }
 
   async function previewListImport(file: File | null) {
