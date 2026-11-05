@@ -79,13 +79,13 @@ Aplica a todos los lotes de fertilizantes y acondicionadores de suelo fabricados
 
 ## 8. REGISTROS ASOCIADOS
 
-- `Formato_Verificacion_Formulacion_V1.csv`: Tabla de calculo del grado por lote.
+- `Formato_Verificacion_Formulacion_V1.xlsx`: Tabla de calculo del grado por lote.
 
 ## 9. ANEXOS
 
 ### Ejemplo Práctico de Cálculo de Balance y Merma
 
-## Caso Ejemplo: Producción de SULFAK 50 (Lote L-2026-0142)
+## Caso Ejemplo: Producción de SULFAK 50 (Lote [codigo item SULFAK 50]-150226, formato POE 3.11)
 
 ### Datos de Entrada
 
@@ -125,7 +125,7 @@ Merma = 1,001.5 - 991.0 = 10.5 kg
 
 ### Conclusión
 
-El balance del Lote L-2026-0142 se encuentra dentro de los límites de tolerancia establecidos. **No requiere** investigación de desviación.
+El balance del lote del ejemplo se encuentra dentro de los límites de tolerancia establecidos. **No requiere** investigación de desviación.
 
 ---
 

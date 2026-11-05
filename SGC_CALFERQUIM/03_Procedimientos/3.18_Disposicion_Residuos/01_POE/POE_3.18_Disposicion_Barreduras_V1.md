@@ -2,7 +2,7 @@
 
 | CODIGO | VERSION | VIGENCIA | PROXIMA REVISION |
 |---|---|---|---|
-| POE-3.18 | 02 | 2026-03-04 | 12 meses o ante cambio regulatorio |
+| POE-3.18 | 03 | 2026-11-05 | 12 meses o ante cambio regulatorio |
 
 ## 1. OBJETIVO
 
@@ -28,7 +28,7 @@ Aplica a Produccion, Envase, Almacen MP, Almacen PT, Control de Calidad y Gestio
 
 ## 5. POLITICA CRITICA GMP
 
-Se prohibe de forma expresa e indelegable reincorporar barreduras, polvo de piso, residuos de limpieza, contramuestras vencidas o material degradado al producto para venta o a lotes en proceso destinados a venta. Cualquier incumplimiento se trata como no conformidad critica.
+En CALFERQUIM las barreduras no se usan ni se reincorporan. Se prohibe de forma expresa e indelegable reincorporar barreduras, polvo de piso, residuos de limpieza, contramuestras vencidas o material degradado a cualquier proceso: producto para venta, lotes en proceso, reproceso, mezcla, granulacion o molienda. Todo este material sale de planta como residuo (seccion 7.3). Cualquier incumplimiento se trata como no conformidad critica.
 
 ## 6. RESPONSABILIDADES
 
@@ -42,14 +42,14 @@ Se prohibe de forma expresa e indelegable reincorporar barreduras, polvo de piso
 ### 7.1 Recoleccion y segregacion
 
 1. Operario recolecta residuos al cierre de turno y despues de cambios de producto.
-2. Operario clasifica segun `ANX_3.18_01_Clasificacion_Residuos.md`.
-3. Operario pesa cada fraccion y registra en `Formato_Control_Disposicion_Residuos_V1.csv`.
+2. Operario clasifica segun la tabla de clasificacion del Anexo (seccion 10).
+3. Operario pesa cada fraccion y registra en `Formato_Control_Disposicion_Residuos_V1.xlsx`.
 4. Operario rotula cada contenedor con fecha, area, tipo de residuo, lote origen (si aplica) y responsable.
 
 ### 7.2 Almacenamiento temporal controlado
 
 5. Residuos se trasladan al area de acopio temporal senalizada.
-6. Tiempo maximo de permanencia: 48 horas para residuos de proceso y 30 dias para acumulacion consolidada documentada.
+6. Limite de acumulacion para residuos de proceso (R-01 a R-05): maximo 500 kg o 30 dias, lo que ocurra primero.
 7. Contenedores deben permanecer cerrados, identificados y sin mezcla de categorias.
 
 ### 7.3 Disposicion final
@@ -57,7 +57,7 @@ Se prohibe de forma expresa e indelegable reincorporar barreduras, polvo de piso
 8. Gestion Ambiental programa retiro al 80% de capacidad o antes del limite de tiempo.
 9. Solo se entrega a gestores con licencia ambiental vigente aprobados por Direccion Tecnica.
 10. Cada salida exige manifiesto y certificado/acta de disposicion final.
-11. Gestion Ambiental registra cierre en `Registro_Disposicion_Residuos_V1.csv`.
+11. Gestion Ambiental registra cierre en `Registro_Disposicion_Residuos_V1.xlsx`.
 
 ### 7.4 Verificacion y cierre
 
@@ -87,8 +87,8 @@ Se prohibe de forma expresa e indelegable reincorporar barreduras, polvo de piso
 
 ## 9. REGISTROS ASOCIADOS
 
-- `Formato_Control_Disposicion_Residuos_V1.csv`
-- `Registro_Disposicion_Residuos_V1.csv`
+- `Formato_Control_Disposicion_Residuos_V1.xlsx`
+- `Registro_Disposicion_Residuos_V1.xlsx`
 
 ## 10. ANEXOS
 
@@ -120,7 +120,7 @@ Esta tabla es de uso obligatorio para segregacion, rotulado y disposicion. No se
 
 | REGLA | DESCRIPCION |
 |---|---|
-| Prohibicion absoluta | R-01, R-02, R-04 y R-05 no se reincorporan a proceso de venta |
+| Prohibicion absoluta | R-01, R-02, R-04 y R-05 no se usan ni se reincorporan a ningun proceso |
 | Pesaje obligatorio | Todo residuo de proceso se pesa y registra por evento |
 | Rotulado minimo | Fecha, area, responsable, tipo y peso |
 | Trazabilidad | Toda salida requiere manifiesto y certificado de disposicion |
@@ -137,4 +137,5 @@ Esta tabla es de uso obligatorio para segregacion, rotulado y disposicion. No se
 |---|---|---|
 | 01 | 2026-02-17 | Emision inicial. |
 | 02 | 2026-03-04 | Se fortalece prohibicion de reutilizacion, trazabilidad y control de disposicion final. |
+| 03 | 2026-11-05 | Se declara que las barreduras no se usan ni se reincorporan a ningun proceso, incluido reproceso. Se unifica el limite de acumulacion (500 kg o 30 dias) y se corrige la referencia al anexo de clasificacion. |
 

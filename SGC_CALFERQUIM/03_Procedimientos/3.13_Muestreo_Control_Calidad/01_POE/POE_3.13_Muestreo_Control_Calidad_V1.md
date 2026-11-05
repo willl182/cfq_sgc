@@ -36,11 +36,11 @@ Aplica a control de calidad de MP, proceso y producto terminado en todas las lin
 1. Calidad define plan de muestreo por tipo de producto (anexo 1).
 2. Analista toma muestra con utensilios limpios y rotula inmediatamente.
    - Para mezclas fisicas en sacos o a granel se debe aplicar `POE_3.13A_Toma_Muestra_Mezclas_Fisicas_V1`.
-3. Analista registra toma en `Formato_Control_Muestreo_V1.csv`.
+3. Analista registra toma en `Formato_Control_Muestreo_V1.xlsx`.
 4. Laboratorio ejecuta ensayos fisicoquimicos segun metodo aplicable.
 5. Calidad compara resultados con criterios del anexo 2 y especificaciones tecnicas vigentes del producto/MP.
 6. Calidad clasifica lote: Conforme, Condicionado o No Conforme.
-7. Calidad consolida resultados en `Registro_Muestreo_V1.csv`.
+7. Calidad consolida resultados en `Registro_Muestreo_V1.xlsx`.
 8. Si hay no conformidad, se activa investigacion y bloqueo del lote.
 
 ## 7. CRITERIOS DE CONTROL Y ACEPTACION
@@ -54,8 +54,8 @@ Aplica a control de calidad de MP, proceso y producto terminado en todas las lin
 
 ## 8. REGISTROS ASOCIADOS
 
-- `Formato_Control_Muestreo_V1.csv`
-- `Registro_Muestreo_V1.csv`
+- `Formato_Control_Muestreo_V1.xlsx`
+- `Registro_Muestreo_V1.xlsx`
 
 ## 9. ANEXOS
 

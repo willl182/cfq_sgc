@@ -34,11 +34,11 @@ Aplica a personal operativo, contratistas y visitantes que ingresen a areas de p
 ## 6. PROCEDIMIENTO
 
 1. Supervisor verifica EPP, orden y estado de equipos al inicio del turno.
-2. Operario reporta hallazgos de seguridad en `Formato_Verificacion_Higiene_V1.csv`.
+2. Operario reporta hallazgos de seguridad en `Formato_Verificacion_Higiene_V1.xlsx`.
 3. Supervisor corrige desviaciones criticas antes de iniciar operacion.
 4. Durante la jornada se mantienen pasillos, estaciones y puntos de riesgo despejados.
 5. Al cierre de turno se realiza inspeccion final y limpieza basica del puesto.
-6. SST/Calidad consolidan incumplimientos en `Registro_Inspecciones_Higiene_V1.csv`.
+6. SST/Calidad consolidan incumplimientos en `Registro_Inspecciones_Higiene_V1.xlsx`.
 7. Las reincidencias escalan a Direccion Tecnica para accion correctiva.
 
 ## 7. CRITERIOS DE CONTROL Y ACEPTACION
@@ -52,8 +52,8 @@ Aplica a personal operativo, contratistas y visitantes que ingresen a areas de p
 
 ## 8. REGISTROS ASOCIADOS
 
-- `Formato_Verificacion_Higiene_V1.csv`
-- `Registro_Inspecciones_Higiene_V1.csv`
+- `Formato_Verificacion_Higiene_V1.xlsx`
+- `Registro_Inspecciones_Higiene_V1.xlsx`
 
 ## 9. ANEXOS
 

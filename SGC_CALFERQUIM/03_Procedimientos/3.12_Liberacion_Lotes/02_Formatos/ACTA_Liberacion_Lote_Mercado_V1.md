@@ -99,7 +99,7 @@ Completar solo si el lote queda en revision o rechazado.
 ## 9. CONTROL DOCUMENTAL
 
 - Procedimiento asociado: `POE_3.12_Liberacion_Lotes_V1.md`
-- Registro resumen asociado: `Formato_Liberacion_Lotes_V1.csv`
-- Historico asociado: `Registro_Liberacion_Lotes_V1.csv`
+- Registro resumen asociado: `Formato_Liberacion_Lotes_V1.xlsx`
+- Historico asociado: `Registro_Liberacion_Lotes_V1.xlsx`
 
 > Nota: Ningun lote puede salir al mercado sin decision firmada por Direccion Tecnica.

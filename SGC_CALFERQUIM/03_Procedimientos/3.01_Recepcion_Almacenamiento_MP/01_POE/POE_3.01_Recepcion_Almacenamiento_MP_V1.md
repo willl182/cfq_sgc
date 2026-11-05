@@ -39,11 +39,11 @@ Aplica a toda MP que ingresa a CALFERQUIM S.A.S. para produccion propia o formul
 
 1. El vehiculo llega a planta. Bodega verifica integridad de empaque y cantidad sin descargar.
 2. Bodega revisa documentos: remision, ficha tecnica, hoja de seguridad vigente y COA cuando aplique.
-3. Bodega diligencia `Formato_Inspeccion_Recepcion_MP_V1.csv` con los datos del vehiculo y la carga.
+3. Bodega diligencia `Formato_Inspeccion_Recepcion_MP_V1.xlsx` con los datos del vehiculo y la carga.
 4. Calidad realiza inspeccion visual del material en el vehiculo y define si requiere muestreo segun riesgo, proveedor o historial de desviaciones.
 5. Calidad define estado (Aprobado o Rechazado) y emite autorizacion formal.
 6. Si Aprobado: el Jefe de Bodega indica la ubicacion de almacenamiento y se descarga el vehiculo directamente al lugar asignado.
-7. Bodega registra ubicacion final en `Registro_Recepcion_Almacenamiento_MP_V1.csv`.
+7. Bodega registra ubicacion final en `Registro_Recepcion_Almacenamiento_MP_V1.xlsx`.
 8. Si Rechazado: el vehiculo no se descarga. El equipo comercial y la Gerencia coordinan la devolucion. Bodega registra la no conformidad.
 
 ## 7. CRITERIOS DE CONTROL Y ACEPTACION
@@ -59,8 +59,8 @@ Aplica a toda MP que ingresa a CALFERQUIM S.A.S. para produccion propia o formul
 
 ## 8. REGISTROS ASOCIADOS
 
-- `Formato_Inspeccion_Recepcion_MP_V1.csv`
-- `Registro_Recepcion_Almacenamiento_MP_V1.csv`
+- `Formato_Inspeccion_Recepcion_MP_V1.xlsx`
+- `Registro_Recepcion_Almacenamiento_MP_V1.xlsx`
 
 ## 9. ANEXOS
 

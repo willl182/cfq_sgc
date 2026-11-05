@@ -58,7 +58,7 @@ El área de contramuestras es una zona restringida. **Se prohíbe** el ingreso d
     *   Número de Lote.
     *   Fecha de Fabricación y Vencimiento.
     *   Firma del responsable de toma.
-5.  **ANALISTA:** **Registrar** el ingreso en el `Formato_Control_Contramuestras_V1.csv`.
+5.  **ANALISTA:** **Registrar** el ingreso en el `Formato_Control_Contramuestras_V1.xlsx`.
 
 ### 6.3. Almacenamiento y Custodia
 
@@ -88,8 +88,8 @@ El área de contramuestras es una zona restringida. **Se prohíbe** el ingreso d
 
 ## 8. REGISTROS ASOCIADOS
 
-*   `Formato_Control_Contramuestras_V1.csv`: Log de ingreso y ubicación.
-*   `Registro_Contramuestras_V1.csv`: Acta de destrucción/salida.
+*   `Formato_Control_Contramuestras_V1.xlsx`: Log de ingreso y ubicación.
+*   `Registro_Contramuestras_V1.xlsx`: Acta de destrucción/salida.
 
 ## 9. ANEXOS
 

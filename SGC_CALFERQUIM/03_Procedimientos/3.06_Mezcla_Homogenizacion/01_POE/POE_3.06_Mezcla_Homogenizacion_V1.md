@@ -95,8 +95,8 @@ Este proceso aplica a productos que pasan por granulacion (POE 3.08). La mezcla 
 
 ## 8. REGISTROS ASOCIADOS
 
-- `Formato_Control_Mezcla_Homogenizacion_V1.csv`: Registro de tipo de proceso, secuencia de carga y controles.
-- `Registro_Mezcla_Homogenizacion_V1.csv`: Historico de lotes mezclados.
+- `Formato_Control_Mezcla_Homogenizacion_V1.xlsx`: Registro de tipo de proceso, secuencia de carga y controles.
+- `Registro_Mezcla_Homogenizacion_V1.xlsx`: Historico de lotes mezclados.
 
 ## 9. ANEXOS
 

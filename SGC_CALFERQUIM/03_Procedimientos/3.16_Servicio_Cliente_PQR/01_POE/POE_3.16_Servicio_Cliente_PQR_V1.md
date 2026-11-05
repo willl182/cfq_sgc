@@ -40,7 +40,7 @@ Aplica a PQR de clientes, distribuidores y terceros relacionadas con producto, d
 ## 6. PROCEDIMIENTO
 
 1. Servicio al Cliente, asesor comercial, Gerencia o area administrativa recibe la PQR y remite el caso para su registro inmediato.
-2. Servicio al Cliente asigna consecutivo en `Formato_Registro_PQR_V1.csv` y registra como minimo: fecha, cliente, contacto, producto, lote cuando aplique, descripcion, cantidad afectada y soportes.
+2. Servicio al Cliente asigna consecutivo en `Formato_Registro_PQR_V1.xlsx` y registra como minimo: fecha, cliente, contacto, producto, lote cuando aplique, descripcion, cantidad afectada y soportes.
 3. Servicio al Cliente clasifica tipo (peticion, queja, reclamo), origen del caso y criticidad.
 4. Calidad coordina el analisis del caso con las areas involucradas. Si la situacion corresponde a calidad del producto, se revisan lote, antecedentes, condiciones de almacenamiento, despacho y soportes tecnicos.
 5. Cuando la informacion disponible no sea suficiente, se puede realizar visita tecnica al cliente o toma de muestra en sitio para ampliar el analisis.
@@ -49,7 +49,7 @@ Aplica a PQR de clientes, distribuidores y terceros relacionadas con producto, d
 8. Responsable del caso redacta la respuesta formal indicando hallazgos, causa, decision, acciones y, cuando aplique, justificacion de no procedencia.
 9. Direccion Tecnica aprueba la respuesta para casos tecnicos criticos o de alto impacto.
 10. Servicio al Cliente comunica la respuesta al cliente y registra fecha, canal y evidencia.
-11. Calidad cierra seguimiento en `Registro_Seguimiento_PQR_V1.csv`, verificando que toda accion comprometida quede trazable.
+11. Calidad cierra seguimiento en `Registro_Seguimiento_PQR_V1.xlsx`, verificando que toda accion comprometida quede trazable.
 
 ## 7. CRITERIOS DE CONTROL Y ACEPTACION
 
@@ -63,8 +63,8 @@ Aplica a PQR de clientes, distribuidores y terceros relacionadas con producto, d
 
 ## 8. REGISTROS ASOCIADOS
 
-- `Formato_Registro_PQR_V1.csv`
-- `Registro_Seguimiento_PQR_V1.csv`
+- `Formato_Registro_PQR_V1.xlsx`
+- `Registro_Seguimiento_PQR_V1.xlsx`
 
 ## 9. ANEXOS
 

@@ -55,7 +55,7 @@ Las materias primas de terceros **deben** mantenerse físicamente segregadas de 
 2.  **LOGÍSTICA:** **Inspeccionar** estado de empaques (integridad, sellado, ausencia de contaminación).
 3.  **CALIDAD:** **Verificar** el COA del proveedor y registrar en sistema.
 4.  **LOGÍSTICA:** **Asignar** ubicación segregada en zona "MP TERCEROS - [NOMBRE DEL TERCERO]".
-5.  **LOGÍSTICA:** **Registrar** ingreso en `Registro_Conciliacion_MP_Terceros_V1.csv` (Fecha, Proveedor, Tercero, Lote, Cantidad, Ubicación).
+5.  **LOGÍSTICA:** **Registrar** ingreso en `Registro_Conciliacion_MP_Terceros_V1.xlsx` (Fecha, Proveedor, Tercero, Lote, Cantidad, Ubicación).
 
 ### 6.2. Custodia y Almacenamiento
 
@@ -85,8 +85,8 @@ Las materias primas de terceros **deben** mantenerse físicamente segregadas de 
 
 ## 8. REGISTROS ASOCIADOS
 
-*   `Formato_Control_Entrega_MP_Terceros_V1.csv`
-*   `Registro_Conciliacion_MP_Terceros_V1.csv`
+*   `Formato_Control_Entrega_MP_Terceros_V1.xlsx`
+*   `Registro_Conciliacion_MP_Terceros_V1.xlsx`
 
 ## 9. ANEXOS
 

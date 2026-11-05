@@ -2,13 +2,13 @@
 
 | CODIGO | VERSION | VIGENCIA | PROXIMA REVISION |
 |---|---|---|---|
-| CGC-POE-3.12 | 01 | 2026-02-18 | 12 meses o ante cambio regulatorio |
+| CGC-POE-3.12 | 02 | 2026-11-05 | 12 meses o ante cambio regulatorio |
 
 ---
 
 ## 1. OBJETIVO
 
-Establecer el proceso de verificacion y liberacion de cada lote de producto terminado antes de su despacho al mercado, asegurando que todos los controles del proceso hayan sido ejecutados y documentados.
+Establecer el proceso de verificacion y liberacion de cada lote de producto terminado antes de su despacho al mercado, con base en la orden de alistamiento, la orden de produccion y los resultados de calidad del lote.
 
 ## 2. ALCANCE
 
@@ -17,22 +17,25 @@ Aplica al 100% de los lotes de fertilizantes y acondicionadores fabricados en CA
 ## 3. DEFINICIONES
 
 - Liberacion: Dictamen formal que autoriza el despacho del lote al mercado.
-- En Revision: Estado del lote mientras se verifica el cumplimiento de los requisitos de liberacion.
-- Aprobado: Lote que cumple todos los requisitos y puede ser despachado.
-- Rechazado: Lote que presenta incumplimiento critico y no puede ser despachado.
+- Orden de alistamiento: Documento que relaciona las materias primas y cantidades alistadas para el lote.
+- Orden de produccion: Documento que relaciona la formulacion, cantidades producidas y codigo de lote (POE 3.11).
+- Resultados de calidad: Resultados analiticos del lote emitidos por Calidad.
+- En Revision: Estado del lote mientras se verifican los tres documentos.
+- Aprobado: Lote que cumple los tres requisitos y puede ser despachado.
+- Rechazado: Lote que incumple alguno de los requisitos y no puede ser despachado.
 
 ## 4. DOCUMENTOS DE REFERENCIA
 
 - Resolucion ICA pv0 (Propuesta): Anexo I-B, Pilar 5 "Liberacion de Lotes".
 - POE 3.11 Codificacion de Lotes.
-- POE 3.10 Envase.
+- POE 3.13 Muestreo y Control de Calidad.
 
 ## 5. RESPONSABILIDADES Y POLITICAS
 
-- Direccion Tecnica verifica la orden de produccion y las etiquetas de los bultos.
-- Calidad emite el certificado de calidad interno del lote.
-- Jefe de Produccion diligencia los datos del proceso en el formato correspondiente.
-- Jefe de Bodega verifica el marcado de lote en los empaques.
+- Bodega/Alistamiento entrega la orden de alistamiento del lote.
+- Jefe de Produccion entrega la orden de produccion cerrada.
+- Calidad entrega los resultados de calidad del lote.
+- Direccion Tecnica verifica los tres documentos y emite el dictamen de liberacion. Es el unico cargo autorizado para liberar.
 - Se prohibe despachar producto sin dictamen de liberacion firmado.
 
 ## 6. PROCEDIMIENTO
@@ -41,108 +44,44 @@ Aplica al 100% de los lotes de fertilizantes y acondicionadores fabricados en CA
 
 1. PRODUCCION: Al finalizar el envase y marcado, trasladar el lote a la bodega asignada. El lote queda en estado EN REVISION hasta el dictamen.
 
-### 6.2. Verificaciones Previas al Dictamen
+### 6.2. Verificacion de Documentos
 
-Las siguientes verificaciones se realizan durante o inmediatamente despues de la produccion del lote:
-
-2. DIRECCION TECNICA: Verificar la orden de produccion (formulacion, cantidades y datos del lote).
-3. DIRECCION TECNICA: Verificar las etiquetas de los bultos (saco o bigbag) contra el arte aprobado por el ICA.
-4. CALIDAD: Emitir el certificado de calidad interno con el resultado analitico del lote.
-5. JEFE DE PRODUCCION: Diligenciar el formato de produccion con los datos y controles del proceso.
-6. JEFE DE BODEGA: Verificar que el marcado de codigo de lote en los empaques sea legible, correcto y coincida con la orden de produccion.
+2. DIRECCION TECNICA: Verificar la **orden de alistamiento**: materias primas y cantidades alistadas coinciden con la formulacion del producto.
+3. DIRECCION TECNICA: Verificar la **orden de produccion**: documento cerrado y completo, cantidades producidas coherentes con lo alistado y codigo de lote correcto (POE 3.11).
+4. DIRECCION TECNICA: Verificar los **resultados de calidad**: resultados del lote conformes con las garantias del Registro ICA del producto.
 
 ### 6.3. Dictamen de Liberacion
 
-7. DIRECCION TECNICA: Revisar que las seis verificaciones anteriores esten completas y conformes. Registrar el dictamen en `Formato_Liberacion_Lotes_V1.csv`:
+5. DIRECCION TECNICA: Registrar el dictamen en `Formato_Liberacion_Lotes_V1.xlsx`:
 
-   - **APROBADO:** Todas las verificaciones conformes. Se autoriza el despacho al mercado.
-
-   - **RECHAZADO:** Incumplimiento critico en alguna verificacion. El lote no puede despacharse. Se abre reporte de no conformidad y se define disposicion final.
-
-   - **EN REVISION:** Alguna verificacion pendiente o con duda tecnica. El lote permanece en bodega sin despachar hasta resolver.
+   - **APROBADO:** Los tres documentos conformes. Se autoriza el despacho al mercado.
+   - **RECHAZADO:** Incumplimiento en alguno de los documentos. El lote no puede despacharse. Se abre reporte de no conformidad y se define disposicion final.
+   - **EN REVISION:** Algun documento pendiente. El lote permanece en bodega sin despachar hasta completarlo.
 
 ### 6.4. Comunicacion
 
-8. DIRECCION TECNICA / CALIDAD: Notificar el dictamen al Jefe de Produccion y al Jefe de Bodega.
-9. BODEGA: Despachar el lote unicamente con dictamen APROBADO firmado.
+6. DIRECCION TECNICA: Notificar el dictamen al Jefe de Produccion y al Jefe de Bodega.
+7. BODEGA: Despachar el lote unicamente con dictamen APROBADO firmado.
 
 ## 7. CRITERIOS DE ACEPTACION
 
-| VERIFICACION | RESPONSABLE | CRITERIO |
+| DOCUMENTO | ENTREGA | CRITERIO |
 |:---|:---|:---|
-| Orden de produccion | Direccion Tecnica | Formulacion y cantidades correctas, documento completo |
-| Etiquetas de bultos | Direccion Tecnica | Coinciden con arte aprobado por ICA |
-| Certificado de calidad interno | Calidad | Resultado analitico conforme con el Registro ICA |
-| Datos del proceso | Jefe de Produccion | Formato diligenciado y sin desviaciones criticas abiertas |
-| Marcado de lote | Jefe de Bodega | Codigo legible, correcto y coherente con la orden |
+| Orden de alistamiento | Bodega/Alistamiento | Materias primas y cantidades segun formulacion |
+| Orden de produccion | Jefe de Produccion | Cerrada, completa, coherente con alistamiento y con codigo de lote valido |
+| Resultados de calidad | Calidad | Conformes con las garantias del Registro ICA |
 
 ## 8. REGISTROS ASOCIADOS
 
-- `Formato_Liberacion_Lotes_V1.csv`: Registro del dictamen de liberacion.
-- `Registro_Liberacion_Lotes_V1.csv`: Historico de lotes con su estatus final.
+- Orden de alistamiento.
+- Orden de produccion.
+- Resultados de calidad del lote.
+- `Formato_Liberacion_Lotes_V1.xlsx`: Registro del dictamen de liberacion.
+- `Registro_Liberacion_Lotes_V1.xlsx`: Historico de lotes con su estatus final.
 
-## 9. ANEXOS
-
-### Flujograma de Decisión de Liberación de Calidad
-
-## Flujo de Decisión
-
-```
-INICIO: Lote Producido
-    │
-    ▼
-[1] ¿Orden de Producción cerrada y completa?
-    ├── NO → Devolver a Producción. Completar documentación.
-    │
-    ▼ SÍ
-[2] ¿Balance de Materias Primas dentro de tolerancia (≤ 2%)?
-    ├── NO → Investigar desviación (POE 3.05). Bloquear lote hasta cierre.
-    │
-    ▼ SÍ
-[3] ¿Resultados fisicoquímicos cumplen especificación?
-    ├── NO → ¿Es desviación menor?
-    │         ├── SÍ → Evaluar reproceso o ajuste. Registrar.
-    │         └── NO → RECHAZAR LOTE. Etiqueta ROJA.
-    │
-    ▼ SÍ
-[4] ¿Control de peso/envase cumple tolerancias (Anexo 1 - POE 3.10)?
-    ├── NO → Segregar unidades fuera de tolerancia. Re-pesar/re-envasar.
-    │
-    ▼ SÍ
-[5] ¿Etiqueta coincide con Registro ICA aprobado?
-    ├── NO → BLOQUEO TOTAL. No Conformidad Mayor. Re-etiquetar.
-    │
-    ▼ SÍ
-[6] ¿Contramuestra tomada y registrada (POE 3.14)?
-    ├── NO → Tomar contramuestra antes de liberar.
-    │
-    ▼ SÍ
-[7] DECISIÓN FINAL - Jefe de Calidad:
-    ├── APROBADO → Etiqueta VERDE. Liberar para despacho.
-    ├── APROBADO CON OBSERVACIONES → Etiqueta AMARILLA. Liberar con restricciones.
-    └── RECHAZADO → Etiqueta ROJA. Bloquear. Evaluar destino.
-        │
-        ▼
-[8] Director Técnico valida decisión:
-    ├── Confirma → Registrar en Formato de Liberación.
-    └── Modifica → Justificar por escrito. Registrar.
-        │
-        ▼
-    FIN: Lote con estado definido.
-```
-
-## Tiempos Máximos
-
-| ETAPA | PLAZO MÁXIMO |
-|:---|:---|
-| Producción → entrega a Calidad | 24 horas tras cierre de lote |
-| Calidad → emisión de resultados | 48 horas tras recepción |
-| Resultados → decisión de liberación | 24 horas tras resultados |
-| **Total máximo** | **4 días hábiles** |
-
-> **Regla:** Ningún lote **puede** despacharse sin pasar por todas las etapas del flujo. El Jefe de Calidad es el único autorizado para emitir la decisión de liberación.
-
-## 10. CONTROL DE CAMBIOS
+## 9. CONTROL DE CAMBIOS
 
 | VERSION | FECHA | DESCRIPCION |
 |---|---|---|
+| 01 | 2026-02-18 | Emision inicial. |
+| 02 | 2026-11-05 | Liberacion basada en orden de alistamiento, orden de produccion y resultados de calidad. Direccion Tecnica como unico responsable del dictamen. Se elimina el flujograma y los tiempos del anexo, que contradecian el cuerpo. |

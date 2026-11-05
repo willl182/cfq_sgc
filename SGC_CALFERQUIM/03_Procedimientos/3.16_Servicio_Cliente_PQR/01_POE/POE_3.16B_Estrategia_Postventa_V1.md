@@ -63,7 +63,7 @@ La estrategia se estructura en siete lineas de accion:
   - Condiciones de almacenamiento (estibas, cubierta plastica, ventilacion, rotacion FIFO, tiempo maximo en bodega).
   - Dosificacion y metodo de aplicacion segun cultivo.
   - Compatibilidad de mezclas y precauciones de manipulacion.
-- Toda consulta tecnica recibida se registra en `Registro_Consultas_Tecnicas_V1.csv`.
+- Toda consulta tecnica recibida se registra en `Registro_Consultas_Tecnicas_V1.xlsx`.
 
 ### 6.2 Coordinacion comercial, facturacion y despacho
 
@@ -105,7 +105,7 @@ Este componente opera conforme al POE-3.16 (Servicio al Cliente y PQR). Se compl
   3. Logistica coordina recojo o recepcion en planta.
   4. Almacen recibe, inspecciona y segrega el producto con etiqueta "HOLD - NO USAR".
   5. Calidad determina disposicion: reintegro al inventario, reproceso o destruccion controlada.
-  6. Se registra en `Registro_Devoluciones_V1.csv`.
+  6. Se registra en `Registro_Devoluciones_V1.xlsx`.
 - No se acepta devolucion de producto reempacado o sin identificacion de lote.
 
 ### 6.6 Seguimiento de satisfaccion del cliente
@@ -134,10 +134,10 @@ Este componente opera conforme al POE-3.16 (Servicio al Cliente y PQR). Se compl
 
 ## 8. REGISTROS ASOCIADOS
 
-- `Registro_Consultas_Tecnicas_V1.csv`
-- `Registro_Devoluciones_V1.csv`
-- `Formato_Registro_PQR_V1.csv` (existente, POE-3.16)
-- `Registro_Seguimiento_PQR_V1.csv` (existente, POE-3.16)
+- `Registro_Consultas_Tecnicas_V1.xlsx`
+- `Registro_Devoluciones_V1.xlsx`
+- `Formato_Registro_PQR_V1.xlsx` (existente, POE-3.16)
+- `Registro_Seguimiento_PQR_V1.xlsx` (existente, POE-3.16)
 - `ANX_3.16B_02_Encuesta_Satisfaccion.md`
 
 ## 9. ANEXOS
@@ -218,7 +218,7 @@ DISPOSICION
 REINTEGRO  REPROCESO  DESTRUCCION
      |        |          |
      v        v          v
-REGISTRO EN Registro_Devoluciones_V1.csv
+REGISTRO EN Registro_Devoluciones_V1.xlsx
 ```
 
 ## 10. CONTROL DE CAMBIOS

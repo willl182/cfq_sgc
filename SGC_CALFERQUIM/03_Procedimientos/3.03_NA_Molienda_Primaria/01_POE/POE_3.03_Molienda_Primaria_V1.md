@@ -68,7 +68,7 @@ Todo el personal operativo **debe** utilizar el Equipo de Protección Personal (
 
 5.  **OPERARIO:** **Iniciar** el equipo en vacío y verificar ausencia de ruidos o vibraciones anormales.
 6.  **OPERARIO:** **Alimentar** el molino de forma gradual y constante, controlando el amperaje del motor para evitar sobrecargas.
-7.  **OPERARIO:** **Registrar** la hora de inicio y los parámetros de operación (Amperaje, Velocidad) en el `Formato_Control_Molienda_Primaria_V1.csv`.
+7.  **OPERARIO:** **Registrar** la hora de inicio y los parámetros de operación (Amperaje, Velocidad) en el `Formato_Control_Molienda_Primaria_V1.xlsx`.
 
 ### 6.3. Control de Proceso y Granulometría
 
@@ -95,8 +95,8 @@ Todo el personal operativo **debe** utilizar el Equipo de Protección Personal (
 
 ## 8. REGISTROS ASOCIADOS
 
-*   `Formato_Control_Molienda_Primaria_V1.csv`: Registro operativo de parámetros y tiempos.
-*   `Registro_Molienda_Primaria_V1.csv`: Consolidado de lote y cierre de producción.
+*   `Formato_Control_Molienda_Primaria_V1.xlsx`: Registro operativo de parámetros y tiempos.
+*   `Registro_Molienda_Primaria_V1.xlsx`: Consolidado de lote y cierre de producción.
 
 ## 9. ANEXOS
 
