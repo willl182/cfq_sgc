@@ -1262,7 +1262,7 @@ function App() {
       window.alert('No hay componentes para exportar.')
       return
     }
-    const nutrients = contributionNutrients
+    const nutrients = NUTRIENTS.filter((n) => contributionNutrients.includes(n) || (target?.composition[n] ?? 0) > 0)
     const headers = ['Materia Prima', 'kg', ...nutrients.map(canonicalNutrientLabel)]
     const rows: string[][] = []
 
