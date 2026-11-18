@@ -91,8 +91,8 @@ Tolva de mezcla → Olla granuladora → Tubo secador → Separador de finos →
 
 ## 8. REGISTROS ASOCIADOS
 
-- `Formato_Control_Presentacion_Fisica_V1.csv`: Registro de parametros de operacion por lote.
-- `Registro_Presentacion_Fisica_V1.csv`: Historico de produccion granulada.
+- `Formato_Control_Presentacion_Fisica_V1.xlsx`: Registro de parametros de operacion por lote.
+- `Registro_Presentacion_Fisica_V1.xlsx`: Historico de produccion granulada.
 
 ## 9. ANEXOS
 

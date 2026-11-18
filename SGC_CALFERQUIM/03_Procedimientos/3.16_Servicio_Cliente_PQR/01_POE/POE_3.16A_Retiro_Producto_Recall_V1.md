@@ -49,7 +49,7 @@ Se activa de inmediato cuando ocurra al menos uno de los siguientes eventos:
 ### 7.1 Deteccion y decision inicial (0 a 4 horas)
 
 1. Area detecta evento y notifica a Calidad y Direccion Tecnica.
-2. Calidad diligencia `Formato_Activacion_Recall_3.16A_V1.csv`.
+2. Calidad diligencia `Formato_Activacion_Recall_3.16A_V1.xlsx`.
 3. Direccion Tecnica convoca Comite de Retiro y clasifica nivel:
    - Nivel 1: critico (riesgo alto, accion inmediata).
    - Nivel 2: mayor (incumplimiento relevante sin riesgo alto inmediato).
@@ -70,7 +70,7 @@ Se activa de inmediato cuando ocurra al menos uno de los siguientes eventos:
 ### 7.4 Recuperacion y conciliacion
 
 10. Logistica coordina retorno y segregacion fisica del producto retirado.
-11. Cada movimiento se registra en `Registro_Trazabilidad_Recall_3.16A_V1.csv`.
+11. Cada movimiento se registra en `Registro_Trazabilidad_Recall_3.16A_V1.xlsx`.
 12. Calidad verifica cantidades recuperadas vs. despachadas.
 
 ### 7.5 Cierre del recall
@@ -89,8 +89,8 @@ Se activa de inmediato cuando ocurra al menos uno de los siguientes eventos:
 
 ## 9. REGISTROS ASOCIADOS
 
-- `Formato_Activacion_Recall_3.16A_V1.csv`
-- `Registro_Trazabilidad_Recall_3.16A_V1.csv`
+- `Formato_Activacion_Recall_3.16A_V1.xlsx`
+- `Registro_Trazabilidad_Recall_3.16A_V1.xlsx`
 
 ## 10. ANEXOS
 

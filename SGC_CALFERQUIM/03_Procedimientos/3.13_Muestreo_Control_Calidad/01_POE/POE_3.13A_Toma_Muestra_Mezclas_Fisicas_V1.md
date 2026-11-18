@@ -24,8 +24,8 @@ Aplica a todos los lotes de mezcla fisica de producto terminado y a cualquier mu
 - `Instructivo_Sacos.docx`
 - `Instructivo_Granel.docx`
 - `SGC_CALFERQUIM/03_Procedimientos/3.13_Muestreo_Control_Calidad/01_POE/POE_3.13_Muestreo_Control_Calidad_V1.md`
-- `SGC_CALFERQUIM/03_Procedimientos/3.13_Muestreo_Control_Calidad/02_Formatos/Formato_Control_Muestreo_V1.csv`
-- `SGC_CALFERQUIM/03_Procedimientos/3.13_Muestreo_Control_Calidad/03_Registros/Registro_Muestreo_V1.csv`
+- `SGC_CALFERQUIM/03_Procedimientos/3.13_Muestreo_Control_Calidad/02_Formatos/Formato_Control_Muestreo_V1.xlsx`
+- `SGC_CALFERQUIM/03_Procedimientos/3.13_Muestreo_Control_Calidad/03_Registros/Registro_Muestreo_V1.xlsx`
 
 ## 5. RESPONSABILIDADES
 
@@ -47,7 +47,7 @@ Aplica a todos los lotes de mezcla fisica de producto terminado y a cualquier mu
 1. Confirmar codigo de producto, numero de lote y cantidad total del lote.
 2. Verificar que no exista contaminacion visible del area o de herramientas.
 3. No reutilizar bolsas de muestra.
-4. Registrar inicio de actividad en `Formato_Control_Muestreo_V1.csv`.
+4. Registrar inicio de actividad en `Formato_Control_Muestreo_V1.xlsx`.
 
 ## 8. PROCEDIMIENTO
 
@@ -118,9 +118,9 @@ Tabla 2. Numero de incrementos para lotes a granel
    - Cantidad de muestra.
    - Fecha y hora de toma.
    - Nombre y firma de quien toma la muestra.
-3. Registrar cierre de actividad en `Formato_Control_Muestreo_V1.csv`.
+3. Registrar cierre de actividad en `Formato_Control_Muestreo_V1.xlsx`.
 4. Entregar muestra al responsable de Calidad para analisis/custodia.
-5. Consolidar resultados posteriores en `Registro_Muestreo_V1.csv`.
+5. Consolidar resultados posteriores en `Registro_Muestreo_V1.xlsx`.
 
 ## 9. CRITERIOS DE ACEPTACION DE MUESTRA
 
@@ -140,8 +140,8 @@ Tabla 2. Numero de incrementos para lotes a granel
 
 ## 11. REGISTROS ASOCIADOS
 
-- `Formato_Control_Muestreo_V1.csv`
-- `Registro_Muestreo_V1.csv`
+- `Formato_Control_Muestreo_V1.xlsx`
+- `Registro_Muestreo_V1.xlsx`
 
 ## 12. CONTROL DE CAMBIOS
 

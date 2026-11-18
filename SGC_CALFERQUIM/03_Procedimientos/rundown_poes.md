@@ -153,7 +153,7 @@ Este balance documental consolida el estado actual de las **20 carpetas oficiale
 
 ### 3.11 Codificación de Lotes
 - **Ubicación:** `3.11_Codificacion_Lotes/`
-- **POE:** `POE_3.11_Codificacion_Lotes_V1.md/.docx`. Sección `## 9. ANEXOS` integra: estructura y reglas del código alfanumérico (`AAAAMMDD-PROD-SERIE`) y lista maestra de abreviaturas de producto. *Nota: la lista maestra también se copió a `10_Base_Datos_Tecnica/` para gestión centralizada.*
+- **POE:** `POE_3.11_Codificacion_Lotes_V1.md/.docx`. Sección `## 9. ANEXOS` integra: estructura y reglas del código de lote `CODIGO-DDMMAA` (v02, 2026-11-05) y lista maestra de abreviaturas de producto. *Nota: la lista maestra también se copió a `10_Base_Datos_Tecnica/` para gestión centralizada.*
 - **Formato:** `Formato_Asignacion_Lotes_V1.csv`
 - **Registro:** `Registro_Codificacion_Lotes_V1.csv`
 - **Piloto ICA:** ✅ Implementado. Valida aplicación del código físico en saco.

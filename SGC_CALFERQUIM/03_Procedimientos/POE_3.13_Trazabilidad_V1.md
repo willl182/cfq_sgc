@@ -31,7 +31,7 @@ Este procedimiento aplica a:
 
 **Lote:** Cantidad definida de producto fabricado en un proceso de producción continuo o discontinuo, identificado con un código único.
 
-**Codificación de lote:** Sistema alfanumérico que identifica: Producto-Fecha-Secuencia (ej: 25-4-24-250519-A).
+**Codificación de lote:** Sistema alfanumérico que identifica: CODIGO-DDMMAA, donde CODIGO es el codigo de item del producto y DDMMAA la fecha de fabricacion (POE 3.11; ej: 65-190525).
 
 **Cadena de trazabilidad:** Secuencia completa desde proveedor → MP → Producción → PT → Cliente.
 
@@ -128,15 +128,13 @@ Este procedimiento aplica a:
 #### 5.2.3 Codificación de Lote Final
 1. Asignar código de lote único siguiendo formato:
    ```
-   [COD-PRODUCTO]-[AAMM]-[SECUENCIA]
-   
-   Ejemplos:
-   - 25-4-24-2505-A (Primer lote del 25-4-24 en mayo 2025)
-   - 25-4-24-2505-B (Segundo lote)
-   - CALFERZINC-2505-01 (Producto con nombre comercial)
+   CODIGO-DDMMAA  (ver POE 3.11)
+
+   Ejemplo:
+   - 65-190525 (producto con codigo de item 65 fabricado el 19 de mayo de 2025)
    ```
 
-2. Registrar en **RC-SI12 Codificación de Lotes**:
+2. Registrar en `Registro_Codificacion_Lotes_V1` (POE 3.11):
    - Código de lote asignado
    - Producto
    - Fecha de fabricación
@@ -161,7 +159,7 @@ Este procedimiento aplica a:
 
 #### 5.3.2 Liberación de Lotes
 1. El laboratorio analiza muestra representativa
-2. En **RC-SI14 Liberación de Lotes**, registrar:
+2. En `Formato_Liberacion_Lotes_V1` (POE 3.12), registrar:
    - Código de lote
    - Resultados de análisis NPK y físico-químicos
    - Decisión de liberación
@@ -188,8 +186,8 @@ Este procedimiento aplica a:
    Cliente: Agroindustrias del Valle S.A.S.
    
    Productos despachados:
-   1. 25-4-24, Lote: 25-4-24-2505-A, 50 bultos
-   2. 18-18-18, Lote: 18-18-18-2505-C, 30 bultos
+   1. 25-4-24, Lote: [codigo item 25-4-24]-190525, 50 bultos
+   2. 18-18-18, Lote: [codigo item 18-18-18]-190525, 30 bultos
    ```
 
 #### 5.4.2 Archivo de Trazabilidad
@@ -242,9 +240,9 @@ Si se detecta una MP no conforme:
 | RC-SI55 | Kardex de Almacén | Almacén |
 | RC-SI56 | Control de Calidad MP | Laboratorio |
 | RC-SI04 | Registro de Mezclas | Producción |
-| RC-SI12 | Codificación de Lotes | Producción/Calidad |
+| Registro_Codificacion_Lotes_V1 (POE 3.11) | Codificación de Lotes | Bodega |
 | RC-SI53 | Traslado Producto Terminado | Almacén |
-| RC-SI14 | Liberación de Lotes | Laboratorio |
+| Formato_Liberacion_Lotes_V1 (POE 3.12) | Liberación de Lotes | Dirección Técnica |
 | RC-SI57 | Trazabilidad de Ventas | Ventas |
 
 ## 8. FRECUENCIA DE REVISIÓN

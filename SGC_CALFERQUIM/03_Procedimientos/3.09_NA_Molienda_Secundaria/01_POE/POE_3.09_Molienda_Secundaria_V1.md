@@ -83,8 +83,8 @@ Dado que se generan polvos muy finos, el riesgo de contaminación cruzada por v�
 
 ## 8. REGISTROS ASOCIADOS
 
-*   `Formato_Control_Molienda_Secundaria_V1.csv`: Bitácora de operación y reprocesos.
-*   `Registro_Molienda_Secundaria_V1.csv`: Histórico de lotes micronizados.
+*   `Formato_Control_Molienda_Secundaria_V1.xlsx`: Bitácora de operación y reprocesos.
+*   `Registro_Molienda_Secundaria_V1.xlsx`: Histórico de lotes micronizados.
 
 ## 9. ANEXOS
 

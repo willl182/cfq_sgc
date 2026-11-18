@@ -98,8 +98,8 @@ Antes de iniciar el envasado, se debe realizar un despeje de linea riguroso para
 
 ## 8. REGISTROS ASOCIADOS
 
-- `Formato_Control_Envase_V1.csv`: Registro de pesos y verificacion de etiquetas.
-- `Registro_Envase_V1.csv`: Consolidado de unidades producidas por turno.
+- `Formato_Control_Envase_V1.xlsx`: Registro de pesos y verificacion de etiquetas.
+- `Registro_Envase_V1.xlsx`: Consolidado de unidades producidas por turno.
 
 ## 9. ANEXOS
 

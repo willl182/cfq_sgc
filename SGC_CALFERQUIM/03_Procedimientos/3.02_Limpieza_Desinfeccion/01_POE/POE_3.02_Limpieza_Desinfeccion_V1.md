@@ -39,7 +39,7 @@ Definir la rutina de limpieza de las areas de produccion, bodega de materias pri
 1. Produccion detiene el equipo y aplica bloqueo seguro cuando corresponda.
 2. Operario barre con escoba el area de trabajo y las superficies del equipo, retirando polvo, residuos y material sobrante.
 3. Los residuos recolectados se disponen segun POE 3.18.
-4. Operario diligencia `Formato_Control_Limpieza_V1.csv`.
+4. Operario diligencia `Formato_Control_Limpieza_V1.xlsx`.
 5. Operario reporta al Jefe de Produccion el estado limpio del area o equipo.
 6. Jefe de Produccion verifica el estado visual y autoriza el inicio del siguiente proceso.
 7. Si no cumple, se repite el barrido y se registra la desviacion.
@@ -48,7 +48,7 @@ Definir la rutina de limpieza de las areas de produccion, bodega de materias pri
 
 1. Personal de bodega barre los pasillos y areas de circulacion con escoba.
 2. Los residuos se disponen segun POE 3.18.
-3. Se registra la ejecucion en `Formato_Control_Limpieza_V1.csv`.
+3. Se registra la ejecucion en `Formato_Control_Limpieza_V1.xlsx`.
 
 ### 6.3. Bodega de Empaques
 
@@ -64,7 +64,7 @@ La bodega de empaques es un area aislada. Los materiales de empaque (sacos, bigb
 
 ## 8. REGISTROS ASOCIADOS
 
-- `Formato_Control_Limpieza_V1.csv`
+- `Formato_Control_Limpieza_V1.xlsx`
 
 ## 9. ANEXOS
 

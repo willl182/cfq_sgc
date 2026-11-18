@@ -5,6 +5,8 @@ import { Archive, ArrowDown, ArrowUp, Beaker, Calculator, ChevronLeft, ChevronRi
 import './style.css'
 import { api } from '../convex/_generated/api'
 import { hasCompositionInfo, parseCatalogCsv, parsePhysicalState, type CatalogItem } from './domain/catalog'
+import { exportBalanceCsv } from './domain/exportBalance'
+import { buildBalanceXlsx } from './domain/exportBalanceXlsx'
 import { exportCatalogCsv, exportLiveListsCsv, exportLiveListsJson, exportSnapshotsCsv, exportSnapshotsJson } from './domain/exportLists'
 import { calculateComponentContributions, summarizeFormula, type FormulaComponentInput } from './domain/formulation'
 import { parseListImportCsv, type ParseListImportResult } from './domain/importLists'
@@ -226,7 +228,10 @@ function exportStamp() {
 }
 
 function downloadTextFile(content: string, filename: string, type: string) {
-  const blob = new Blob([content], { type })
+  downloadBlob(new Blob([content], { type }), filename)
+}
+
+function downloadBlob(blob: Blob, filename: string) {
   const url = URL.createObjectURL(blob)
   const link = document.createElement('a')
   link.href = url
@@ -1256,12 +1261,12 @@ function App() {
     downloadTextFile(exportCatalogCsv(activeCatalog), `cfq-catalogo-productos-${exportStamp()}.csv`, 'text/csv;charset=utf-8')
   }
 
-  function exportFormulaTable() {
+  async function exportFormulaTable(format: 'csv' | 'xlsx' = 'csv') {
     if (resolvedComponents.length === 0) {
       window.alert('No hay componentes para exportar.')
       return
     }
-    const nutrients = contributionNutrients
+    const nutrients = NUTRIENTS.filter((n) => contributionNutrients.includes(n) || (target?.composition[n] ?? 0) > 0)
     const headers = ['Materia Prima', 'kg', ...nutrients.map(canonicalNutrientLabel)]
     const rows: string[][] = []
 
@@ -1303,12 +1308,28 @@ function App() {
       ])
     }
 
-    const csv = [headers, ...rows].map((r) => r.map((cell) => {
-      const text = cell === null || cell === undefined ? '' : String(cell)
-      return /[;"\n\r]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text
-    }).join(';')).join('\n')
-
-    downloadTextFile(csv, `cfq-balance-materias-${exportStamp()}.csv`, 'text/csv;charset=utf-8')
+    const { csv, filename } = exportBalanceCsv(target?.name ?? 'Sin producto', headers, rows, exportStamp())
+    if (format === 'csv') {
+      downloadTextFile(csv, filename, 'text/csv;charset=utf-8')
+      return
+    }
+    const evaluationOf = (n: NutrientKey) => summary.evaluation.evaluations.find((e) => e.nutrient === n)
+    const blob = await buildBalanceXlsx({
+      productName: target?.name ?? 'Sin producto',
+      productCode: target?.externalCode ?? '',
+      generalStatus: summary.evaluation.generalStatus,
+      baseKg: 1000,
+      nutrients: nutrients.map(canonicalNutrientLabel),
+      components: componentContributions.map((row) => ({ name: row.item.name, kg: row.quantityKg, values: nutrients.map((n) => row.contribution[n]) })),
+      total: { kg: summary.totalKg, values: nutrients.map((n) => summary.composition[n]) },
+      target: target ? {
+        declared: nutrients.map((n) => target.composition[n] ?? 0),
+        min: nutrients.map((n) => evaluationOf(n)?.min ?? 0),
+        max: nutrients.map((n) => evaluationOf(n)?.max ?? 0),
+        status: nutrients.map((n) => evaluationOf(n)?.status ?? 'INFO'),
+      } : undefined,
+    })
+    downloadBlob(blob, filename.replace(/\.csv$/, '.xlsx'))
   }
 
   async function previewListImport(file: File | null) {
@@ -1704,7 +1725,8 @@ function App() {
                   )}
                   <button className="secondary" onClick={() => exportLists('csv')}><Download size={17} /> CSV</button>
                   <button className="secondary" onClick={() => exportLists('json')}><Download size={17} /> JSON</button>
-                  <button className="secondary" onClick={exportFormulaTable}><Download size={17} /> Tabla balance</button>
+                  <button className="secondary" onClick={() => exportFormulaTable('csv')}><Download size={17} /> Balance CSV</button>
+                  <button className="secondary" onClick={() => exportFormulaTable('xlsx')}><Download size={17} /> Balance Excel</button>
                   <button className="primary" onClick={saveList}><Save size={17} /> Guardar snapshot</button>
                 </div>
               </div>

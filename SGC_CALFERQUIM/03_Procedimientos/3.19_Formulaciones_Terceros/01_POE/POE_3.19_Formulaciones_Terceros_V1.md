@@ -69,7 +69,7 @@ Aplica a toda formulación (producto fertilizante o acondicionador) fabricada ba
 
 ### 6.3. Control de Versiones
 
-5.  **DIRECCIÓN TÉCNICA:** **Registrar** la nueva formulación en `Registro_Control_Cambios_Formulacion_Tercero_V1.csv`.
+5.  **DIRECCIÓN TÉCNICA:** **Registrar** la nueva formulación en `Registro_Control_Cambios_Formulacion_Tercero_V1.xlsx`.
 6.  **PRODUCCIÓN:** **Archivar** copia de la formulación vigente en carpeta de producción.
 
 ### 6.4. Fabricación y Trazabilidad
@@ -90,8 +90,8 @@ Aplica a toda formulación (producto fertilizante o acondicionador) fabricada ba
 
 ## 8. REGISTROS ASOCIADOS
 
-*   `Formato_Solicitud_Formulacion_Tercero_V1.csv`
-*   `Registro_Control_Cambios_Formulacion_Tercero_V1.csv`
+*   `Formato_Solicitud_Formulacion_Tercero_V1.xlsx`
+*   `Registro_Control_Cambios_Formulacion_Tercero_V1.xlsx`
 
 ## 9. ANEXOS
 

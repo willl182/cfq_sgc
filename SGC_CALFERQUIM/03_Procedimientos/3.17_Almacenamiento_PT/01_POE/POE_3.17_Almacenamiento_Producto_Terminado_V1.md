@@ -22,7 +22,7 @@ Aplica a PT liberado o en cuarentena dentro de bodegas de CALFERQUIM S.A.S.
 
 - DC-SI37 Almacenamiento Seguro y Conteo de Bultos.
 - RC-SI53 Traslado de Producto Terminado al Almacen.
-- Formato_Control_Almacenamiento_PT_V1.csv.
+- Formato_Control_Almacenamiento_PT_V1.xlsx.
 
 ## 5. RESPONSABILIDADES Y POLITICAS
 
@@ -34,12 +34,12 @@ Aplica a PT liberado o en cuarentena dentro de bodegas de CALFERQUIM S.A.S.
 ## 6. PROCEDIMIENTO
 
 1. Bodega recibe PT con soporte de traslado y verifica integridad de empaque.
-2. Bodega registra ingreso en `Formato_Control_Almacenamiento_PT_V1.csv`.
+2. Bodega registra ingreso en `Formato_Control_Almacenamiento_PT_V1.xlsx`.
 3. Bodega ubica PT por lote, estado y compatibilidad (anexo 2).
 4. Calidad verifica identificacion y estatus de liberacion.
 5. Bodega realiza conteo ciclico y control de condiciones ambientales.
 6. Para despacho, Bodega selecciona lote por FEFO y valida con Calidad.
-7. Bodega consolida trazabilidad de movimientos en `Registro_Almacenamiento_PT_V1.csv`.
+7. Bodega consolida trazabilidad de movimientos en `Registro_Almacenamiento_PT_V1.xlsx`.
 
 ## 7. CRITERIOS DE CONTROL Y ACEPTACION
 
@@ -52,8 +52,8 @@ Aplica a PT liberado o en cuarentena dentro de bodegas de CALFERQUIM S.A.S.
 
 ## 8. REGISTROS ASOCIADOS
 
-- `Formato_Control_Almacenamiento_PT_V1.csv`
-- `Registro_Almacenamiento_PT_V1.csv`
+- `Formato_Control_Almacenamiento_PT_V1.xlsx`
+- `Registro_Almacenamiento_PT_V1.xlsx`
 
 ## 9. ANEXOS
 
